@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+
+<typeAliases>
+<typeAlias alias="map" type="java.util.Map"/>
+
+<typeAlias alias="boardDto" type="com.groupware.board.model.boardDto"/>
+<typeAlias alias="noticboardDto" type=" com.groupware.board.model.noticboardDto"/>
+<typeAlias alias="MemberDto" type="com.groupware.member.model.MemberDto"/>
+
+<typeAlias alias="AdminmanagerDto" type=" com.groupware.model.AlbumDto"/>
+<typeAlias alias="ApprovalDto" type=" com.groupware.model.ApprovalDto "/>
+<typeAlias alias="OfficerworkDto" type=" com.groupware.model.OfficerworkDto "/>
+<typeAlias alias="OrganizationDto" type=" com.groupware.OrganizationDto"/>
+<typeAlias alias="ScheduleDto" type=" com.groupware.model.ScheduleDto"/>
+
+</typeAliases>
+
+</configuration>
