@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- @Autowired 와 연동되어 있다 -->
+	<context:component-scan
+		base-package="com.groupware.**.service" />
+
+	<!-- 데이터 소스 / 마이바티스에 연결 정보 넘겨주는건 스프링이 함 -->
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<bean id="ds"
+		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:xe" />
+		<property name="username" value="GROUPWARE" />
+		<property name="password" value="GROUPWARE" />
+	</bean>
+
+	<!-- 팩토리 빈 설정 파일 만들기 / 위치 알려줌 -->
+	<bean id="ssfb" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="ds" />
+		<property name="configLocation"	value="classpath:com/groupware/config/mybatis/Configuration.xml" />
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:com/groupware/config/mybatis/adminmanager.xml</value>
+			
+				<value>classpath:com/groupware/config/mybatis/approval.xml</value>
+				<value>classpath:com/groupware/config/mybatis/board_common.xml</value>
+				<value>classpath:com/groupware/config/mybatis/board.xml</value>
+				<value>classpath:com/groupware/config/mybatis/email.xml</value> 
+				<value>classpath:com/groupware/config/mybatis/form.xml</value> 
+				
+				<value>classpath:com/groupware/config/mybatis/login.xml</value>
+				<value>classpath:com/groupware/config/mybatis/membermanager.xml</value>
+				<value>classpath:com/groupware/config/mybatis/noticeboard_admin.xml</value>
+				<value>classpath:com/groupware/config/mybatis/noticeboard_common.xml</value>
+				<value>classpath:com/groupware/config/mybatis/noticeboard.xml</value>
+				
+				<value>classpath:com/groupware/config/mybatis/officerwork.xml</value>
+				<value>classpath:com/groupware/config/mybatis/organization.xml</value>
+				<value>classpath:com/groupware/config/mybatis/schedule.xml</value>
+			 
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- sqlsession 탬플릿 -->
+	<bean id="ss" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="ssfb" />
+	</bean>
+</beans>

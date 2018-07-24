@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<typeAliases>
+		<typeAlias alias="map" type="java.util.Map" />
+
+		
+		<typeAlias alias="ApprovalDivisionDto" type="com.groupware.approval.model.ApprovalDivisionDto" />
+		<typeAlias alias="ApprovalDto" type="com.groupware.approval.model.ApprovalDto" />
+		<typeAlias alias="ApprovalOkDto" type="com.groupware.approval.model.ApprovalOkDto" />
+
+		<typeAlias alias="BoardDataDto" type="com.groupware.board.model.BoardDataDto" /> 
+		<typeAlias alias="BoardDivisionDto" type="com.groupware.board.model.BoardDivisionDto" />
+		<typeAlias alias="BoardDto" type="com.groupware.board.model.BoardDto" />
+		<typeAlias alias="BoardListDto"	type="com.groupware.board.model.BoardListDto" />
+		<typeAlias alias="BoardRpyDto" type="com.groupware.board.model.BoardRpyDto" />
+		<typeAlias alias="NoticboardDto" type="com.groupware.board.model.NoticboardDto" />
+
+		<typeAlias alias="CommonDto" type="com.groupware.common.model.CommonDto" />
+
+		<typeAlias alias="EmailDto"	type="com.groupware.email.model.EmailDto" />
+		<typeAlias alias="EmailKeepDto"	type="com.groupware.email.model.EmailKeepDto" />
+		<typeAlias alias="EmailReceptionDto" type="com.groupware.email.model.EmailReceptionDto" />
+		<typeAlias alias="EmailSendDto"	type="com.groupware.email.model.EmailSendDto" />
+
+		<typeAlias alias="MemberDto" type="com.groupware.member.model.MemberDto" />
+		<typeAlias alias="MemberRankDto" type="com.groupware.member.model.MemberRankDto" />
+
+		<typeAlias alias="OfficerworkDto" type="com.groupware.officerwork.model.OfficerworkDto" />
+
+		<typeAlias alias="OrganizationDto" type="com.groupware.organization.model.OrganizationDto" />
+
+		<typeAlias alias="ScheduleDivisionDto" type="com.groupware.schedule.model.ScheduleDivisionDto" />
+		<typeAlias alias="ScheduleDto" type="com.groupware.schedule.model.ScheduleDto" />
+
+	</typeAliases>
+
+</configuration>
