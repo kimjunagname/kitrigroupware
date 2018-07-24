@@ -29,19 +29,23 @@
 		<property name="mapperLocations">
 			<list>
 				<value>classpath:com/groupware/config/mybatis/adminmanager.xml</value>
+			
 				<value>classpath:com/groupware/config/mybatis/approval.xml</value>
-				<value>classpath:com/groupware/config/mybatis/board_admin.xml</value>
 				<value>classpath:com/groupware/config/mybatis/board_common.xml</value>
 				<value>classpath:com/groupware/config/mybatis/board.xml</value>
-				<value>classpath:com/groupware/config/mybatis/form.xml</value>
+				<value>classpath:com/groupware/config/mybatis/email.xml</value> 
+				<value>classpath:com/groupware/config/mybatis/form.xml</value> 
+				
 				<value>classpath:com/groupware/config/mybatis/login.xml</value>
 				<value>classpath:com/groupware/config/mybatis/membermanager.xml</value>
 				<value>classpath:com/groupware/config/mybatis/noticeboard_admin.xml</value>
 				<value>classpath:com/groupware/config/mybatis/noticeboard_common.xml</value>
 				<value>classpath:com/groupware/config/mybatis/noticeboard.xml</value>
+				
 				<value>classpath:com/groupware/config/mybatis/officerwork.xml</value>
 				<value>classpath:com/groupware/config/mybatis/organization.xml</value>
 				<value>classpath:com/groupware/config/mybatis/schedule.xml</value>
+			 
 			</list>
 		</property>
 	</bean>

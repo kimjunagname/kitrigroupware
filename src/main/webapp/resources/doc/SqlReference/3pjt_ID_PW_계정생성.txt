@@ -1,0 +1,23 @@
+ㅁ3차 프로젝트 계정 만들기
+
+cmd에서 
+
+
+
+sqlplus "/as sysdba"
+
+create user GROUPWARE
+identified by GROUPWARE
+default tablespace users
+temporary tablespace temp;
+
+grant connect, resource to GROUPWARE;
+
+
+conn GROUPWARE/GROUPWARE
+로 접속 되는지 확인
+
+sqldeveloper실행 후
+새접속 만들기 > 접속명 : GROUPWARE, ID/PWD > GROUPWARE/GROUPWARE
+
+접속 확인

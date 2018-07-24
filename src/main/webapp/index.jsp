@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head> 
 <body> 
-
+<%
+String root = request.getContextPath();
+response.sendRedirect(root + "/email/emaillist.kitri");
+%>
 </body>
 </html>
