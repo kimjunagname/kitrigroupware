@@ -235,7 +235,7 @@ $('#myModal').on('shown.bs.modal', function () {
         <!-- user login dropdown start-->
         <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <img alt="" src="images/2.png">
+                <img alt="" src="${root}/images/2.png">
                 <span class="username">John Doe</span>
                 <b class="caret"></b>
             </a>
@@ -627,7 +627,7 @@ $('#myModal').on('shown.bs.modal', function () {
 <script src="${root}/js/scripts.js"></script>
 <script src="${root}/js/jquery.slimscroll.js"></script>
 <script src="${root}/js/jquery.nicescroll.js"></script>
-<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
+<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="${root}/js/flot-chart/excanvas.min.js"></script><![endif]-->
 <script src="${root}/js/jquery.scrollTo.js"></script>
 </body>
 </html>

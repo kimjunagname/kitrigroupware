@@ -36,9 +36,10 @@
 		up static resources in the ${webappRoot}/resources directory -->
 	<!-- /resources/board/css/** >> css  만 적으면 바로 된다.-->
    <mvc:resources mapping="/css/**" location="/resources/board/css/"/>
-   <mvc:resources mapping="/img/**" location="/resources/board/img/"/>
+   <mvc:resources mapping="/images/**" location="/resources/board/images/"/>
    <mvc:resources mapping="/js/**" location="/resources/board/js/"/>
-   
+   <mvc:resources mapping="/fonts/**" location="/resources/board/fonts/"/>
+     
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

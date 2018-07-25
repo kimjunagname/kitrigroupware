@@ -22,7 +22,7 @@ public class EmailController {
 		System.out.println("EmailController  ¿Ô´Ù!!!!!");
 	//	List<EmailDto> list = emailService.getListEmail();
 	//	map.put("userInfo", list);
-		return "schedule/list";
+		return "schedule/write";
 	}
 	
 }
