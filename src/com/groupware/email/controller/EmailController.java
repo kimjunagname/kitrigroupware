@@ -19,10 +19,10 @@ public class EmailController {
 	
 	@RequestMapping("/emaillist.kitri")
 	public String emailList(Map<String, Object> map) {
-		System.out.println("EmailController  왔다!!!!!");
-		List<EmailDto> list = emailService.getListEmail();
-		map.put("userInfo", list);
-		return "error/404";
+		//System.out.println("EmailController  왔다!!!!!");
+		//List<EmailDto> list = emailService.getListEmail();
+		//map.put("userInfo", list);
+		return "/schedule/list";
 	}
 	
 }
