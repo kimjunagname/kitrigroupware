@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.groupware.email.model.EmailDto;
 import com.groupware.email.service.EmailService;
@@ -17,12 +18,20 @@ public class EmailController {
 	@Autowired
 	private EmailService emailService;
 	
-	@RequestMapping("/emaillist.kitri")
-	public String emailList(Map<String, Object> map) {
-		System.out.println("EmailController  ¿Ô´Ù!!!!!");
-	//	List<EmailDto> list = emailService.getListEmail();
-	//	map.put("userInfo", list);
-		return "schedule/write";
+	@RequestMapping(value="/emaillist.kitri", method=RequestMethod.GET)
+	public String emailList() {
+		return "email/receivemaillist";
 	}
+	
+	@RequestMapping(value="/sendlist.kitri", method=RequestMethod.GET)
+	public String sendList() {
+		return "email/sendmaillist";
+	}
+	
+	@RequestMapping(value="/keeplist.kitri", method=RequestMethod.GET)
+	public String keepList() {
+		return "email/keepmaillist";
+	}
+	
 	
 }
