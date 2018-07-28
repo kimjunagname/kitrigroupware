@@ -338,14 +338,12 @@ $(document).ready(function() {
 										</td>
 									</tr>
 									<tr>
-										<th>보내는 사람(*)</th>
+										<th>보내는 사람(* 사원번호 입력) </th>
 										<td>
 											<div class="col-xs-4">
 												<input type="text" id="stf_rcv_email" name="stf_rcv_email" class="form-control">
 											</div>
-											&nbsp;@ kitriware.com
-										</td>
-										
+										</td>										
 									</tr>
 									<tr>
 										<th>파일첨부</th>

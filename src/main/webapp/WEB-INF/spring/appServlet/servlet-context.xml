@@ -39,6 +39,8 @@
    <mvc:resources mapping="/images/**" location="/resources/board/images/"/>
    <mvc:resources mapping="/js/**" location="/resources/board/js/"/>
    <mvc:resources mapping="/fonts/**" location="/resources/board/fonts/"/>
+   <!-- JQuery EasyUI API Mapping -->
+   <mvc:resources mapping="/easyui/**" location="/resources/easyui/"/>
      
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean

@@ -350,10 +350,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											1
 										</td>
 										<td class="view-message  dont-show">
-											<a href="#" data-toggle="modal" class="eml_rd" data-value="" data-target="#readModal">Lorem ipsumdolor imit set.</a>
+											<a href="#" >Lorem ipsumdolor imit set.</a>
 										</td>
 										<td class="view-message ">
-											<a href="#">Lorem ipsumdolor imit set.</a>
+											<a href="#" data-toggle="modal" class="eml_rd" data-value="" data-target="#readModal">Lorem ipsumdolor imit set.</a>
 										</td>
 										<td class="view-message  inbox-small-cells"></td>
 										<td class="view-message  text-right">12.10 AM</td>
