@@ -20,12 +20,12 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	@RequestMapping("/form.kitri")
+	@RequestMapping("/login.kitri")
 	public String listMember(Map<String, Object> map) {
 		System.out.println("EmailController  ¿Ô´Ù!!!!!");
-		List<MemberDto> list = memberService.getListmember();
-		map.put("eamilList", list);
-		return "error/404";
+		//List<MemberDto> list = memberService.getListmember();
+	//	map.put("eamilList", list);
+		return "login/login";
 	}
 	
 	

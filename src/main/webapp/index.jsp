@@ -12,7 +12,7 @@ String root = request.getContextPath();
 
 
 
-response.sendRedirect(root + "/email/emaillist.kitri");
+response.sendRedirect(root + "/member/login.kitri");
 %>
 </body>
 </html>
