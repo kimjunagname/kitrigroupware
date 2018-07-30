@@ -17,6 +17,9 @@
 		<mybatis-spring-version>1.3.1</mybatis-spring-version>
 		<jackson-version>2.9.5</jackson-version>
 		<commons-fileupload-version>1.3.1</commons-fileupload-version>
+		<org.slf4j-version>1.6.6</org.slf4j-version>
+		
+	
 	</properties>
 	<dependencies>
 		<!-- Spring -->
@@ -38,7 +41,47 @@
 
 
 		<!-- Logging -->
-
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${org.slf4j-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${org.slf4j-version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${org.slf4j-version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.15</version>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.mail</groupId>
+					<artifactId>mail</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.jms</groupId>
+					<artifactId>jms</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.sun.jdmk</groupId>
+					<artifactId>jmxtools</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.sun.jmx</groupId>
+					<artifactId>jmxri</artifactId>
+				</exclusion>
+			</exclusions>
+			<scope>runtime</scope>
+		</dependency>
 		<!-- @Inject -->
 
 		<!-- Servlet -->
@@ -85,7 +128,34 @@
 		    <version>${commons-fileupload-version}</version>
 		</dependency>
 	        
-	      
+	        
+ 
+	    <!-- Tiles 2 설정 -->
+		<dependency>
+	      <groupId>org.apache.tiles</groupId>
+	      <artifactId>tiles-api</artifactId>
+	      <version>2.2.2</version>
+	    </dependency>
+	
+	    <dependency>
+	      <groupId>org.apache.tiles</groupId>
+	      <artifactId>tiles-core</artifactId>
+	      <version>2.2.2</version>
+	    </dependency>
+	
+	    <dependency>
+	      <groupId>org.apache.tiles</groupId>
+	      <artifactId>tiles-jsp</artifactId>
+	      <version>2.2.2</version>
+	    </dependency>
+	
+	    <dependency>
+	      <groupId>org.apache.tiles</groupId>
+	      <artifactId>tiles-servlet</artifactId>
+	      <version>2.2.2</version>
+	    </dependency>
+
+	  
 
 	</dependencies>
 	<build>
