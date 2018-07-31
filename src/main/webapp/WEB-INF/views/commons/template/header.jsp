@@ -1,39 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/commons/public.jsp" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Visitors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- bootstrap-css -->
-<link rel="stylesheet" href="${root}/css/bootstrap.min.css" >
-<!-- //bootstrap-css -->
-<!-- Custom CSS -->
-<link href="${root}/css/project.css" rel='stylesheet' type='text/css' />
-<link href="${root}/css/style-responsive.css" rel="stylesheet"/>
-<!-- font CSS -->
-<link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-<!-- font-awesome icons -->
-<link rel="stylesheet" href="${root}/css/font.css" type="text/css"/>
-<link href="${root}/css/font-awesome.css" rel="stylesheet"> 
-
 <!--header start-->
 <header class="header fixed-top clearfix">
-<!-- //font-awesome icons -->
-<script src="${root}/js/jquery2.0.3.min.js"></script>
-
-$('#myModal').on('shown.bs.modal', function () {
-	  $('#myInput').focus()
-	})
-</script>
-</head>
-<!-- body start -->
-<body>
-<section id="container">
 
 <!--logo start-->
 <div class="brand">

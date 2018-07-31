@@ -9,7 +9,7 @@
 <body> 
 <%
 String root = request.getContextPath();
-response.sendRedirect(root + "/email/emaillist.kitri");
+response.sendRedirect(root + "/approval/list.kitri");
 %>
 </body>
 </html>

@@ -5,9 +5,12 @@
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing 
 		infrastructure -->
@@ -39,14 +42,85 @@
    <mvc:resources mapping="/images/**" location="/resources/board/images/"/>
    <mvc:resources mapping="/js/**" location="/resources/board/js/"/>
    <mvc:resources mapping="/fonts/**" location="/resources/board/fonts/"/>
-   <!-- JQuery EasyUI API Mapping -->
-   <mvc:resources mapping="/easyui/**" location="/resources/easyui/"/>
      
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<beans:bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+     <!-- 
+	<beans:bean	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="order" value="2"/> 
 	</beans:bean>
+	  -->
+
+ 
+  	  <!-- 타일즈 설정: 시작 -->
+      <!-- 아래 타일즈를 위한  TilesViewResolver, TilesConfigurer는 스프링3.2 이상에서만...-->
+      <beans:bean id="tilesviewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" > 
+      	<beans:property name="order" value="1"/>
+      </beans:bean>
+      
+      
+      <beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer"> 
+           <beans:property name="definitions"> 
+                <beans:list> 
+                     <beans:value>/WEB-INF/spring/tiles3def.xml</beans:value> 
+                </beans:list> 
+           </beans:property> 
+      </beans:bean> 
+      <!-- 타일즈 설정: 종료 -->
+
+
+  <context:component-scan base-package="com.groupware.approval.controller" />
+  <context:component-scan base-package="com.groupware.approval.dao" />
+  <context:component-scan base-package="com.groupware.approval.model" />
+  <context:component-scan base-package="com.groupware.approval.service" />
+
+  <context:component-scan base-package="com.groupware.adminmanager.controller" />
+  <context:component-scan base-package="com.groupware.adminmanager.dao" />
+  <context:component-scan base-package="com.groupware.adminmanager.model" />
+  <context:component-scan base-package="com.groupware.adminmanager.service" />
+
+  <context:component-scan base-package="com.groupware.board.controller" />
+  <context:component-scan base-package="com.groupware.board.dao" />
+  <context:component-scan base-package="com.groupware.board.model" />
+  <context:component-scan base-package="com.groupware.board.service" />
+
+
+  <context:component-scan base-package="com.groupware.member.controller" />
+  <context:component-scan base-package="com.groupware.member.dao" />
+  <context:component-scan base-package="com.groupware.member.model" />
+  <context:component-scan base-package="com.groupware.member.service" />
+  
+  <context:component-scan base-package="com.groupware.common.controller" />
+  <context:component-scan base-package="com.groupware.common.dao" />
+  <context:component-scan base-package="com.groupware.common.model" />
+  <context:component-scan base-package="com.groupware.common.service" />
+  
+   <context:component-scan base-package="com.groupware.email.controller" />
+  <context:component-scan base-package="com.groupware.email.dao" />
+  <context:component-scan base-package="com.groupware.email.model" />
+  <context:component-scan base-package="com.groupware.email.service" />
+
+  <context:component-scan base-package="com.groupware.form.controller" />
+  <context:component-scan base-package="com.groupware.form.dao" />
+  <context:component-scan base-package="com.groupware.form.model" />
+  <context:component-scan base-package="com.groupware.form.service" />
+    
+  <context:component-scan base-package="com.groupware.organization.controller" />
+  <context:component-scan base-package="com.groupware.organization.dao" />
+  <context:component-scan base-package="com.groupware.organization.model" />
+  <context:component-scan base-package="com.groupware.organization.service" />
+    
+  <context:component-scan base-package="com.groupware.schedule.controller" />
+  <context:component-scan base-package="com.groupware.schedule.dao" />
+  <context:component-scan base-package="com.groupware.schedule.model" />
+  <context:component-scan base-package="com.groupware.schedule.service" />
+      
+  
+  <context:component-scan base-package="com.groupware.**" />
+  
+ 
+  <context:component-scan base-package="com.groupware.util" />
+ 
+
 
 </beans:beans>
