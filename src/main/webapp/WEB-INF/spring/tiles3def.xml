@@ -221,13 +221,13 @@
   -->
  
    <!-- 상규 -->
- <!-- 
-     <definition name="/login/login" extends="lgoin">
+ 
+     <definition name="/email/emaillist.kitri" extends="base-definition">
        <put-attribute name="title" value="lsit" />
-       <put-attribute name="body" value="/WEB-INF/views/login/login.jsp" />
+       <put-attribute name="body" value="/WEB-INF/views/email/keepmaillist.jsp" />
  	 </definition> 
  
- 
+  <!--
     <definition name="/approval/list" extends="base-definition">
        <put-attribute name="title" value="lsit" />
        <put-attribute name="body" value="/WEB-INF/views/approval/list.jsp" />
