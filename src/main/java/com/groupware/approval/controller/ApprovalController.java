@@ -28,45 +28,6 @@ public class ApprovalController {
 		return mav;
 	}
 	
-	@RequestMapping("/select.kitri")
-	public ModelAndView selectApprovalManager(Map<String, Object> map) {
-		System.out.println("ApprovalController 왔다!!!");
-		//List<MemberDto> list = approvalService.getListAdminManager();
-		//map.put("menulist", list);
-		ModelAndView mav = new ModelAndView();
-	    mav.setViewName("/approval/select"); // /webapp/pds5/list.jsp
-		return mav;
-	}
 	
-	@RequestMapping("/sign.kitri")
-	public ModelAndView signsApprovalManager(Map<String, Object> map) {
-		System.out.println("ApprovalController 왔다!!!");
-		//List<MemberDto> list = approvalService.getListAdminManager();
-		//map.put("menulist", list);
-		ModelAndView mav = new ModelAndView();
-	    mav.setViewName("/approval/sign"); // /webapp/pds5/list.jsp
-		return mav;
-	}
-	
-	
-	@RequestMapping("/write.kitri")
-	public ModelAndView writeApprovalManager(Map<String, Object> map) {
-		System.out.println("ApprovalController 왔다!!!");
-		//List<MemberDto> list = approvalService.getListAdminManager();
-		//map.put("menulist", list);
-		ModelAndView mav = new ModelAndView();
-	    mav.setViewName("/approval/write"); // /webapp/pds5/list.jsp
-		return mav;
-	}
-	
-	@RequestMapping("/complition.kitri")
-	public ModelAndView complitionApprovalManager(Map<String, Object> map) {
-		System.out.println("ApprovalController 왔다!!!");
-		//List<MemberDto> list = approvalService.getListAdminManager();
-		//map.put("menulist", list);
-		ModelAndView mav = new ModelAndView();
-	    mav.setViewName("/approval/complition"); // /webapp/pds5/list.jsp
-		return mav;
-	}
 	
 }

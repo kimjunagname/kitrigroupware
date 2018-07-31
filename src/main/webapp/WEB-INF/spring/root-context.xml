@@ -17,8 +17,7 @@
 
 	<!-- 데이터 소스 / 마이바티스에 연결 정보 넘겨주는건 스프링이 함 -->
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	<bean id="ds"
-		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+	<bean id="ds" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
 		<property name="url" value="jdbc:oracle:thin:@13.125.221.123:1521:xe" />
 		<property name="username" value="GROUPWARE" />
