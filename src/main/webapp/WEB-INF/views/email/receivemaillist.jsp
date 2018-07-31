@@ -23,15 +23,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="${root}/css/font-awesome.css" rel="stylesheet"> 
 <!-- //font-awesome icons -->
 <script src="${root}/js/jquery2.0.3.min.js"></script>
-
-<!-- script start for J-Query & function -->
-<script type="text/javascript">
-$(document).ready(function() {
-	$("#okbutton").click(function() {
-		alert("메일 전송 버튼");
-	});
-})
-</script>
 </head>
 <body>
 	<section id="container"> <!--header start--> 
@@ -222,35 +213,25 @@ $(document).ready(function() {
 		</ul>
 		<!--search & user info end-->
 	</div>
-	</header> <!--header end--> <!--sidebar start--> <aside>
+	</header> <!--header end--> <!--sidebar start--><aside>
 	<div id="sidebar" class="nav-collapse">
 		<!-- sidebar menu start-->
 		<div class="leftside-navigation">
 			<ul class="sidebar-menu" id="nav-accordion">
-				<li>
-					<a href="index.html"> 
-					<i class="fa fa-dashboard"></i> 
-					<span>Dashboard</span>
-					</a>
-				</li>
+				<li><a href="index.html"> <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+				</a></li>
 
-				<li class="sub-menu">
-					<a href="javascript:;"> 
-						<i class="fa fa-book"></i>
-						<span>UI Elements</span>
-					</a>
+				<li class="sub-menu"><a href="javascript:;"> <i
+						class="fa fa-book"></i> <span>UI Elements</span>
+				</a>
 					<ul class="sub">
 						<li><a href="typography.html">Typography</a></li>
 						<li><a href="glyphicon.html">glyphicon</a></li>
 						<li><a href="grids.html">Grids</a></li>
-					</ul>
-				</li>
-				<li>
-					<a href="fontawesome.html"> 
-						<i class="fa fa-bullhorn"></i>
+					</ul></li>
+				<li><a href="fontawesome.html"> <i class="fa fa-bullhorn"></i>
 						<span>Font awesome </span>
-					</a>
-				</li>
+				</a></li>
 				<li class="sub-menu"><a href="javascript:;"> <i
 						class="fa fa-th"></i> <span>Data Tables</span>
 				</a>
@@ -273,8 +254,7 @@ $(document).ready(function() {
 						<li><a href="${root}/email/emaillist.kitri">수신 메일함</a></li>
 						<li><a href="${root}/email/sendlist.kitri">발신 메일함</a></li>
 						<li><a href="${root}/email/keeplist.kitri">받은 메일 보관함</a></li>
-					</ul>
-				</li>
+					</ul></li>
 				<li class="sub-menu"><a href="javascript:;"> <i
 						class=" fa fa-bar-chart-o"></i> <span>Charts</span>
 				</a>
@@ -297,9 +277,14 @@ $(document).ready(function() {
 						<li><a href="404.html">404 Error</a></li>
 						<li><a href="registration.html">Registration</a></li>
 					</ul></li>
-				<li><a href="login.html"> <i class="fa fa-user"></i> <span>Login
-							Page</span>
-				</a></li>
+				<li class="sub-menu"><a href="javascript:;">
+						<i class="fa fa-user"></i> <span>관리자</span>
+				</a>
+					<ul class="sub">
+						<li><a href="${root}/organization/organization.kitri">조직도 관리</a></li>
+						<li><a href="${root}/email/sendlist.kitri">기능1</a></li>
+						<li><a href="${root}/email/keeplist.kitri">기능2</a></li>
+					</ul></li>
 			</ul>
 		</div>
 		<!-- sidebar menu end-->
@@ -659,7 +644,15 @@ $(document).ready(function() {
 		</div>
 		<!-- page end-->
 	</div>
-	</section> 
+	</section>
+	<!-- script start for J-Query & function -->
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$("#okbutton").click(function() {
+		alert("메일 전송 버튼");
+		});
+	})
+</script> 
 	<!-- footer -->
 	<div class="footer">
 		<div class="wthree-copyright">

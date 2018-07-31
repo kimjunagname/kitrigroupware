@@ -31,18 +31,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="${root}/js/jquery2.0.3.min.js"></script>
 
 <!-- jQuery EasyUi API -->
-<link rel="stylesheet" type="text/css"
-	href="${root}/easyui/themes/default/easyui.css">
-<link rel="stylesheet" type="text/css"
-	href="${root}/easyui/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="${root}/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="${root}/easyui/themes/icon.css">
 <script type="text/javascript" src="${root}/easyui/jquery.easyui.min.js"></script>
-
 </head>
 <body>
-	<section id="container"> <!--header start--> <header
-		class="header fixed-top clearfix"> <!--logo start-->
+	<style>
+		#blah {
+			width:96px;
+			height:126px;
+		}
+	</style>
+	<section id="container"> 
+	<!--header start--> 
+	<header class="header fixed-top clearfix"> 
+	<!--logo start-->
 	<div class="brand">
-
 		<a href="index.html" class="logo"> KITRIWARE </a>
 		<div class="sidebar-toggle-box">
 			<div class="fa fa-bars"></div>
@@ -240,7 +244,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<li><a href="form_validation.html">Form Validation</a></li>
 						<li><a href="dropzone.html">Dropzone</a></li>
 					</ul></li>
-				<li class="sub-menu"><a class="active" href="javascript:;">
+				<li class="sub-menu"><a href="javascript:;">
 						<i class="fa fa-envelope"></i> <span>Mail </span>
 				</a>
 					<ul class="sub">
@@ -274,7 +278,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<i class="fa fa-user"></i> <span>관리자</span>
 				</a>
 					<ul class="sub">
-						<li><a href="${root}/email/emaillist.kitri">조직도 관리</a></li>
+						<li><a href="${root}/organization/organization.kitri">조직도 관리</a></li>
 						<li><a href="${root}/email/sendlist.kitri">기능1</a></li>
 						<li><a href="${root}/email/keeplist.kitri">기능2</a></li>
 					</ul></li>
@@ -337,9 +341,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div>
 						<table class="tableMiddle table table-striped" enctype="multipart/form-data">
 							<tr>
-								<td>사진등록</td>
-								<td><input type="file" id="applyphoto" class="form-control">
-								이미지는 가로 96px, 세로 126px를 준수해 주세요.<br>(*)이 작성된 칸은 필수항목 입니다.</td>
+								<td>
+									사진등록
+								</td>
+								<td>
+								<!-- 사진 미리보기 기능 추가. (JPG, GIF, PNG외 다른 확장자 파일 제한)  -->
+								<form id="form1" runat="server"> 
+									<input type='file' id="applyphoto" class="form-control" onchange="readURL(this);" accept=".jpg,.gif,.png"/> 
+									<img id="blah" src="#" alt="미리보기"/> 
+								</form>
+								이미지는 가로 96px, 세로 126px를 준수해 주세요.<br>(*)이 작성된 칸은 필수항목 입니다.
+								</td>
 							</tr>
 							<tr>
 								<td>이름(*)</td>
@@ -366,20 +378,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<td><input type="text" id="grade" class="form-control"></td>
 							</tr>
 							<tr>
-								<td>주소(*)</td>
+								<td>우편번호(*)</td>
 								<td>
-									<input type="text" id="address" class="col-xs-4" readonly="readonly">
+									<input type="text" id="zipcode" class="col-xs-4" readonly="readonly" data-target="#zip_codeModal">
 									&nbsp;
 									<span>
-										<button class="btn btn-primary btn-sm" id="addressBtn"
-								type="button" data-toggle="modal" data-target="#zip_codeModal">주소검색</button>
+										<button class="btn btn-primary btn-sm" id="addressBtn" type="button" data-toggle="modal" data-target="#zip_codeModal">우편번호 검색</button>
 									</span>
 								</td>
 							</tr>
 							<tr>
 								<td>상세주소(*)</td>
 								<td>
-									<input type="text" id="address" class="form-control">
+									<input type="text" id="addrdetail" class="form-control">
 								</td>
 							</tr>
 							<tr>
@@ -596,13 +607,90 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 		<!-- page end-->
 	</div>
-	</section> <!-- footer -->
+	</section>
+	
+	<!-- 기능부 스크립트 시작 -->
+	<script type="text/javascript">
+	$(document).ready(function() {
+		// 우편번호 검색기능
+		$("#searchBtn").click(function(e){
+			$('body').css('overflow-y', 'hidden');
+	        e.preventDefault();
+	        // AJAX
+	        $.ajax({
+	            // organization controller 진입 url
+	            url : '${root}/organization/zipcodeList.kitri',
+	            // zip_codeForm을 serialize 해줍니다.
+	            data : $("#zip_codeForm").serialize(),
+	            type : "POST",
+	            // dataType 은 json형태로 보냅니다.
+	            dataType : "json",
+	            success : function(result){
+	                $("#zip_codeList").empty();
+	                var html = "";
+	                if(result.errorCode != null && result.errorCode != ""){
+	                    html += "<tr>";
+	                    html += "    <td colspan='2'>";
+	                    html +=            result.errorMessage;
+	                    html += "    </td>";
+	                    html += "</tr>";
+	                }
+	                else{
+	                    // 검색결과를 list에 담는다.
+	                    var list = result.list;   
+	                    for(var i = 0; i < list.length; i++){
+	                        html += "<tr>";
+	                        html += "    <td>";
+	                        // 우편번호
+	                        var zipcode = list[i].zipcode;
+	                        // 주소
+	                        var address = list[i].address;
+	                        html +=         list[i].zipcode;
+	                        html += "    </td>";
+	                        html += "    <td>";
+	                        html +=     '<a href="#" onclick="put(\'' + list[i].address + '\',\'' + zipcode + '\')">' + address + '</a>';
+	                        html += "    </td>";
+	                        html += "</tr>";
+	                    }
+	                }
+	                // 완성된 html(우편번호 list)를 zip_codeList밑에 append
+	                $("#zip_codeList").append(html);	                
+	            }
+	        });
+	   	 });
+	});		
+	// 원하는 우편번호 선택시 함수 실행
+	function put(address,zipcode){
+    	var address = address;
+    	var zipcode = zipcode;
+    	// 모달창 닫고, 선택값 대입
+    	$("#zip_codeModal").modal("hide");
+    	$("#zipcode").val(zipcode);
+    	$("#addrdetail").val(address);
+        $("#zip_codeList").empty();
+	}
+	// 사진 업로드시 미리보기 업로드
+	function readURL(input) {		
+		if(input.files && input.files[0]){
+			var reader = new FileReader(); 
+			reader.onload = function (e) { 
+				$('#blah').attr('src', e.target.result); 
+			} 
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+	</script>
+	
+	<!-- footer -->
 	<div class="footer">
 		<div class="wthree-copyright">
 			<p>© 2018 KITRIWARE All rights reserved | Design by DC #26 3TEAM</p>
 		</div>
 	</div>
-	<!-- / footer --> </section> <!--main content end--> </section>
+	<!-- / footer --> 
+	</section> 
+	<!--main content end--> 
+	</section>
 	<script src="${root}/js/bootstrap.js"></script>
 	<script src="${root}/js/jquery.dcjqaccordion.2.7.js"></script>
 	<script src="${root}/js/scripts.js"></script>

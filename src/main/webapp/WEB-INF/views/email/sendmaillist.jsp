@@ -255,9 +255,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<li><a href="404.html">404 Error</a></li>
 						<li><a href="registration.html">Registration</a></li>
 					</ul></li>
-				<li><a href="login.html"> <i class="fa fa-user"></i> <span>Login
-							Page</span>
-				</a></li>
+				<li class="sub-menu"><a href="javascript:;">
+						<i class="fa fa-user"></i> <span>관리자</span>
+				</a>
+					<ul class="sub">
+						<li><a href="${root}/organization/organization.kitri">조직도 관리</a></li>
+						<li><a href="${root}/email/sendlist.kitri">기능1</a></li>
+						<li><a href="${root}/email/keeplist.kitri">기능2</a></li>
+					</ul></li>
 			</ul>
 		</div>
 		<!-- sidebar menu end-->
