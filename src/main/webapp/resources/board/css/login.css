@@ -13,7 +13,7 @@ html, body{
 	font-family: 'Roboto', sans-serif;
     font-size: 100%;
     overflow-x: hidden;
-    background: #bae6de;
+    background: url(../images/background.jpg);
 	background-size:cover;
 }
 
@@ -55,7 +55,7 @@ html, body{
 }
 .captn h4 {
 	font-size: 1.2em;
-    color: #fff;
+    color: #8dd5f2;
     margin: 2.5em 0 0 0;
     text-transform: uppercase;
     font-weight: 600;
@@ -74,7 +74,7 @@ html, body{
 }
 /*-- gallery --*/
 .w3layouts-main h2 {
-	color: #388ea1;
+	color: #274ea8;
     font-size: 29px;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -85,7 +85,7 @@ html, body{
 .w3layouts-main {
     width: 30%;
     margin:5em auto;
-    background:#90d0d1;
+    background:white;
     padding: 42px 35px;
 }
 
@@ -94,10 +94,10 @@ html, body{
 input.ggg{
     width: 100%;
     padding: 15px 0px 15px 15px;
-    border: 1px solid #fff;
+    border: 1px solid black;
     outline: none;
     font-size: 14px;
-    color: #fff;
+    color: #8dd5f2;
     margin: 5px 0px;
 	background: none;
 	height: 50px;
@@ -106,10 +106,10 @@ input.ggg{
 
 input.gg{   
     padding: 15px 0px 15px 15px;
-    border: 1px solid #fff;
+    border: 1px solid black;
     outline: none;
     font-size: 14px;
-    color: #fff;
+    color: #8dd5f2;
     margin: 5px 0px;
 	background: none;
 	height: 30px;
@@ -118,10 +118,10 @@ input.gg{
 
 
 select.gg  {	
-    border: 1px solid #fff;
+    border: 1px solid black;
     outline: none;
     font-size: 14px;
-    color: #fff;
+    color: #8dd5f2;
     margin: 5px 0px;
 	background: none;
 	height: 30px;	
@@ -130,24 +130,24 @@ select.gg  {
 
 
 option {
-	background: #90d0d1;
+	background: white;
 }
 
 
 .w3layouts-main span {
     font-size: 16px;
-    color: #fff;      	
+    color: #8dd5f2;      	
 }
 .w3layouts-main h6 {
     font-size: 16px;
     float: right;
     width: 37%;
-	color: #fff;
+	color: #8dd5f2;
     letter-spacing: 1px;
 	margin-top: 8px;	
 }
 .w3layouts-main a {
-    color: #fff;
+    color: #8dd5f2;
 	transition:0.5s all;
 	-webkit-transition:0.5s all;
 	-o-transition:0.5s all;
@@ -155,7 +155,7 @@ option {
 	-ms-transition:0.5s all;
 }
 .w3layouts-main a:hover, a:focus{
-	color:#388ea1;
+	color:#274ea8;
 	transition:0.5s all;
 	-webkit-transition:0.5s all;
 	-o-transition:0.5s all;
@@ -182,7 +182,7 @@ option {
     -ms-transition: 0.5s all;
 }
 .w3layouts-main input[type="button"]:hover {
-	background:#388ea1;
+	background:#274ea8;
 	transition:0.5s all;
 	-webkit-transition:0.5s all;
 	-o-transition:0.5s all;
@@ -193,13 +193,24 @@ option {
     color: #56aebf;
     padding: 10px;
 }
+
 .w3layouts-main p a:hover {
-    color: #388ea1;
+    color: #274ea8;
     text-decoration: none;
 }
+
+.w3layouts-main label {
+	color: #56aebf;    
+}
+
+.w3layouts-main label:hover {
+	color: #274ea8;
+    text-decoration: none;
+}
+
 .w3layouts-main p {
     font-size: 17px;
-    color: #fff;
+    color: black;
 	text-align: center;
 }
 /*--//login--*/
@@ -208,22 +219,22 @@ h4 input[type="checkbox"] {
 }
 .w3layouts-main h4{
     margin-right: 10px;
-	color:#fff;
+	color:#8dd5f2;
 	font-weight:400;
 	font-size:14px;
 }
  /*--placeholder-color--*/
 ::-webkit-input-placeholder {
-	color:#fff !important;
+	color:#8dd5f2 !important;
 }
 :-moz-placeholder { /* Firefox 18- */
-	color:#fff !important; 
+	color:#8dd5f2 !important; 
 }
 ::-moz-placeholder {  /* Firefox 19+ */
-	color:#fff !important;
+	color:#8dd5f2 !important;
 }
 :-ms-input-placeholder {  
-	color:#fff !important;
+	color:#8dd5f2 !important;
 }
 /*--//placeholder-color--*/
 .alert {
@@ -267,11 +278,11 @@ canvas.canvasjs-chart-canvas {
 }
 .chart_agile_bottom{
 	padding:20px;
-	background:#fff;
+	background:#8dd5f2;
 }
 .floatcharts_w3layouts_bottom{
 	padding:20px;
-	background:#fff;
+	background:#8dd5f2;
 }
 .floatcharts_w3layouts_left {
     margin-bottom: 2em;
