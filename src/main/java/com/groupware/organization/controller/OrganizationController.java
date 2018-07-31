@@ -45,7 +45,7 @@ public class OrganizationController {
 		// navigation.makeNavigator();
 		// mav.addObject("list", list);
 		// mav.addObject("navigator", navigation);
-		mav.setViewName("organization/list");
+		mav.setViewName("/organization/list");
 		return mav;
 	}
 	

@@ -20,17 +20,17 @@ public class EmailController {
 	
 	@RequestMapping(value="/emaillist.kitri", method=RequestMethod.GET)
 	public String emailList() {
-		return "email/receivemaillist";
+		return "/email/receivemaillist";
 	}
 	
 	@RequestMapping(value="/sendlist.kitri", method=RequestMethod.GET)
 	public String sendList() {
-		return "email/sendmaillist";
+		return "/email/sendmaillist";
 	}
 	
 	@RequestMapping(value="/keeplist.kitri", method=RequestMethod.GET)
 	public String keepList() {
-		return "email/keepmaillist";
+		return "/email/keepmaillist";
 	}
 	
 	
