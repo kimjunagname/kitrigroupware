@@ -18,8 +18,7 @@
 		<jackson-version>2.9.5</jackson-version>
 		<commons-fileupload-version>1.3.1</commons-fileupload-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
-		<jsonup-version>1.8.3</jsonup-version>
-		<gson-version>2.2.4</gson-version>
+		<org.apache.tiles-version>3.0.5</org.apache.tiles-version>
 		
 	</properties>
 	<dependencies>
@@ -40,9 +39,11 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
+
 		<!-- Logging -->
+<!-- tiles 2와 관련되어 있음 -->
 		<dependency>
-		<groupId>org.slf4j</groupId>
+			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${org.slf4j-version}</version>
 		</dependency>
@@ -82,6 +83,11 @@
 			</exclusions>
 			<scope>runtime</scope>
 		</dependency>
+
+
+
+
+
 		<!-- @Inject -->
 
 		<!-- Servlet -->
@@ -127,47 +133,44 @@
 		    <artifactId>commons-fileupload</artifactId>
 		    <version>${commons-fileupload-version}</version>
 		</dependency>
-		
-		<!-- JSONUP, GSON for zipcode Return -->
-		<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
-    	<dependency>
-        	<groupId>org.jsoup</groupId>
-        	<artifactId>jsoup</artifactId>
-       		<version>${jsonup-version}</version>
-    	</dependency>
-		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-    	<dependency>
-        	<groupId>com.google.code.gson</groupId>
-        	<artifactId>gson</artifactId>
-        	<version>${gson-version}</version>
-    	</dependency>
-
-	    <!-- Tiles 2 설정 -->
-		<dependency>
-	      <groupId>org.apache.tiles</groupId>
-	      <artifactId>tiles-api</artifactId>
-	      <version>2.2.2</version>
-	    </dependency>
-	
+		 <!-- Tiles 2 설정 -->
 	    <dependency>
 	      <groupId>org.apache.tiles</groupId>
-	      <artifactId>tiles-core</artifactId>
-	      <version>2.2.2</version>
+	      <artifactId>tiles-api</artifactId>
+	      <version>${org.apache.tiles-version}</version>
 	    </dependency>
+	
+		<!-- https://mvnrepository.com/artifact/org.apache.tiles/tiles-core -->
+		<dependency>
+		    <groupId>org.apache.tiles</groupId>
+		    <artifactId>tiles-core</artifactId>
+	      <version>${org.apache.tiles-version}</version>
+		</dependency>
+
 	
 	    <dependency>
 	      <groupId>org.apache.tiles</groupId>
 	      <artifactId>tiles-jsp</artifactId>
-	      <version>2.2.2</version>
+	      <version>${org.apache.tiles-version}</version>
 	    </dependency>
 	
 	    <dependency>
 	      <groupId>org.apache.tiles</groupId>
 	      <artifactId>tiles-servlet</artifactId>
-	      <version>2.2.2</version>
+	      <version>${org.apache.tiles-version}</version>
 	    </dependency>
-
-	  
+	
+	    <dependency>
+	      <groupId>org.apache.tiles</groupId>
+	      <artifactId>tiles-template</artifactId>
+	      <version>${org.apache.tiles-version}</version>
+	    </dependency>
+	    	 	        
+	    <dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-extras</artifactId>
+			<version>${org.apache.tiles-version}</version>
+	 	</dependency> 
 
 	</dependencies>
 	<build>

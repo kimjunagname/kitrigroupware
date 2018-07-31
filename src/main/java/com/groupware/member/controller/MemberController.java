@@ -25,7 +25,7 @@ public class MemberController {
 		System.out.println("EmailController  ¿Ô´Ù!!!!!");
 		//List<MemberDto> list = memberService.getListmember();
 	//	map.put("eamilList", list);
-		return "login/login";
+		return "/login/login";
 	}
 	
 	
