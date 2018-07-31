@@ -42,7 +42,7 @@
 				<value>classpath:com/groupware/config/mybatis/noticeboard_common.xml</value>
 				<value>classpath:com/groupware/config/mybatis/noticeboard.xml</value>
 				
-				<value>classpath:com/groupware/config/mybatis/officerwork.xml</value>
+				<value>classpath:com/groupware/config/mybatis/commute.xml</value>
 				<value>classpath:com/groupware/config/mybatis/organization.xml</value>
 				<value>classpath:com/groupware/config/mybatis/schedule.xml</value>
 			 
