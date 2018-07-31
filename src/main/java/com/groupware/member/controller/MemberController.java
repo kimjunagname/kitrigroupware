@@ -21,12 +21,23 @@ public class MemberController {
 	private MemberService memberService;
 	
 	@RequestMapping("/login.kitri")
-	public String listMember(Map<String, Object> map) {
-		System.out.println("EmailController  ¿Ô´Ù!!!!!");
-		//List<MemberDto> list = memberService.getListmember();
-	//	map.put("eamilList", list);
+	public String loginform() {				
 		return "/login/login";
 	}
 	
+	@RequestMapping("/register.kitri")
+	public String register() {
+		return "/join/registration";
+	}
+	
+	@RequestMapping("/idfind.kitri")
+	public String idfind() {
+		return "/login/idfind";
+	}
+	
+	@RequestMapping("/pwfind.kitri")
+	public String pwfind() {
+		return "/join/pwfind";
+	}
 	
 }
