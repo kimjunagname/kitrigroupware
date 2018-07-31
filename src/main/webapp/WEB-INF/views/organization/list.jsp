@@ -1,636 +1,614 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/commons/public.jsp" %>
-    
+	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/commons/public.jsp"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Visitors an Admin Panel Category Bootstrap Responsive Website Template | Home :: w3layouts</title>
+<title>조직도 관리</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Visitors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+<meta name="keywords"
+	content="Visitors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<script type="application/x-javascript">
+	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+</script>
 <!-- bootstrap-css -->
-<link rel="stylesheet" href="${root}/css/bootstrap.min.css" >
+<link rel="stylesheet" href="${root}/css/bootstrap.min.css">
 <!-- //bootstrap-css -->
 <!-- Custom CSS -->
 <link href="${root}/css/project.css" rel='stylesheet' type='text/css' />
-<link href="${root}/css/style-responsive.css" rel="stylesheet"/>
+<link href="${root}/css/style-responsive.css" rel="stylesheet" />
 <!-- font CSS -->
-<link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+<link
+	href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic'
+	rel='stylesheet' type='text/css'>
 <!-- font-awesome icons -->
-<link rel="stylesheet" href="${root}/css/font.css" type="text/css"/>
-<link href="${root}/css/font-awesome.css" rel="stylesheet"> 
-<link rel="stylesheet" href="${root}/css/morris.css" type="text/css"/>
-<!-- calendar -->
-<link rel="stylesheet" href="${root}/css/month.css">
-<!-- 트리구조 -->
-<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-<!-- //calendar -->
+<link rel="stylesheet" href="${root}/css/font.css" type="text/css" />
+<link href="${root}/css/font-awesome.css" rel="stylesheet">
 <!-- //font-awesome icons -->
 <script src="${root}/js/jquery2.0.3.min.js"></script>
-<script src="${root}/js/raphael-min.js"></script>
-<script src="${root}/js/morris.js"></script>
-<!-- http://www.blueb.co.kr/?c=1/4&cat=%ED%8A%B8%EB%A6%AC%EB%A9%94%EB%89%B4&uid=3762 -->
-<style>
-div.container ul {
-    padding: 0em;
-}
 
-div.container ul li, ul li ul li {
-    position:relative;
-    top:0;
-    bottom:0;
-    padding-bottom: 7px;
+<!-- jQuery EasyUi API -->
+<link rel="stylesheet" type="text/css"
+	href="${root}/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css"
+	href="${root}/easyui/themes/icon.css">
+<script type="text/javascript" src="${root}/easyui/jquery.easyui.min.js"></script>
 
-}
-
-div.container ul li ul {
-    margin-left: 4em;
-}
-
-div.container li {
-    list-style-type: none;
-}
-
-div.container li a {
-    padding:0 0 0 10px;
-    position: relative;
-    top:1em;
-}
-
-div.container li a:hover {
-    text-decoration: none;
-}
-
-div.container a.addBorderBefore:before {
-    content: "";
-    display: inline-block;
-    width: 2px;
-    height: 28px;
-    position: absolute;
-    left: -47px;
-    top:-16px;
-    border-left: 1px solid gray;
-}
-
-div.container li:before {
-    content: "";
-    display: inline-block;
-    width: 25px;
-    height: 0;
-    position: relative;
-    left: 0em;
-    top:1em;
-    border-top: 1px solid gray;
-}
-
-div.container ul li ul li:last-child:after, div.container ul li:last-child:after {
-    content: '';
-    display: block;
-    width: 1em;
-    height: 1em;
-    position: relative;
-    background: #fff;
-    top: 9px;
-    left: -1px;
-}
-</style>
 </head>
 <body>
-<section id="container">
-<!--header start-->
-<header class="header fixed-top clearfix">
-<!--logo start-->
-<div class="brand">
-    <a href="index.html" class="logo">
-        VISITORS
-    </a>
-    <div class="sidebar-toggle-box">
-        <div class="fa fa-bars"></div>
-    </div>
-</div>
-<!--logo end-->
-<div class="nav notify-row" id="top_menu">
-    <!--  notification start -->
-    <ul class="nav top-menu">
-        <!-- settings start -->
-        <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <i class="fa fa-tasks"></i>
-                <span class="badge bg-success">8</span>
-            </a>
-            <ul class="dropdown-menu extended tasks-bar">
-                <li>
-                    <p class="">You have 8 pending tasks</p>
-                </li>
-                <li>
-                    <a href="#">
-                        <div class="task-info clearfix">
-                            <div class="desc pull-left">
-                                <h5>Target Sell</h5>
-                                <p>25% , Deadline  12 June’13</p>
-                            </div>
-                                    <span class="notification-pie-chart pull-right" data-percent="45">
-                            <span class="percent"></span>
-                            </span>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <div class="task-info clearfix">
-                            <div class="desc pull-left">
-                                <h5>Product Delivery</h5>
-                                <p>45% , Deadline  12 June’13</p>
-                            </div>
-                                    <span class="notification-pie-chart pull-right" data-percent="78">
-                            <span class="percent"></span>
-                            </span>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <div class="task-info clearfix">
-                            <div class="desc pull-left">
-                                <h5>Payment collection</h5>
-                                <p>87% , Deadline  12 June’13</p>
-                            </div>
-                                    <span class="notification-pie-chart pull-right" data-percent="60">
-                            <span class="percent"></span>
-                            </span>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <div class="task-info clearfix">
-                            <div class="desc pull-left">
-                                <h5>Target Sell</h5>
-                                <p>33% , Deadline  12 June’13</p>
-                            </div>
-                                    <span class="notification-pie-chart pull-right" data-percent="90">
-                            <span class="percent"></span>
-                            </span>
-                        </div>
-                    </a>
-                </li>
+	<section id="container"> <!--header start--> <header
+		class="header fixed-top clearfix"> <!--logo start-->
+	<div class="brand">
 
-                <li class="external">
-                    <a href="#">See All Tasks</a>
-                </li>
-            </ul>
-        </li>
-        <!-- settings end -->
-        <!-- inbox dropdown start-->
-        <li id="header_inbox_bar" class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <i class="fa fa-envelope-o"></i>
-                <span class="badge bg-important">4</span>
-            </a>
-            <ul class="dropdown-menu extended inbox">
-                <li>
-                    <p class="red">You have 4 Mails</p>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="photo"><img alt="avatar" src="images/3.png"></span>
-                                <span class="subject">
-                                <span class="from">Jonathan Smith</span>
-                                <span class="time">Just now</span>
-                                </span>
-                                <span class="message">
-                                    Hello, this is an example msg.
-                                </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="photo"><img alt="avatar" src="images/1.png"></span>
-                                <span class="subject">
-                                <span class="from">Jane Doe</span>
-                                <span class="time">2 min ago</span>
-                                </span>
-                                <span class="message">
-                                    Nice admin template
-                                </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="photo"><img alt="avatar" src="images/3.png"></span>
-                                <span class="subject">
-                                <span class="from">Tasi sam</span>
-                                <span class="time">2 days ago</span>
-                                </span>
-                                <span class="message">
-                                    This is an example msg.
-                                </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="photo"><img alt="avatar" src="images/2.png"></span>
-                                <span class="subject">
-                                <span class="from">Mr. Perfect</span>
-                                <span class="time">2 hour ago</span>
-                                </span>
-                                <span class="message">
-                                    Hi there, its a test
-                                </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">See all messages</a>
-                </li>
-            </ul>
-        </li>
-        <!-- inbox dropdown end -->
-        <!-- notification dropdown start-->
-        <li id="header_notification_bar" class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+		<a href="index.html" class="logo"> KITRIWARE </a>
+		<div class="sidebar-toggle-box">
+			<div class="fa fa-bars"></div>
+		</div>
+	</div>
+	<!--logo end-->
 
-                <i class="fa fa-bell-o"></i>
-                <span class="badge bg-warning">3</span>
-            </a>
-            <ul class="dropdown-menu extended notification">
-                <li>
-                    <p>Notifications</p>
-                </li>
-                <li>
-                    <div class="alert alert-info clearfix">
-                        <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                        <div class="noti-info">
-                            <a href="#"> Server #1 overloaded.</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="alert alert-danger clearfix">
-                        <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                        <div class="noti-info">
-                            <a href="#"> Server #2 overloaded.</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="alert alert-success clearfix">
-                        <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                        <div class="noti-info">
-                            <a href="#"> Server #3 overloaded.</a>
-                        </div>
-                    </div>
-                </li>
+	<div class="nav notify-row" id="top_menu">
+		<!--  notification start -->
+		<ul class="nav top-menu">
+			<!-- settings start -->
+			<li class="dropdown"><a data-toggle="dropdown"
+				class="dropdown-toggle" href="#"> <i class="fa fa-tasks"></i> <span
+					class="badge bg-success">8</span>
+			</a>
+				<ul class="dropdown-menu extended tasks-bar">
+					<li>
+						<p class="">You have 8 pending tasks</p>
+					</li>
+					<li><a href="#">
+							<div class="task-info clearfix">
+								<div class="desc pull-left">
+									<h5>Target Sell</h5>
+									<p>25% , Deadline 12 June’13</p>
+								</div>
+								<span class="notification-pie-chart pull-right"
+									data-percent="45"> <span class="percent"></span>
+								</span>
+							</div>
+					</a></li>
+					<li><a href="#">
+							<div class="task-info clearfix">
+								<div class="desc pull-left">
+									<h5>Product Delivery</h5>
+									<p>45% , Deadline 12 June’13</p>
+								</div>
+								<span class="notification-pie-chart pull-right"
+									data-percent="78"> <span class="percent"></span>
+								</span>
+							</div>
+					</a></li>
+					<li><a href="#">
+							<div class="task-info clearfix">
+								<div class="desc pull-left">
+									<h5>Payment collection</h5>
+									<p>87% , Deadline 12 June’13</p>
+								</div>
+								<span class="notification-pie-chart pull-right"
+									data-percent="60"> <span class="percent"></span>
+								</span>
+							</div>
+					</a></li>
+					<li><a href="#">
+							<div class="task-info clearfix">
+								<div class="desc pull-left">
+									<h5>Target Sell</h5>
+									<p>33% , Deadline 12 June’13</p>
+								</div>
+								<span class="notification-pie-chart pull-right"
+									data-percent="90"> <span class="percent"></span>
+								</span>
+							</div>
+					</a></li>
 
-            </ul>
-        </li>
-        <!-- notification dropdown end -->
-    </ul>
-    <!--  notification end -->
-</div>
-<div class="top-nav clearfix">
-    <!--search & user info start-->
-    <ul class="nav pull-right top-menu">
-        <li>
-            <input type="text" class="form-control search" placeholder=" Search">
-        </li>
-        <!-- user login dropdown start-->
-        <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <img alt="" src="images/2.png">
-                <span class="username">John Doe</span>
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu extended logout">
-                <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-                <li><a href="login.html"><i class="fa fa-key"></i> Log Out</a></li>
-            </ul>
-        </li>
-        <!-- user login dropdown end -->
-       
-    </ul>
-    <!--search & user info end-->
-</div>
-</header>
-<!--header end-->
-<!--sidebar start-->
-<aside>
-    <div id="sidebar" class="nav-collapse">
-        <!-- sidebar menu start-->
-        <div class="leftside-navigation">
-            <ul class="sidebar-menu" id="nav-accordion">
-                <li>
-                    <a class="active" href="index.html">
-                        <i class="fa fa-dashboard"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-                
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class="fa fa-book"></i>
-                        <span>UI Elements</span>
-                    </a>
-                    <ul class="sub">
+					<li class="external"><a href="#">See All Tasks</a></li>
+				</ul></li>
+			<!-- settings end -->
+			<!-- inbox dropdown start-->
+			<li id="header_inbox_bar" class="dropdown"><a
+				data-toggle="dropdown" class="dropdown-toggle" href="#"> <i
+					class="fa fa-envelope-o"></i> <span class="badge bg-important">4</span>
+			</a>
+				<ul class="dropdown-menu extended inbox">
+					<li>
+						<p class="red">You have 4 Mails</p>
+					</li>
+					<li><a href="#"> <span class="photo"><img
+								alt="avatar" src="${root}/images/3.png"></span> <span
+							class="subject"> <span class="from">Jonathan Smith</span>
+								<span class="time">Just now</span>
+						</span> <span class="message"> Hello, this is an example msg. </span>
+					</a></li>
+					<li><a href="#"> <span class="photo"><img
+								alt="avatar" src="${root}/images/1.png"></span> <span
+							class="subject"> <span class="from">Jane Doe</span> <span
+								class="time">2 min ago</span>
+						</span> <span class="message"> Nice admin template </span>
+					</a></li>
+					<li><a href="#"> <span class="photo"><img
+								alt="avatar" src="${root}/images/3.png"></span> <span
+							class="subject"> <span class="from">Tasi sam</span> <span
+								class="time">2 days ago</span>
+						</span> <span class="message"> This is an example msg. </span>
+					</a></li>
+					<li><a href="#"> <span class="photo"><img
+								alt="avatar" src="${root}/images/2.png"></span> <span
+							class="subject"> <span class="from">Mr. Perfect</span> <span
+								class="time">2 hour ago</span>
+						</span> <span class="message"> Hi there, its a test </span>
+					</a></li>
+					<li><a href="#">See all messages</a></li>
+				</ul></li>
+			<!-- inbox dropdown end -->
+			<!-- notification dropdown start-->
+			<li id="header_notification_bar" class="dropdown"><a
+				data-toggle="dropdown" class="dropdown-toggle" href="#"> <i
+					class="fa fa-bell-o"></i> <span class="badge bg-warning">3</span>
+			</a>
+				<ul class="dropdown-menu extended notification">
+					<li>
+						<p>Notifications</p>
+					</li>
+					<li>
+						<div class="alert alert-info clearfix">
+							<span class="alert-icon"><i class="fa fa-bolt"></i></span>
+							<div class="noti-info">
+								<a href="#"> Server #1 overloaded.</a>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="alert alert-danger clearfix">
+							<span class="alert-icon"><i class="fa fa-bolt"></i></span>
+							<div class="noti-info">
+								<a href="#"> Server #2 overloaded.</a>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="alert alert-success clearfix">
+							<span class="alert-icon"><i class="fa fa-bolt"></i></span>
+							<div class="noti-info">
+								<a href="#"> Server #3 overloaded.</a>
+							</div>
+						</div>
+					</li>
+
+				</ul></li>
+			<!-- notification dropdown end -->
+		</ul>
+		<!--  notification end -->
+	</div>
+	<div class="top-nav clearfix">
+		<!--search & user info start-->
+		<ul class="nav pull-right top-menu">
+			<li><input type="text" class="form-control search"
+				placeholder=" Search"></li>
+			<!-- user login dropdown start-->
+			<li class="dropdown"><a data-toggle="dropdown"
+				class="dropdown-toggle" href="#"> <img alt=""
+					src="${root}/images/2.png"> <span class="username">John
+						Doe</span> <b class="caret"></b>
+			</a>
+				<ul class="dropdown-menu extended logout">
+					<li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
+					<li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+					<li><a href="login.html"><i class="fa fa-key"></i> Log Out</a></li>
+				</ul></li>
+			<!-- user login dropdown end -->
+
+		</ul>
+		<!--search & user info end-->
+	</div>
+	</header> <!--header end--> <!--sidebar start--> <aside>
+	<div id="sidebar" class="nav-collapse">
+		<!-- sidebar menu start-->
+		<div class="leftside-navigation">
+			<ul class="sidebar-menu" id="nav-accordion">
+				<li><a href="index.html"> <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+				</a></li>
+
+				<li class="sub-menu"><a href="javascript:;"> <i
+						class="fa fa-book"></i> <span>UI Elements</span>
+				</a>
+					<ul class="sub">
 						<li><a href="typography.html">Typography</a></li>
 						<li><a href="glyphicon.html">glyphicon</a></li>
-                        <li><a href="grids.html">Grids</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="fontawesome.html">
-                        <i class="fa fa-bullhorn"></i>
-                        <span>Font awesome </span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class="fa fa-th"></i>
-                        <span>Data Tables</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="basic_table.html">Basic Table</a></li>
-                        <li><a href="responsive_table.html">Responsive Table</a></li>
-                    </ul>
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class="fa fa-tasks"></i>
-                        <span>Form Components</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="form_component.html">Form Elements</a></li>
-                        <li><a href="form_validation.html">Form Validation</a></li>
+						<li><a href="grids.html">Grids</a></li>
+					</ul></li>
+				<li><a href="fontawesome.html"> <i class="fa fa-bullhorn"></i>
+						<span>Font awesome </span>
+				</a></li>
+				<li class="sub-menu"><a href="javascript:;"> <i
+						class="fa fa-th"></i> <span>Data Tables</span>
+				</a>
+					<ul class="sub">
+						<li><a href="basic_table.html">Basic Table</a></li>
+						<li><a href="responsive_table.html">Responsive Table</a></li>
+					</ul></li>
+				<li class="sub-menu"><a href="javascript:;"> <i
+						class="fa fa-tasks"></i> <span>Form Components</span>
+				</a>
+					<ul class="sub">
+						<li><a href="form_component.html">Form Elements</a></li>
+						<li><a href="form_validation.html">Form Validation</a></li>
 						<li><a href="dropzone.html">Dropzone</a></li>
-                    </ul>
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class="fa fa-envelope"></i>
-                        <span>Mail </span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="mail.html">Inbox</a></li>
-                        <li><a href="mail_compose.html">Compose Mail</a></li>
-                    </ul>
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class=" fa fa-bar-chart-o"></i>
-                        <span>Charts</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="chartjs.html">Chart js</a></li>
-                        <li><a href="flot_chart.html">Flot Charts</a></li>
-                    </ul>
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class=" fa fa-bar-chart-o"></i>
-                        <span>Maps</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="google_map.html">Google Map</a></li>
-                        <li><a href="vector_map.html">Vector Map</a></li>
-                    </ul>
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class="fa fa-glass"></i>
-                        <span>Extra</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="gallery.html">Gallery</a></li>
+					</ul></li>
+				<li class="sub-menu"><a class="active" href="javascript:;">
+						<i class="fa fa-envelope"></i> <span>Mail </span>
+				</a>
+					<ul class="sub">
+						<li><a href="${root}/email/emaillist.kitri">수신 메일함</a></li>
+						<li><a href="${root}/email/sendlist.kitri">발신 메일함</a></li>
+						<li><a href="${root}/email/keeplist.kitri">받은 메일 보관함</a></li>
+					</ul></li>
+				<li class="sub-menu"><a href="javascript:;"> <i
+						class=" fa fa-bar-chart-o"></i> <span>Charts</span>
+				</a>
+					<ul class="sub">
+						<li><a href="chartjs.html">Chart js</a></li>
+						<li><a href="flot_chart.html">Flot Charts</a></li>
+					</ul></li>
+				<li class="sub-menu"><a href="javascript:;"> <i
+						class=" fa fa-bar-chart-o"></i> <span>Maps</span>
+				</a>
+					<ul class="sub">
+						<li><a href="google_map.html">Google Map</a></li>
+						<li><a href="vector_map.html">Vector Map</a></li>
+					</ul></li>
+				<li class="sub-menu"><a href="javascript:;"> <i
+						class="fa fa-glass"></i> <span>Extra</span>
+				</a>
+					<ul class="sub">
+						<li><a href="gallery.html">Gallery</a></li>
 						<li><a href="404.html">404 Error</a></li>
-                        <li><a href="registration.html">Registration</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="login.html">
-                        <i class="fa fa-user"></i>
-                        <span>Login Page</span>
-                    </a>
-                </li>
-            </ul>            </div>
-        <!-- sidebar menu end-->
-    </div>
-</aside>
-<!--sidebar end-->
-<!--main content start-->
-<section id="main-content">
-	<section class="wrapper">
-			<h1><b>결재작성</b></h1><hr>
-			<div class="table-agile-info">
-			    <div class="row">
-			    	<div class="col-lg-6">
-                        <div class="panel-body"><h4>· 결재양식리스트</h4>
-<div class="container">                        
-<ul>
-	<li><a href="#">Manchester</a>
-		<ul>
-			<li><a href="#">Magazine</a>
-					<ul>
-					<li><a href="#">Spiral Scratch</a></li>
-					<li><a href="#">Real Life</a></li>
-					<li><a href="#">Secondhand Daylight</a></li>
-					<li><a href="#">The Correct Use</a></li>
-					</ul>
-			</li>
-			<li><a href="#">Buzzcocks</a>
-				<ul>
-				<li><a href="#">Time's Up</a></li>
-				<li><a href="#">Another Music in A Different Kitchen</a></li>
-				<li><a href="#">Love Bites</a></li>
-				<li><a href="#">A Different Kind Of Tension</a></li>
-				</ul>
-			</li>
-			<li><a href="#">Joy Division</a>
-				<ul>
-				<li><a href="#">Unknown Pleasures</a></li>
-				<li><a href="#">Closer</a></li>
-				<li><a href="#">Still</a></li>
-				</ul>
-			</li>
-		</ul>
-	</li>
-	<li><a href="#">Liverpool</a>
-		<ul>
-			<li><a href="#">OMD</a>
-				<ul>
-					<li><a href="#">OMD</a></li>
-					<li><a href="#">Organisation</a></li>
-				</ul>
-			</li>
-			<li><a href="#">Echo & the Bunnymen</a>
-				<ul>
-					<li><a href="#">Crocodiles</a></li>
-					<li><a href="#">Heaven Up Here</a></li>
-					<li><a href="#">Porcupine</a></li>
-				</ul>
-			</li>
-		</ul>
-	</li>
-</ul>
-</div>
-                        </div>
-                	</div>
-			    	<div class="col-lg-6">
-                        <div class="panel-body"><h4>· 결재양식정보</h4></div>
-                        
-                	</div>
+						<li><a href="registration.html">Registration</a></li>
+					</ul></li>
+				<li class="sub-menu"><a class="active" href="javascript:;">
+						<i class="fa fa-user"></i> <span>관리자</span>
+				</a>
+					<ul class="sub">
+						<li><a href="${root}/email/emaillist.kitri">조직도 관리</a></li>
+						<li><a href="${root}/email/sendlist.kitri">기능1</a></li>
+						<li><a href="${root}/email/keeplist.kitri">기능2</a></li>
+					</ul></li>
+			</ul>
+		</div>
+		<!-- sidebar menu end-->
+	</div>
+	</aside> 
+	<!--sidebar end--> 
+	<!-- 조직관리 모달 시작 -->
+	<div class="modal fade" id="DeptModal" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">조직관리</h4>
+				</div>
+				<div class="modal-body">
+					<div>
+						<table class="tableMiddle table table-hover">
+							<tr>
+								<td><a href="#">기획부</a></td>
+							</tr>
+							<tr>
+								<td><a href="#">개발부</a></td>
+							</tr>
+							<tr>
+								<td><a href="#">경영부</a></td>
+							</tr>
+							<tr>
+								<td><a href="#">홍보부</a></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div align="left">
+						<strong>추가할 부서명 입력</strong>
+					</div>
+					<input type="text" class="form-control" placeholder="추가 부서명 입력">
+					<span>
+						<button type="button" id="applybutton" class="btn btn-primary btn-sm" data-dismiss="modal">등록</button>
+						<button type="button" id="okbutton" class="btn btn-success btn-sm" data-dismiss="modal">닫기</button>
+					</span>
 				</div>
 			</div>
-	</section>
-</section>
-<!--main content end-->
-</section>
-<script src="js/bootstrap.js"></script>
-<script src="js/jquery.dcjqaccordion.2.7.js"></script>
-<script src="js/scripts.js"></script>
-<script src="js/jquery.slimscroll.js"></script>
-<script src="js/jquery.nicescroll.js"></script>
-<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
-<script src="js/jquery.scrollTo.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script>
-// Select the main list and add the class "hasSubmenu" in each LI that contains an UL
-$('ul').each(function(){
-  $this = $(this);
-  $this.find("li").has("ul").addClass("hasSubmenu");
-});
-// Find the last li in each level
-$('li:last-child').each(function(){
-  $this = $(this);
-  // Check if LI has children
-  if ($this.children('ul').length === 0){
-    // Add border-left in every UL where the last LI has not children
-    $this.closest('ul').css("border-left", "1px solid gray");
-  } else {
-    // Add border in child LI, except in the last one
-    $this.closest('ul').children("li").not(":last").css("border-left","1px solid gray");
-    // Add the class "addBorderBefore" to create the pseudo-element :defore in the last li
-    $this.closest('ul').children("li").last().children("a").addClass("addBorderBefore");
-    // Add margin in the first level of the list
-    $this.closest('ul').css("margin-top","20px");
-    // Add margin in other levels of the list
-    $this.closest('ul').find("li").children("ul").css("margin-top","20px");
-  };
-});
-// Add bold in li and levels above
-$('ul li').each(function(){
-  $this = $(this);
-  $this.mouseenter(function(){
-    $( this ).children("a").css({"font-weight":"bold","color":"#336b9b"});
-  });
-  $this.mouseleave(function(){
-    $( this ).children("a").css({"font-weight":"normal","color":"#428bca"});
-  });
-});
-// Add button to expand and condense - Using FontAwesome
-$('ul li.hasSubmenu').each(function(){
-  $this = $(this);
-  $this.prepend("<a href='#'><i class='fa fa-minus-circle'></i><i style='display:none;' class='fa fa-plus-circle'></i></a>");
-  $this.children("a").not(":last").removeClass().addClass("toogle");
-});
-// Actions to expand and consense
-$('ul li.hasSubmenu a.toogle').click(function(){
-  $this = $(this);
-  $this.closest("li").children("ul").toggle("slow");
-  $this.children("i").toggle();
-  return false;
-});
-</script>
-<!-- morris JavaScript -->	
-<script>
-	$(document).ready(function() {
-		//BOX BUTTON SHOW AND CLOSE
-	   jQuery('.small-graph-box').hover(function() {
-		  jQuery(this).find('.box-button').fadeIn('fast');
-	   }, function() {
-		  jQuery(this).find('.box-button').fadeOut('fast');
-	   });
-	   jQuery('.small-graph-box .box-close').click(function() {
-		  jQuery(this).closest('.small-graph-box').fadeOut(200);
-		  return false;
-	   });
-	   
-	    //CHARTS
-	    function gd(year, day, month) {
-			return new Date(year, month - 1, day).getTime();
-		}
-		
-		graphArea2 = Morris.Area({
-			element: 'hero-area',
-			padding: 10,
-        behaveLikeLine: true,
-        gridEnabled: false,
-        gridLineColor: '#dddddd',
-        axes: true,
-        resize: true,
-        smooth:true,
-        pointSize: 0,
-        lineWidth: 0,
-        fillOpacity:0.85,
-			data: [
-				{period: '2015 Q1', iphone: 2668, ipad: null, itouch: 2649},
-				{period: '2015 Q2', iphone: 15780, ipad: 13799, itouch: 12051},
-				{period: '2015 Q3', iphone: 12920, ipad: 10975, itouch: 9910},
-				{period: '2015 Q4', iphone: 8770, ipad: 6600, itouch: 6695},
-				{period: '2016 Q1', iphone: 10820, ipad: 10924, itouch: 12300},
-				{period: '2016 Q2', iphone: 9680, ipad: 9010, itouch: 7891},
-				{period: '2016 Q3', iphone: 4830, ipad: 3805, itouch: 1598},
-				{period: '2016 Q4', iphone: 15083, ipad: 8977, itouch: 5185},
-				{period: '2017 Q1', iphone: 10697, ipad: 4470, itouch: 2038},
-			
-			],
-			lineColors:['#eb6f6f','#926383','#eb6f6f'],
-			xkey: 'period',
-            redraw: true,
-            ykeys: ['iphone', 'ipad', 'itouch'],
-            labels: ['All Visitors', 'Returning Visitors', 'Unique Visitors'],
-			pointSize: 2,
-			hideHover: 'auto',
-			resize: true
-		});
-		
-	   
-	});
-	</script>
-<!-- calendar -->
-	<script type="text/javascript" src="js/monthly.js"></script>
-	<script type="text/javascript">
-		$(window).load( function() {
+		</div>
+	</div>
+	<!-- 조직관리 모달 끝   --> 
+	
+	<!-- 구성원 추가 모달 --> 
+	<div class="modal fade" id="PersonModal" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">구성원 추가</h4>
+				</div>
+				<div class="modal-body">
+					<div>
+						<table class="tableMiddle table table-striped" enctype="multipart/form-data">
+							<tr>
+								<td>사진등록</td>
+								<td><input type="file" id="applyphoto" class="form-control">
+								이미지는 가로 96px, 세로 126px를 준수해 주세요.<br>(*)이 작성된 칸은 필수항목 입니다.</td>
+							</tr>
+							<tr>
+								<td>이름(*)</td>
+								<td><input type="text" id="name" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>비밀번호(*)</td>
+								<td><input type="password" id="pass" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>비밀번호 확인(*)</td>
+								<td><input type="password" id="passcheck" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>사원번호(*)</td>
+								<td><input type="text" id="memberno" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>권한(*)</td>
+								<td><input type="text" id="author" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>직급(*)</td>
+								<td><input type="text" id="grade" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>주소(*)</td>
+								<td>
+									<input type="text" id="address" class="col-xs-4" readonly="readonly">
+									&nbsp;
+									<span>
+										<button class="btn btn-primary btn-sm" id="addressBtn"
+								type="button" data-toggle="modal" data-target="#zip_codeModal">주소검색</button>
+									</span>
+								</td>
+							</tr>
+							<tr>
+								<td>상세주소(*)</td>
+								<td>
+									<input type="text" id="address" class="form-control">
+								</td>
+							</tr>
+							<tr>
+								<td>이메일(*)</td>
+								<td>
+									<input type="text" id="email" class="form-control">
+								</td>
+							</tr>
+							<tr>
+								<td>휴대폰(*)</td>
+								<td>
+									<input type="text" id="tel1" class="col-xs-2">
+									<input type="text" id="tel2" class="col-xs-2">
+									<input type="text" id="tel3" class="col-xs-2">
+								</td>
+							</tr>
+							<tr>
+								<td>내선번호</td>
+								<td>
+									<input type="text" id="companytel1" class="col-xs-2">
+									<input type="text" id="companytel2" class="col-xs-2">
+									<input type="text" id="companytel3" class="col-xs-2">
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<span>
+						<button type="button" id="applybutton" class="btn btn-primary btn-sm" data-dismiss="modal">등록</button>
+						<button type="button" id="okbutton" class="btn btn-success btn-sm" data-dismiss="modal">닫기</button>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 구성원 추가 모달 끝  -->
+	
+	<!-- 우편번호 조회 모달 -->
+	<div class="modal fade" id="zip_codeModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title" id="myModalLabel">우편번호</h3>
+            </div>    
+            <div class="modal-body text-center">
+                 <form id = "zip_codeForm">
+                         <div class = "input-group">
+                            <span class = "input-group-addon">동 입력</span>
+                            <input type="text" class = "form-control" name="query" id="query">
+                            <span class = "input-group-btn">                                                
+                                <input type="submit" class = "btn btn-warning" value="검색" id="searchBtn" onkeydown="javascript:if(event.keyCode==13)">                                            
+                            </span>
+                        </div>
+                </form>
+                <p>
+                </p>
+                <div>
+                <div style="width:100%; height:200px; overflow:auto">
+                       <table class = "table text-center">
+                        <thead>
+                            <tr>
+                                <th style="width:150px;">우편번호</th>
+                                <th style="width:600px;">주소</th>
+                                </tr>
+                        </thead>
+                        <tbody id="zip_codeList"></tbody>
+                    </table>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	</div>
+	<!--  우편번호 조회 모달 끝 -->
+	
+	<!-- 구성원 조회 /수정/삭제 모달 --> 
+	
+	<!-- 구성원 조회 /수정/삭제 모달 끝  -->
+	<!--main content start--> <section id="main-content"> <section
+		class="wrapper">
+	<div class="mail-w3agile">
+		<!-- page start-->
+		<!-- 조직도 왼쪽 -->
+		<div class="row">
+			<div id="leftMenu" class="col-sm-4 col-md-3">
+				<section id="leftTop">
+				<div class="panel-body">
+					<div class="panel">
+						<font size="5"><strong>조직도 관리</strong></font>
+						<!-- 버튼 위치 조절 수동 -->
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+						<!----------------->
+						<span align="left">
+							<button class="btn btn-primary btn-sm" id="deptManage"
+								type="button" data-toggle="modal" data-target="#DeptModal">관리</button>
+						</span>
+					</div>
+					<ul class="easyui-tree">
+						<li><span>KITRIWARE</span>
+							<ul>
+								<li data-options="state:'opened'"><span>기획부</span>
+									<ul>
+										<li><span>이부장</span></li>
+										<li><span>김과장</span></li>
+										<li><span>이대리</span></li>
+										<li><span>박사원</span></li>
+									</ul></li>
+								<li><span>개발부</span>
+									<ul>
+										<li>박부장</li>
+										<li>서과장</li>
+										<li>함대리</li>
+										<li>이사원</li>
+									</ul></li>
+								<li><span>경영부</span>
+									<ul>
+										<li>서부장</li>
+										<li>임과장</li>
+										<li>송대리</li>
+										<li>김사원</li>
+									</ul></li>
+								<li><span>홍보부</span>
+									<ul>
+										<li>서부장</li>
+										<li>임과장</li>
+										<li>박대리</li>
+										<li>박사원</li>
+									</ul></li>
+								<!-- data 둘어갈 시 원상복귀 시키기 -->
+								<!-- <ul>
+									<c:forEach items="${selectDpt_Div_Tb}" var="dptmap">
+										<li data-options="state:'closed'"><span>${dptmap.DPT_NM}</span>
+											<ul>
+												<c:forEach items="${selectOrganization}" var="stfmap">
+													<c:if test="${dptmap.DPT_NM eq stfmap.DPT_NM}">
+														<li>[${stfmap.DPT_NM}/${stfmap.RNK_NM}]
+															${stfmap.STF_NM}</li>
+													</c:if>
+												</c:forEach>
+											</ul></li>
+									</c:forEach> -->
+								<!------------------------->
+							</ul></li>
+					</ul>
+				</div>
+				</section>
+			</div>
+			<!-- 조직도 왼쪽 메뉴 끝 -->
+			<div class="col-sm-14 col-md-9">
+				<section class="panel"> <header
+					class="panel-heading wht-bg">
+				<h4 class="gen-case">
+					<b>구성원 보기</b>
+				</header>
+				</h4>
+				<div id="rightBottom">
+					<span> <label>전체 : </label> <span id="userCount">
+							<!-- ${officerListCount}-->
+					</span>명 <input type="hidden" id="navStfNm" value="${navStfNm }" />
+					</span> &nbsp; <span>
+						<button class="btn btn-success btn-sm" id="manage" type="button"
+							data-toggle="modal" data-target="#PersonModal">구성원 추가</button>
+					</span>
+				</div>
+				<div class="table-responsive">
+					<table id="officerList" class="tableMiddle table table-hover">
+						<colgroup>
+							<col width="96PX" />
+							<col width="15%" />
+							<col width="15%" />
+							<col width="15%" />
+							<col width="15%" />
+							<col width="15%" />
+							<col width="15%" />
+						</colgroup>
+						<thead>
+							<tr class="active">
+								<th class="text-center">사진</th>
+								<th class="text-center">이름</th>
+								<th class="text-center">직급</th>
+								<th class="text-center">조직</th>
+								<th class="text-center">핸드폰번호</th>
+								<th class="text-center">내선번호</th>
+								<th class="text-center">이메일</th>
+							</tr>
+						</thead>
+						<!-- 
+								<tbody>
+									<c:forEach items="${officerList}" var="map">
+										<tr>
+											<td class="text-center"><input type="checkbox" id=""></td>
+											<td class="text-center"><img src="${map.STF_PT_RT}" class="profileImg"/></td>
+											<td class="text-center">${map.STF_NM}</td>
+											<td class="text-center">${map.RNK_NM}</td>
+											<td class="text-center">${map.DPT_NM}</td>
+											<td class="text-center">${map.STF_PH}</td>
+											<td class="text-center">${map.STF_BS_PH}</td>
+											<td class="text-center">${map.STF_EML}</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+								--->
+					</table>
+					<div class="unstyled inbox-pagination" align="center">AJAX
+						Paging 처리</div>
+				</div>
+				</section>
+			</div>
+		</div>
 
-			$('#mycalendar').monthly({
-				mode: 'event',
-				
-			});
-
-			$('#mycalendar2').monthly({
-				mode: 'picker',
-				target: '#mytarget',
-				setWidth: '250px',
-				startHidden: true,
-				showTrigger: '#mytarget',
-				stylePast: true,
-				disablePast: true
-			});
-
-		switch(window.location.protocol) {
-		case 'http:':
-		case 'https:':
-		// running on a server, should be good.
-		break;
-		case 'file:':
-		alert('Just a heads-up, events will not work when run locally.');
-		}
-
-		});
-	</script>
-	<!-- //calendar -->
+		<!-- page end-->
+	</div>
+	</section> <!-- footer -->
+	<div class="footer">
+		<div class="wthree-copyright">
+			<p>© 2018 KITRIWARE All rights reserved | Design by DC #26 3TEAM</p>
+		</div>
+	</div>
+	<!-- / footer --> </section> <!--main content end--> </section>
+	<script src="${root}/js/bootstrap.js"></script>
+	<script src="${root}/js/jquery.dcjqaccordion.2.7.js"></script>
+	<script src="${root}/js/scripts.js"></script>
+	<script src="${root}/js/jquery.slimscroll.js"></script>
+	<script src="${root}/js/jquery.nicescroll.js"></script>
+	<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="${root}/js/flot-chart/excanvas.min.js"></script><![endif]-->
+	<script src="${root}/js/jquery.scrollTo.js"></script>
 </body>
 </html>
