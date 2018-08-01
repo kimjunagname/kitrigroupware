@@ -42,6 +42,7 @@
    <mvc:resources mapping="/images/**" location="/resources/board/images/"/>
    <mvc:resources mapping="/js/**" location="/resources/board/js/"/>
    <mvc:resources mapping="/fonts/**" location="/resources/board/fonts/"/>
+   <mvc:resources mapping="/easyui/**" location="/resources/easyui/"/>
      
      <!-- 
 	<beans:bean	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
