@@ -5,6 +5,12 @@
   
   
     <mapper namespace="com.groupware.member.dao.MemberDao">
+    
+    <select id="login" parameterType="map" resultType="MemberDto">
+    SELECT *
+	FROM stf_tb
+	WHERE stf_sq = ${stf_sq} AND stf_pw=${stf_pw}
+    </select>
 
 
 </mapper>

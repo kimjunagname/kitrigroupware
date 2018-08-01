@@ -19,14 +19,18 @@
 		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}/{3}.jsp"/>	
 	</definition>
 	
-	<definition name="lgoin" template="/WEB-INF/views/commons/template/template2.jsp">
-		<put-attribute name="header" value=""/>
-		<put-attribute name="public" value=""/>
-	    <put-attribute name="sidemenu" value=""/> 
+
+	<definition name="schedule" template="/WEB-INF/views/commons/template/template2.jsp">
+<put-attribute name="sheader" value="/WEB-INF/views/commons/template/sheader.jsp"/>
+		<put-attribute name="spublic" value="/WEB-INF/views/commons/spublic.jsp"/>
+	    <put-attribute name="sidemenu" value="/WEB-INF/views/commons/template/sidemenu.jsp"/> 
 		<put-attribute name="body" value=""/>
-		<put-attribute name="footer" value=""/>
+		<put-attribute name="footer" value="/WEB-INF/views/commons/template/footer.jsp"/>
 	</definition>
 	
+	<definition name="login" template="/WEB-INF/views/commons/loginpublic.jsp">		 
+		<put-attribute name="body" value=""/>		
+	</definition>
 	 
 	 <!-- 
 	<definition name="/approval/list.kitri" extends="layout">
@@ -106,11 +110,27 @@
  
  <!-- 은진 -->
  
-     <definition name="/login/login" extends="lgoin">
-       <put-attribute name="title" value="lsit" />
+   <definition name="/login/login" extends="login">       
        <put-attribute name="body" value="/WEB-INF/views/login/login.jsp" />
  	 </definition> 
- <!-- 
+ 	 
+ 	 <definition name="/login/idfind" extends="login">       
+       <put-attribute name="body" value="/WEB-INF/views/login/idfind.jsp" />
+ 	 </definition> 
+ 	 
+ 	 <definition name="/join/registration" extends="login">       
+       <put-attribute name="body" value="/WEB-INF/views/join/registration.jsp" />
+ 	 </definition> 
+ 	 
+ 	 <definition name="/join/pwfind" extends="login">       
+       <put-attribute name="body" value="/WEB-INF/views/join/pwfind.jsp" />
+ 	 </definition> 
+ 	 
+ 	 <definition name="/login/loginfail" extends="login">       
+       <put-attribute name="body" value="/WEB-INF/views/login/loginfail.jsp" />
+ 	 </definition> 	
+  <!-- 
+
  
     <definition name="/approval/list" extends="base-definition">
        <put-attribute name="title" value="lsit" />
@@ -163,13 +183,13 @@
   -->
  
   <!-- 나영 -->
+    <definition name="/schedule/test" extends="schedule">
+       <put-attribute name="title" value="test" />
+       <put-attribute name="body" value="/WEB-INF/views/schedule/test.jsp" />
+   </definition>
+   
+ 
  <!-- 
-     <definition name="/login/login" extends="lgoin">
-       <put-attribute name="title" value="lsit" />
-       <put-attribute name="body" value="/WEB-INF/views/login/login.jsp" />
- 	 </definition> 
- 
- 
     <definition name="/approval/list" extends="base-definition">
        <put-attribute name="title" value="lsit" />
        <put-attribute name="body" value="/WEB-INF/views/approval/list.jsp" />
@@ -221,13 +241,13 @@
   -->
  
    <!-- 상규 -->
- <!-- 
-     <definition name="/login/login" extends="lgoin">
+ 
+     <definition name="/email/emaillist.kitri" extends="base-definition">
        <put-attribute name="title" value="lsit" />
-       <put-attribute name="body" value="/WEB-INF/views/login/login.jsp" />
+       <put-attribute name="body" value="/WEB-INF/views/email/keepmaillist.jsp" />
  	 </definition> 
  
- 
+  <!--
     <definition name="/approval/list" extends="base-definition">
        <put-attribute name="title" value="lsit" />
        <put-attribute name="body" value="/WEB-INF/views/approval/list.jsp" />
