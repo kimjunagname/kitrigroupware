@@ -63,6 +63,10 @@ $(document).ready(function() {
 			<h6><label id="idfind">아이디</label> 또는 <br>
 			<label id="pwfind">비밀번호</label> 찾기</h6>
 				<div class="clearfix"></div>
+			<span style="color: red">
+			<br>아이디 또는 비밀번호를다시 확인하세요.<br>
+			등록되지 않은 아이디이거나, 아이디 또는 비밀번호를 잘못 입력하셨습니다.
+			</span>
 				<input type="button" value="LOGIN" id="loginBtn">
 		</form>
 		<p class="ns">아직 계정이 없으신가요?<label id="registerBtn">회원가입</label></p>
