@@ -34,7 +34,7 @@ public class MemberController {
 			session.setAttribute("userinfo", dto);
 			return "/approval/list";
 		} else 
-			return "/login/idfind";
+			return "/login/loginfail";
 		
 	}
 	

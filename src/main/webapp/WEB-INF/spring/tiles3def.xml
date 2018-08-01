@@ -117,6 +117,10 @@
  	 <definition name="/join/pwfind" extends="login">       
        <put-attribute name="body" value="/WEB-INF/views/join/pwfind.jsp" />
  	 </definition>  	
+ 	 
+ 	 <definition name="/login/loginfail" extends="login">       
+       <put-attribute name="body" value="/WEB-INF/views/login/loginfail.jsp" />
+ 	 </definition> 
  <!-- 
  
     <definition name="/approval/list" extends="base-definition">
