@@ -5,13 +5,13 @@
 <%
 
 Cookie cookie[] = request.getCookies();
-String id = "";
+String stf_sq = "";
 String ck = "";
 if(cookie != null) {
 	int len = cookie.length;
 	for(int i=0; i<len; i++) {
 		if("loginid".equals(cookie[i].getName())){
-			id = cookie[i].getValue();
+			stf_sq = cookie[i].getValue();
 			ck = "checked='checked'";
 			break;
 		}
@@ -23,10 +23,10 @@ if(cookie != null) {
 $(document).ready(function() {
 	
 	$("#loginBtn").click(function name() {
-		if($("#id").val() == "") {
+		if($("#stf_sq").val() == "") {
 			alert("아이디 입력!");
 			return;
-		} else if($("#pass").val() == "") {
+		} else if($("#stf_pw").val() == "") {
 			alert("비번 입력!");
 			return;
 		} else {
@@ -57,8 +57,8 @@ $(document).ready(function() {
 	<br> 
 	
 		<form name="loginform" method="post" action="">					
-			<input id="id" type="text" class="form-control ggg" name="id" placeholder="ID" value="<%= id%>">
-			<input id="pass" type="password" class="form-control ggg" name="pass" placeholder="PASSWORD">
+			<input id="stf_sq" type="text" class="form-control ggg" name="stf_sq" placeholder="ID" value="<%= stf_sq%>">
+			<input id="stf_pw" type="password" class="form-control ggg" name="stf_pw" placeholder="PASSWORD">
 			<span><input type="checkbox" name="idsave" <%=ck %> value="saveok"> 아이디 저장</span>
 			<h6><label id="idfind">아이디</label> 또는 <br>
 			<label id="pwfind">비밀번호</label> 찾기</h6>
