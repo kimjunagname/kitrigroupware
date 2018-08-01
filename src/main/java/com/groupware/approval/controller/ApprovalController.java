@@ -20,7 +20,7 @@ public class ApprovalController {
 	
 	@RequestMapping("/list.kitri")
 	public ModelAndView listApprovalManager(Map<String, Object> map) {
-		System.out.println("ApprovalController in!!!");
+		System.out.println("ApprovalController ¿Ô´Ù!!!");
 		//List<MemberDto> list = approvalService.getListAdminManager();
 		//map.put("menulist", list);
 		ModelAndView mav = new ModelAndView();
