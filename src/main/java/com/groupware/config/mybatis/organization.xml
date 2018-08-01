@@ -4,6 +4,38 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
   <mapper namespace="com.groupware.organization.dao.OrganizationDao">
-  
-  </mapper>
-  
+  	<select id="officerListCount" parameterType="Map" resultType="int">
+  		SELECT COUNT(*) AS CNT
+		FROM STF_TB STF, ADMN_TB ADMN, RNK_TB RNK, DPT_DIV_TB DD
+		WHERE ADMN.ADMNN_SQ = STF.ADMN_SQ
+		AND RNK.RNK_SQ = STF.RNK_SQ
+		AND DD.DPT_SQ = STF.DPT_SQ2
+  	</select>
+  	
+  	<select id="selectStf_tb" resultType="Map">
+	SELECT STF.STF_NM, RNK.RNK_NM, DD.DPT_NM
+	FROM STF_TB STF, ADMN_TB ADMN, RNK_TB RNK, DPT_DIV_TB DD
+    WHERE ADMN.ADMNN_SQ = STF.ADMN_SQ
+    AND RNK.RNK_SQ = STF.RNK_SQ
+    AND DD.DPT_SQ = STF.DPT_SQ2
+	</select>
+  	
+  	
+  	<select id="selectAdmn_Tb" parameterType="Map" resultType="Map">
+	SELECT ADMNN_SQ, ADMN_PW
+	FROM ADMN_TB
+	ORDER BY ADMNN_SQ
+	</select>
+	
+	<select id="selectRnk_Tb" parameterType="Map" resultType="Map">
+	SELECT RNK_SQ, RNK_NM
+	FROM RNK_TB
+	ORDER BY RNK_SQ
+	</select>
+	
+	<select id="selectDpt_Div_Tb" parameterType="Map" resultType="Map">
+	SELECT DPT_SQ, DPT_NM
+	FROM DPT_DIV_TB
+	ORDER BY DPT_SQ
+	</select>	 	 
+ </mapper>

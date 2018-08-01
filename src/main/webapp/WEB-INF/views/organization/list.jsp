@@ -27,12 +27,12 @@
 					</div>
 					<div class="modal-body">
 						<div id="dpt_sq_dept" class="form-group well">
-							<!-- <c:forEach items="${selectDpt_Div_Tb}" var="map">
+							<c:forEach items="${selectDpt_Div_Tb}" var="map">
 								<div class="has-feedback">
 									<div class="deptDiv" data-value="${map.DPT_SQ}">${map.DPT_NM}</div>
-									<span class="glyphicon glyphicon-remove form-control-feedback small-icon"></span>
+									
 								</div>
-							</c:forEach> -->
+							</c:forEach>
 						</div>
 						<div class="modal-footer">
 							<div class="col-xs-10 col-md-10 leftNoPadding">
@@ -522,9 +522,9 @@
 						</span>
 					</div>
 					<ul class="easyui-tree">
-						<li><span>KITRIWARE</span>
-							<ul>
-								<li data-options="state:'opened'"><span>기획부</span>
+						 <li>
+						 	<span>KITRIWARE</span>
+								<!-- <li data-options="state:'opened'"><span>기획부</span>
 									<ul>
 										<li><span>이부장</span></li>
 										<li><span>김과장</span></li>
@@ -551,22 +551,27 @@
 										<li>임과장</li>
 										<li>박대리</li>
 										<li>박사원</li>
-									</ul></li>
+									</ul></li>  --> 
 								<!-- data 둘어갈 시 원상복귀 시키기 -->
-								<!-- <ul>
+								 <ul>
 									<c:forEach items="${selectDpt_Div_Tb}" var="dptmap">
-										<li data-options="state:'closed'"><span>${dptmap.DPT_NM}</span>
+										<li data-options="state:'open'">
+											<span>${dptmap.DPT_NM}</span>
 											<ul>
 												<c:forEach items="${selectOrganization}" var="stfmap">
 													<c:if test="${dptmap.DPT_NM eq stfmap.DPT_NM}">
-														<li>[${stfmap.DPT_NM}/${stfmap.RNK_NM}]
-															${stfmap.STF_NM}</li>
+														<li>
+														[${stfmap.RNK_NM}]
+														${stfmap.STF_NM}
+														
+														</li>
 													</c:if>
 												</c:forEach>
-											</ul></li>
-									</c:forEach> -->
-								<!------------------------->
-							</ul></li>
+											</ul>
+										</li>
+									</c:forEach> 
+							</ul>
+						</li>
 					</ul>
 				</div>
 				</section>
@@ -581,7 +586,7 @@
 				</h4>
 				<div id="rightBottom">
 					<span> <label>전체 : </label> <span id="userCount">
-							<!-- ${officerListCount}-->
+							${officerListCount}
 					</span>명 <input type="hidden" id="navStfNm" value="${navStfNm }" />
 					</span> &nbsp; <span>
 						<button class="btn btn-success btn-sm" id="insertModal" type="button"
@@ -615,12 +620,12 @@
 								<th class="text-center">메일</th>
 							</tr>
 						</thead>
-						<!-- 
+						
 								<tbody>
 									<c:forEach items="${officerList}" var="map">
 										<tr>
-											<td><input type="radio" class="radio"
-												value="${map.STF_SQ}"></td>
+											<td>
+											<input type="radio" class="radio"value="${map.STF_SQ}"></td>
 											<td><img src="${map.STF_PT_RT}" class="profileImg"/></td>
 											<td>${map.STF_NM}</td>
 											<td>${map.RNK_NM}</td>
@@ -632,10 +637,10 @@
 										</tr>
 									</c:forEach>
 								</tbody>
-								--->
+								
 					</table>
 					<div class="unstyled inbox-pagination" align="center">
-						${pageIndexList}
+						<!--  ${pageIndexList} -->
 					</div>
 				</div>
 				</section>
@@ -744,7 +749,7 @@
 		
 		// 사원 검색
 		$("#search").on("click", function() {
-			/* if ($("#keyword").val() == "") {
+			if ($("#keyword").val() == "") {
 				alert("검색어를 최소 1글자 이상 입력해주세요.");
 				return;
 			} else if ($("#keyword").val() != "")
@@ -752,7 +757,7 @@
 					cate : $("#cate").val(),
 					keyword : $("#keyword").val()
 			};
-		   officerListSearch(params); */
+		   officerListSearch(params);
 		});
 		// AJAX 페이징 처리
 		$(document).on("click", "#pageIndexListAjax > li > a", function() {
@@ -767,7 +772,7 @@
 		
 		// 입사일 자동입력(구성원 추가 모달)
 		$("#officerInsertModal").on("click", function() {
-			/* var date = new Date();
+			var date = new Date();
 			var yyyy = date.getFullYear();
 			var mm = (date.getMonth() + 1)
 			var dd = date.getDate();
@@ -778,8 +783,7 @@
 				dd = "0" + dd;
 			}
 			date = yyyy + "-" + mm + "-" + dd;
-	
-			$("#stf_ent").val(date); */
+			$("#stf_ent").val(date);
 		});
 		// 한글 입력 방지
 		$("#stf_eml, #stf_sq1").on("keyup", function() {
@@ -1002,12 +1006,12 @@
 		});
 		// 부서명 삭제
 		$(document).on("click", ".small-icon", function() {
-			// var dpt_sq = $(this).parent().children("div").attr("data-value");
-			// deptDelete(dpt_sq);
+			var dpt_sq = $(this).parent().children("div").attr("data-value");
+			deptDelete(dpt_sq);
 		});
 		// 조직도 닫은 후 강제 redirect
 		$("#deptClose").on("click", function() {
-			// window.location = '${root}+/organization/organization.kitri';
+			window.location = '${root}/organization/organization.kitri';
 		});
 	});
 	
@@ -1024,26 +1028,373 @@
         $("#zip_codeList1").empty();
 	}	
 	// 사원검색
+	function officerListSearch(params) {
+		$.ajax({
+			url : "/organization/officerListSearch",
+			type : "POST",
+			dataType : "json",
+			data : JSON.stringify(params),
+			contentType : "application/json; charset=UTF-8",
+			beforeSend : function() {
+				$("#userCount").empty();
+				$("#officerList > tbody").empty();
+				$("#pageIndexList").empty();
+			},
+			success : function(data) {
 	
+				var officerListCount = data.officerListCount;
+				var officerList = data.officerList;
+				var pageIndexListAjax = data.pageIndexListAjax;
+				$("#userCount").html(officerListCount);
+				var tbody = $("#officerList > tbody");
+				$.each(officerList,	function(idx, val) {
+					tbody.append($('<tr>').append($('<td>',	{html : "<input type='radio' class='radio' value='"+val.STF_SQ+"'>"}))
+										  .append($('<td>',	{html : "<img src='"+val.STF_PT_RT+"' class='profileImg'/>"}))
+										  .append($('<td>',	{text : val.STF_NM}))
+										  .append($('<td>',	{text : val.RNK_NM}))
+										  .append($('<td>',	{text : val.DPT_NM}))
+										  .append($('<td>',	{text : val.ADMN_PW}))
+										  .append($('<td>',	{text : val.STF_PH}))
+										  .append($('<td>',	{text : val.STF_BS_PH}))
+										  .append($('<td>',	{text : val.STF_EML})));
+				});		
+				$("#pageIndexList").html(pageIndexListAjax);
+			},
+			error : function(request, status, error) {
+				alert("list search fail :: error code: "
+						+ request.status + "\n" + "error message: "
+						+ error + "\n");
+			}
+		});
+	}
 	// 사원번호 중복 검색
-	
+	function selectStf_sq(data) {
+		var params = {
+			stf_sq : data
+		};
+		$.ajax({
+			url : "${root}/organization/selectStf_Sq.kitri",
+			type : "POST",
+			dataType : "text",
+			data : JSON.stringify(params),
+			contentType : "application/json; charset=UTF-8",
+			beforeSend : function() {
+				$("#stf_sq").val("");
+				$("#stf_sq_up").val("");
+			},
+			success : function(data) {
+				var result = Number(data);
+				if (result > 0) {
+					alert("이미 존재하는 사원번호 입니다.");
+					$("#stf_sq_Div").attr("class", "has-error has-feedback");
+					$("#stf_sq_Span").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+					$("#stf_sq_Div_up").attr("class", "has-error has-feedback");
+					$("#stf_sq_Span_up").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+				} else if (result == 0) {
+					$("#stf_sq").val($("#stf_sq1").val());
+					$("#stf_sq_up").val($("#stf_sq1_up").val());
+					
+					$("#stf_sq_Div").attr("class", "has-success has-feedback");
+					$("#stf_sq_Span").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+					$("#stf_sq_Div_up").attr("class", "has-success has-feedback");
+					$("#stf_sq_Span_up").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+				}
+			},
+			error : function(request, status, error) {
+				alert("list search fail :: error code: "
+						+ request.status + "\n" + "error message: "
+						+ error + "\n");
+			}
+		});
+	}
 	// 사원 등록 AJAX 파일 업로드
-	
+	function officerInsert() {
+		var params = {
+			stf_sq : $("#stf_sq").val(),
+			admn_sq : $("#admn_sq").val(),
+			dpt_sq : $("#dpt_sq").val(),
+			rnk_sq : $("#rnk_sq").val(),
+			stf_nm : $("#stf_nm").val(),
+			stf_pw : $("#stf_pw").val(),
+			stf_ph : $("#stf_ph").val(),
+			stf_cm_add : $("#stf_cm_add").val(),
+			stf_dt_add : $("#stf_dt_add").val(),
+			stf_bs_ph : $("#stf_bs_ph").val(),
+			stf_eml : $("#stf_eml").val(),
+			stf_ent : $("#stf_ent").val(),
+		};
+		$("#officerInsertForm").ajaxForm({
+			url : "/admin/officerInsert",
+			type : "POST",
+			dataType : "text",
+			data : JSON.stringify(params),
+			enctype : "multipart/form-data",
+			contentType : "application/json; charset=UTF-8",
+			beforeSend : function() {
+				$("#officerInsert").attr("disabled", "disabled");
+			},
+			success : function(data) {
+				if (data == "SUCCESS") {
+					alert("정상적으로 입력되었습니다.");
+					window.location = "${root}/organization/organization.kitri";
+				} else if (data == "FAIL") {
+					alert("입력을 실패하였습니다.");
+				}
+			},
+			error : function(request, status, error) {
+				alert("list search fail :: error code: "
+						+ request.status + "\n" + "error message: "
+						+ error + "\n");
+			}
+		}).submit();
+		$("#officerInsert").attr("disabled");
+	}
 	// 사원 정보 불러오기
-	
-	// 사원 수정 파일 업로드
-	
+	function selectUpdateOfficer() {
+		var stf_sq = $("input[type=radio]:checked").val();
+		var params = {
+				stf_sq : stf_sq
+		};
+		$.ajax({
+			url : "${root}/organization/selectUpdateOfficer.kitri",
+			type : "POST",
+			dataType : "json",
+			data : JSON.stringify(params),
+			contentType : "application/json; charset=UTF-8",
+			beforeSend : function() {		
+			},
+			success : function(data) {		
+				$("#imgView_up").attr("src", data.STF_PT_RT);
+				$("#stf_nm_up").val(data.STF_NM);
+				$("#stf_sq1_up").val(data.STF_SQ);
+				$("#stf_sq_up").val(data.STF_SQ);
+				$("#stf_sq_old").val(data.STF_SQ);
+				$("#admn_sq_up").val(data.ADMN_SQ);
+				$("#dpt_sq_up").val(data.DPT_SQ);
+				$("#rnk_sq_up").val(data.RNK_SQ);
+				$("#stf_cm_add_up").val(data.STF_CM_ADD);
+				$("#stf_dt_add_up").val(data.STF_DT_ADD);
+				$("#stf_eml_up").val(data.STF_EML);
+
+				var arrPhoneNum = data.STF_PH.split("-");
+				
+				$("#phoneNum1_up").val(arrPhoneNum[0]);
+				$("#phoneNum2_up").val(arrPhoneNum[1]);
+				$("#phoneNum3_up").val(arrPhoneNum[2]);
+				$("#stf_ph_up").val(data.STF_PH);
+				
+				var arrTelNum = data.STF_BS_PH.split("-");
+				
+				$("#telNum1_up").val(arrTelNum[0]);
+				$("#telNum2_up").val(arrTelNum[1]);
+				$("#telNum3_up").val(arrTelNum[2]);
+				$("#stf_bs_ph_up").val(data.STF_BS_PH);
+				
+				$("#stf_ent_up").val(data.STF_ENT);		
+			},
+			error : function(request, status, error) {
+				alert("list search fail :: error code: "
+						+ request.status + "\n" + "error message: "
+						+ error + "\n");
+			}
+		});
+	}
+	// 사원 수정파일 업로드
+	function officerUpdate() {
+		var params = {
+			stf_sq : $("#stf_sq_up").val(),
+			stf_sq_old : $("#stf_sq_old").val(),
+			admn_sq : $("#admn_sq_up").val(),
+			dpt_sq : $("#dpt_sq_up").val(),
+			rnk_sq : $("#rnk_sq_up").val(),
+			stf_nm : $("#stf_nm_up").val(),
+			stf_pw : $("#stf_pw_up").val(),
+			stf_ph : $("#stf_ph_up").val(),
+			stf_cm_add : $("#stf_cm_add_up").val(),
+			stf_dt_add : $("#stf_dt_add_up").val(),
+			stf_bs_ph : $("#stf_bs_ph_up").val(),
+			stf_eml : $("#stf_eml_up").val(),
+			stf_ent : $("#stf_ent_up").val(),
+		};
+		$("#officerUpdateForm").ajaxForm({
+			url : "${root}/organization/officerUpdate.kitri",
+			type : "POST",
+			dataType : "text",
+			data : JSON.stringify(params),
+			enctype : "multipart/form-data",
+			contentType : "application/json; charset=UTF-8",
+			beforeSend : function() {
+				$("#officerUpdate").attr("disabled", "disabled");
+			},
+			success : function(data) {
+				if (data == "SUCCESS") {
+					alert("정상적으로 수정되었습니다.");
+					window.location = "${root}/organization/organization.kitri";
+				} else if (data == "FAIL") {
+					alert("입력을 실패하였습니다.");
+				}
+			},
+			error : function(request, status, error) {
+				alert("list search fail :: error code: "
+						+ request.status + "\n" + "error message: "
+						+ error + "\n");
+			}
+		}).submit();
+		$("#officerInsert").attr("disabled");
+	}
 	// 부서명 등록
-	
+	function deptInsert() {
+		var params = {
+				dpt_nm : $("#addDept").val()
+		};
+		$.ajax({
+			url : "${root}/organization/deptInsert.kitri",
+			type : "POST",
+			dataType : "text",
+			data : JSON.stringify(params),
+			contentType : "application/json; charset=UTF-8",
+			beforeSend : function() {
+				$("#addDept").val("");
+			},
+			success : function(data) {
+				if (data > 0) {
+					alert("부서 추가를 성공하였습니다.");
+					deptList();
+				}
+				else if (data == 0) {
+					alert("부서 추가를 실패하였습니다.");
+				}
+			},
+			error : function(request, status, error) {
+				alert("list search fail :: error code: "
+						+ request.status + "\n" + "error message: "
+						+ error + "\n");
+			}
+		});
+	}
 	// 부서명 다시 가져오기
-		
+	function deptList(dpt_sq, dpt_nm) {
+		$.ajax({
+			url : "${root}/organization/selectDpt_Div_Tb.kitri",
+			type : "POST",
+			dataType : "json",
+			contentType : "application/json; charset=UTF-8",
+			beforeSend : function() {
+				$("#dpt_sq_dept").empty();
+			},
+			success : function(data) {		
+				var div = $("#dpt_sq_dept");	
+				$.each(data, function(idx, val) {
+					if (val.DPT_SQ != dpt_sq) {
+						//div.append($('<div>', {class : "deptDiv", "data-value" : val.DPT_SQ, text : val.DPT_NM}))
+						div.append($('<div>', {"class" : "has-feedback"})
+						   .append($('<div>', {"class" : "deptDiv", "data-value" : val.DPT_SQ, text : val.DPT_NM}))
+						   .append($('<span>', {"class" : "glyphicon glyphicon-remove form-control-feedback small-icon"})))
+					}
+					else if (val.DPT_SQ == dpt_sq) {
+						div.append($('<input>', {type : "text", id : "deptNmUp", "data-value" : val.DPT_SQ, value : val.DPT_NM}))
+						div.append($('<button>', {id : "deptUpdate", text : "수정"}))
+					}
+				});
+			},
+			error : function(request, status, error) {
+				alert("list search fail :: error code: "
+						+ request.status + "\n" + "error message: "
+						+ error + "\n");
+			}
+		});
+	}	
 	// 동일한 부서명 체크
-	
+	function selectDeptNm() {
+		var params = {
+				dpt_nm : $("#deptNmUp").val()
+		};
+		$.ajax({
+			url : "${root}/organization/selectDeptNm.kitri",
+			type : "POST",
+			dataType : "text",
+			data : JSON.stringify(params),
+			contentType : "application/json; charset=UTF-8",
+			beforeSend : function() {		
+			},
+			success : function(data) {
+				if (data > 0) {
+					alert("같은 이름의 부서명이 존재합니다.");
+				}
+				else if (data == 0) {
+					deptUpdate();
+				}
+			},
+			error : function(request, status, error) {
+				alert("list search fail :: error code: "
+						+ request.status + "\n" + "error message: "
+						+ error + "\n");
+			}
+		});
+	}
 	// 부서명 수정
-	
+	function deptUpdate() {
+		var params = {
+				dpt_sq : $("#deptNmUp").attr("data-value"),
+				dpt_nm : $("#deptNmUp").val()
+		};
+		$.ajax({
+			url : "${root}/organization/deptUpdate.kitri",
+			type : "POST",
+			dataType : "text",
+			data : JSON.stringify(params),
+			contentType : "application/json; charset=UTF-8",
+			beforeSend : function() {		
+			},
+			success : function(data) {
+				if (data > 0) {
+					alert("부서명 수정을 성공하였습니다.");
+					deptList();
+				}
+				else if (data == 0) {
+					alert("부서명 수정을 실패하였습니다.");
+				}
+			},
+			error : function(request, status, error) {
+				alert("list search fail :: error code: "
+						+ request.status + "\n" + "error message: "
+						+ error + "\n");
+			}
+		});
+	}
 	// 부서명 삭제
-	
-	
+	function deptDelete(data) {
+		var params = {
+				dpt_sq : data
+		};
+		$.ajax({
+			url : "${root}/organization/deptDelete.kitri",
+			type : "POST",
+			dataType : "text",
+			data : JSON.stringify(params),
+			contentType : "application/json; charset=UTF-8",
+			beforeSend : function() {		
+			},
+			success : function(data) {	
+				if (data > 0) {
+					alert("부서 삭제를 성공하였습니다.");
+					deptList();
+				}
+				else if (data == 0) {
+					alert("부서 삭제를 실패하였습니다.");
+				}
+				else if (data == -1) {
+					alert("부서에 임직원이 존재하여 삭제할 수 없습니다.");
+				}
+				
+			},
+			error : function(request, status, error) {
+				alert("list search fail :: error code: "
+						+ request.status + "\n" + "error message: "
+						+ error + "\n");
+			}
+		});
+	}
 	</script>
 </body>
 </html>
