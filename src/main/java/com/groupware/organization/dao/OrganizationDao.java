@@ -9,4 +9,6 @@ public interface OrganizationDao {
 	List selectAdmn_Tb() throws Exception;
 	List selectRnk_Tb() throws Exception;
 	List selectDpt_Div_Tb() throws Exception;
+	List officerList(Map params) throws Exception;
+	int deptInsert(Map<String, Object> params) throws Exception;
 }

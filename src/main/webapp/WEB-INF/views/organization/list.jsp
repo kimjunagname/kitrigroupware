@@ -29,8 +29,9 @@
 						<div id="dpt_sq_dept" class="form-group well">
 							<c:forEach items="${selectDpt_Div_Tb}" var="map">
 								<div class="has-feedback">
-									<div class="deptDiv" data-value="${map.DPT_SQ}">${map.DPT_NM}</div>
+									<div class="deptDiv" data-value="${map.DPT_SQ}">${map.DPT_SQ}/${map.DPT_NM}</div>
 									
+									<span class="glyphicon glyphicon-remove form-control-feedback small-icon"></span>					
 								</div>
 							</c:forEach>
 						</div>
@@ -512,9 +513,8 @@
 					<div class="panel">
 						<font size="5"><strong>조직도 관리</strong></font>
 						<!-- 버튼 위치 조절 수동 -->
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;
 						<!----------------->
 						<span align="left">
 							<button class="btn btn-primary btn-sm" id="deptManage"
@@ -523,47 +523,16 @@
 					</div>
 					<ul class="easyui-tree">
 						 <li>
-						 	<span>KITRIWARE</span>
-								<!-- <li data-options="state:'opened'"><span>기획부</span>
-									<ul>
-										<li><span>이부장</span></li>
-										<li><span>김과장</span></li>
-										<li><span>이대리</span></li>
-										<li><span>박사원</span></li>
-									</ul></li>
-								<li><span>개발부</span>
-									<ul>
-										<li>박부장</li>
-										<li>서과장</li>
-										<li>함대리</li>
-										<li>이사원</li>
-									</ul></li>
-								<li><span>경영부</span>
-									<ul>
-										<li>서부장</li>
-										<li>임과장</li>
-										<li>송대리</li>
-										<li>김사원</li>
-									</ul></li>
-								<li><span>홍보부</span>
-									<ul>
-										<li>서부장</li>
-										<li>임과장</li>
-										<li>박대리</li>
-										<li>박사원</li>
-									</ul></li>  --> 
-								<!-- data 둘어갈 시 원상복귀 시키기 -->
+						 	<span>KITRI 주식회사</span>
 								 <ul>
 									<c:forEach items="${selectDpt_Div_Tb}" var="dptmap">
 										<li data-options="state:'open'">
 											<span>${dptmap.DPT_NM}</span>
 											<ul>
-												<c:forEach items="${selectOrganization}" var="stfmap">
+												<c:forEach items="${selectStf_tb}" var="stfmap">
 													<c:if test="${dptmap.DPT_NM eq stfmap.DPT_NM}">
 														<li>
-														[${stfmap.RNK_NM}]
-														${stfmap.STF_NM}
-														
+														[${stfmap.RNK_NM}] ${stfmap.STF_NM}
 														</li>
 													</c:if>
 												</c:forEach>
@@ -599,24 +568,22 @@
 				<div class="table-responsive">
 					<table id="officerList" class="tableMiddle table table-hover">
 						<colgroup>
-							<col width="5%" />
+							<col />
 							<col width="15%" />
 							<col width="10%" />
-							<col width="10%" />
+							<col width="13%" />
 							<col width="15%" />
-							<col width="15%" />
-							<col width="15%" />
-							<col width="15%" />
+							<col width="20%" />
+							<col width="10%"/>
 						</colgroup>
 						<thead>
 							<tr class="active">
-								<th class="text-center"></th>
-								<th class="text-center">사진</th>
+								<th class="text-center">V</th>
 								<th class="text-center">이름</th>
 								<th class="text-center">직급</th>
 								<th class="text-center">조직</th>
-								<th class="text-center">핸드폰번호</th>
-								<th class="text-center">내선번호</th>
+								<th class="text-center">권한</th>
+								<th class="text-center">휴대폰</th>
 								<th class="text-center">메일</th>
 							</tr>
 						</thead>
@@ -626,7 +593,6 @@
 										<tr>
 											<td>
 											<input type="radio" class="radio"value="${map.STF_SQ}"></td>
-											<td><img src="${map.STF_PT_RT}" class="profileImg"/></td>
 											<td>${map.STF_NM}</td>
 											<td>${map.RNK_NM}</td>
 											<td>${map.DPT_NM}</td>
@@ -640,7 +606,7 @@
 								
 					</table>
 					<div class="unstyled inbox-pagination" align="center">
-						<!--  ${pageIndexList} -->
+						 ${pageIndexList}
 					</div>
 				</div>
 				</section>
@@ -761,13 +727,13 @@
 		});
 		// AJAX 페이징 처리
 		$(document).on("click", "#pageIndexListAjax > li > a", function() {
-			/* var params = {
+			 var params = {
 					cate : $("#cate").val(),
 					keyword : $("#keyword").val(),
 					page : $(this).attr("data-page")
 				};
 			
-			officerListSearch(params); */
+			officerListSearch(params);
 		});
 		
 		// 입사일 자동입력(구성원 추가 모달)
@@ -1009,10 +975,18 @@
 			var dpt_sq = $(this).parent().children("div").attr("data-value");
 			deptDelete(dpt_sq);
 		});
+		
+		// 부서명 입력
+		$("#deptInsert").on("click", function() {
+			deptInsert();
+		});
+		
 		// 조직도 닫은 후 강제 redirect
 		$("#deptClose").on("click", function() {
 			window.location = '${root}/organization/organization.kitri';
 		});
+		
+		
 	});
 	
 	/// JAVA SCRIPT ///
@@ -1289,10 +1263,8 @@
 						//div.append($('<div>', {class : "deptDiv", "data-value" : val.DPT_SQ, text : val.DPT_NM}))
 						div.append($('<div>', {"class" : "has-feedback"})
 						   .append($('<div>', {"class" : "deptDiv", "data-value" : val.DPT_SQ, text : val.DPT_NM}))
-						   .append($('<span>', {"class" : "glyphicon glyphicon-remove form-control-feedback small-icon"})))
-					}
-					else if (val.DPT_SQ == dpt_sq) {
-						div.append($('<input>', {type : "text", id : "deptNmUp", "data-value" : val.DPT_SQ, value : val.DPT_NM}))
+						   .append($('<span>', {"class" : "glyphicon glyphicon-remove form-control-feedback small-icon"})))		 
+						div.append($('<input>', {type : "text", id : "deptNmUp", "data-value" : val.DPT_SQ}))
 						div.append($('<button>', {id : "deptUpdate", text : "수정"}))
 					}
 				});

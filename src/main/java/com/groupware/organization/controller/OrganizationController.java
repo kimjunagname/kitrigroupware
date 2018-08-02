@@ -13,8 +13,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.UncategorizedSQLException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +28,7 @@ import com.google.gson.Gson;
 import com.groupware.organization.model.OrganizationDto;
 import com.groupware.organization.model.ZipcodeDto;
 import com.groupware.organization.service.OrganizationService;
+import com.groupware.util.AjaxPaging;
 
 
 @Controller
@@ -40,6 +43,7 @@ public class OrganizationController {
 	// API 쓰기 위한 주소
 	public static final String ZIPCODE_API_URL = "http://biz.epost.go.kr/KpostPortal/openapi";
 	
+	// 초기화면 리스트 출력하기
 	@RequestMapping(value="/organization.kitri")
 	public String listOrganization(HttpServletRequest request, HttpSession session, Model model, RedirectAttributes attr) throws Exception {
 		// 로그인 후 제약 조건 거는 것 나중에
@@ -59,31 +63,31 @@ public class OrganizationController {
 			selectDpt_Div_Tb = organizationService.selectDpt_Div_Tb();
 
 			// 페이징 처리 
-			//Paging paging = new Paging();
+			AjaxPaging paging = new AjaxPaging();
 
 			// 총 게시물 수 
-			//int totalCnt = officerListCount;
+			int totalCnt = officerListCount;
 
 			// 현재 페이지 초기화
-			//int current_page = 1;
+			int current_page = 1;
 
 			// 만약 사용자로부터 페이지를 받아왔다면
-			//if (request.getParameter("page") != null) {
-			//	current_page = Integer.parseInt((String)request.getParameter("page"));
-			//}
+			if (request.getParameter("page") != null) {
+				current_page = Integer.parseInt((String)request.getParameter("page"));
+			}
 
 			// jsp에 뿌릴 페이지 태그를 만들어서 보낸다.
-			//String pageIndexList = paging.pageIndexList(totalCnt, current_page);
+			String pageIndexList = paging.pageIndexList(totalCnt, current_page);
 
 			// SQL 쿼리문에 넣을 조건문
-			//int startCount = (current_page - 1) * 10 + 1;
-			//int endCount = current_page * 10;
+			int startCount = (current_page - 1) * 10 + 1;
+			int endCount = current_page * 10;
 
-			//params.put("startCount", startCount);
-			//params.put("endCount", endCount);
-			//officerList = organizationService.officerList(params);
-			//model.addAttribute("pageIndexList", pageIndexList);
-			// ======================================================================================================== 페이징 처리
+			params.put("startCount", startCount);
+			params.put("endCount", endCount);
+			officerList = organizationService.officerList(params);
+			model.addAttribute("pageIndexList", pageIndexList);
+			//페이징 처리
 			//model.addAttribute("myInfoList", myInfoList);
 			model.addAttribute("officerList", officerList);
 			model.addAttribute("officerListCount", officerListCount);
@@ -97,7 +101,7 @@ public class OrganizationController {
 		}
 		return "/organization/list";
 	}
-	
+	// 우편번호 데이터 파싱
 	@RequestMapping(value="/zipcodeList.kitri" , method = {RequestMethod.GET, RequestMethod.POST}, produces = "text/planin;charset=UTF-8")
 	public @ResponseBody String zipcodeList(@RequestParam("query") String query) throws Exception{
 		 Map<String, Object> paramMap = new HashMap<String, Object>();
@@ -135,6 +139,32 @@ public class OrganizationController {
 	         paramMap.put("errorMessage", errorMessage);
 	     }    
 		return (new Gson()).toJson(paramMap);
+	}
+	// 부서 추가
+	@ResponseBody
+	@RequestMapping(value="/deptInsert.kitri", method = { RequestMethod.GET, RequestMethod.POST})
+	public int deptInsert(HttpServletRequest request, @RequestBody Map<String, Object> params) throws Exception {
+		int result = 0;
+		try {
+			result = organizationService.deptInsert(params);
+		} catch(UncategorizedSQLException use) {
+			use.printStackTrace();
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		return result;
+	}
+	// 부서 관리 - 추가 / 수정 / 삭제 후 다시 표출
+	@ResponseBody
+	@RequestMapping(value="/selectDpt_Div_Tb.kitri", method={ RequestMethod.GET, RequestMethod.POST})
+	public List selectDpt_Div_Tb(HttpServletRequest request) throws Exception {
+		List selectDpt_Div_Tb = new ArrayList<HashMap<String, Object>>();
+		try {
+			selectDpt_Div_Tb = organizationService.selectDpt_Div_Tb();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectDpt_Div_Tb;
 	}
 	
 		

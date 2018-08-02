@@ -11,7 +11,6 @@ import com.groupware.organization.dao.OrganizationDao;
 @Service
 public class OrganizationServiceImpl implements OrganizationService {
 
-	
 	@Autowired
 	private SqlSession sqlSession;
 
@@ -43,6 +42,18 @@ public class OrganizationServiceImpl implements OrganizationService {
 	public List selectDpt_Div_Tb() throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.getMapper(OrganizationDao.class).selectDpt_Div_Tb();
+	}
+
+	@Override
+	public List officerList(Map params) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.getMapper(OrganizationDao.class).officerList(params);
+	}
+
+	@Override
+	public int deptInsert(Map<String, Object> params) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.getMapper(OrganizationDao.class).deptInsert(params);
 	}
 	
 }
