@@ -55,5 +55,23 @@ public class OrganizationServiceImpl implements OrganizationService {
 		// TODO Auto-generated method stub
 		return sqlSession.getMapper(OrganizationDao.class).deptInsert(params);
 	}
+
+	@Override
+	public int deptDelete(Map<String, Object> params) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.getMapper(OrganizationDao.class).deptDelete(params);
+	}
+
+	@Override
+	public int deptUpdate(Map<String, Object> params) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.getMapper(OrganizationDao.class).deptUpdate(params);
+	}
+
+	@Override
+	public int selectDeptNm(Map<String, Object> params) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.getMapper(OrganizationDao.class).selectDeptNm(params);
+	}
 	
 }

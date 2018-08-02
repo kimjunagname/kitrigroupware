@@ -92,5 +92,21 @@
 	VALUES(DEPT_SQ.NEXTVAL, #{dpt_nm}) 
 	</insert>
 	
+	<delete id="deptDelete" parameterType="Map">
+	DELETE FROM DPT_DIV_TB
+	WHERE DPT_SQ=#{dpt_sq}
+	</delete>
+	
+	<select id="selectDeptNm" parameterType="Map" resultType="int">
+	SELECT COUNT(*) AS CNT
+	FROM DPT_DIV_TB
+	WHERE DPT_NM = #{dpt_nm}
+	</select>
+	
+	<update id="deptUpdate" parameterType="Map">
+	UPDATE DPT_DIV_TB
+	SET DPT_NM = #{dpt_nm}
+	WHERE DPT_SQ = #{dpt_sq}
+	</update>
 		 	 
  </mapper>

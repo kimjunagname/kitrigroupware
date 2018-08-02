@@ -28,10 +28,9 @@
 					<div class="modal-body">
 						<div id="dpt_sq_dept" class="form-group well">
 							<c:forEach items="${selectDpt_Div_Tb}" var="map">
-								<div class="has-feedback">
-									<div class="deptDiv" data-value="${map.DPT_SQ}">${map.DPT_SQ}/${map.DPT_NM}</div>
-									
-									<span class="glyphicon glyphicon-remove form-control-feedback small-icon"></span>					
+								<div class="has-feedback" data-value="${map.DPT_SQ}">
+									<div class="deptDiv" data-value="${map.DPT_SQ}">${map.DPT_NM}</div>						
+									<button id="deptDelete">삭제</button>				
 								</div>
 							</c:forEach>
 						</div>
@@ -970,8 +969,9 @@
 				$(this).val($(this).val().substring(0, 8));
 			}
 		});
+			
 		// 부서명 삭제
-		$(document).on("click", ".small-icon", function() {
+		$(document).on("click", "#deptDelete", function() {
 			var dpt_sq = $(this).parent().children("div").attr("data-value");
 			deptDelete(dpt_sq);
 		});
@@ -1263,9 +1263,7 @@
 						//div.append($('<div>', {class : "deptDiv", "data-value" : val.DPT_SQ, text : val.DPT_NM}))
 						div.append($('<div>', {"class" : "has-feedback"})
 						   .append($('<div>', {"class" : "deptDiv", "data-value" : val.DPT_SQ, text : val.DPT_NM}))
-						   .append($('<span>', {"class" : "glyphicon glyphicon-remove form-control-feedback small-icon"})))		 
-						div.append($('<input>', {type : "text", id : "deptNmUp", "data-value" : val.DPT_SQ}))
-						div.append($('<button>', {id : "deptUpdate", text : "수정"}))
+						   .append($('<button>', {id: "deptDelete", text:"삭제"})))
 					}
 				});
 			},
@@ -1304,40 +1302,11 @@
 			}
 		});
 	}
-	// 부서명 수정
-	function deptUpdate() {
-		var params = {
-				dpt_sq : $("#deptNmUp").attr("data-value"),
-				dpt_nm : $("#deptNmUp").val()
-		};
-		$.ajax({
-			url : "${root}/organization/deptUpdate.kitri",
-			type : "POST",
-			dataType : "text",
-			data : JSON.stringify(params),
-			contentType : "application/json; charset=UTF-8",
-			beforeSend : function() {		
-			},
-			success : function(data) {
-				if (data > 0) {
-					alert("부서명 수정을 성공하였습니다.");
-					deptList();
-				}
-				else if (data == 0) {
-					alert("부서명 수정을 실패하였습니다.");
-				}
-			},
-			error : function(request, status, error) {
-				alert("list search fail :: error code: "
-						+ request.status + "\n" + "error message: "
-						+ error + "\n");
-			}
-		});
-	}
+	
 	// 부서명 삭제
 	function deptDelete(data) {
 		var params = {
-				dpt_sq : data
+				dpt_sq : data		
 		};
 		$.ajax({
 			url : "${root}/organization/deptDelete.kitri",

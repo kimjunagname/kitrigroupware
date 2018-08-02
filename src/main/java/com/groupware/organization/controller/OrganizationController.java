@@ -13,6 +13,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.UncategorizedSQLException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -154,7 +155,34 @@ public class OrganizationController {
 		}
 		return result;
 	}
-	// 부서 관리 - 추가 / 수정 / 삭제 후 다시 표출
+	// 부서 삭제
+	@ResponseBody
+	@RequestMapping(value="/deptDelete.kitri", method = { RequestMethod.GET, RequestMethod.POST})
+	public int deptDelete(HttpServletRequest request, @RequestBody Map<String, Object> params) throws Exception {
+		int result = 0;
+		try {
+			result = organizationService.deptDelete(params);
+		} catch(DataIntegrityViolationException dive) {
+			result = -1;
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	// 중복부서명 체크
+	@ResponseBody
+	@RequestMapping(value = "/selectDeptNm.kitri", method = { RequestMethod.GET, RequestMethod.POST})
+	public int selectDeptNm(HttpServletRequest request, @RequestBody Map<String, Object> params) throws Exception {
+		int result = 0;
+		try {
+			result = organizationService.selectDeptNm(params);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	// 부서 관리 - 추가 / 삭제 후 다시 표출
 	@ResponseBody
 	@RequestMapping(value="/selectDpt_Div_Tb.kitri", method={ RequestMethod.GET, RequestMethod.POST})
 	public List selectDpt_Div_Tb(HttpServletRequest request) throws Exception {
