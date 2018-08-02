@@ -34,7 +34,9 @@
 	</div>	
 	 
 	<div id="body">
+	<!-- TEMPLATE BODY TEMPLATE BODY TEMPLATE BODY TEMPLATE BODY TEMPLATE BODY TEMPLATE BODY -->
 		<tiles:insertAttribute name="body" />
+	<!-- TEMPLATE BODY TEMPLATE BODY TEMPLATE BODY TEMPLATE BODY TEMPLATE BODY TEMPLATE BODY -->
 	</div>
 	<div id="footer">
 		<tiles:insertAttribute name="footer" />
