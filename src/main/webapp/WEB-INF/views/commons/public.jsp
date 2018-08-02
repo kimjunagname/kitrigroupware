@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
-
+<script src="${root}/js/jquery2.0.3.min.js"></script>
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- bootstrap-css -->
 <link rel="stylesheet" href="${root}/css/bootstrap.min.css" >
@@ -25,4 +25,3 @@
 <script src="${root}/js/jquery.scrollTo.js"></script>
 <!-- morris JavaScript -->	
 <!-- //font-awesome icons -->
-<script src="${root}/js/jquery2.0.3.min.js"></script>
