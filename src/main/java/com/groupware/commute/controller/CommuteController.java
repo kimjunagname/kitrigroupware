@@ -22,6 +22,7 @@ public class CommuteController {
 	@RequestMapping(value="/list.kitri", method=RequestMethod.GET)
 	public ModelAndView CommuteList(HttpSession session, Map<String, Object> map) {
 		System.out.println("CommuteController  CommuteList()");
+		System.out.println(map.size());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/commute/list");
 		
@@ -36,5 +37,12 @@ public class CommuteController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/punch.kitri", method=RequestMethod.POST)
+	public ModelAndView punch(Map<String, Object> map) {
+		System.out.println("CommuteController  punch()");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/commute/list");
+		return mav;
+	}
 	
 }

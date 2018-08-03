@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
 <!--main content start--><!--main content start--><!--main content start--><!--main content start-->
 <!--main content start--><!--main content start--><!--main content start--><!--main content start-->
 <!--main content start--><!--main content start--><!--main content start--><!--main content start-->
@@ -17,6 +18,7 @@
     </div>
     <div class="row w3-res-tb">
       <div class="col-sm-7 m-b-xs">
+      	<form id="searchFrom">
 		<input type="date" class="input-sm form-control w-sm inline v-middle" name="startDate" id="startDate" value="">
 		~
 		<input type="date" class="input-sm form-control w-sm inline v-middle" name="endDate" id="endDate" value="">
@@ -28,7 +30,8 @@
           <option value="3">Export</option>
         </select>
          -->
-        <button class="btn btn-sm btn-default" id="searchBtn">조회</button>                
+        <button class="btn btn-sm btn-default" id="searchBtn">조회</button>
+        </form>                
       </div>
       <div class="col-sm-0">
       </div>
@@ -136,7 +139,7 @@
                                     </div>
                                     <div class="modal-body">
 
-                                        <form class="form-horizontal" role="form">
+                                        <form class="form-horizontal" role="form" id="punchForm">
                                             <div class="form-group">
                                                 <label for="now" class="col-lg-2 col-sm-2 control-label">일시</label>
                                                 <div class="col-lg-10">
@@ -167,7 +170,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-lg-offset-2 col-lg-10">
-                                                    <button type="submit" class="btn btn-default">저장</button>
+                                                    <button type="button" class="btn btn-default" id="punchBtn">저장</button>
                                                     <button aria-hidden="true" data-dismiss="modal" class="btn btn-default" type="button">취소</button>
                                                 </div>
                                             </div>
@@ -243,7 +246,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-lg-offset-2 col-lg-10">
-                                                    <button type="submit" class="btn btn-default">저장</button>
+                                                    <button type="button" class="btn btn-default" id="">저장</button>
                                                     <button aria-hidden="true" data-dismiss="modal" class="btn btn-default" type="button">취소</button>
                                                 </div>
                                             </div>
@@ -270,10 +273,19 @@ $("#searchBtn").click(function() {
 		alert("종료 일이 시작일 보다 빠를 수 없습니다.");
 		setDate();
 		return;
+	}else{
+		alert(cmt_str_tm);
+		alert(cmt_end_tm);
+		$("#searchFrom").attr("method", "post").attr("action", "${root}/commute/search.kitri").submit();
 	}
-	alert(cmt_str_tm);
-	alert(cmt_end_tm);
 	
+	
+});
+
+$("#punchBtn").click(function() {
+	alert("punchBtn");
+	
+	$("#punchForm").attr("method", "post").attr("action", "${root}/commute/punch.kitri").submit();
 });
 
 function setDate(){
