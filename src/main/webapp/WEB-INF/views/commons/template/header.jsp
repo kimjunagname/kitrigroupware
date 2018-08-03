@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
 <!--header start-->
 <header class="header fixed-top clearfix">
 
@@ -31,7 +35,7 @@
                         <div class="task-info clearfix">
                             <div class="desc pull-left">
                                 <h5>Target Sell</h5>
-                                <p>25% , Deadline  12 June’13</p>
+                                <p>25% , Deadline  12 Juneâ13</p>
                             </div>
                                     <span class="notification-pie-chart pull-right" data-percent="45">
                             <span class="percent"></span>
@@ -44,7 +48,7 @@
                         <div class="task-info clearfix">
                             <div class="desc pull-left">
                                 <h5>Product Delivery</h5>
-                                <p>45% , Deadline  12 June’13</p>
+                                <p>45% , Deadline  12 Juneâ13</p>
                             </div>
                                     <span class="notification-pie-chart pull-right" data-percent="78">
                             <span class="percent"></span>
@@ -57,7 +61,7 @@
                         <div class="task-info clearfix">
                             <div class="desc pull-left">
                                 <h5>Payment collection</h5>
-                                <p>87% , Deadline  12 June’13</p>
+                                <p>87% , Deadline  12 Juneâ13</p>
                             </div>
                                     <span class="notification-pie-chart pull-right" data-percent="60">
                             <span class="percent"></span>
@@ -70,7 +74,7 @@
                         <div class="task-info clearfix">
                             <div class="desc pull-left">
                                 <h5>Target Sell</h5>
-                                <p>33% , Deadline  12 June’13</p>
+                                <p>33% , Deadline  12 Juneâ13</p>
                             </div>
                                     <span class="notification-pie-chart pull-right" data-percent="90">
                             <span class="percent"></span>
