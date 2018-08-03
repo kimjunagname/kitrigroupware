@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
 <!-- body start -->
 <section id="container">
 	<!--main content start-->
@@ -13,14 +13,70 @@
 
 
 					<!-- Calendar start -->
-					<h1>일정관리</h1>
 					<div id="divCalendar">
 						<div id="calendar"></div>
 					</div>
 					<!-- Calendar end -->
+					
+					<div>&nbsp;</div>
+					
+					<!-- Modal -->
+					<div align= "center">
+						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">일정 등록하기</button>
+					</div>
+					<div class="modal fade" id="myModal" role="dialog">
+						<div class="modal-dialog">
 
+							<!-- Modal content-->
+							<div class="modal-content">
+							<form class="form-horizontal" role="form" id="sform" action="${root}/schedule/sadd.kitri" method="get">
+								<!-- MODAL HEADER -->
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">일정 등록하기</h4>
+								</div>
+								
+								<!-- MODAL BODY -->
+								<div class="modal-body">
+									<div class="form-group">
+											<label class="col-lg-2 col-sm-2 control-label">일정구분</label>
+											<div class="col-lg-10">
+												<select id="sselect">
+													<option value="" selected>미팅</option>
+													<option value="">출장</option>
+												</select>
+											</div>
+										</div>
+									<div class="form-group">
+										<label class="col-lg-2 col-sm-2 control-label">일정이름</label>
+										<div class="col-lg-10">
+											<input type="text" name="" id="sname">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-lg-2 col-sm-2 control-label">시작날짜</label>
+										<div class="col-lg-10">
+											<input type="datetime-local" name="" id="sstart_date">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-lg-2 col-sm-2 control-label">종료날짜</label>
+										<div class="col-lg-10">
+											<input type="datetime-local" name="" id="send_date">
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal" id="registBtn">등록하기</button>
+									<button type="submit">test</button>
+								</div>
+							</form>
+							</div>
 
-
+						</div>
+					</div>
+					<!-- modal end -->
 					<!--main content end-->
 				</div>
 			</div>
@@ -30,95 +86,116 @@
 </section>
 <!--main content end-->
 
+<style>
 
-<script type='text/javascript'>
-$('#calendar').fullCalendar({
-	  defaultView: 'month'
+  body {
+    margin: 40px 10px;
+    padding: 0;
+    font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+    font-size: 14px;
+  }
+
+  #calendar {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+</style>
+<style>
+
+  body {
+    margin: 40px 10px;
+    padding: 0;
+    font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+    font-size: 14px;
+  }
+
+  #calendar {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+</style>
+<script>
+  $(document).ready(function() {
+
+    $('#calendar').fullCalendar({
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,basicWeek,basicDay'
+      },
+      defaultDate: '2018-03-12',
+      navLinks: true, // can click day/week names to navigate views
+      editable: true,
+      eventLimit: true, // allow "more" link when too many events
+      events: [
+        {
+          title: 'NaYeong Made Event',
+          start: '2018-03-01'
+        },
+        {
+          title: 'Long Event',
+          start: '2018-03-07',
+          end: '2018-03-10'
+        },
+        {
+          id: 999,
+          title: 'Repeating Event',
+          start: '2018-03-09T16:00:00'
+        },
+        {
+          id: 999,
+          title: 'Repeating Event',
+          start: '2018-03-16T16:00:00'
+        },
+        {
+          title: 'Conference',
+          start: '2018-03-11',
+          end: '2018-03-13'
+        },
+        {
+          title: 'Meeting',
+          start: '2018-03-12T10:30:00',
+          end: '2018-03-12T12:30:00'
+        },
+        {
+          title: 'Lunch',
+          start: '2018-03-12T12:00:00'
+        },
+        {
+          title: 'Meeting',
+          start: '2018-03-12T14:30:00'
+        },
+        {
+          title: 'Happy Hour',
+          start: '2018-03-12T17:30:00'
+        },
+        {
+          title: 'Dinner',
+          start: '2018-03-12T20:00:00'
+        },
+        {
+          title: 'Birthday Party',
+          start: '2018-03-13T07:00:00'
+        },
+        {
+          title: 'Click for Google',
+          url: 'http://google.com/',
+          start: '2018-03-28'
+        }
+      ]
+    });
+ });
+    
+    $(document).on("click", "#registBtn", function() {
+    	alert($("#sform").attr("action"));
+		$("#sform").attr("method", "get").attr("action", "${root}/schedule/sadd.kitri").submit();
+    	
+    	//alert($("#sform").attr("method"));
+    	//$("#sform").submit();
+    	//alert("${root}/schedule/sadd");
+    document.getElementById("sform").submit();
+    //
 	});
-
-$('#calendar').fullCalendar({
-	  defaultView: 'agendaWeek'
-	});
-	
-var calendar = null;
-var events = null;
-
-events = [
-    {
-        title: 'Long Event',
-        start: new Date(y, m, d-5),
-        end: new Date(y, m, d-2),
-        color: 'red',
-        backgroundColor: 'yellow',
-        borderColor: 'blue',
-        textColor: 'green',
-
-        uid: 'event_0003',                     //--- Customize한 속성
-        flagCheckbox: true                     //--- Customize한 속성
-    }
-];
-
-$(document).ready(function() {
-	calendar = $('#calendar').fullCalendar({
-		header: {
-			left: 'prev,next today',
-			center: 'title',
-			right: 'month,agendaWeek,agendaDay'
-		},
-		selectable: true,
-		selectHelper: true,
-		dayClick: function(date, allDay, jsEvent, view) {
-			window.alert("dayClick");
-			calendar.fullCalendar('unselect');
-		},
-		eventClick: function(calEvent, jsEvent, view) {
-			window.alert("eventClick");
-		},
-		select: function(start, end, allDay) {
-			var title = prompt('Event Title:');
-			if (title) {
-				calendar.fullCalendar('renderEvent',
-					{
-						title: title,
-						start: start,
-						end: end,
-						allDay: allDay
-					},
-					true // make the event "stick"
-				);
-			}
-			calendar.fullCalendar('unselect');
-		},
-		eventMouseover: function( event, jsEvent, view) { 
-			window.alert("eventMouseover");
-		},
-		eventMouseout: function( event, jsEvent, view) { 
-			window.alert("eventMouseout");
-		},
-		eventDrop: function( event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view ) {
-			window.alert("eventDrop");
-		},
-		eventResize:function( event, dayDelta, minuteDelta, revertFunc, jsEvent, ui, view ) { 
-			window.alert("eventResize");
-		},
- 		editable: true,
- 		events: events,
-		firstDay: 0,				//---	0. 일요일
-		weekends: true,
-		allDaySlot: true,
-		allDayText: '종일',
-		axisFormat : 'hh:mm tt',
-		slotMinutes: 30,
-		defaultEventMinutes: 60,
-		firstHour: 9,
-		timeFormat: 'hh:mm tt',
-		columnFormat: {month: 'ddd', week: 'M/d ddd', day: 'M/d dddd'},
-		titleFormat: {month: 'yyyy년 M월', week: 'yyyy년 M월 d일{ — [yyyy년] [M월] d일 }', day: 'yyy y년 M월 d일 dddd'},
-		monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'] ,
-		monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'], 
-		dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
- 		dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
- 		buttonText: {today: '오늘', month: '월', week: '주', day: '일'}
-	});
-});
 </script>

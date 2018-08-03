@@ -6,6 +6,9 @@
 <link rel="stylesheet" type="text/css" href="${root }/js/fullcalendar/fullcalendar.css"/>
 <link rel="stylesheet" type="text/css" href="${root }/js/fullcalendar/fullcalendar.min.css"/>
 <link rel="stylesheet" media="print" type="text/css" href="${root }/js/fullcalendar/fullcalendar.print.min.css"/>
+<!-- fullcalendar -->
+<script src="${root}/js/fullcalendar/lib/jquery.min.js"></script>
+<script src="${root}/js/fullcalendar/lib/jquery-ui.min.js"></script>
 	
 <!-- bootstrap-css -->
 <link rel="stylesheet" href="${root}/css/bootstrap.min.css" >
@@ -18,13 +21,20 @@
 <!-- font-awesome icons -->
 <link rel="stylesheet" href="${root}/css/font.css" type="text/css"/>
 <link href="${root}/css/font-awesome.css" rel="stylesheet"> 
-	
-	
-<script src="${root}/js/fullcalendar/lib/jquery.min.js"></script>
-<script src="${root}/js/fullcalendar/lib/jquery-ui.min.js"></script>
-<script src="${root}/js/fullcalendar/lib/moment.min.js"></script>
 
+<script src="${root}/js/bootstrap.js"></script>
+<script src="${root}/js/jquery.dcjqaccordion.2.7.js"></script>
+<script src="${root}/js/scripts.js"></script>
+<script src="${root}/js/jquery.slimscroll.js"></script>
+<script src="${root}/js/jquery.nicescroll.js"></script>
+
+
+<!-- fullcalendar -->
 <script type="text/javascript" src="${root }/js/fullcalendar/lib/moment.min.js"></script>
 <script type="text/javascript" src="${root }/js/fullcalendar/fullcalendar.js"></script>
+
+<link href='${root}/js/fullcalendar/fullcalendar.min.css' rel='stylesheet' />
+<link href='${root}/js/fullcalendar/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+
 
 
