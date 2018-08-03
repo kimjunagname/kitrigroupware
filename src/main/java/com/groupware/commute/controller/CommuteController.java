@@ -2,9 +2,12 @@ package com.groupware.commute.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.groupware.commute.service.CommuteService;
@@ -16,22 +19,18 @@ public class CommuteController {
 	@Autowired
 	private CommuteService commuteService;
 	
-	@RequestMapping("/list.kitri")
-	public ModelAndView CommuteList(Map<String, Object> map) {
-		System.out.println("CommuteController  왔다!!!!!");
+	@RequestMapping(value="/list.kitri", method=RequestMethod.GET)
+	public ModelAndView CommuteList(HttpSession session, Map<String, Object> map) {
+		System.out.println("CommuteController  CommuteList()");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/commute/list");
-//		Map<String, String> map2 = new HashMap<>();
-//		List<CommuteDto> list = commuteService.getCommuteList(map2);
-//		map.put("commutelist", list);
-//		return "error/404";
 		
 		return mav;
 	}
 	
-	@RequestMapping("/listdepart.kitri")
+	@RequestMapping(value="/listdepart.kitri", method=RequestMethod.GET)
 	public ModelAndView CommuteListDepartment(Map<String, Object> map) {
-		System.out.println("CommuteController  왔다!!!!!");
+		System.out.println("CommuteController  CommuteListDepartment()");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/commute/list_department");
 		return mav;

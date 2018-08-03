@@ -13,13 +13,13 @@
  <div class="table-agile-info">
   <div class="panel panel-default">
     <div class="panel-heading">
-      개인출근월별조회
+      개인출근조회
     </div>
     <div class="row w3-res-tb">
       <div class="col-sm-7 m-b-xs">
-		<input type="date" class="input-sm form-control w-sm inline v-middle" name="" id="" value="" required>
+		<input type="date" class="input-sm form-control w-sm inline v-middle" name="startDate" id="startDate" value="">
 		~
-		<input type="date" class="input-sm form-control w-sm inline v-middle" name="" id="" value="" required>
+		<input type="date" class="input-sm form-control w-sm inline v-middle" name="endDate" id="endDate" value="">
 		<!-- 
         <select class="input-sm form-control w-sm inline v-middle">
           <option value="0">Bulk action</option>
@@ -28,7 +28,7 @@
           <option value="3">Export</option>
         </select>
          -->
-        <button class="btn btn-sm btn-default">조회</button>                
+        <button class="btn btn-sm btn-default" id="searchBtn">조회</button>                
       </div>
       <div class="col-sm-0">
       </div>
@@ -259,7 +259,32 @@
 </section>
 
 <script>
-$('#myModal').on('shown.bs.modal', function () {
-	  $('#myInput').focus()
-	})
+$(document).ready(function(){
+	setDate();
+});
+
+$("#searchBtn").click(function() {
+	var cmt_str_tm = $("#startDate").val();
+	var cmt_end_tm = $("#endDate").val();
+	if(cmt_end_tm < cmt_str_tm){
+		alert("종료 일이 시작일 보다 빠를 수 없습니다.");
+		setDate();
+		return;
+	}
+	alert(cmt_str_tm);
+	alert(cmt_end_tm);
+	
+});
+
+function setDate(){
+	var date = new Date();
+	var year = date.getFullYear();
+	var month = date.getMonth();
+	
+	var lastDay = new Date(year, month+1, 1);
+	
+	$("#startDate").val(lastDay.toISOString().slice(0,8) + "01");
+	$("#endDate").val(lastDay.toISOString().slice(0,10));
+	
+};
 </script>
