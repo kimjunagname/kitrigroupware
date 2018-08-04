@@ -2,21 +2,22 @@ package com.groupware.schedule.model;
 
 public class ScheduleDivisionDto {
 
-	private int Scd_sq;    /* ÀÏÁ¤±¸ºĞ¹ø */
-	private String Scd_nm; /* ÀÏÁ¤¸í */
+	private int Scd_sq;  /* ì¼ì •êµ¬ë¶„ë²ˆí˜¸ */
+	private String Scd_nm;  /* ì¼ì •ëª… */
+	
 	public int getScd_sq() {
 		return Scd_sq;
 	}
 	public void setScd_sq(int scd_sq) {
 		Scd_sq = scd_sq;
 	}
+	
+	
 	public String getScd_nm() {
 		return Scd_nm;
 	}
 	public void setScd_nm(String scd_nm) {
 		Scd_nm = scd_nm;
 	}
-	
-	
 	
 }

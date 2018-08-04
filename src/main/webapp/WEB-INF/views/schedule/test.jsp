@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <!-- body start -->
 <section id="container">
@@ -39,31 +40,36 @@
 								<!-- MODAL BODY -->
 								<div class="modal-body">
 									<div class="form-group">
-											<label class="col-lg-2 col-sm-2 control-label">일정구분</label>
+											<label class="col-lg-2 col-sm-2 control-label">구분</label>
 											<div class="col-lg-10">
-												<select id="sselect">
-													<option value="" selected>미팅</option>
-													<option value="">출장</option>
-												</select>
+											<!-- spring form 태그로 select 불러오기 -->
+											<form:form commandName="ScheduleDivisionDto">
+												<form:select path="Scd_nm" items="${stype}"></form:select>
+											</form:form>
 											</div>
 										</div>
 									<div class="form-group">
-										<label class="col-lg-2 col-sm-2 control-label">일정이름</label>
-										<div class="col-lg-10">
-											<input type="text" name="" id="sname">
-										</div>
-									</div>
-									<div class="form-group">
 										<label class="col-lg-2 col-sm-2 control-label">시작날짜</label>
-										<div class="col-lg-10">
-											<input type="datetime-local" name="" id="sstart_date">
+											<div class="col-lg-10">
+												<input type="date" name="sstart_date" id="sstart_date"> 
+												<input type="time" name="sstart_time" id="sstart_time">
+											</div>
 										</div>
-									</div>
 									<div class="form-group">
 										<label class="col-lg-2 col-sm-2 control-label">종료날짜</label>
 										<div class="col-lg-10">
-											<input type="datetime-local" name="" id="send_date">
+											<input type="date" name="send_date" id="send_date"> 
+											<input type="time" name="send_time" id="send_time">
 										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-lg-2 col-sm-2 control-label">제목</label>
+										<div class="col-lg-10">
+											<input type="text" name="sname" id="sname">
+										</div>
+									</div>
+									<div class="form-group">
+										<textarea id="summernote" name="content"></textarea>
 									</div>
 								</div>
 								<div class="modal-footer">
@@ -116,6 +122,20 @@
   }
 
 </style>
+<!-- summernote -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>
+
+<script type="text/javascript">
+  $(function() {
+    $('#summernote').summernote({
+      height: 300,         
+      minHeight: null,      
+      maxHeight: null,     
+      lang: 'ko-KR'      
+    });
+  });
+</script>
 <script>
   $(document).ready(function() {
 
@@ -189,13 +209,6 @@
  });
     
     $(document).on("click", "#registBtn", function() {
-    	alert($("#sform").attr("action"));
-		$("#sform").attr("method", "get").attr("action", "${root}/schedule/sadd.kitri").submit();
-    	
-    	//alert($("#sform").attr("method"));
-    	//$("#sform").submit();
-    	//alert("${root}/schedule/sadd");
-    document.getElementById("sform").submit();
-    //
+		$("#sform").attr("method", "post").attr("action", "${root}/schedule/sadd.kitri").submit();
 	});
 </script>
