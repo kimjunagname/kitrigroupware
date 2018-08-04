@@ -3,6 +3,7 @@ package com.groupware.schedule.controller;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -28,15 +29,17 @@ public class ScheduleController {
 	private ScheduleService scheduleService;
 	
 	@RequestMapping(value="/test.kitri")
-	public ModelAndView test(Map<String, Object> map, HttpSession session) {
+	public ModelAndView viewSchedule(Map<String, Object> map, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/schedule/test");
 		
-		//TODO 일정구분 DB에서 가져오기
+		// 일정구분
+		List<ScheduleDivisionDto> typeList= scheduleService.getScheduleType();
 		Map<String, String> stype= new HashMap<String, String>();
-		stype.put("1", "1번 타입");
-		stype.put("2", "2번 타입");
-		stype.put("3", "3번 타입");
+		
+		for (int i = 0; i < typeList.size(); i++) {
+			stype.put(typeList.get(i).getScd_sq()+ "", typeList.get(i).getScd_nm());
+		}
 		//stype.put("일정구분번호", "일정명");
 		
 //		MemberDto memberDto= (MemberDto) session.getAttribute("userInfo");
@@ -47,6 +50,17 @@ public class ScheduleController {
 		
 		mav.addObject("stype", stype);
 		mav.addObject("ScheduleDivisionDto", new ScheduleDivisionDto());
+		
+		// 스케쥴리스트 가져오기
+		int stf_sq= 1; //사원번호로 가져옴
+		List<ScheduleDto> list= scheduleService.getScheduleList(stf_sq);
+		
+		if(list!= null) {
+			 for(ScheduleDto dto : list) {
+				 System.out.println("schedule subject >>> "+ dto.getBs_bs_nm());
+			 }
+		} else
+			System.out.println("schedule list is null");
 		
 		return mav;
 	}
@@ -64,7 +78,7 @@ public class ScheduleController {
 		//TODO date에는 24시간 구분이 안됨..? 일단 오전만 가능... 해결해야함	
 		
 		ScheduleDto dto= new ScheduleDto();
-		dto.setBs_scd_sq(Integer.parseInt(scheduleDivisionDto.getScd_nm())); //일정구분번호
+		dto.setScd_sq(Integer.parseInt(scheduleDivisionDto.getScd_nm())); //일정구분번호
 		//TODO 사원번호 집어넣기
 		dto.setStf_sq("1");
 		dto.setBs_bs_nm(map.get("sname"));//제목

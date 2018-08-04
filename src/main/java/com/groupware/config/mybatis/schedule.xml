@@ -6,11 +6,20 @@
     <mapper namespace="com.groupware.schedule.dao.ScheduleDao">
 	
 	<insert id="addSchedule" parameterType="ScheduleDto">
-	insert into SCD_DIV_TB (bs_scd_sq, scd_sq, stf_sq, bs_bs_nm, bs_bs_scd_cnt, bs_scd_str_dt, bs_scd_end_dt)
+	insert into BS_SCD_TB (bs_scd_sq, scd_sq, stf_sq, bs_bs_nm, bs_bs_scd_cnt, bs_scd_str_dt, bs_scd_end_dt)
 	values (BS_SCD_TB_BS_SCD_SQ.nextval, #{scd_sq}, #{stf_sq}, #{bs_bs_nm}, #{bs_bs_scd_cnt}, 
 				to_date(#{bs_scd_str_dt}, 'yyyy-mm-dd hh:mi:ss'), to_date(#{bs_scd_end_dt}, 'yyyy-mm-dd hh:mi:ss'))
 	</insert>
 	
+	<select id="getScheduleList" parameterType="int" resultType="ScheduleDto">
+	select * 
+	from BS_SCD_TB
+	where stf_sq= #{stf_sq}
+	</select>
 	
+	<select id="getScheduleType" resultType="ScheduleDivisionDto">
+	select *
+	from SCD_DIV_TB
+	</select>
   
   </mapper>

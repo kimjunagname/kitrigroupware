@@ -16,12 +16,15 @@ import com.groupware.schedule.model.ScheduleDto;
 public class ScheduleServiceImpl implements ScheduleService {
 	@Autowired
 	private SqlSession sqlSession;
-		
+
 	@Override
-	@Transactional
-	public List<ScheduleDivisionDto> getListSchedule() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ScheduleDivisionDto> getScheduleType() {
+		return sqlSession.getMapper(ScheduleDao.class).getScheduleType();
+	}
+
+	@Override
+	public List<ScheduleDto> getScheduleList(int stf_sq) {
+		return sqlSession.getMapper(ScheduleDao.class).getScheduleList(stf_sq);
 	}
 
 	@Override
