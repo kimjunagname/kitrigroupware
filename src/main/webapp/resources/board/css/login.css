@@ -97,7 +97,7 @@ input.ggg{
     border: 1px solid black;
     outline: none;
     font-size: 14px;
-    color: #8dd5f2;
+    color: black;
     margin: 5px 0px;
 	background: none;
 	height: 50px;
@@ -109,7 +109,7 @@ input.gg{
     border: 1px solid black;
     outline: none;
     font-size: 14px;
-    color: #8dd5f2;
+    color: black;
     margin: 5px 0px;
 	background: none;
 	height: 30px;
@@ -121,7 +121,7 @@ select.gg  {
     border: 1px solid black;
     outline: none;
     font-size: 14px;
-    color: #8dd5f2;
+    color: black;
     margin: 5px 0px;
 	background: none;
 	height: 30px;	
@@ -136,7 +136,7 @@ option {
 
 .w3layouts-main span {
     font-size: 16px;
-    color: #8dd5f2;      	
+    color: black;      	
 }
 .w3layouts-main h6 {
     font-size: 16px;
@@ -225,16 +225,16 @@ h4 input[type="checkbox"] {
 }
  /*--placeholder-color--*/
 ::-webkit-input-placeholder {
-	color:#8dd5f2 !important;
+	color:black !important;
 }
 :-moz-placeholder { /* Firefox 18- */
-	color:#8dd5f2 !important; 
+	color:black !important; 
 }
 ::-moz-placeholder {  /* Firefox 19+ */
-	color:#8dd5f2 !important;
+	color:black !important;
 }
 :-ms-input-placeholder {  
-	color:#8dd5f2 !important;
+	color:black !important;
 }
 /*--//placeholder-color--*/
 .alert {
