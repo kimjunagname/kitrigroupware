@@ -32,13 +32,6 @@ public class CommuteServiceImpl implements CommuteService {
 		return sqlSession.getMapper(CommuteDao.class).punchIn(commuteDto);
 	}
 
-//	마지막 출퇴근번호
-	@Override
-	public int lastPunchInSeq(int stf_sq) {
-//		return sqlSession.getMapper(CommuteDao.class).lastPunchInSeq(stf_sq);
-		return 0;
-	}
-
 //	퇴근
 	@Override
 	public int punchOut(CommuteDto commuteDto) {

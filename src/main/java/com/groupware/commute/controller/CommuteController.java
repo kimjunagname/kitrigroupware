@@ -79,8 +79,6 @@ public class CommuteController {
 		if("in".equals(check)){
 			commuteService.punchIn(commuteDto);
 		}else if("out".equals(check)) {
-//			int lastPunchInSeq = commuteService.lastPunchInSeq(stf_sq);
-//			commuteDto.setCmt_sq(lastPunchInSeq);
 			commuteService.punchOut(commuteDto);
 		}
 		ModelAndView mav = new ModelAndView();

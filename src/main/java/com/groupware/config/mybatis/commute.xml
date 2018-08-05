@@ -18,7 +18,6 @@
 	</update>
 
 	<update id="punchOut" parameterType="CommuteDto">
-	<!-- max(cmt_sq)의 end가 null이 아닐때 update, 퇴근시간 갱신 방지용 -->
 	merge into cmt_tb c
 		using (
 				select max(cmt_sq) cmt_sq
