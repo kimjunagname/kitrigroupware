@@ -39,7 +39,7 @@
 								        		<th></th>
 								        		<th colspan="2">
 								        			<div align="center">
-														<img src="${root}/images/g1.jpg" align="center" width="100" height="100">
+														<img src="${root}/images/logo.png" align="center" width="100" height="100">
 													</div>
 								        		</th>
 								        		<!-- <th></th>  -->
@@ -56,7 +56,7 @@
 								        		<!-- <th></th> -->
 								        		<th colspan="2">
 								        			<div align="center">
-														<img src="${root}/images/g1.jpg" align="center" width="100" height="100">
+														<img src="${root}/images/logo.png" align="center" width="100" height="100">
 													</div>
 								        		</th>
 								        		<!-- <th></th>  -->

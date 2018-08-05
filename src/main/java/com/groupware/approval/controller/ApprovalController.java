@@ -28,6 +28,24 @@ public class ApprovalController {
 		return mav;
 	}
 	
+	@RequestMapping("/write.kitri")
+	public ModelAndView writeApprovalManager(Map<String, Object> map) {
+		System.out.println("ApprovalController in!!! -- write");
+		//List<MemberDto> list = approvalService.getListAdminManager();
+		//map.put("menulist", list);
+		ModelAndView mav = new ModelAndView();
+	    mav.setViewName("/approval/write"); // /webapp/pds5/list.jsp
+		return mav;
+	}
 	
+	@RequestMapping("/mwrite.kitri")
+	public ModelAndView mwriteApprovalManager(Map<String, Object> map) {
+		System.out.println("ApprovalController in!!! -- write");
+		//List<MemberDto> list = approvalService.getListAdminManager();
+		//map.put("menulist", list);
+		ModelAndView mav = new ModelAndView();
+	    mav.setViewName("/approval/mwrite"); // /webapp/pds5/list.jsp
+		return mav;
+	}
 	
 }
