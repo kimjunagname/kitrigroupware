@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 
 <!-- body start -->
-<body>
 <section id="container">
 
 <!--sidebar start-->

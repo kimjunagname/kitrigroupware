@@ -68,12 +68,12 @@ $(document).ready(function() {
 		<p class="ns">아직 계정이 없으신가요?<label id="registerBtn">회원가입</label></p>
 </div>
 </div>
-<script src="js/bootstrap.js"></script>
-<script src="js/jquery.dcjqaccordion.2.7.js"></script>
-<script src="js/scripts.js"></script>
-<script src="js/jquery.slimscroll.js"></script>
-<script src="js/jquery.nicescroll.js"></script>
+<script src="${root}/js/bootstrap.js"></script>
+<script src="${root}/js/jquery.dcjqaccordion.2.7.js"></script>
+<script src="${root}/js/scripts.js"></script>
+<script src="${root}/js/jquery.slimscroll.js"></script>
+<script src="${root}/js/jquery.nicescroll.js"></script>
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
-<script src="js/jquery.scrollTo.js"></script>
+<script src="${root}/js/jquery.scrollTo.js"></script>
 </body>
 </html>

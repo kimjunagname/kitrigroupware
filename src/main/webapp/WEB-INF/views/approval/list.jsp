@@ -3,7 +3,6 @@
 
 
 <!-- body start -->
-<body>
 <section id="container">
 
 
