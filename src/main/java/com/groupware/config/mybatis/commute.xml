@@ -3,12 +3,44 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.groupware.commute.dao.CommuteDao">
+<mapper namespace="com.groupware.commute.dao.CommuteDao">
   
-  <insert id="punchIn" parameterType="CommuteDto">
-  	insert into cmt_tb (cmt_sq, stf_sq, cmt_str_tm, cmt_msg)
-  	values (cmt_tb_cmt_sq.nextval, #{stf_sq}, sysdate, #{cmt_msg})
-  </insert>
-  
-  </mapper>
+	<update id="punchIn" parameterType="CommuteDto">
+	merge into cmt_tb
+		using dual
+		on (
+			trunc(sysdate, 'dd') = trunc(cmt_str_tm, 'dd')
+			and stf_sq = #{stf_sq}
+			)
+		when not matched then
+			insert (cmt_sq, stf_sq, cmt_str_tm, cmt_msg)
+			values (cmt_tb_cmt_sq.nextval, #{stf_sq}, sysdate, #{cmt_msg})
+	</update>
+
+	<update id="punchOut" parameterType="CommuteDto">
+	<!-- max(cmt_sq)의 end가 null이 아닐때 update, 퇴근시간 갱신 방지용 -->
+	merge into cmt_tb c
+		using (
+				select max(cmt_sq) cmt_sq
+				from cmt_tb
+				where stf_sq = #{stf_sq}
+				and cmt_end_tm is null
+		      )sub
+		on (
+			c.cmt_sq = sub.cmt_sq
+			)
+		when matched then
+			update
+			set c.cmt_end_tm = sysdate, c.cmt_msg = #{cmt_msg}
+			where c.cmt_sq = sub.cmt_sq
+	</update>
+	
+	<select id="getCommuteList" parameterType="map" resultType="CommuteDto">
+	select cmt_sq, stf_sq, cmt_str_tm, cmt_end_tm, cmt_msg, to_char(trunc(cmt_str_tm, 'dd'), 'mm.dd')||'('||to_char(cmt_str_tm, 'dy')||')' cmt_dt
+	from cmt_tb
+	where stf_sq = #{stf_sq}
+	and cmt_str_tm between trunc(sysdate, 'MM') and last_day(sysdate)
+	</select>
+	  
+</mapper>
   

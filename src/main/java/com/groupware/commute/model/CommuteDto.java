@@ -8,7 +8,8 @@ public class CommuteDto {
 	private String cmt_str_tm; /* 출근시간 */
 	private String cmt_end_tm; /* 퇴근시간 */
 	private String cmt_msg; /* 메시지 */
-
+	private String cmt_dt;	/* 날짜 */ 
+	
 	public int getCmt_sq() {
 		return cmt_sq;
 	}
@@ -47,6 +48,14 @@ public class CommuteDto {
 
 	public void setCmt_msg(String cmt_msg) {
 		this.cmt_msg = cmt_msg;
+	}
+
+	public String getCmt_dt() {
+		return cmt_dt;
+	}
+
+	public void setCmt_dt(String cmt_dt) {
+		this.cmt_dt = cmt_dt;
 	}
 
 }

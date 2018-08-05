@@ -14,11 +14,12 @@
  <div class="table-agile-info">
   <div class="panel panel-default">
     <div class="panel-heading">
-      개인출근조회
+      개인출근조회	[${stf_sq}]
     </div>
     <div class="row w3-res-tb">
       <div class="col-sm-7 m-b-xs">
       	<form id="searchFrom">
+      	<input type="hidden" id="stf_sq" name="stf_sq" value="5"><!-- TODO session.stf_sq -->
 		<input type="date" class="input-sm form-control w-sm inline v-middle" name="startDate" id="startDate" value="">
 		~
 		<input type="date" class="input-sm form-control w-sm inline v-middle" name="endDate" id="endDate" value="">
@@ -73,7 +74,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr data-expanded="true">
+          <tr>
             <td>180721</td>
             <td>08:30</td>
             <td>18:30</td>
@@ -150,9 +151,9 @@
                                                 <label for="radio" class="col-lg-2 col-sm-2 control-label">출퇴근</label>
                                                 <div class="col-lg-10">
                                                    <div >
-					                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+					                                    <input type="radio" name="punch" id="punch" value="in" checked="">
 					                                    	출근
-					                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+					                                    <input type="radio" name="punch" id="punch" value="out">
 				                                    		퇴근
                            						   </div>
 
@@ -163,7 +164,7 @@
                                                 <div class="col-lg-offset-2 col-lg-10">
                                                     <div class="checkbox">
                                                           <div class="col-lg-10">
-															<textarea rows="5" cols="40"></textarea>
+															<textarea rows="5" cols="40" name="cmt_msg"></textarea>
 	                                                      </div>
                                                     </div>
                                                 </div>
@@ -274,17 +275,14 @@ $("#searchBtn").click(function() {
 		setDate();
 		return;
 	}else{
-		alert(cmt_str_tm);
-		alert(cmt_end_tm);
-		$("#searchFrom").attr("method", "post").attr("action", "${root}/commute/search.kitri").submit();
+		
+		$("#searchFrom").attr("method", "get").attr("action", "${root}/commute/list.kitri").submit();
 	}
 	
 	
 });
 
 $("#punchBtn").click(function() {
-	alert("punchBtn");
-	
 	$("#punchForm").attr("method", "post").attr("action", "${root}/commute/punch.kitri").submit();
 });
 

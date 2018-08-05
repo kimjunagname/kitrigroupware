@@ -12,9 +12,9 @@ public interface CommuteService {
 //	출근
 	int punchIn(CommuteDto commuteDto);
 //	마지막 출퇴근번호
-	int lastPunchInSeq(CommuteDto commuteDto);
+	int lastPunchInSeq(int stf_sq);
 //	퇴근
-	int punchOut(int cmt_sq);
+	int punchOut(CommuteDto commuteDto);
 	
 	
 }
