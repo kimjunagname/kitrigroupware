@@ -2,15 +2,14 @@ package com.groupware.schedule.model;
 
 public class ScheduleDto extends ScheduleDivisionDto{
 
-	    private int bs_scd_sq;  /* »ç³»ÀÏÁ¤¹øÈ£ */
-		private int scd_sq;  /* ÀÏÁ¤±¸ºĞ¹øÈ£ */
-		private String stf_sq;  /* »ç¿ø¹øÈ£ */
-		private String bs_bs_nm;  /* Á¦¸ñ */
-		private String bs_bs_scd_cnt;  /* ³»¿ë */
-		private String bs_scd_str_dt;  /* ½ÃÀÛÀÏ */
-		private String bs_scd_end_dt;  /* Á¾·áÀÏ */
-		private int scd_sq2; /* ÀÏÁ¤±¸ºĞ¹ø */
-		
+	    private int bs_scd_sq;  /* ì‚¬ë‚´ì¼ì •ë²ˆí˜¸ */
+		private int scd_sq;  /* ì¼ì •êµ¬ë¶„ë²ˆí˜¸ */
+		private String stf_sq;  /* ì‚¬ì›ë²ˆí˜¸ */
+		private String bs_bs_nm;  /* ì œëª© */
+		private String bs_bs_scd_cnt;  /* ë‚´ìš© */
+		private String bs_scd_str_dt;  /* ì‹œì‘ì¼ */
+		private String bs_scd_end_dt;  /* ì¢…ë£Œì¼ */
+		//ì¼ì •êµ¬ë¶„ë²ˆí˜¸2 ì‚­ì œí•¨
 		
 		public int getBs_scd_sq() {
 			return bs_scd_sq;
@@ -54,14 +53,4 @@ public class ScheduleDto extends ScheduleDivisionDto{
 		public void setBs_scd_end_dt(String bs_scd_end_dt) {
 			this.bs_scd_end_dt = bs_scd_end_dt;
 		}
-		public int getScd_sq2() {
-			return scd_sq2;
-		}
-		public void setScd_sq2(int scd_sq2) {
-			this.scd_sq2 = scd_sq2;
-		}
-
-
-		
-		
 }

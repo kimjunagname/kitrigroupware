@@ -10,9 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.groupware.member.model.MemberDto;
 import com.groupware.member.service.MemberService;
+
 
 @Controller
 @RequestMapping("/member")
@@ -38,9 +40,24 @@ public class MemberController {
 		
 	}
 	
-	@RequestMapping("/register.kitri")
+	@RequestMapping(value="/register.kitri", method=RequestMethod.GET)
 	public String register() {
 		return "/join/registration";
+	}
+	
+	@RequestMapping(value="/register.kitri", method=RequestMethod.POST)
+	public ModelAndView register(MemberDto dto) {
+		ModelAndView mav= new ModelAndView();
+		
+		int cnt= memberService.registerMember(dto);
+		
+		if(cnt!= 0) { //회원가입 성공
+			mav.addObject("userinfo", dto);		
+			mav.setViewName("/join/registrationok");
+		} else //회원가입 실패
+			mav.setViewName("login/login");
+		
+		return mav;
 	}
 	
 	@RequestMapping("/idfind.kitri")
@@ -52,5 +69,6 @@ public class MemberController {
 	public String pwfind() {
 		return "/join/pwfind";
 	}
+
 	
 }

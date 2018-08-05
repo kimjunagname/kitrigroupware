@@ -6,7 +6,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.groupware.adminmanager.dao.AdminmanagerDao;
 import com.groupware.approval.dao.ApprovalDao;
 import com.groupware.approval.model.ApprovalDto;
 

@@ -9,6 +9,6 @@ public interface MemberService {
 
 	public MemberDto login(Map<String, String> map);
 	
-	
+	public int registerMember(MemberDto dto);
 	
 }

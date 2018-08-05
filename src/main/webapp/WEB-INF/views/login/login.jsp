@@ -22,7 +22,7 @@ if(cookie != null) {
 <script type="text/javascript">
 $(document).ready(function() {
 	
-	$("#loginBtn").click(function name() {
+	$("#loginBtn").click(function() {
 		if($("#stf_sq").val() == "") {
 			alert("아이디 입력!");
 			return;
@@ -50,9 +50,9 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-<div class="log-w3">
+<div class="log-w3 ns">
 <div class="w3layouts-main">
-	<h2>kitrigroupware</h2>
+	<img src="${root}/images/logo.png" style="display: block; margin-left: auto; margin-right: auto;">
 	
 	<br> 
 	
