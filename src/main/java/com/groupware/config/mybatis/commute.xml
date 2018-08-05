@@ -31,7 +31,10 @@
 			)
 		when matched then
 			update
-			set c.cmt_end_tm = sysdate, c.cmt_msg = #{cmt_msg}
+			set c.cmt_end_tm = sysdate
+			<if test="cmt_msg != null and cmt_msg != ''">
+			, c.cmt_msg = c.cmt_msg || #{cmt_msg}
+			</if>
 			where c.cmt_sq = sub.cmt_sq
 	</update>
 	

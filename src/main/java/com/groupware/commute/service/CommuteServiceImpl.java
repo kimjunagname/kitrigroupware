@@ -43,7 +43,7 @@ public class CommuteServiceImpl implements CommuteService {
 	@Override
 	public int punchOut(CommuteDto commuteDto) {
 		if(commuteDto.getCmt_msg().length() != 0 || !"".equals(commuteDto.getCmt_msg())) {
-			commuteDto.setCmt_msg(commuteDto.getCmt_msg() + "[Επ±Ω]");
+			commuteDto.setCmt_msg("[Επ±Ω]" + commuteDto.getCmt_msg());
 		}
 		return sqlSession.getMapper(CommuteDao.class).punchOut(commuteDto);
 	}
