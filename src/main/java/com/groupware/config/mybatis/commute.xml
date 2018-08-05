@@ -38,10 +38,20 @@
 	</update>
 	
 	<select id="getCommuteList" parameterType="map" resultType="CommuteDto">
-	select cmt_sq, stf_sq, cmt_str_tm, cmt_end_tm, cmt_msg, to_char(trunc(cmt_str_tm, 'dd'), 'mm.dd')||'('||to_char(cmt_str_tm, 'dy')||')' cmt_dt
-	from cmt_tb
-	where stf_sq = #{stf_sq}
-	and cmt_str_tm between trunc(sysdate, 'MM') and last_day(sysdate)
+	select cmt_sq, stf_sq, cmt_str_tm, cmt_end_tm, cmt_msg, a.days, b.dt, to_char(trunc(b.dt, 'dd'), 'mm.dd') || '(' ||to_char(b.dt, 'dy')|| ')' cmt_dt
+	from
+	    (
+	        select cmt_sq, stf_sq, cmt_str_tm, cmt_end_tm, cmt_msg, trunc(cmt.cmt_str_tm, 'dd') days
+	        from cmt_tb cmt
+	        where stf_sq = #{stf_sq}
+	    ) a,
+	    (   
+	        select trunc(sysdate, 'MM')+level-1 dt
+	        from dual
+	        connect by level &lt;= last_day(sysdate)-trunc(sysdate, 'MM')+1
+	    ) b
+	where a.days(+) = b.dt
+	order by b.dt
 	</select>
 	  
 </mapper>

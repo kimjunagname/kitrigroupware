@@ -14,7 +14,7 @@
  <div class="table-agile-info">
   <div class="panel panel-default">
     <div class="panel-heading">
-      개인출근조회	[${stf_sq}]
+      개인출근조회
     </div>
     <div class="row w3-res-tb">
       <div class="col-sm-7 m-b-xs">
@@ -74,38 +74,16 @@
           </tr>
         </thead>
         <tbody>
+        <c:forEach var="cmt" items="${commuteList}">
           <tr>
-            <td>180721</td>
-            <td>08:30</td>
-            <td>18:30</td>
+            <td>${cmt.cmt_dt}</td>
+            <td>${cmt.cmt_str_tm}</td>
+            <td>${cmt.cmt_end_tm}</td>
             <td></td>
             <td></td>
-            <td></td>
+            <td>${cmt.cmt_msg}</td>
           </tr>
-          <tr>
-            <td>180722</td>
-            <td>08:30</td>
-            <td>18:30</td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>180723</td>
-            <td>08:30</td>
-            <td>18:30</td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>180724</td>
-            <td>08:30</td>
-            <td>18:30</td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
+        </c:forEach>
         </tbody>
           <tr>
             <td>합계</td>

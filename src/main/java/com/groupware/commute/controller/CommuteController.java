@@ -41,7 +41,7 @@ public class CommuteController {
 		System.out.println("list size = " + list.size());
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("stf_sq", session.getAttribute("stf_sq"));
-		mav.addObject("list", list);
+		mav.addObject("commuteList", list);
 		mav.setViewName("/commute/list");
 		
 		return mav;
@@ -64,7 +64,7 @@ public class CommuteController {
 	
 	
 	@RequestMapping(value="/punch.kitri", method=RequestMethod.POST)
-	public ModelAndView punch(HttpSession session, @RequestParam Map<String, String> map) {
+	public String punch(HttpSession session, @RequestParam Map<String, String> map) {
 		System.out.println("CommuteController  punch()");
 //TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST 
 		session.setAttribute("stf_sq", 5);
@@ -82,8 +82,9 @@ public class CommuteController {
 			commuteService.punchOut(commuteDto);
 		}
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/commute/list");
-		return mav;
+//		mav.setViewName("/commute/list");
+//		return mav;
+		return "redirect:list.kitri";
 	}
 	
 	@RequestMapping(value="/listdepart.kitri", method=RequestMethod.GET)
