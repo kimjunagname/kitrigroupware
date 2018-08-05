@@ -254,7 +254,7 @@ $("#searchBtn").click(function() {
 		return;
 	}else{
 		
-		$("#searchFrom").attr("method", "get").attr("action", "${root}/commute/list.kitri").submit();
+		$("#searchFrom").attr("method", "post").attr("action", "${root}/commute/list.kitri").submit();
 	}
 	
 	

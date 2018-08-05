@@ -46,9 +46,23 @@
 	        where stf_sq = #{stf_sq}
 	    ) a,
 	    (   
-	        select trunc(sysdate, 'MM')+level-1 dt
+   			<choose>
+   				<when test="startDate != null and startDate != ''">
+   				select trunc(to_date(#{startDate}), 'dd')+level-1 dt
+   				</when>
+	        	<otherwise>
+	        	select trunc(sysdate, 'MM')+level-1 dt
+	        	</otherwise>
+	        </choose>
 	        from dual
-	        connect by level &lt;= last_day(sysdate)-trunc(sysdate, 'MM')+1
+   			<choose>
+   				<when test="startDate != null and startDate != ''">
+   				connect by level &lt;= to_date(#{endDate})-trunc(to_date(#{startDate}), 'dd')+1
+   				</when>
+	        	<otherwise>
+	        	connect by level &lt;= last_day(sysdate)-trunc(sysdate, 'MM')+1
+	        	</otherwise>
+	        </choose>
 	    ) b
 	where a.days(+) = b.dt
 	order by b.dt

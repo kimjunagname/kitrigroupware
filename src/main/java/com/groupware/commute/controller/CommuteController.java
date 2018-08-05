@@ -49,14 +49,21 @@ public class CommuteController {
 	
 	@RequestMapping(value="/list.kitri", method=RequestMethod.POST)
 	public ModelAndView CommuteSearchList(HttpSession session, @RequestParam Map<String, String> map) {
-		//TEST
+//TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST 
 		session.setAttribute("stf_sq", "5");
-		
-		//TEST
+//					MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+//					map.put("stf_sq", memberDto.getStf_sq());
+		if(map.size() == 0) {
+			map.put("stf_sq", (String) session.getAttribute("stf_sq"));
+		}
+//TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST 
+//		startDate=2018-08-01&endDate=2018-08-31
+		List<CommuteDto> list = commuteService.getCommuteList(map);
 		System.out.println("CommuteController  CommuteSearchList()");
-		System.out.println(map.size());
+		System.out.println("list size = " + list.size());
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("stf_sq", map.get("stf_sq"));
+		mav.addObject("commuteList", list);
 		mav.setViewName("/commute/list");
 		
 		return mav;
