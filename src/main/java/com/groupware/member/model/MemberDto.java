@@ -3,7 +3,7 @@ package com.groupware.member.model;
 public class MemberDto {
 	private String stf_sq;/* 사원번호 */
 	private int admn_sq;  /* 권한번호 */
-	private int dpt_sq2;  /* 부서명구분번호 */
+	private int dpt_sq;  /* 부서명구분번호 */
 	private int pnk_sq; /* 직급구분번호 */
 	private String stf_nm; /* 이름 */
 	private String stf_pw;  /* 비밀번호 */
@@ -36,11 +36,11 @@ public class MemberDto {
 	public void setAdmn_sq(int admn_sq) {
 		this.admn_sq = admn_sq;
 	}
-	public int getDpt_sq2() {
-		return dpt_sq2;
+	public int getDpt_sq() {
+		return dpt_sq;
 	}
-	public void setDpt_sq2(int dpt_sq2) {
-		this.dpt_sq2 = dpt_sq2;
+	public void setDpt_sq(int dpt_sq) {
+		this.dpt_sq = dpt_sq;
 	}
 	public int getPnk_sq() {
 		return pnk_sq;

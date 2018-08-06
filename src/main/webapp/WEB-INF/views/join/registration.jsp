@@ -122,7 +122,7 @@ $(document).ready(function() {
   					<span>부서</span>
   				</div>
   				<div class="col-sm-8">
-  					<select class="form-control gg" name="dpt_sq2" id="dpt_sq2">
+  					<select class="form-control gg" name="dpt_sq" id="dpt_sq">
         				<option value="1">관리부</option>    
         				<option value="2">무역부</option>   				
         				<option value="3">영업부</option>   
