@@ -1,5 +1,6 @@
 package com.groupware.commute.service;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,8 +20,13 @@ public class CommuteServiceImpl implements CommuteService {
 //	근태목록
 	@Override
 	public List<CommuteDto> getCommuteList(Map<String, String> map) {
-		
 		return sqlSession.getMapper(CommuteDao.class).getCommuteList(map);
+	}
+	
+//	부서근태목록	
+	@Override
+	public List<LinkedHashMap<String, String>> getCommuteListDepartment(Map<String, String> map) {
+		return sqlSession.getMapper(CommuteDao.class).getCommuteListDepartment(map);
 	}
 
 //	출근

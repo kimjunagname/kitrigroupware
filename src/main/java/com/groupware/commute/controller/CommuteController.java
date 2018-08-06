@@ -1,6 +1,7 @@
 package com.groupware.commute.controller;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.groupware.commute.model.CommuteDto;
 import com.groupware.commute.service.CommuteService;
+import com.groupware.member.model.MemberDto;
 
 @Controller
 @RequestMapping("/commute")
@@ -29,9 +31,9 @@ public class CommuteController {
 
 		Map<String, String> map = new HashMap<String, String>();
 //TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST 
-		session.setAttribute("stf_sq", "5");
-//			MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-//			map.put("stf_sq", memberDto.getStf_sq());
+//		session.setAttribute("stf_sq", "5");
+		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+		map.put("stf_sq", memberDto.getStf_sq());
 		if(map.size() == 0) {
 			map.put("stf_sq", (String) session.getAttribute("stf_sq"));
 		}
@@ -50,9 +52,9 @@ public class CommuteController {
 	@RequestMapping(value="/list.kitri", method=RequestMethod.POST)
 	public ModelAndView CommuteSearchList(HttpSession session, @RequestParam Map<String, String> map) {
 //TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST 
-		session.setAttribute("stf_sq", "5");
-//					MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-//					map.put("stf_sq", memberDto.getStf_sq());
+//		session.setAttribute("stf_sq", "5");
+		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+		map.put("stf_sq", memberDto.getStf_sq());
 		if(map.size() == 0) {
 			map.put("stf_sq", (String) session.getAttribute("stf_sq"));
 		}
@@ -74,9 +76,10 @@ public class CommuteController {
 	public String punch(HttpSession session, @RequestParam Map<String, String> map) {
 		System.out.println("CommuteController  punch()");
 //TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST 
-		session.setAttribute("stf_sq", 5);
-//		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-		int stf_sq = (int) session.getAttribute("stf_sq");
+//		session.setAttribute("stf_sq", 5);
+		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+//		int stf_sq = (int) session.getAttribute("stf_sq");
+		int stf_sq = Integer.parseInt(memberDto.getStf_sq());
 		map.put("stf_sq", stf_sq + "");
 		
 		String check = map.get("punch");
@@ -95,9 +98,27 @@ public class CommuteController {
 	}
 	
 	@RequestMapping(value="/listdepart.kitri", method=RequestMethod.GET)
-	public ModelAndView CommuteListDepartment(Map<String, String> map) {
+	public ModelAndView CommuteListDepartment(HttpSession session) {
 		System.out.println("CommuteController  CommuteListDepartment()");
 		ModelAndView mav = new ModelAndView();
+		Map<String, String> map = new HashMap<String, String>();
+		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+		map.put("dpt_sq", memberDto.getDpt_sq() + "");
+		List<LinkedHashMap<String, String>> searchList = commuteService.getCommuteListDepartment(map);
+		System.out.println("searchList.size : "+searchList.size());
+		mav.addObject("commuteList", searchList);
+		mav.setViewName("/commute/list_department");
+		return mav;
+	}
+
+	@RequestMapping(value="/listdepart.kitri", method=RequestMethod.POST)
+	public ModelAndView CommuteSearchDepartment(HttpSession session, @RequestParam Map<String, String> map) {
+		System.out.println("CommuteController  CommuteSearchDepartment()");
+		ModelAndView mav = new ModelAndView();
+		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+		map.put("dpt_sq", memberDto.getDpt_sq() + "");
+		List<LinkedHashMap<String, String>> searchList = commuteService.getCommuteListDepartment(map);
+		mav.addObject("commuteList", searchList);
 		mav.setViewName("/commute/list_department");
 		return mav;
 	}
