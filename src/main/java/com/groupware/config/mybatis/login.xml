@@ -13,8 +13,8 @@
     </select>	
     
     <insert id="registerMember" parameterType="MemberDto">
-   	Insert into STF_TB (STF_SQ,ADMN_SQ,DPT_SQ2,RNK_SQ,STF_NM,STF_PW,STF_PH1,STF_PH2,STF_PH3,STF_ZIP_ADD,STF_CM_ADD,STF_DT_ADD,STF_BS_PH1,STF_BS_PH2,STF_BS_PH3,STF_EML1,STF_EML2,STF_ENT,STF_REG,STF_MOD,STF_PT_RT,STF_PT_NM) 
-	values (STF_TB_STF_SQ.nextval,1,${dpt_sq2},5,'${stf_nm}','${stf_pw}','${stf_ph1}','${stf_ph2}','${stf_ph3}','${stf_zip_add}','${stf_cm_add}','${stf_dt_add}',null,null,null,'${stf_eml1}','${stf_eml2}',sysdate,sysdate,sysdate,null,null)
+   	Insert into STF_TB (STF_SQ,ADMN_SQ,DPT_SQ,RNK_SQ,STF_NM,STF_PW,STF_PH1,STF_PH2,STF_PH3,STF_ZIP_ADD,STF_CM_ADD,STF_DT_ADD,STF_BS_PH1,STF_BS_PH2,STF_BS_PH3,STF_EML1,STF_EML2,STF_ENT,STF_REG,STF_MOD,STF_PT_RT,STF_PT_NM) 
+	values (STF_TB_STF_SQ.nextval,1,${dpt_sq},5,'${stf_nm}','${stf_pw}','${stf_ph1}','${stf_ph2}','${stf_ph3}','${stf_zip_add}','${stf_cm_add}','${stf_dt_add}',null,null,null,'${stf_eml1}','${stf_eml2}',sysdate,sysdate,sysdate,null,null)
     </insert>
 	
 </mapper>
