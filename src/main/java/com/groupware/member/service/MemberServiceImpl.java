@@ -26,7 +26,21 @@ public class MemberServiceImpl implements MemberService {
 	public int registerMember(MemberDto dto) {		
 		return sqlSession.getMapper(MemberDao.class).registerMember(dto);
 	}
-	
-	
 
+	@Override
+	public MemberDto findId(Map<String, String> map) {		
+		return sqlSession.getMapper(MemberDao.class).findId(map);
+	}
+
+	@Override
+	public int emlCheck(Map<String, String> map) {		
+		return sqlSession.getMapper(MemberDao.class).emlCheck(map);
+	}
+
+	@Override
+	public MemberDto findPw(Map<String, String> map) {
+		return sqlSession.getMapper(MemberDao.class).findPw(map);
+	}
+
+	
 }

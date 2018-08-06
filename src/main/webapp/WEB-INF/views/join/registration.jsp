@@ -24,7 +24,35 @@ $(document).ready(function() {
 			$("form[name='registerform']").attr("method","POST").attr("action","${root}/member/register.kitri").submit();
 		}
 		
-	})	
+	})		
+	
+	$('#stf_eml1').keyup(function() {
+		var stf_eml1= $('#stf_eml1').val();
+		var stf_eml2= $('#stf_eml2').val();
+		
+		$.ajax({
+			type : "GET",
+			url : "${root}/member/emlckeck.kitri",
+			dataType : "json",
+			data : {"stf_eml1": stf_eml1, "stf_eml2": stf_eml2},
+			success : function(data){
+			cnt= parseInt(data.emlcount);					
+					
+			if(cnt== 0){
+				$('#emailresult').css("color", "blue");
+				$('#emailresult').text(stf_eml1 +"@" + stf_eml2 + "는 사용가능합니다");
+				} else {
+					$('#emailresult').css("color", "red");
+					$('#emailresult').text(stf_eml1 +"@" + stf_eml2 + "는 사용중입니다");
+				} 
+			},
+			error : function(e){
+					
+			}
+		});
+		
+	});
+	
 })
 
 </script>
@@ -33,7 +61,7 @@ $(document).ready(function() {
 <div class="reg-w3 ns">
 <div class="w3layouts-main" style="width: 50%;">
 	<h2 class="jg">회원가입</h2>
-		<form name="registerform" method="post" action="">	
+		<form name="registerform" method="post" action="" enctype="multipart/form-data">	
 			
 			<hr>
 			
@@ -94,9 +122,7 @@ $(document).ready(function() {
   						<p class="zip ns" onclick= "sample6_execDaumPostcode()" style="float: left; background-color: #56aebf; color: white; padding: 5px; margin-top: 5px;" >
   						&emsp;검색 &emsp;</p><br>						
 						<input type="text" class="form-control gg" id="sample6_address" name="stf_cm_add" placeholder="주소"  >
-						<input type="text" class="form-control gg" id="sample6_address2" name="stf_dt_add" placeholder="상세주소">
-  												
-  						
+						<input type="text" class="form-control gg" id="sample6_address2" name="stf_dt_add" placeholder="상세주소">							
   					</span> 
   				</div>  				
 			</div>			
@@ -108,12 +134,8 @@ $(document).ready(function() {
   				<div class="col-sm-8">
   					<input type="text" class="form-control gg" placeholder="이메일"  style="float: left; width: 45%;" name="stf_eml1" id="stf_eml1">
   					<span style="float: left;">&nbsp;@&nbsp;</span>
-  					<select class="form-control gg" style="float: left; width: 45%;" name="stf_eml2" id="stf_eml2">  				
-        				<option>naver.com</option>    
-        				<option>gmail.com</option>   				
-        				<option>nate.com</option>   
-        				
-      				</select>
+  					<input type="text" class="form-control gg" value="gmail.com"  style="float: left; width: 45%;" name="stf_eml2" id="stf_eml2" readonly="readonly">  									
+      				<div id= "emailresult" style="clear: left;">사용 중인 이메일은 이용하실 수 없습니다</div>
   				</div>
   			</div>		
   				
@@ -122,7 +144,7 @@ $(document).ready(function() {
   					<span>부서</span>
   				</div>
   				<div class="col-sm-8">
-  					<select class="form-control gg" name="dpt_sq" id="dpt_sq">
+  					<select class="form-control gg" name="dpt_sq2" id="dpt_sq2">
         				<option value="1">관리부</option>    
         				<option value="2">무역부</option>   				
         				<option value="3">영업부</option>   
@@ -175,7 +197,7 @@ $(document).ready(function() {
   					<span>프로필 사진</span>  					
   				</div>
   				<div class="col-sm-8">
-  					<input type="file" name="stf_pt_nm" id="stf_pt_nm"/>
+  					<input type="file" name="picture" id="picture"/>
   				</div>  				
 			</div>
 			

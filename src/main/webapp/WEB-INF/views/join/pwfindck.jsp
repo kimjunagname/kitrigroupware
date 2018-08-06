@@ -2,7 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
-
+<script type="text/javascript">
+$(document).ready(function() {
+		
+	$("#back").click(function name() {
+		$(location).attr("href", "${root}/member/login.kitri");
+	});	
+	
+})
+</script>
 </head>
 <body>
 <div class="reg-w3">
@@ -21,7 +29,7 @@
 			<hr>
 			
 				<div class="clearfix"></div>
-				<input type="button" value="로그인 페이지로 이동" onclick="location.href='login.html'">
+				<input type="button" value="로그인 페이지로 이동" id="back">
 		</form>
 		
 </div>

@@ -118,12 +118,20 @@
        <put-attribute name="body" value="/WEB-INF/views/login/idfind.jsp" />
  	 </definition> 
  	 
+ 	 <definition name="/login/idfindck" extends="login">       
+       <put-attribute name="body" value="/WEB-INF/views/login/idfindck.jsp" />
+ 	 </definition> 
+ 	 
  	 <definition name="/join/registration" extends="login">       
        <put-attribute name="body" value="/WEB-INF/views/join/registration.jsp" />
  	 </definition> 
  	 
  	 <definition name="/join/pwfind" extends="login">       
        <put-attribute name="body" value="/WEB-INF/views/join/pwfind.jsp" />
+ 	 </definition> 
+ 	 
+ 	 <definition name="/join/pwfindck" extends="login">       
+       <put-attribute name="body" value="/WEB-INF/views/join/pwfindck.jsp" />
  	 </definition> 
  	 
  	 <definition name="/login/loginfail" extends="login">       
@@ -133,6 +141,7 @@
  	 <definition name="/join/registrationok" extends="login">       
        <put-attribute name="body" value="/WEB-INF/views/join/registrationok.jsp" />
  	 </definition>   
+ 
  
   <!-- 나영 -->
     <definition name="/schedule/test" extends="schedule">

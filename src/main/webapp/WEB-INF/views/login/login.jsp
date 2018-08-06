@@ -2,23 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
-<%
-
-Cookie cookie[] = request.getCookies();
-String stf_sq = "";
-String ck = "";
-if(cookie != null) {
-	int len = cookie.length;
-	for(int i=0; i<len; i++) {
-		if("loginid".equals(cookie[i].getName())){
-			stf_sq = cookie[i].getValue();
-			ck = "checked='checked'";
-			break;
-		}
-	}
-}
-%>   
-
 <script type="text/javascript">
 $(document).ready(function() {
 	
@@ -57,11 +40,9 @@ $(document).ready(function() {
 	<br> 
 	
 		<form name="loginform" method="post" action="">					
-			<input id="stf_sq" type="text" class="form-control ggg" name="stf_sq" placeholder="ID" value="<%= stf_sq%>">
-			<input id="stf_pw" type="password" class="form-control ggg" name="stf_pw" placeholder="PASSWORD">
-			<span><input type="checkbox" name="idsave" <%=ck %> value="saveok"> 아이디 저장</span>
-			<h6><label id="idfind">아이디</label> 또는 <br>
-			<label id="pwfind">비밀번호</label> 찾기</h6>
+			<input id="stf_sq" type="text" class="form-control ggg" name="stf_sq" placeholder="ID">
+			<input id="stf_pw" type="password" class="form-control ggg" name="stf_pw" placeholder="PASSWORD">			
+			<span style="float: right; margin-top: 5px;"><label id="idfind">아이디</label> 또는 <label id="pwfind">비밀번호</label> 찾기</span>
 				<div class="clearfix"></div>
 				<input type="button" value="LOGIN" id="loginBtn">
 		</form>

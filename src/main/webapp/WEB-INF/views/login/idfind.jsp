@@ -6,9 +6,13 @@
 <script type="text/javascript">
 $(document).ready(function() {
 		
-	$("#back").click(function name() {
+	$("#back").click(function() {
 		$(location).attr("href", "${root}/member/login.kitri");
 	});	
+	
+	$("#idfind").click(function() {
+		$("form[name='idfindform']").attr("method","POST").attr("action","${root}/member/idfind.kitri").submit();
+	});
 	
 })
 
@@ -18,32 +22,25 @@ $(document).ready(function() {
 <div class="reg-w3">
 <div class="w3layouts-main" style="width: 50%;">
 	<h2 class="jg">아이디 찾기</h2>
-		<form action="#" method="post" class="ns">
+		<form name="idfindform" method="post" action="">	
 			
-			<hr>
-			
-			<div class="row">
-  				<div class="col-sm-4">
-  					<span>이름</span>
-  				</div>
-  				<div class="col-sm-8">
-  					<input type="text" class="form-control gg" placeholder="이름">
-  				</div>
-  			</div>
+			<hr>			
   			
   			<div class="row">
   				<div class="col-sm-4">
   					<span>이메일</span>
   				</div>
   				<div class="col-sm-8">
-  					<input type="text" class="form-control gg" placeholder="이메일 주소 전체를 입력해주세요">
+  					<input type="text" class="form-control gg" placeholder="이메일"  style="float: left; width: 45%;" name="stf_eml1" id="stf_eml1">
+  					<span style="float: left;">&nbsp;@&nbsp;</span>
+  					<input type="text" class="form-control gg" value="gmail.com"  style="float: left; width: 45%;" name="stf_eml2" id="stf_eml2" readonly="readonly"> 
   				</div>
   			</div> 			
   					
 			<hr>
 			
 				<div class="clearfix"></div>
-				<input type="button" value="아이디 찾기" onclick="location.href='idfindck.html'">
+				<input type="button" value="아이디 찾기" id="idfind">
 		</form>
 		<center><label class="ns" id="back">이전 페이지로 돌아가기</label></center>
 </div>

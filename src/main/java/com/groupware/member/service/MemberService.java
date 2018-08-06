@@ -11,4 +11,9 @@ public interface MemberService {
 	
 	public int registerMember(MemberDto dto);
 	
+	public MemberDto findId(Map<String, String> map);
+	
+	public MemberDto findPw(Map<String, String> map);	
+	public int emlCheck(Map<String, String> map);
+	
 }

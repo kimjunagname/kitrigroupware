@@ -24,7 +24,7 @@ $(document).ready(function() {
 			<div class="row">
   				<p class="ns">
   				회원가입을 축하드립니다!<br>
-  				가입되신 아이디는 <span style="color: red">${userinfo.stf_sq}</span>입니다.
+  				가입되신 아이디는 <span style="color: red">${findId.stf_sq}</span>입니다.
   				</p>
   			</div> 			
   					

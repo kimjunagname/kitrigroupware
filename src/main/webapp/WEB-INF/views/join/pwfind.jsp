@@ -10,6 +10,9 @@ $(document).ready(function() {
 		$(location).attr("href", "${root}/member/login.kitri");
 	});	
 	
+	$("#pwfind").click(function() {
+		$("form[name='pwfindform']").attr("method","POST").attr("action","${root}/member/pwfind.kitri").submit();
+	});
 })
 
 </script>
@@ -18,25 +21,16 @@ $(document).ready(function() {
 <div class="reg-w3">
 <div class="w3layouts-main" style="width: 50%;">
 	<h2 class="jg">비밀번호 찾기</h2>
-		<form action="#" method="post" class="ns">
+		<form name="pwfindform" method="post" action="">	
 			
-			<hr>
+			<hr>			
 			
-			<div class="row">
-  				<div class="col-sm-4">
-  					<span>이름</span>
-  				</div>
-  				<div class="col-sm-8">
-  					<input type="text" class="form-control gg" placeholder="이름">
-  				</div>
-  			</div>
-  			
   			<div class="row">
   				<div class="col-sm-4">
   					<span>아이디</span>
   				</div>
   				<div class="col-sm-8">
-  					<input type="text" class="form-control gg" placeholder="아이디">
+  					<input type="text" class="form-control gg" placeholder="아이디" name="stf_sq" id="stf_sq">
   				</div>
   			</div>
   			
@@ -45,14 +39,16 @@ $(document).ready(function() {
   					<span>이메일</span>
   				</div>
   				<div class="col-sm-8">
-  					<input type="text" class="form-control gg" placeholder="이메일 주소 전체를 입력해주세요">
+  					<input type="text" class="form-control gg" placeholder="이메일"  style="float: left; width: 45%;" name="stf_eml1" id="stf_eml1">
+  					<span style="float: left;">&nbsp;@&nbsp;</span>
+  					<input type="text" class="form-control gg" value="gmail.com"  style="float: left; width: 45%;" name="stf_eml2" id="stf_eml2" readonly="readonly"> 
   				</div>
   			</div> 			
   					
 			<hr>
 			
 				<div class="clearfix"></div>
-				<input type="button" value="비밀번호 찾기" name="register" onclick="location.href='pwfindck.html'">
+				<input type="button" value="비밀번호 찾기" id="pwfind">
 		</form>
 		<center><label class="ns" id="back">이전 페이지로 돌아가기</label></center>
 </div>

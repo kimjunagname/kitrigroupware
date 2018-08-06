@@ -36,6 +36,7 @@ public class MemberDto {
 	public void setAdmn_sq(int admn_sq) {
 		this.admn_sq = admn_sq;
 	}
+	
 	public int getDpt_sq() {
 		return dpt_sq;
 	}
