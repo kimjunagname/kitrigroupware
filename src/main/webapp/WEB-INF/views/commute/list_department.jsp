@@ -72,14 +72,12 @@
         <tbody>
           <c:forEach var="map" items="${commuteList}">
           <tr>
-          <c:forEach var="cmt" items="${map}">
-          	<td class="NM"><c:if test="${cmt.key == 'STF_NM'}">${cmt.value}</c:if></td>
-          	<td class="STR"><c:if test="${cmt.key == 'CMT_STR_TM'}">${cmt.value}</c:if></td>
-          	<td class="END"><c:if test="${cmt.key == 'CMT_END_TM'}">${cmt.value}</c:if></td>
+          	<td class="NM">${map.STF_NM}</td>
+          	<td class="STR">${map.CMT_STR_TM}</td>
+          	<td class="END">${map.CMT_END_TM}</td>
 			<td></td>
 			<td></td>
-          	<td class="MSG"><c:if test="${cmt.key == 'CMT_MSG'}">${cmt.value}</c:if></td>
-          </c:forEach>
+          	<td class="MSG">${map.CMT_MSG}</td>
           </tr>
           </c:forEach>
         </tbody>
