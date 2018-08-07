@@ -55,7 +55,10 @@ public class MemberController {
 		MemberDto dto = memberService.login(map);				
 		if(dto != null) {
 			session.setAttribute("userinfo", dto);
-			return "/approval/list";
+			
+//			return "/approval/list";
+			//리다이렉트를 통해서 /approval/list.kitri 이동
+			return "redirect:/approval/list.kitri";
 		} else 
 			return "/login/loginfail";
 		

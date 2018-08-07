@@ -6,8 +6,9 @@
 
 	<tiles-definitions>
 	<definition name="base-definition" template="/WEB-INF/views/commons/template/template.jsp">
-		<put-attribute name="header" value="/WEB-INF/views/commons/template/header.jsp"/>
 		<put-attribute name="public" value="/WEB-INF/views/commons/public.jsp"/>
+		<put-attribute name="public2" value="/WEB-INF/views/commons/public2.jsp"/>
+		<put-attribute name="header" value="/WEB-INF/views/commons/template/header.jsp"/>
 	    <put-attribute name="sidemenu" value="/WEB-INF/views/commons/template/sidemenu.jsp"/> 
 		<put-attribute name="body" value=""/>
 		<put-attribute name="footer" value="/WEB-INF/views/commons/template/footer.jsp"/>

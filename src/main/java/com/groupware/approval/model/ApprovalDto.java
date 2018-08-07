@@ -4,7 +4,7 @@ public class ApprovalDto {
 
 	private int apv_sq;  /* 결재번호 */
 	private int div_apv_sq;  /* 결재구분번호 */
-	private String stf_sq_sq;/* 사원번호 */
+	private String stf_sq;/* 사원번호 */
 	private String stf_mid_sq;  /* 중간승인자 */
 	private String stf_fnl_sq; /* 최종승인자 */
 	private String apv_ok_sq; /* 결재승인번호 */
@@ -24,11 +24,11 @@ public class ApprovalDto {
 	public void setDiv_apv_sq(int div_apv_sq) {
 		this.div_apv_sq = div_apv_sq;
 	}
-	public String getStf_sq_sq() {
-		return stf_sq_sq;
+	public String getStf_sq() {
+		return stf_sq;
 	}
-	public void setStf_sq_sq(String stf_sq_sq) {
-		this.stf_sq_sq = stf_sq_sq;
+	public void setStf_sq(String stf_sq) {
+		this.stf_sq = stf_sq;
 	}
 	public String getStf_mid_sq() {
 		return stf_mid_sq;

@@ -9,41 +9,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <!-- 각종 스크립트 및 CSS -->
-<script type="text/javascript">
-
-</script>
+		<tiles:insertAttribute name="public" />
 </head>
 <body>
-	<br>
-	<br>
-	<br>
 	<!-- Body
 		================================================== 
 	-->
-	<div id="header">
+
 		<tiles:insertAttribute name="header" />
-	</div>
-	<div id="public">
-		<tiles:insertAttribute name="public" />
-	</div>
-	 
-	<div id="sidemenu">
+
 		<tiles:insertAttribute name="sidemenu" />
-	</div>	
-	 
-	<div id="body">
+
 	<!-- TEMPLATE BODY TEMPLATE BODY TEMPLATE BODY TEMPLATE BODY TEMPLATE BODY TEMPLATE BODY -->
 		<tiles:insertAttribute name="body" />
 	<!-- TEMPLATE BODY TEMPLATE BODY TEMPLATE BODY TEMPLATE BODY TEMPLATE BODY TEMPLATE BODY -->
-	</div>
-	<div id="footer">
+
 		<tiles:insertAttribute name="footer" />
-	</div>
+		
+		</section>
+		<!--main content end-->
+			</section>
+		<tiles:insertAttribute name="public2" />
 	<!-- Body
 		================================================== 
 	-->
 </body>
-
 </html>

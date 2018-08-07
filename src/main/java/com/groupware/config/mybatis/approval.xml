@@ -3,8 +3,52 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.groupware.approval.dao.ApprovalDao">
+	<mapper namespace="com.groupware.approval.dao.ApprovalDao">
+	
+	<select id="gListApproval" parameterType="map" resultType="map">
+	select DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
+	       APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
+	       APV_TB.APV_NO, APV_TB.APV_CR_DATE
+	from APV_TB, DIV_APV_TB
+	where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+	and APV_TB.STF_SQ = #{stf_sq}
+	and APV_TB.DIV_APV_SQ = '1'
+	and rownum &lt;= '3'
+	</select>
+	
+	<select id="cListApproval" parameterType="map" resultType="map">
+	select  DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
+	        APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
+	        APV_TB.APV_NO, APV_TB.APV_CR_DATE
+	from APV_TB, DIV_APV_TB
+	where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+	and APV_TB.STF_SQ = #{stf_sq}
+	and APV_TB.DIV_APV_SQ = '2'
+	and rownum &lt;= '3'
+	</select>
+
+	<select id="mListApproval" parameterType="map" resultType="map">
+	select  DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
+	        APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
+	        APV_TB.APV_NO, APV_TB.APV_CR_DATE
+	from APV_TB, DIV_APV_TB
+	where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+	and APV_TB.STF_SQ = #{stf_sq}
+	and APV_TB.DIV_APV_SQ = '3'
+	and rownum &lt;= '3'
+	</select>
+
+	<select id="eListApproval" parameterType="map" resultType="map">
+	select  DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
+	        APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
+	        APV_TB.APV_NO, APV_TB.APV_CR_DATE
+	from APV_TB, DIV_APV_TB
+	where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+	and APV_TB.STF_SQ = #{stf_sq}
+	and APV_TB.DIV_APV_SQ = '4'
+	and rownum &lt;= '3'
+	</select>
 
 
-</mapper>
+	</mapper>
   
