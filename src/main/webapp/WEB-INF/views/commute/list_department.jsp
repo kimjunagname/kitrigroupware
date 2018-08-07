@@ -99,7 +99,12 @@
 
 <script>
 $(document).ready(function(){
-	setDate();
+	var searchDate = "${searchDate}";
+	if(searchDate != ""){
+		$("#searchDate").val(searchDate);
+	}else{
+		setDate();
+	}
 });
 
 $("#searchBtn").click(function() {

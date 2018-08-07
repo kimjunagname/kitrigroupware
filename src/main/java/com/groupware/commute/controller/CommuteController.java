@@ -28,11 +28,14 @@ public class CommuteController {
 	@RequestMapping(value="/list.kitri", method=RequestMethod.GET)
 	public ModelAndView CommuteList(HttpSession session) {
 		System.out.println("CommuteController  CommuteList()");
+		ModelAndView mav = new ModelAndView();
+		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+		if(memberDto == null) {
+			mav.setViewName("redirect:/");
+			return mav;
+		}
 
 		Map<String, String> map = new HashMap<String, String>();
-//TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST 
-//		session.setAttribute("stf_sq", "5");
-		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 		map.put("stf_sq", memberDto.getStf_sq());
 		if(map.size() == 0) {
 			map.put("stf_sq", (String) session.getAttribute("stf_sq"));
@@ -41,7 +44,6 @@ public class CommuteController {
 		
 		List<CommuteDto> list = commuteService.getCommuteList(map);
 		System.out.println("list size = " + list.size());
-		ModelAndView mav = new ModelAndView();
 		mav.addObject("stf_sq", session.getAttribute("stf_sq"));
 		mav.addObject("commuteList", list);
 		mav.setViewName("/commute/list");
@@ -51,19 +53,24 @@ public class CommuteController {
 	
 	@RequestMapping(value="/list.kitri", method=RequestMethod.POST)
 	public ModelAndView CommuteSearchList(HttpSession session, @RequestParam Map<String, String> map) {
+		System.out.println("CommuteController  CommuteSearchList()");
+		ModelAndView mav = new ModelAndView();
+		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+		if(memberDto == null) {
+			mav.setViewName("redirect:/");
+			return mav;
+		}
 //TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST 
 //		session.setAttribute("stf_sq", "5");
-		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 		map.put("stf_sq", memberDto.getStf_sq());
+		
 		if(map.size() == 0) {
 			map.put("stf_sq", (String) session.getAttribute("stf_sq"));
 		}
 //TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST 
 //		startDate=2018-08-01&endDate=2018-08-31
 		List<CommuteDto> list = commuteService.getCommuteList(map);
-		System.out.println("CommuteController  CommuteSearchList()");
 		System.out.println("list size = " + list.size());
-		ModelAndView mav = new ModelAndView();
 		mav.addObject("stf_sq", map.get("stf_sq"));
 		mav.addObject("commuteList", list);
 		mav.setViewName("/commute/list");
@@ -75,9 +82,13 @@ public class CommuteController {
 	@RequestMapping(value="/punch.kitri", method=RequestMethod.POST)
 	public String punch(HttpSession session, @RequestParam Map<String, String> map) {
 		System.out.println("CommuteController  punch()");
+		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+		if(memberDto == null) {
+			return "redirect:/";
+		}
 //TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST 
 //		session.setAttribute("stf_sq", 5);
-		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+
 //		int stf_sq = (int) session.getAttribute("stf_sq");
 		int stf_sq = Integer.parseInt(memberDto.getStf_sq());
 		map.put("stf_sq", stf_sq + "");
@@ -101,8 +112,12 @@ public class CommuteController {
 	public ModelAndView CommuteListDepartment(HttpSession session) {
 		System.out.println("CommuteController  CommuteListDepartment()");
 		ModelAndView mav = new ModelAndView();
-		Map<String, String> map = new HashMap<String, String>();
 		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+		if(memberDto == null) {
+			mav.setViewName("redirect:/");
+			return mav;
+		}
+		Map<String, String> map = new HashMap<String, String>();
 		map.put("dpt_sq", memberDto.getDpt_sq() + "");
 		List<LinkedHashMap<String, String>> searchList = commuteService.getCommuteListDepartment(map);
 		System.out.println("searchList.size : "+searchList.size());
@@ -114,11 +129,17 @@ public class CommuteController {
 	@RequestMapping(value="/listdepart.kitri", method=RequestMethod.POST)
 	public ModelAndView CommuteSearchDepartment(HttpSession session, @RequestParam Map<String, String> map) {
 		System.out.println("CommuteController  CommuteSearchDepartment()");
+		System.out.println("searchDate : "+map.get("searchDate"));
 		ModelAndView mav = new ModelAndView();
 		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+		if(memberDto == null) {
+			mav.setViewName("redirect:/");
+			return mav;
+		}
 		map.put("dpt_sq", memberDto.getDpt_sq() + "");
 		List<LinkedHashMap<String, String>> searchList = commuteService.getCommuteListDepartment(map);
 		mav.addObject("commuteList", searchList);
+		mav.addObject("searchDate", map.get("searchDate"));
 		mav.setViewName("/commute/list_department");
 		return mav;
 	}

@@ -82,7 +82,7 @@
 	where c.stf_sq = sub.stf_sq
 	<choose>
 		<when test="searchDate != null and searchDate != ''">
-		and trunc(c.cmt_str_tm, 'dd') = trunc(#{searchDate} 'dd')
+		and trunc(c.cmt_str_tm, 'dd') = trunc(to_date(#{searchDate}), 'dd')
 		</when>
 		<otherwise>
 		and trunc(c.cmt_str_tm, 'dd') = trunc(sysdate, 'dd')
