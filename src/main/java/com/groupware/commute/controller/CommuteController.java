@@ -129,7 +129,6 @@ public class CommuteController {
 	@RequestMapping(value="/listdepart.kitri", method=RequestMethod.POST)
 	public ModelAndView CommuteSearchDepartment(HttpSession session, @RequestParam Map<String, String> map) {
 		System.out.println("CommuteController  CommuteSearchDepartment()");
-		System.out.println("searchDate : "+map.get("searchDate"));
 		ModelAndView mav = new ModelAndView();
 		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 		if(memberDto == null) {

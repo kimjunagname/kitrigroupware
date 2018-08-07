@@ -69,25 +69,34 @@
 	</select>
 	  
 	<select id="getCommuteListDepartment" parameterType="map" resultType="map">
-	select sub.stf_nm, c.cmt_str_tm, c.cmt_end_tm, c.cmt_msg
-	from 
-		cmt_tb c,
-	    (
-		    select s.stf_sq, s.stf_nm, r.rnk_nm, d.dpt_nm
-		    from stf_tb s, dpt_div_tb d, rnk_tb r
-		    where s.dpt_sq = d.dpt_sq
-		    and s.dpt_sq = #{dpt_sq}
-		    and s.rnk_sq = r.rnk_sq
-	    )sub
-	where c.stf_sq = sub.stf_sq
-	<choose>
-		<when test="searchDate != null and searchDate != ''">
-		and trunc(c.cmt_str_tm, 'dd') = trunc(to_date(#{searchDate}), 'dd')
-		</when>
-		<otherwise>
-		and trunc(c.cmt_str_tm, 'dd') = trunc(sysdate, 'dd')
-		</otherwise>
-	</choose>
+	select stf_nm, cmt_str_tm, cmt_end_tm, cmt_msg
+	from
+		(
+		select sub.stf_nm, c.cmt_str_tm, c.cmt_end_tm, c.cmt_msg, to_char(c.cmt_str_tm, 'yy/mm/dd') dd
+		from 
+			cmt_tb c,
+		    (
+			    select s.stf_sq, s.stf_nm, r.rnk_nm, d.dpt_nm
+			    from stf_tb s, dpt_div_tb d, rnk_tb r
+			    where s.dpt_sq = d.dpt_sq
+			    and s.dpt_sq = #{dpt_sq}
+			    and s.rnk_sq = r.rnk_sq
+		    )sub
+		where c.stf_sq(+) = sub.stf_sq
+		)l,
+		(
+		<choose>
+			<when test="searchDate != null and searchDate != ''">
+				select to_char(to_date(#{searchDate}), 'yy/mm/dd') dd
+			</when>
+			<otherwise>
+				select to_char(sysdate, 'yy/mm/dd') dd
+			</otherwise>
+		</choose>
+			from dual
+		)r
+	where l.dd = r.dd
+	or l.dd is null
 	</select>
 </mapper>
   
