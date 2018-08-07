@@ -18,7 +18,7 @@
     </div>
     <div class="row w3-res-tb">
       <div class="col-sm-7 m-b-xs">
-     	[인사총무팀]
+     	[${commuteList[0].DPT_NM}]
      	<form id="searchForm">
 		<input type="date" class="input-sm form-control w-sm inline v-middle" name="searchDate" id="searchDate" value="" required>
 		<!-- 
@@ -72,7 +72,7 @@
         <tbody>
           <c:forEach var="map" items="${commuteList}">
           <tr>
-          	<td class="NM">${map.STF_NM}</td>
+          	<td class="NM">${map.STF_NM} [${map.RNK_NM}]</td>
           	<td class="STR">${map.CMT_STR_TM}</td>
           	<td class="END">${map.CMT_END_TM}</td>
 			<td></td>

@@ -69,18 +69,18 @@
 	</select>
 	  
 	<select id="getCommuteListDepartment" parameterType="map" resultType="map">
-	select stf_nm, cmt_str_tm, cmt_end_tm, cmt_msg
+	select stf_nm, cmt_str_tm, cmt_end_tm, cmt_msg, rnk_sq, rnk_nm, dpt_nm
 	from
 		(
-		select sub.stf_nm, c.cmt_str_tm, c.cmt_end_tm, c.cmt_msg, to_char(c.cmt_str_tm, 'yy/mm/dd') dd
+		select sub.stf_nm, c.cmt_str_tm, c.cmt_end_tm, c.cmt_msg, sub.rnk_sq, sub.rnk_nm, sub.dpt_nm, to_char(c.cmt_str_tm, 'yy/mm/dd') dd
 		from 
 			cmt_tb c,
 		    (
-			    select s.stf_sq, s.stf_nm, r.rnk_nm, d.dpt_nm
-			    from stf_tb s, dpt_div_tb d, rnk_tb r
+			    select s.stf_sq, s.stf_nm, rnk.rnk_sq, rnk.rnk_nm, d.dpt_nm
+			    from stf_tb s, dpt_div_tb d, rnk_tb rnk
 			    where s.dpt_sq = d.dpt_sq
 			    and s.dpt_sq = #{dpt_sq}
-			    and s.rnk_sq = r.rnk_sq
+			    and s.rnk_sq = rnk.rnk_sq
 		    )sub
 		where c.stf_sq(+) = sub.stf_sq
 		)l,
@@ -97,6 +97,7 @@
 		)r
 	where l.dd = r.dd
 	or l.dd is null
+	order by rnk_sq desc
 	</select>
 </mapper>
   
