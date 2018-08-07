@@ -243,8 +243,8 @@ ul.sidebar-menu li a.active i {
                         <span>근태관리</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="${root}/commute/list.kitri">Commute</a></li>
-                        <li><a href="${root}/commute/listdepart.kitri">Department</a></li>
+                        <li><a href="${root}/commute/list.kitri">개인출근조회</a></li>
+                        <li><a href="${root}/commute/listdepart.kitri">부서출근조회</a></li>
                     </ul>
                 </li>
                 
