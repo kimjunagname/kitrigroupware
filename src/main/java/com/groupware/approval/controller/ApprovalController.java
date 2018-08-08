@@ -37,15 +37,25 @@ public class ApprovalController {
 		}
 		
 		List <ApprovalDto> gListApproval = approvalService.gListApproval(map);
-		List <ApprovalDto> cListApproval = approvalService.cListApproval(map);
 		List <ApprovalDto> eListApproval = approvalService.eListApproval(map);
 		List <ApprovalDto> mListApproval = approvalService.mListApproval(map);
+		List <ApprovalDto> cListApproval = approvalService.cListApproval(map);
 		
 		List <ApprovalDto> gListCountApproval = approvalService.gListCountApproval(map);
 		List <ApprovalDto> cListCountApproval = approvalService.cListCountApproval(map);
 		List <ApprovalDto> mListCountApproval = approvalService.mListCountApproval(map);
 		List <ApprovalDto> eListCountApproval = approvalService.eListCountApproval(map);
 		
+		
+		List <ApprovalDto> gProgress = approvalService.gProgress(map);
+		List <ApprovalDto> cProgress = approvalService.cProgress(map);
+		List <ApprovalDto> mProgress = approvalService.mProgress(map);
+		List <ApprovalDto> eProgress = approvalService.eProgress(map);
+		
+		List <ApprovalDto> gEndApproval = approvalService.gEndApproval(map);
+		List <ApprovalDto> cEndApproval = approvalService.cEndApproval(map);
+		List <ApprovalDto> mEndApproval = approvalService.mEndApproval(map);
+		List <ApprovalDto> eEndApproval = approvalService.eEndApproval(map);		
 		
 		mav.addObject("stf_sq", session.getAttribute("stf_sq"));
 		mav.addObject("gListCountApproval", gListCountApproval);
@@ -58,15 +68,30 @@ public class ApprovalController {
 		mav.addObject("eListApproval", eListApproval);
 		mav.addObject("mListApproval", mListApproval);	
 		
+		mav.addObject("gProgress", gProgress);
+		mav.addObject("cProgress", cProgress);
+		mav.addObject("mProgress", mProgress);
+		mav.addObject("eProgress", eProgress);			
+		
+		mav.addObject("gEndApproval", gEndApproval);
+		mav.addObject("cEndApproval", cEndApproval);
+		mav.addObject("mEndApproval", mEndApproval);
+		mav.addObject("eEndApproval", eEndApproval);		
+		
 		System.out.println("gListCountApproval" + gListCountApproval);
 		System.out.println("cListCountApproval" + cListCountApproval);
 		System.out.println("mListCountApproval" + mListCountApproval);
 		System.out.println("eListCountApproval" + eListCountApproval);
 		
-		System.out.println("gListApproval" + gListApproval);
-		System.out.println("cListApproval" + cListApproval);
-		System.out.println("eListApproval" + eListApproval);
-		System.out.println("mListApproval" + mListApproval);
+		System.out.println("gProgress" + gProgress);
+		System.out.println("cProgress" + cProgress);
+		System.out.println("mProgress" + mProgress);
+		System.out.println("eProgress" + eProgress);
+		
+		System.out.println("gEndApproval" + gEndApproval);
+		System.out.println("cEndApproval" + cEndApproval);
+		System.out.println("mEndApproval" + mEndApproval);
+		System.out.println("eEndApproval" + eEndApproval);
 		
 
 	    mav.setViewName("/approval/list"); // /webapp/pds5/list.jsp

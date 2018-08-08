@@ -41,9 +41,12 @@ public class ApprovalServiceImpl implements ApprovalService {
 	//기타공문
 	@Override
 	public List<ApprovalDto> eListApproval(Map<String, String> map) {
-		return sqlSession.getMapper(ApprovalDao.class).eListCountApproval(map);
+		return sqlSession.getMapper(ApprovalDao.class).eListApproval(map);
 	}
 
+
+	
+	
 	@Override
 	public List<ApprovalDto> gListCountApproval(Map<String, String> map) {
 		return sqlSession.getMapper(ApprovalDao.class).gListCountApproval(map);
@@ -59,9 +62,53 @@ public class ApprovalServiceImpl implements ApprovalService {
 		return sqlSession.getMapper(ApprovalDao.class).mListCountApproval(map);
 	}
 
+
 	@Override
 	public List<ApprovalDto> eListCountApproval(Map<String, String> map) {
-		return sqlSession.getMapper(ApprovalDao.class).eListApproval(map);
+		return sqlSession.getMapper(ApprovalDao.class).eListCountApproval(map);
 	}
+
+	
+	@Override
+	public List<ApprovalDto> gProgress(Map<String, String> map) {
+		return sqlSession.getMapper(ApprovalDao.class).gProgress(map);
+	}
+
+	@Override
+	public List<ApprovalDto> cProgress(Map<String, String> map) {
+		return sqlSession.getMapper(ApprovalDao.class).cProgress(map);
+	}
+
+	@Override
+	public List<ApprovalDto> eProgress(Map<String, String> map) {
+		return sqlSession.getMapper(ApprovalDao.class).eProgress(map);
+	}
+
+	@Override
+	public List<ApprovalDto> mProgress(Map<String, String> map) {
+		return sqlSession.getMapper(ApprovalDao.class).mProgress(map);
+	}
+
+	
+	@Override
+	public List<ApprovalDto> gEndApproval(Map<String, String> map) {
+		return sqlSession.getMapper(ApprovalDao.class).gEndApproval(map);
+	}
+
+	@Override
+	public List<ApprovalDto> cEndApproval(Map<String, String> map) {
+		return sqlSession.getMapper(ApprovalDao.class).cEndApproval(map);
+	}
+
+	@Override
+	public List<ApprovalDto> eEndApproval(Map<String, String> map) {
+		return sqlSession.getMapper(ApprovalDao.class).eEndApproval(map);
+	}
+
+	@Override
+	public List<ApprovalDto> mEndApproval(Map<String, String> map) {
+		return sqlSession.getMapper(ApprovalDao.class).mEndApproval(map);
+	}
+
 	
 }
