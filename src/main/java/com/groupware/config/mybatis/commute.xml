@@ -38,7 +38,7 @@
 	</update>
 	
 	<select id="getCommuteList" parameterType="map" resultType="CommuteDto">
-	select cmt_sq, stf_sq, cmt_str_tm, cmt_end_tm, cmt_msg, a.days, b.dt, to_char(trunc(b.dt, 'dd'), 'mm.dd') || '(' ||to_char(b.dt, 'dy')|| ')' cmt_dt
+	select b.scd_nm, a.cmt_sq, a.stf_sq, a.cmt_str_tm, a.cmt_end_tm, a.cmt_msg, a.days, b.ldt, to_char(trunc(b.ldt, 'dd'), 'mm.dd') || '(' ||to_char(b.ldt, 'dy')|| ')' cmt_dt
 	from
 	    (
 	        select cmt_sq, stf_sq, cmt_str_tm, cmt_end_tm, cmt_msg, trunc(cmt.cmt_str_tm, 'dd') days
@@ -46,26 +46,38 @@
 	        where stf_sq = #{stf_sq}
 	    ) a,
 	    (   
-   			<choose>
-   				<when test="startDate != null and startDate != ''">
-   				select trunc(to_date(#{startDate}), 'dd')+level-1 dt
-   				</when>
-	        	<otherwise>
-	        	select trunc(sysdate, 'MM')+level-1 dt
-	        	</otherwise>
-	        </choose>
-	        from dual
-   			<choose>
-   				<when test="startDate != null and startDate != ''">
-   				connect by level &lt;= to_date(#{endDate})-trunc(to_date(#{startDate}), 'dd')+1
-   				</when>
-	        	<otherwise>
-	        	connect by level &lt;= last_day(sysdate)-trunc(sysdate, 'MM')+1
-	        	</otherwise>
-	        </choose>
+	    	select *
+	    	from
+	    		(
+	   			<choose>
+	   				<when test="startDate != null and startDate != ''">
+	   				select trunc(to_date(#{startDate}), 'dd')+level-1 ldt
+	   				</when>
+		        	<otherwise>
+		        	select trunc(sysdate, 'MM')+level-1 ldt
+		        	</otherwise>
+		        </choose>
+		        from dual
+	   			<choose>
+	   				<when test="startDate != null and startDate != ''">
+	   				connect by level &lt;= to_date(#{endDate})-trunc(to_date(#{startDate}), 'dd')+1
+	   				</when>
+		        	<otherwise>
+		        	connect by level &lt;= last_day(sysdate)-trunc(sysdate, 'MM')+1
+		        	</otherwise>
+		        </choose>
+		        )l,
+		        (
+		        select scd.*, d.scd_nm, trunc(scd.bs_scd_str_dt, 'dd') rdt
+                from bs_scd_tb scd, scd_div_tb d
+                where scd.scd_sq = d.scd_sq
+                and scd.stf_sq = #{stf_sq}
+                and scd.scd_sq in (3, 5)
+		        )r
+	        where l.ldt = r.rdt(+)
 	    ) b
-	where a.days(+) = b.dt
-	order by b.dt
+	where a.days(+) = b.ldt
+	order by b.ldt
 	</select>
 	  
 	<select id="getCommuteListDepartment" parameterType="map" resultType="map">

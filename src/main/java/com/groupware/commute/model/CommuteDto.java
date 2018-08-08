@@ -9,6 +9,7 @@ public class CommuteDto {
 	private String cmt_end_tm; /* 퇴근시간 */
 	private String cmt_msg; /* 메시지 */
 	private String cmt_dt;	/* 날짜 */ 
+	private String scd_nm;  /* 상태 */
 	
 	public int getCmt_sq() {
 		return cmt_sq;
@@ -58,4 +59,12 @@ public class CommuteDto {
 		this.cmt_dt = cmt_dt;
 	}
 
+	public String getScd_nm() {
+		return scd_nm;
+	}
+
+	public void setScd_nm(String scd_nm) {
+		this.scd_nm = scd_nm;
+	}
+	
 }

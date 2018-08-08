@@ -79,7 +79,7 @@
             <td>${cmt.cmt_dt}</td>
             <td>${cmt.cmt_str_tm}</td>
             <td>${cmt.cmt_end_tm}</td>
-            <td></td>
+            <td>${cmt.scd_nm}</td>
             <td></td>
             <td>${cmt.cmt_msg}</td>
           </tr>
