@@ -8,7 +8,7 @@
 	<select id="gListApproval" parameterType="map" resultType="map">
 	select DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
 	       APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
-	       APV_TB.APV_NO, APV_TB.APV_CR_DATE
+	       APV_TB.APV_NO, to_char(trunc(APV_TB.APV_CR_DATE), 'yyyy.mm.dd') as "APV_CR_DATE" 
 	from APV_TB, DIV_APV_TB
 	where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
 	and APV_TB.STF_SQ = #{stf_sq}
@@ -19,7 +19,7 @@
 	<select id="cListApproval" parameterType="map" resultType="map">
 	select  DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
 	        APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
-	        APV_TB.APV_NO, APV_TB.APV_CR_DATE
+	        APV_TB.APV_NO, to_char(trunc(APV_TB.APV_CR_DATE), 'yyyy.mm.dd') as "APV_CR_DATE"
 	from APV_TB, DIV_APV_TB
 	where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
 	and APV_TB.STF_SQ = #{stf_sq}
@@ -30,7 +30,7 @@
 	<select id="mListApproval" parameterType="map" resultType="map">
 	select  DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
 	        APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
-	        APV_TB.APV_NO, APV_TB.APV_CR_DATE
+	        APV_TB.APV_NO, to_char(trunc(APV_TB.APV_CR_DATE), 'yyyy.mm.dd') as "APV_CR_DATE"
 	from APV_TB, DIV_APV_TB
 	where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
 	and APV_TB.STF_SQ = #{stf_sq}
@@ -41,12 +41,45 @@
 	<select id="eListApproval" parameterType="map" resultType="map">
 	select  DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
 	        APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
-	        APV_TB.APV_NO, APV_TB.APV_CR_DATE
+	        APV_TB.APV_NO, to_char(trunc(APV_TB.APV_CR_DATE), 'yyyy.mm.dd') as "APV_CR_DATE"
 	from APV_TB, DIV_APV_TB
 	where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
 	and APV_TB.STF_SQ = #{stf_sq}
 	and APV_TB.DIV_APV_SQ = '4'
 	and rownum &lt;= '3'
+	</select>
+
+
+	<select id="gListCountApproval" parameterType="map" resultType="map">
+    select count(DIV_APV_TB.DIV_APV_NM) as "GLISTCOUNT"
+	from APV_TB, DIV_APV_TB
+	where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+	and APV_TB.STF_SQ = #{stf_sq}
+	and APV_TB.DIV_APV_SQ = '1'
+	</select>
+
+	<select id="cListCountApproval" parameterType="map" resultType="map">
+    select count(DIV_APV_TB.DIV_APV_NM) 
+	from APV_TB, DIV_APV_TB
+	where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+	and APV_TB.STF_SQ = #{stf_sq}
+	and APV_TB.DIV_APV_SQ = '2'
+	</select>
+	
+	<select id="mListCountApproval" parameterType="map" resultType="map">
+    select count(DIV_APV_TB.DIV_APV_NM) 
+	from APV_TB, DIV_APV_TB
+	where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+	and APV_TB.STF_SQ = #{stf_sq}
+	and APV_TB.DIV_APV_SQ = '3'
+	</select>
+
+	<select id="eListCountApproval" parameterType="map" resultType="map">
+    select count(DIV_APV_TB.DIV_APV_NM) 
+	from APV_TB, DIV_APV_TB
+	where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+	and APV_TB.STF_SQ = #{stf_sq}
+	and APV_TB.DIV_APV_SQ = '4'
 	</select>
 
 

@@ -11,6 +11,7 @@
 <head>
 <!-- 각종 스크립트 및 CSS -->
 		<tiles:insertAttribute name="public" />
+		<tiles:insertAttribute name="public2" />
 </head>
 <body>
 	<!-- Body
@@ -30,7 +31,6 @@
 		</section>
 		<!--main content end-->
 			</section>
-		<tiles:insertAttribute name="public2" />
 	<!-- Body
 		================================================== 
 	-->

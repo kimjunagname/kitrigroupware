@@ -41,6 +41,26 @@ public class ApprovalServiceImpl implements ApprovalService {
 	//기타공문
 	@Override
 	public List<ApprovalDto> eListApproval(Map<String, String> map) {
+		return sqlSession.getMapper(ApprovalDao.class).eListCountApproval(map);
+	}
+
+	@Override
+	public List<ApprovalDto> gListCountApproval(Map<String, String> map) {
+		return sqlSession.getMapper(ApprovalDao.class).gListCountApproval(map);
+	}
+
+	@Override
+	public List<ApprovalDto> cListCountApproval(Map<String, String> map) {
+		return sqlSession.getMapper(ApprovalDao.class).cListCountApproval(map);
+	}
+
+	@Override
+	public List<ApprovalDto> mListCountApproval(Map<String, String> map) {
+		return sqlSession.getMapper(ApprovalDao.class).mListCountApproval(map);
+	}
+
+	@Override
+	public List<ApprovalDto> eListCountApproval(Map<String, String> map) {
 		return sqlSession.getMapper(ApprovalDao.class).eListApproval(map);
 	}
 	

@@ -12,6 +12,11 @@ public interface ApprovalService {
 	List<ApprovalDto> cListApproval(Map<String, String> map);
 	List<ApprovalDto> mListApproval(Map<String, String> map);
 	List<ApprovalDto> eListApproval(Map<String, String> map);
-	
+
+	List<ApprovalDto> gListCountApproval(Map<String, String> map);
+	List<ApprovalDto> cListCountApproval(Map<String, String> map);
+	List<ApprovalDto> mListCountApproval(Map<String, String> map);
+	List<ApprovalDto> eListCountApproval(Map<String, String> map);
+
 	
 }

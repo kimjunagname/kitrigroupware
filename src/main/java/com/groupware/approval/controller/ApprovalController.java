@@ -40,16 +40,34 @@ public class ApprovalController {
 		List <ApprovalDto> cListApproval = approvalService.cListApproval(map);
 		List <ApprovalDto> eListApproval = approvalService.eListApproval(map);
 		List <ApprovalDto> mListApproval = approvalService.mListApproval(map);
+		
+		List <ApprovalDto> gListCountApproval = approvalService.gListCountApproval(map);
+		List <ApprovalDto> cListCountApproval = approvalService.cListCountApproval(map);
+		List <ApprovalDto> mListCountApproval = approvalService.mListCountApproval(map);
+		List <ApprovalDto> eListCountApproval = approvalService.eListCountApproval(map);
+		
+		
 		mav.addObject("stf_sq", session.getAttribute("stf_sq"));
+		mav.addObject("gListCountApproval", gListCountApproval);
+		mav.addObject("cListCountApproval", cListCountApproval);
+		mav.addObject("mListCountApproval", mListCountApproval);
+		mav.addObject("eListCountApproval", eListCountApproval);	
+		
 		mav.addObject("gListApproval", gListApproval);
 		mav.addObject("cListApproval", cListApproval);
 		mav.addObject("eListApproval", eListApproval);
 		mav.addObject("mListApproval", mListApproval);	
 		
+		System.out.println("gListCountApproval" + gListCountApproval);
+		System.out.println("cListCountApproval" + cListCountApproval);
+		System.out.println("mListCountApproval" + mListCountApproval);
+		System.out.println("eListCountApproval" + eListCountApproval);
+		
 		System.out.println("gListApproval" + gListApproval);
 		System.out.println("cListApproval" + cListApproval);
 		System.out.println("eListApproval" + eListApproval);
 		System.out.println("mListApproval" + mListApproval);
+		
 
 	    mav.setViewName("/approval/list"); // /webapp/pds5/list.jsp
 		return mav;
