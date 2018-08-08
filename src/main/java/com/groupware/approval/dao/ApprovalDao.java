@@ -18,4 +18,13 @@ public interface ApprovalDao {
 	List<ApprovalDto> mListCountApproval(Map<String, String> map);
 	List<ApprovalDto> eListCountApproval(Map<String, String> map);
 
+	List<ApprovalDto> gProgress(Map<String, String> map);
+	List<ApprovalDto> cProgress(Map<String, String> map);
+	List<ApprovalDto> eProgress(Map<String, String> map);
+	List<ApprovalDto> mProgress(Map<String, String> map);
+
+	List<ApprovalDto> gEndApproval(Map<String, String> map);
+	List<ApprovalDto> cEndApproval(Map<String, String> map);
+	List<ApprovalDto> eEndApproval(Map<String, String> map);
+	List<ApprovalDto> mEndApproval(Map<String, String> map);
 }
