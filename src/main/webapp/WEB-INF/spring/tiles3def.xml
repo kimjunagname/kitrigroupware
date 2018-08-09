@@ -67,17 +67,37 @@
  	 </definition>
  
 
-<!-- 
-   <definition name="/approval/list" extends="base-definition">
+   <definition name="/approval/glist" extends="base-definition">
        <put-attribute name="title" value="lsit" />
-       <put-attribute name="body" value="/WEB-INF/views/approval/list.jsp" />
+       <put-attribute name="body" value="/WEB-INF/views/approval/glist.jsp" />
    </definition>
-   
-    <definition name="/approval/select" extends="base-definition">
+
+   <definition name="/approval/clist" extends="base-definition">
        <put-attribute name="title" value="lsit" />
-       <put-attribute name="body" value="/WEB-INF/views/approval/select.jsp" />
+       <put-attribute name="body" value="/WEB-INF/views/approval/clist.jsp" />
+   </definition>
+
+   <definition name="/approval/elist" extends="base-definition">
+       <put-attribute name="title" value="lsit" />
+       <put-attribute name="body" value="/WEB-INF/views/approval/elist.jsp" />
+   </definition>
+  
+    <definition name="/approval/mlist" extends="base-definition">
+       <put-attribute name="title" value="lsit" />
+       <put-attribute name="body" value="/WEB-INF/views/approval/mlist.jsp" />
+   </definition>
+  
+    <definition name="/approval/view" extends="base-definition">
+       <put-attribute name="title" value="lsit" />
+       <put-attribute name="body" value="/WEB-INF/views/approval/view.jsp" />
     </definition>
-   
+    
+    <definition name="/approval/mview" extends="base-definition">
+       <put-attribute name="title" value="lsit" />
+       <put-attribute name="body" value="/WEB-INF/views/approval/mview.jsp" />
+    </definition>
+    
+   <!--  
      <definition name="/approval/sign" extends="base-definition">
        <put-attribute name="title" value="lsit" />
        <put-attribute name="body" value="/WEB-INF/views/approval/sign.jsp" />

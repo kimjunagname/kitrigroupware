@@ -1,6 +1,6 @@
 package com.groupware.approval.model;
 
-public class ApprovalDto {
+public class ApprovalDto  {
 
 	private int apv_sq;  /* 결재번호 */
 	private int div_apv_sq;  /* 결재구분번호 */

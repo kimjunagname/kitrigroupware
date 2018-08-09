@@ -64,8 +64,8 @@
 											</tr>
 								        	<tr>
 								        		<th></th>
-								        		<th>구분</th>
-								        		<th colspan="7"></th>
+								        		<th>제목</th>
+								        		<th colspan="7">수신자 참조</th>
 								        		<!-- <th></th>
 								        		<th></th>
 								        		<th></th>
@@ -89,7 +89,7 @@
 								        	<tr>
 								        		<th></th>
 								        		<th>제목</th>
-								        		<th colspan="7"><input type="text" class="form-control"></th>
+								        		<th colspan="7">빅이슈(노숙인 판매 잡지) 판매원 공간이용 협조</th>
 								        		<!-- <th></th>
 								        		<th></th>
 								        		<th></th>
@@ -146,21 +146,21 @@
 
 											<tr>
 								        		<th></th>
-								        		<th></th>
-								        		<th></th>
-								        		<th></th>
-								        		<th></th>
-								        		<th></th>
-								        		<th></th>
-								        		<th></th>
-								        		<th></th>
+								        		<th>사장</th>
+								        		<th>송민섭</th>
+								        		<th>부장</th>
+								        		<th>최나영</th>
+								        		<th>과장</th>
+								        		<th>이상규</th>
+								        		<th>사원</th>
+								        		<th>김정남</th>
 								        		<th></th>
 											</tr>																																																			        		
 											<tr>
 								        		<th></th>
-								        		<th>협조자</th>
-								        		<th></th>
-								        		<th></th>
+								        		<th>경유자</th>
+								        		<th>차장</th>
+								        		<th>함은진</th>
 								        		<th></th>
 								        		<th></th>
 								        		<th></th>
@@ -171,20 +171,20 @@
 											<tr>
 								        		<th></th>
 								        		<th>시행</th>
-								        		<th colspan="4"></th>
+								        		<th colspan="4">영업관리팀-0000(2018.08.01)</th>
 								        		<!-- <th></th>
 								        		<th></th>
 								        		<th></th>
 								        		<th></th> -->
-								        		<th></th>
-								        		<th></th>
+								        		<th>접수</th>
+								        		<th>()</th>
 								        		<th></th>
 											</tr>																																																			        		
 											<tr>
 								        		<th></th>
 								        		<th>우</th>
-								        		<th></th>
-								        		<th colspan="4"></th>
+								        		<th>12345</th>
+								        		<th colspan="4">서울시특별시 부천</th>
 								        		<!-- <th></th>
 								        		<th></th>
 								        		<th></th> 
@@ -195,13 +195,13 @@
 											<tr>
 								        		<th></th>
 								        		<th>전화</th>
-								        		<th>-</th>
+								        		<th>123-4567</th>
 								        		<th></th>
 								        		<th>전송</th>
-								        		<th>-</th>
+								        		<th>1234-4567</th>
 								        		<th colspan="2">/1234@kitri.com</th>
 								        		<!-- <th></th> -->
-								        		<th>/</th>
+								        		<th>/공개</th>
 								        		<th></th>
 											</tr>									        
 								        
@@ -211,14 +211,16 @@
 							</div>
 
 							<div class="w3ls_head">
-								<input type="button" value="결재상신" class="btn btn-info">
-								<input type="button" value="취소" class="btn btn-info">
+								<input type="button" value="임시보관하기" class="btn btn-info">
+								<input type="button" value="상신하기" class="btn btn-info">
 							</div>
 						</div>
 					</div>
 				</div>
+			</section>
 		</section>
-	<!-- </section> 2개는 template.jsp에 위치 -->
+		<!--main content end-->
+	</section>
 
 <!-- summernote -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css" rel="stylesheet">
@@ -237,7 +239,6 @@
 
 
 <!-- 완성후 삭제 예정 -->
-<!-- 
 <style>
 table, th, td {
     border: 1px solid black;
@@ -248,5 +249,5 @@ th, td {
     text-align: left;    
 }
 </style>	
- -->
+
 	

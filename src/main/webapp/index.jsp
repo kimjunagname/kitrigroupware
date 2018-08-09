@@ -10,6 +10,7 @@
 <%
 String root = request.getContextPath();
 response.sendRedirect(root + "/member/login.kitri");
+//response.sendRedirect(root + "/approval/mview.kitri");
 %>
 </body>
 </html>

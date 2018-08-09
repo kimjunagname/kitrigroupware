@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/commons/public.jsp" %>
+<%@ include file="/WEB-INF/views/commons/board_common.jsp"%>
+
 
 <!-- body start -->
 <section id="container">
@@ -213,6 +215,7 @@
 								         </thead>
 								         <tbody>
 								          <c:forEach items="${gListApproval}" var="map">
+								          <tr class="posting"  APV_TB_apv_seq="${map.APV_SQ}" >
 								           <td>${map.APV_SQ}</td>
 								           <td>${map.APV_CR_DATE}</td>
 								           <td>${map.APV_NM}</td>
@@ -252,6 +255,7 @@
 								         </thead>
 								         <tbody>
 								          <c:forEach items="${cListApproval}" var="map">
+								          <tr class="posting"  APV_TB_apv_seq="${map.APV_SQ}">
 								           <td>${map.APV_SQ}</td>
 								           <td>${map.APV_CR_DATE}</td>
 								           <td>${map.APV_NM}</td>
@@ -291,6 +295,7 @@
 								         </thead>
 								         <tbody>
 								          <c:forEach items="${eListApproval}" var="map">
+								          <tr class="posting"  APV_TB_apv_seq="${map.APV_SQ}">
 								           <td>${map.APV_SQ}</td>
 								           <td>${map.APV_CR_DATE}</td>
 								           <td>${map.APV_NM}</td>
@@ -330,6 +335,7 @@
 								         </thead>
 								         <tbody>
 								          <c:forEach items="${mListApproval}" var="map">
+								          <tr id=mposting  APV_TB_apv_seq="${map.APV_SQ}">
 								           <td>${map.APV_SQ}</td>
 								           <td>${map.APV_CR_DATE}</td>
 								           <td>${map.APV_NM}</td>
@@ -348,3 +354,57 @@
 			</div>
 	</section>
 	<!-- </section> 2개는 template.jsp에 위치 -->
+	
+	
+	
+<!-- 스크립트 -->
+<script src="${root}/js/board.js"></script>
+<script>
+control = "${root}/approval";
+initPath();
+$(document).ready(function() {
+	
+	$("#firstpage").click(function() {		
+		moveBoard('${bcode}', '1', '', '', listpath);		
+	});
+	
+	$(".mvpage").click(function() {
+		moveBoard("${bcode}", $(this).attr("move-page-no"), "${key}", "${word}", listpath)
+	});
+	
+	$("#searchBtn").click(function() {
+		moveBoard('${bcode}', '1', $("#skey").val(), $("#sword").val(), listpath);		
+	});
+	
+	$("#myBtn").click(function() {
+		moveBoard('${bcode}', '1', 'id', '${userInfo.id}', listpath);		
+	});
+	
+	$(".writeBtn").click(function() {
+		moveBoard('${bcode}', '1', '', '', writepath);		
+	});	
+	
+	//class 클릭 > view page로 이동
+	$(".posting").click(function() {
+		$("#bcode").val("");
+		$("#seq").val($(this).attr("APV_TB_apv_seq"));
+		$("#pg").val("");
+		$("#key").val("");
+		$("#word").val("");
+		$("#commonform").attr("method", "get").attr("action", viewpath).submit();
+	});
+	
+	$("#mposting").click(function() {
+		$("#bcode").val("");
+		$("#seq").val($(this).attr("APV_TB_apv_seq"));
+		$("#pg").val("");
+		$("#key").val("");
+		$("#word").val("");
+		$("#commonform").attr("method", "get").attr("action", mviewpath).submit();
+	});
+	
+});
+
+</script>	
+
+	

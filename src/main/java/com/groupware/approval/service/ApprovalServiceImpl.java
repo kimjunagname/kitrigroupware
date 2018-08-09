@@ -111,4 +111,37 @@ public class ApprovalServiceImpl implements ApprovalService {
 	}
 
 	
+	
+	//일반공문 선택 뷰
+	@Override
+	public List<ApprovalDto> ViewApproval(Map<String, String> map) {
+		return sqlSession.getMapper(ApprovalDao.class).ViewApproval(map);
+	}
+
+	//상세 목록
+	@Override
+	public List<ApprovalDto> tgListApproval(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.getMapper(ApprovalDao.class).tgListApproval(map);
+	}
+
+	@Override
+	public List<ApprovalDto> tcListApproval(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.getMapper(ApprovalDao.class).tcListApproval(map);
+	}
+
+	@Override
+	public List<ApprovalDto> tmListApproval(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.getMapper(ApprovalDao.class).tmListApproval(map);
+	}
+
+	@Override
+	public List<ApprovalDto> teListApproval(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.getMapper(ApprovalDao.class).teListApproval(map);
+	}
+
+	
 }

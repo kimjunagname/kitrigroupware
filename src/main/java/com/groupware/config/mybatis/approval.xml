@@ -16,6 +16,7 @@
 	and rownum &lt;= '3'
 	</select>
 	
+
 	<select id="cListApproval" parameterType="map" resultType="map">
 	select  DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
 	        APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
@@ -47,6 +48,48 @@
 	and APV_TB.STF_SQ = #{stf_sq}
 	and APV_TB.DIV_APV_SQ = '4'
 	and rownum &lt;= '3'
+	</select>
+
+
+	<select id="tgListApproval" parameterType="map" resultType="map">
+	select DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
+	       APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
+	       APV_TB.APV_NO, to_char(trunc(APV_TB.APV_CR_DATE), 'yyyy.mm.dd') as "APV_CR_DATE" 
+	from APV_TB, DIV_APV_TB
+	where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+	and APV_TB.STF_SQ = #{stf_sq}
+	and APV_TB.DIV_APV_SQ = '1'
+	</select>
+	
+
+	<select id="tcListApproval" parameterType="map" resultType="map">
+	select  DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
+	        APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
+	        APV_TB.APV_NO, to_char(trunc(APV_TB.APV_CR_DATE), 'yyyy.mm.dd') as "APV_CR_DATE"
+	from APV_TB, DIV_APV_TB
+	where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+	and APV_TB.STF_SQ = #{stf_sq}
+	and APV_TB.DIV_APV_SQ = '2'
+	</select>
+
+	<select id="tmListApproval" parameterType="map" resultType="map">
+	select  DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
+	        APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
+	        APV_TB.APV_NO, to_char(trunc(APV_TB.APV_CR_DATE), 'yyyy.mm.dd') as "APV_CR_DATE"
+	from APV_TB, DIV_APV_TB
+	where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+	and APV_TB.STF_SQ = #{stf_sq}
+	and APV_TB.DIV_APV_SQ = '3'
+	</select>
+
+	<select id="teListApproval" parameterType="map" resultType="map">
+	select  DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
+	        APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
+	        APV_TB.APV_NO, to_char(trunc(APV_TB.APV_CR_DATE), 'yyyy.mm.dd') as "APV_CR_DATE"
+	from APV_TB, DIV_APV_TB
+	where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+	and APV_TB.STF_SQ = #{stf_sq}
+	and APV_TB.DIV_APV_SQ = '4'
 	</select>
 
 
@@ -150,6 +193,34 @@
 	and APV_TB.STF_SQ = #{stf_sq}
 	and APV_TB.DIV_APV_SQ = '3'
 	</select>
+
+	<!-- 결재 로그인 대상자가 클릭한 공문 내용 가져오기 -->
+	<!-- 
+	<select id="ViewApproval" parameterType="map" resultType="map">
+	select DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
+	       APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
+	       APV_TB.APV_NO, to_char(trunc(APV_TB.APV_CR_DATE), 'yyyy.mm.dd') as "APV_CR_DATE", to_char(APV_TB.CONTENT)  as "CONTENT"  
+	from APV_TB, DIV_APV_TB
+	where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+	and APV_TB.STF_SQ = #{stf_sq}
+    and APV_TB.APV_SQ = #{seq}
+	</select>
+	 -->
+	<select id="ViewApproval" parameterType="map" resultType="map">
+    select DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
+	       APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
+	       APV_TB.APV_NO, to_char(trunc(APV_TB.APV_CR_DATE), 'yyyy.mm.dd') as "APV_CR_DATE", to_char(APV_TB.CONTENT)  as "CONTENT", 
+           RNK_TB.RNK_NM, DPT_DIV_TB.DPT_NM, STF_TB.STF_BS_PH1, STF_TB.STF_BS_PH2, STF_TB.STF_BS_PH3, STF_TB.STF_EML1, STF_TB.STF_EML2,
+           STF_TB.STF_CM_ADD, STF_TB.STF_ZIP_ADD, STF_TB.STF_NM
+    from APV_TB, DIV_APV_TB, STF_TB, RNK_TB, DPT_DIV_TB
+	where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+    and   APV_TB.STF_SQ = STF_TB.STF_SQ
+    and   STF_TB.RNK_SQ = RNK_TB.RNK_SQ 
+    and   DPT_DIV_TB.DPT_SQ = STF_TB.DPT_SQ	and APV_TB.STF_SQ = #{stf_sq}
+    and APV_TB.APV_SQ = #{seq}
+	</select>
+
+
 
 	</mapper>
   

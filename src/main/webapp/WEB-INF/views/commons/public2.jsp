@@ -13,3 +13,4 @@
 <script src="${root}/js/jquery.scrollTo.js"></script>
 <!-- morris JavaScript -->
 <!-- //font-awesome icons -->
+<script src="${root}/js/board.js"></script>
