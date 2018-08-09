@@ -4,6 +4,163 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
   <mapper namespace="com.groupware.organization.dao.OrganizationDao">
-  
-  </mapper>
-  
+  	<select id="officerList" parameterType="Map" resultType="Map">
+	SELECT B.RNUM, B.STF_SQ, B.STF_PT_RT,  B.STF_NM, B.RNK_NM, B.DPT_NM, 
+		   B.ADMN_PW, B.STF_PH1, B.STF_PH2, B.STF_PH3, B.STF_BS_PH1, B.STF_BS_PH2, B.STF_BS_PH3, B.STF_EML1, B.STF_EML2
+	FROM (
+		   SELECT ROWNUM AS RNUM, A.STF_SQ, A.STF_PT_RT,  A.STF_NM, 
+			      A.RNK_NM, A.DPT_NM, A.ADMN_PW, A.STF_PH1, A.STF_PH2, A.STF_PH3, A.STF_BS_PH1,
+                  A.STF_BS_PH2, A.STF_BS_PH3, A.STF_EML1, A.STF_EML2
+		     FROM (
+			        SELECT  STF.STF_SQ,
+			                STF.STF_PT_RT, 
+			                STF.STF_NM, 
+			                RNK.RNK_SQ,
+			                RNK.RNK_NM,
+			                DD.DPT_NM, 
+			                ADMN.ADMN_PW, 
+			                STF.STF_PH1,
+			                STF.STF_PH2,
+			                STF.STF_PH3,
+			                STF.STF_BS_PH1,
+                            STF.STF_BS_PH2,
+                            STF.STF_BS_PH3,
+			                STF.STF_EML1,
+			                STF.STF_EML2
+			        FROM STF_TB STF, ADMN_TB ADMN, RNK_TB RNK, DPT_DIV_TB DD
+			        WHERE ADMN.ADMNN_SQ = STF.ADMN_SQ
+			        AND RNK.RNK_SQ = STF.RNK_SQ
+			        AND DD.DPT_SQ = STF.DPT_SQ
+			        AND RNK.RNK_SQ NOT IN('50')
+			        <choose>
+						<when test="cate == 1">
+							AND STF.STF_NM LIKE #{keyword} || '%'
+						</when>
+						<when test="cate == 2">
+							AND RNK.RNK_NM LIKE #{keyword} || '%'
+						</when>
+						<when test="cate == 3">
+							AND DD.DPT_NM LIKE #{keyword} || '%'
+						</when>
+						<otherwise>
+							
+						</otherwise>
+					</choose>
+			        ORDER BY DPT_NM DESC, RNK_SQ ASC, STF_NM ASC
+		<![CDATA[
+			    )A
+			    WHERE ROWNUM <= #{endCount}
+			)B
+			WHERE B.RNUM >= #{startCount}
+			ORDER BY RNUM DESC
+		]]>
+	</select>
+  	
+  	<select id="officerListCount" parameterType="Map" resultType="int">
+  	SELECT COUNT(*) AS CNT
+	FROM STF_TB STF, ADMN_TB ADMN, RNK_TB RNK, DPT_DIV_TB DD
+	WHERE ADMN.ADMNN_SQ = STF.ADMN_SQ
+	AND RNK.RNK_SQ = STF.RNK_SQ
+	AND DD.DPT_SQ = STF.DPT_SQ
+	AND DD.DPT_SQ NOT IN('100')
+	AND RNK.RNK_SQ NOT IN('50')
+  	</select>
+  	
+  	<select id="selectStf_tb" resultType="Map">
+	SELECT STF.STF_NM, RNK.RNK_NM, DD.DPT_NM
+	FROM STF_TB STF, ADMN_TB ADMN, RNK_TB RNK, DPT_DIV_TB DD
+    WHERE ADMN.ADMNN_SQ = STF.ADMN_SQ
+    AND RNK.RNK_SQ = STF.RNK_SQ
+    AND DD.DPT_SQ = STF.DPT_SQ
+	</select>
+  	
+  	
+  	<select id="selectAdmn_Tb" parameterType="Map" resultType="Map">
+	SELECT ADMNN_SQ, ADMN_PW
+	FROM ADMN_TB
+	ORDER BY ADMNN_SQ
+	</select>
+	
+	<select id="selectRnk_Tb" parameterType="Map" resultType="Map">
+	SELECT RNK_SQ, RNK_NM
+	FROM RNK_TB
+	WHERE RNK_SQ NOT IN('50')
+	ORDER BY RNK_SQ
+	</select>
+	
+	<select id="selectDpt_Div_Tb" parameterType="Map" resultType="Map">
+	SELECT DPT_SQ, DPT_NM
+	FROM DPT_DIV_TB
+	WHERE DPT_SQ NOT IN('100')
+	ORDER BY DPT_SQ
+	</select>
+	
+	<insert id="deptInsert" parameterType="Map">
+	INSERT INTO DPT_DIV_TB
+	VALUES(DPT_DIV_TB_DPT_SQ.NEXTVAL, #{dpt_nm}) 
+	</insert>
+	
+	<delete id="deptDelete" parameterType="Map">
+	DELETE FROM DPT_DIV_TB
+	WHERE DPT_SQ = #{dpt_sq}
+	</delete>
+	
+	<select id="selectDeptNm" parameterType="Map" resultType="int">
+	SELECT COUNT(*) AS CNT
+	FROM DPT_DIV_TB
+	WHERE DPT_NM = #{dpt_nm}
+	</select>
+	
+	<select id="selectStf_Sq" parameterType="Map" resultType="int">
+	SELECT COUNT(*) AS CNT
+	FROM STF_TB
+	WHERE STF_SQ = #{stf_sq}
+	</select>
+	
+	<select id="selectUpdateOfficer" parameterType="Map" resultType="Map">
+	SELECT STF_SQ, ADMN_SQ, DPT_SQ, RNK_SQ, STF_NM, STF_PH1, STF_PH2, STF_PH3, STF_CM_ADD, STF_DT_ADD, STF_BS_PH1, STF_BS_PH2, STF_BS_PH3, STF_EML1, STF_EML2
+	FROM STF_TB
+	WHERE STF_SQ = #{stf_sq}
+	</select>
+	
+	<insert id="officerInsert" parameterType="OrganizationDto">
+	INSERT INTO STF_TB
+	VALUES(STF_TB_STF_SQ.NEXTVAL,#{admn_sq},#{dpt_sq},#{rnk_sq},#{stf_nm}, 
+	#{stf_pw},#{stf_ph1},#{stf_ph2},#{stf_ph3},#{stf_zip_add},
+	#{stf_cm_add},#{stf_dt_add},#{stf_bs_ph1},#{stf_bs_ph2},#{stf_bs_ph3}, 
+	#{stf_eml1},#{stf_eml2},#{stf_ent},SYSDATE,SYSDATE,null,null)
+	</insert>
+	
+	<update id="officerUpdate" parameterType="OrganizationDto">
+	UPDATE STF_TB
+	SET STF_NM = #{stf_nm},
+	ADMN_SQ = #{admn_sq},
+	DPT_SQ = #{dpt_sq},
+	RNK_SQ = #{rnk_sq},
+	STF_CM_ADD = #{stf_cm_add},
+	STF_DT_ADD = #{stf_dt_add},
+	STF_EML1 = #{stf_eml1},
+	STF_EML2 = #{stf_eml2},
+	STF_PH1 = #{stf_ph1},
+	STF_PH2 = #{stf_ph2},
+	STF_PH3 = #{stf_ph3},
+	STF_BS_PH1 = #{stf_bs_ph1},
+	STF_BS_PH2 = #{stf_bs_ph2},
+	STF_BS_PH3 = #{stf_bs_ph3},
+	STF_ENT = #{stf_ent},
+	STF_MOD = SYSDATE,
+	STF_PW = #{stf_pw}
+	WHERE STF_SQ = #{stf_sq} 
+	</update>
+	
+	<update id="officerLayoff" parameterType="OrganizationDto">
+	UPDATE STF_TB
+	SET ADMN_SQ = '50',
+	DPT_SQ = '100',
+	RNK_SQ = '50',
+	STF_EML1 = 'layoff',
+	STF_EML2 = 'layoff.com'
+	WHERE STF_SQ = #{stf_sq} 
+	</update>
+			 	 
+ </mapper>

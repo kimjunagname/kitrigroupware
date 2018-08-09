@@ -195,9 +195,9 @@ ul.sidebar-menu li a.active i {
                         <span>Mail </span>
                     </a>
                     <ul class="sub">
-                        <li><a href="mail_compose.html">메일 보관함</a></li>                     
-                        <li><a href="mail.html">받은 편지함</a></li>
-                        <li><a href="mail_compose.html">보낸 편지함</a></li>
+                        <li><a href="${root}/email/rcvList.kitri">수신 메일함</a></li>                     
+                        <li><a href="${root}/email/sndList.kitri">발신 메일함</a></li>
+                        <li><a href="${root}/email//keepList.kitri">받은 메일 보관함</a></li>
                     </ul>
                 </li>
                 
@@ -256,9 +256,7 @@ ul.sidebar-menu li a.active i {
                         <span>관리자</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="#">조직관리</a></li>
-						<li><a href="#">회원관리</a></li>
-                        <li><a href="#">조직관리</a></li>
+                        <li><a href="${root}/organization/organization.kitri">부서/구성원 관리</a></li>
                     </ul>
                 </li>
 

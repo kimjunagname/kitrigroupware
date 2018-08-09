@@ -22,8 +22,12 @@
 		<property name="url" value="jdbc:oracle:thin:@13.125.221.123:1521:xe" />
 		<property name="username" value="GROUPWARE" />
 		<property name="password" value="GROUPWARE" />
-	</bean>	 
- 
+	</bean>
+	
+	<!-- uploadPath -->	 
+ 	<bean id="uploadPath" class="java.lang.String">
+ 		<constructor-arg value="D:\\java data\\workspace\\framework\\kitrigroupware\\src\\main\\webapp\\WEB-INF\\upload\\file\\"></constructor-arg> 
+ 	</bean> 
 <!-- 커넥션풀 -->
 
 	<!-- <bean id="ds" class="org.springframework.jndi.JndiObjectFactoryBean">
