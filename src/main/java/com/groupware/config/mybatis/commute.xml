@@ -68,13 +68,27 @@
 		        </choose>
 		        )l,
 		        (
-		        select scd.*, d.scd_nm, trunc(scd.bs_scd_str_dt, 'dd') rdt
-                from bs_scd_tb scd, scd_div_tb d
-                where scd.scd_sq = d.scd_sq
-                and scd.stf_sq = #{stf_sq}
-                and scd.scd_sq in (3, 5)
+                    select scd.dt, scd.stf_sq, div.scd_nm
+                    from 
+                    (
+                        select * 
+                        from (
+                                select trunc(bs_scd_str_dt, 'dd') dt, stf_sq, scd_sq
+                                from bs_scd_tb
+                                where stf_sq = #{stf_sq}
+                                order by dt) scda
+                        union
+                        select *
+                        from (
+                                select trunc(bs_scd_end_dt, 'dd') dt, stf_sq, scd_sq
+                                from bs_scd_tb
+                                where stf_sq = #{stf_sq}
+                                order by dt) scdb
+                    )scd, scd_div_tb div
+                    where scd.scd_sq = div.scd_sq
+                    and scd.scd_sq in (3, 5, 6)
 		        )r
-	        where l.ldt = r.rdt(+)
+	        where l.ldt = r.dt(+)
 	    ) b
 	where a.days(+) = b.ldt
 	order by b.ldt
