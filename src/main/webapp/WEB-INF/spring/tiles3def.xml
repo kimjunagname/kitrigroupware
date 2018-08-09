@@ -110,7 +110,15 @@
   -->
  
  <!-- 은진 -->
-  
+  	
+  	<definition name="/login/idfindfail" extends="login">       
+       <put-attribute name="body" value="/WEB-INF/views/login/idfindfail.jsp" />
+ 	 </definition> 
+ 	 
+ 	 <definition name="/join/pwfindfail" extends="login">       
+       <put-attribute name="body" value="/WEB-INF/views/join/pwfindfail.jsp" />
+ 	 </definition> 
+  	
  	<definition name="/login/login" extends="login">       
        <put-attribute name="body" value="/WEB-INF/views/login/login.jsp" />
  	 </definition> 

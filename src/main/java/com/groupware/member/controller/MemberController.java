@@ -126,20 +126,25 @@ public class MemberController {
 		
 		MemberDto memberDto = memberService.findId(map);
 		
-		final MimeMessagePreparator preparator = new MimeMessagePreparator() {
-	        @Override
-	        public void prepare(MimeMessage mimeMessage) throws Exception {
-	            final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-	            helper.setFrom("kitrigroupware@gmail.com");
-	            helper.setTo(memberDto.getStf_eml1()+ "@" + memberDto.getStf_eml2());
-	            helper.setSubject("kitrigroupware 아이디 확인 이메일입니다");
-	            helper.setText(memberDto.getStf_nm() + "님의 아이디는" + memberDto.getStf_sq() + "입니다");
-	        }
-	    };
-
-	    mailSender.send(preparator);
+		if(memberDto != null) {
 		
-		return "/login/idfindck";
+			final MimeMessagePreparator preparator = new MimeMessagePreparator() {
+				@Override
+				public void prepare(MimeMessage mimeMessage) throws Exception {
+					final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+					helper.setFrom("kitrigroupware@gmail.com");
+					helper.setTo(memberDto.getStf_eml1()+ "@" + memberDto.getStf_eml2());
+					helper.setSubject("kitrigroupware 아이디 확인 이메일입니다");
+					helper.setText(memberDto.getStf_nm() + "님의 아이디는" + memberDto.getStf_sq() + "입니다");
+				}
+			};
+
+			mailSender.send(preparator);
+		
+			return "/login/idfindck";
+		} else {
+			return "/login/idfindfail";
+		}
 	}	
 	
 	@RequestMapping(value="/pwfind.kitri", method=RequestMethod.GET)
@@ -152,20 +157,26 @@ public class MemberController {
 		
 		MemberDto memberDto = memberService.findPw(map);
 		
-		final MimeMessagePreparator preparator = new MimeMessagePreparator() {
-	        @Override
-	        public void prepare(MimeMessage mimeMessage) throws Exception {
-	            final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-	            helper.setFrom("kitrigroupware@gmail.com");
-	            helper.setTo(memberDto.getStf_eml1()+ "@" + memberDto.getStf_eml2());
-	            helper.setSubject("kitrigroupware 비밀번호 확인 이메일입니다");
-	            helper.setText(memberDto.getStf_nm() + "님의 비밀번호는" + memberDto.getStf_pw() + "입니다");
-	        }
-	    };
-
-	    mailSender.send(preparator);
+		if(memberDto != null) {		
 		
-		return "/join/pwfindck";
+			final MimeMessagePreparator preparator = new MimeMessagePreparator() {
+				@Override
+				public void prepare(MimeMessage mimeMessage) throws Exception {
+					final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+					helper.setFrom("kitrigroupware@gmail.com");
+					helper.setTo(memberDto.getStf_eml1()+ "@" + memberDto.getStf_eml2());
+					helper.setSubject("kitrigroupware 비밀번호 확인 이메일입니다");
+					helper.setText(memberDto.getStf_nm() + "님의 비밀번호는" + memberDto.getStf_pw() + "입니다");
+				}
+			};
+
+			mailSender.send(preparator);
+		
+			return "/join/pwfindck";
+			
+		} else {
+			return "/join/pwfindfail";
+		}
 	}
 	
 	@RequestMapping("/emlckeck.kitri")
