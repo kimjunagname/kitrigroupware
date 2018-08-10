@@ -31,7 +31,7 @@
           <option value="3">Export</option>
         </select>
          -->
-        <button class="btn btn-sm btn-default" id="searchBtn">조회</button>
+        <a href="#" class="btn btn-sm btn-default" id="searchBtn">조회</a>
         </form>                
       </div>
       <div class="col-sm-0">
@@ -45,8 +45,8 @@
           </span>
         </div>
          -->
-         <a href="#timeMngBtn1" data-toggle="modal" class="btn btn-default">출퇴근등록</a>
-         <a href="#timeMngBtn2" data-toggle="modal" class="btn btn-default">외근/출장/휴가/휴일근무</a>
+         <a href="#timeMngBtn1" id="punchInBtn" data-toggle="modal" class="btn btn-default">출퇴근등록</a>
+        <!--  <a href="#timeMngBtn2" data-toggle="modal" class="btn btn-default">외근/출장/휴가/휴일근무</a> -->
       </div>
     </div>
     
@@ -77,8 +77,8 @@
         <c:forEach var="cmt" items="${commuteList}">
           <tr>
             <td>${cmt.cmt_dt}</td>
-            <td>${cmt.cmt_str_tm}</td>
-            <td>${cmt.cmt_end_tm}</td>
+            <td strTm="${cmt.cmt_str_tm}">${cmt.cmt_str_tm}</td>
+            <td endTm="${cmt.cmt_end_tm}">${cmt.cmt_end_tm}</td>
             <td>${cmt.scd_nm}</td>
             <td></td>
             <td>${cmt.cmt_msg}</td>
@@ -122,16 +122,16 @@
                                             <div class="form-group">
                                                 <label for="now" class="col-lg-2 col-sm-2 control-label">일시</label>
                                                 <div class="col-lg-10">
-                                                    <input type="text" class="form-control" id="" placeholder="00:00" readonly="readonly">
+                                                    <input type="text" class="form-control" id="toDay" placeholder="00:00" readonly="readonly">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="radio" class="col-lg-2 col-sm-2 control-label">출퇴근</label>
                                                 <div class="col-lg-10">
                                                    <div >
-					                                    <input type="radio" name="punch" id="punch" value="in" checked="">
+					                                    <input type="radio" name="punch" id="punchIn" value="in" checked="">
 					                                    	출근
-					                                    <input type="radio" name="punch" id="punch" value="out">
+					                                    <input type="radio" name="punch" id="punchOut" value="out">
 				                                    		퇴근
                            						   </div>
 
@@ -244,35 +244,45 @@
 $(document).ready(function(){
 	setDate();
 });
-
+var date = new Date();
 $("#searchBtn").click(function() {
 	var cmt_str_tm = $("#startDate").val();
 	var cmt_end_tm = $("#endDate").val();
 	if(cmt_end_tm < cmt_str_tm){
 		alert("종료 일이 시작일 보다 빠를 수 없습니다.");
-		setDate();
 		return;
 	}else{
-		
 		$("#searchFrom").attr("method", "post").attr("action", "${root}/commute/list.kitri").submit();
 	}
-	
-	
 });
 
 $("#punchBtn").click(function() {
 	$("#punchForm").attr("method", "post").attr("action", "${root}/commute/punch.kitri").submit();
 });
 
+$("#punchInBtn").click(function() {
+	var now = date.toISOString().slice(0,10);
+	var check = $("td[strTm^='"+ now +"']");
+	if(check.text() != ""){
+		$("#punchIn").attr("disabled", "disabled");
+		$("#punchOut").attr("checked", "checked");
+	}
+	$("#toDay").val(now + " " +date.toLocaleTimeString());
+});
+
 function setDate(){
-	var date = new Date();
-	var year = date.getFullYear();
-	var month = date.getMonth();
-	
-	var lastDay = new Date(year, month+1, 1);
-	
-	$("#startDate").val(lastDay.toISOString().slice(0,8) + "01");
-	$("#endDate").val(lastDay.toISOString().slice(0,10));
-	
+	var startDate = "${startDate}";
+	var endDate = "${endDate}";
+	if(startDate == "" && endDate == ""){
+		var year = date.getFullYear();
+		var month = date.getMonth();
+		var lastDay = new Date(year, month+1, 1);
+		
+		$("#startDate").val(lastDay.toISOString().slice(0,8) + "01");
+		$("#endDate").val(lastDay.toISOString().slice(0,10));
+	}else{
+		$("#startDate").val(startDate);
+		$("#endDate").val(endDate);
+	}	
 };
 </script>
