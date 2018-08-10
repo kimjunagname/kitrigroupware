@@ -40,7 +40,6 @@ public class CommuteController {
 		if(map.size() == 0) {
 			map.put("stf_sq", (String) session.getAttribute("stf_sq"));
 		}
-//TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST 
 		
 		List<CommuteDto> list = commuteService.getCommuteList(map);
 		System.out.println("list size = " + list.size());
@@ -60,18 +59,17 @@ public class CommuteController {
 			mav.setViewName("redirect:/");
 			return mav;
 		}
-//TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST 
-//		session.setAttribute("stf_sq", "5");
 		map.put("stf_sq", memberDto.getStf_sq());
 		
 		if(map.size() == 0) {
 			map.put("stf_sq", (String) session.getAttribute("stf_sq"));
 		}
-//TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST 
 //		startDate=2018-08-01&endDate=2018-08-31
 		List<CommuteDto> list = commuteService.getCommuteList(map);
 		System.out.println("list size = " + list.size());
 		mav.addObject("stf_sq", map.get("stf_sq"));
+		mav.addObject("startDate", map.get("startDate"));
+		mav.addObject("endDate", map.get("endDate"));
 		mav.addObject("commuteList", list);
 		mav.setViewName("/commute/list");
 		
@@ -86,10 +84,7 @@ public class CommuteController {
 		if(memberDto == null) {
 			return "redirect:/";
 		}
-//TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST 
-//		session.setAttribute("stf_sq", 5);
 
-//		int stf_sq = (int) session.getAttribute("stf_sq");
 		int stf_sq = Integer.parseInt(memberDto.getStf_sq());
 		map.put("stf_sq", stf_sq + "");
 		
@@ -103,8 +98,6 @@ public class CommuteController {
 			commuteService.punchOut(commuteDto);
 		}
 		ModelAndView mav = new ModelAndView();
-//		mav.setViewName("/commute/list");
-//		return mav;
 		return "redirect:list.kitri";
 	}
 	

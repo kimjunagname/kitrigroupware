@@ -67,50 +67,78 @@
  	 </definition>
  
 
-<!-- 
-   <definition name="/approval/list" extends="base-definition">
+   <definition name="/approval/glist" extends="base-definition">
        <put-attribute name="title" value="lsit" />
-       <put-attribute name="body" value="/WEB-INF/views/approval/list.jsp" />
+       <put-attribute name="body" value="/WEB-INF/views/approval/glist.jsp" />
    </definition>
-   
-    <definition name="/approval/select" extends="base-definition">
+
+   <definition name="/approval/clist" extends="base-definition">
        <put-attribute name="title" value="lsit" />
-       <put-attribute name="body" value="/WEB-INF/views/approval/select.jsp" />
+       <put-attribute name="body" value="/WEB-INF/views/approval/clist.jsp" />
+   </definition>
+
+   <definition name="/approval/elist" extends="base-definition">
+       <put-attribute name="title" value="lsit" />
+       <put-attribute name="body" value="/WEB-INF/views/approval/elist.jsp" />
+   </definition>
+  
+    <definition name="/approval/mlist" extends="base-definition">
+       <put-attribute name="title" value="lsit" />
+       <put-attribute name="body" value="/WEB-INF/views/approval/mlist.jsp" />
+   </definition>
+  
+    <definition name="/approval/view" extends="base-definition">
+       <put-attribute name="title" value="lsit" />
+       <put-attribute name="body" value="/WEB-INF/views/approval/view.jsp" />
     </definition>
-   
-     <definition name="/approval/sign" extends="base-definition">
+    
+    <definition name="/approval/mview" extends="base-definition">
        <put-attribute name="title" value="lsit" />
-       <put-attribute name="body" value="/WEB-INF/views/approval/sign.jsp" />
+       <put-attribute name="body" value="/WEB-INF/views/approval/mview.jsp" />
+    </definition>
+
+   
+     <definition name="/approval/complition" extends="base-definition">
+       <put-attribute name="title" value="lsit" />
+       <put-attribute name="body" value="/WEB-INF/views/approval/complition.jsp" />
      </definition>
 
      <definition name="/approval/write" extends="base-definition">
        <put-attribute name="title" value="lsit" />
        <put-attribute name="body" value="/WEB-INF/views/approval/write.jsp" />
    	 </definition>
- 
-     <definition name="/approval/complition" extends="base-definition">
+   	 
+
+     <definition name="/approval/mwrite" extends="base-definition">
        <put-attribute name="title" value="lsit" />
-       <put-attribute name="body" value="/WEB-INF/views/approval/complition.jsp" />
- 	 </definition>
- 
- 
-     <definition name="/approval/write" extends="base-definition">
-       <put-attribute name="title" value="lsit" />
-       <put-attribute name="body" value="/WEB-INF/views/approval/write.jsp" />
+       <put-attribute name="body" value="/WEB-INF/views/approval/mwrite.jsp" />
    	 </definition>
  
-     <definition name="/approval/complition" extends="base-definition">
+     <definition name="/approval/writefail" extends="base-definition">
        <put-attribute name="title" value="lsit" />
-       <put-attribute name="body" value="/WEB-INF/views/approval/complition.jsp" />
+       <put-attribute name="body" value="/WEB-INF/views/approval/writefail.jsp" />
  	 </definition>
+
+<!-- 
+     <definition name="/approval/writeok" extends="base-definition">
+       <put-attribute name="title" value="lsit" />
+       <put-attribute name="body" value="/WEB-INF/views/approval/writeok.jsp" />
+   	 </definition>
+  --> 
  
  
  
- 
-  -->
  
  <!-- 은진 -->
-  
+  	
+  	<definition name="/login/idfindfail" extends="login">       
+       <put-attribute name="body" value="/WEB-INF/views/login/idfindfail.jsp" />
+ 	 </definition> 
+ 	 
+ 	 <definition name="/join/pwfindfail" extends="login">       
+       <put-attribute name="body" value="/WEB-INF/views/join/pwfindfail.jsp" />
+ 	 </definition> 
+  	
  	<definition name="/login/login" extends="login">       
        <put-attribute name="body" value="/WEB-INF/views/login/login.jsp" />
  	 </definition> 

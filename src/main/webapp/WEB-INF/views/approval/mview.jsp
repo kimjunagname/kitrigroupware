@@ -3,10 +3,6 @@
 <%@ include file="/WEB-INF/views/commons/public.jsp" %>
 <%@ include file="/WEB-INF/views/commons/board_common.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!-- summernote -->
-<link href="${root}/summernote0.8.9dist/dist/summernote-lite.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css" rel="stylesheet">
-
 	
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 
@@ -41,41 +37,56 @@
 								          "enabled": true
 								        }}'>
 									<tbody>
+										<c:forEach items="${ViewApproval}" var="map">
 										<tr data-expanded="true">
 											<td>문서번호</td>
-											<td></td>
+											<td>${map.APV_SQ}</td>
 											<td>기안</td>
-											<td></td>
-											<td></td>
+											<td>${map.DPT_NM}</td>
+											<td>${map.STF_NM}</td>
 										</tr>
 
 										<tr>
 											<th>문서분류</td>
-											<td></td>
+											<td>${map.DIV_APV_NM}</td>
+											</c:forEach>
+											<c:forEach items="${ViewApproval}" var="map">
 												<td>확인</td>
-												<td></td>
-												<td></td>
-										</tr>									
+												<td>인사과</td>
+												<td>김정남</td>
+										</tr>
+											</c:forEach>
+									
+										
+										<c:forEach items="${ViewApproval}" var="map">
 										<tr>
 											<th>제목</td>
-											 <td colspan="2">
-											 	<input type="text" class="form-control">
-											 </td>
-											<th></th> 
+											 <td colspan="2">${map.APV_NM}</td>
+										</c:forEach>
+										<c:forEach items="${ViewApproval}" var="map">	 
+											<th>인사과</td>
+											<th>송민섭</td> 
 										</tr>
+										</c:forEach>
+										<c:forEach items="${ViewApproval}" var="map">
 										<tr>
-											<!-- 아래에 썸머노트 rink와 script있음 -->
-												<td colspan="5"><textarea id="summernote" name="content"></textarea></td>
-
+											<td colspan="5">
+												<text name="content" readonly="readonly" height="30" width="100%">${map.CONTENT}</text>
+								           	</td>
 										</tr>
+										</c:forEach>
+										
+										 
 									</tbody>
 								</table>
 							</div>
 						</div>
 
 						<div class="w3ls_head">
-							<input id = "approval"type="button" value="결재 상신" class="btn btn-info">
-							<input id = "cancel"type="button" value="취소" class="btn btn-info">
+							<input id = "glist"type="button" value="일반 공문 목록" class="btn btn-info">
+							<input id = "clist"type="button" value="협조 공문 목록" class="btn btn-info">
+							<input id = "elist"type="button" value="기타 공문 목록" class="btn btn-info">
+							<input id = "mlist"type="button" value="메모 보고 목록" class="btn btn-info">
 						</div>
 					</div>
 				</div>
@@ -84,29 +95,22 @@
 	<!-- </section> 2개는 template.jsp에 위치 -->
 
 <!-- 스크립트 -->
-<!-- summernote -->
-<script	src="${root}/summernote0.8.9dist/dist/summernote-lite.js"></script>
-<script	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>
-
-<script type="text/javascript">
-  $(function() {
-    $('#summernote').summernote({
-      height: 300,         
-      minHeight: null,      
-      maxHeight: null,     
-      lang: 'ko-KR'      
-    });
-  });
-</script>
-
 <script src="${root}/js/board.js"></script>
 <script>
 control = "${root}/approval";
 initPath();
 $(document).ready(function() {
 		
+	$("#glist").click(function() {
+		$("#bcode").val("");
+		$("#seq").val("");
+		$("#pg").val("1");
+		$("#key").val("");
+		$("#word").val("");
+		$("#commonform").attr("method", "get").attr("action", glistpath).submit();
+	});
 
-	$("#approval").click(function() {
+	$("#clist").click(function() {
 		$("#bcode").val("");
 		$("#seq").val("");
 		$("#pg").val("1");
@@ -115,7 +119,7 @@ $(document).ready(function() {
 		$("#commonform").attr("method", "get").attr("action", clistpath).submit();
 	});
 
-	$("#cancel").click(function() {
+	$("#elist").click(function() {
 		$("#bcode").val("");
 		$("#seq").val("");
 		$("#pg").val("1");
@@ -123,7 +127,14 @@ $(document).ready(function() {
 		$("#word").val("");
 		$("#commonform").attr("method", "get").attr("action", elistpath).submit();
 	});
-
+	$("#mlist").click(function() {
+		$("#bcode").val("");
+		$("#seq").val("");
+		$("#pg").val("1");
+		$("#key").val("");
+		$("#word").val("");
+		$("#commonform").attr("method", "get").attr("action", mlistpath).submit();
+	});
 
 });	
 </script>	

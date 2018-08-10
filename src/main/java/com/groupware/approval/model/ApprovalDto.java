@@ -1,22 +1,25 @@
 package com.groupware.approval.model;
 
-public class ApprovalDto {
+public class ApprovalDto  {
 
 	private int apv_sq;  /* 결재번호 */
 	private int div_apv_sq;  /* 결재구분번호 */
 	private String stf_sq;/* 사원번호 */
 	private String stf_mid_sq;  /* 중간승인자 */
 	private String stf_fnl_sq; /* 최종승인자 */
-	private String apv_ok_sq; /* 결재승인번호 */
+	private int apv_ok_sq; /* 결재승인번호 */
 	private String apv_nm; /* 제목 */
 	private String apv_pl_rt; /* 파일경로 */
 	private String apv_pl_nm;  /* 파일명 */
 	private String apv_no; /* 반려사유 */
-	public int getApv_sq() {
-		return apv_sq;
+	private String content;
+	
+	
+	public String getContent() {
+		return content;
 	}
-	public void setApv_sq(int apv_sq) {
-		this.apv_sq = apv_sq;
+	public void setContent(String content) {
+		this.content = content;
 	}
 	public int getDiv_apv_sq() {
 		return div_apv_sq;
@@ -24,6 +27,14 @@ public class ApprovalDto {
 	public void setDiv_apv_sq(int div_apv_sq) {
 		this.div_apv_sq = div_apv_sq;
 	}
+	public int getApv_sq() {
+		return apv_sq;
+	}
+	public void setApv_sq(int apv_sq) {
+		this.apv_sq = apv_sq;
+	}
+
+	
 	public String getStf_sq() {
 		return stf_sq;
 	}
@@ -42,10 +53,10 @@ public class ApprovalDto {
 	public void setStf_fnl_sq(String stf_fnl_sq) {
 		this.stf_fnl_sq = stf_fnl_sq;
 	}
-	public String getApv_ok_sq() {
+	public int getApv_ok_sq() {
 		return apv_ok_sq;
 	}
-	public void setApv_ok_sq(String apv_ok_sq) {
+	public void setApv_ok_sq(int apv_ok_sq) {
 		this.apv_ok_sq = apv_ok_sq;
 	}
 	public String getApv_nm() {
