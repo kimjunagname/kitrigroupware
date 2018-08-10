@@ -10,6 +10,4 @@ public interface ScheduleDao {
 	
 	List <ScheduleDto> getScheduleList(int stf_sq); //사원번호로 list가져오기
 	void addSchedule(ScheduleDto dto);
-	
-	String getToday();
 }

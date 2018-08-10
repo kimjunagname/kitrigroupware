@@ -174,6 +174,7 @@
 								          "enabled": true
 								        }}'>
 								        
+								         ${ }
 								         <thead>
 								          <tr data-expanded="true">
 								           <th data-breakpoints="xs">문서번호</th>

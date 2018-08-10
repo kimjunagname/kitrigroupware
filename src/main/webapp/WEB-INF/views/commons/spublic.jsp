@@ -7,8 +7,7 @@
 <link rel="stylesheet" type="text/css" href="${root }/js/fullcalendar/fullcalendar.min.css"/>
 <link rel="stylesheet" media="print" type="text/css" href="${root }/js/fullcalendar/fullcalendar.print.min.css"/>
 <!-- fullcalendar -->
-<%-- <script src="${root}/js/fullcalendar/lib/jquery.min.js"></script> --%>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script src="${root}/js/fullcalendar/lib/jquery.min.js"></script>
 <script src="${root}/js/fullcalendar/lib/jquery-ui.min.js"></script>
 	
 <!-- bootstrap-css -->

@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<c:set var= "stf_sq" value= "62"></c:set>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <!-- body start -->
 <section id="container">
@@ -12,16 +11,17 @@
 			<div class="table-agile-info">
 				<div class="row">
 					<!--main content start-->
-					
-					<!-- Calendar 시작 -->
+
+
+					<!-- Calendar start -->
 					<div id="divCalendar">
 						<div id="calendar"></div>
 					</div>
-					<!-- Calendar 끝 -->
+					<!-- Calendar end -->
 					
 					<div>&nbsp;</div>
 					
-					<!-- 스케쥴 등록 MODAL 시작 -->
+					<!-- Modal -->
 					<div align= "center">
 						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">일정 등록하기</button>
 					</div>
@@ -44,7 +44,7 @@
 											<div class="col-lg-10">
 											<!-- spring form 태그로 select 불러오기 -->
 											<form:form commandName="ScheduleDivisionDto">
-												<form:select path="Scd_nm" items="${stype}" id="sselect"></form:select>
+												<form:select path="Scd_nm" items="${stype}"></form:select>
 											</form:form>
 											</div>
 										</div>
@@ -82,7 +82,7 @@
 
 						</div>
 					</div>
-					<!-- 스케쥴 등록 MODAL 끝 -->
+					<!-- modal end -->
 					<!--main content end-->
 				</div>
 			</div>
@@ -91,12 +91,13 @@
 
 </section>
 <!--main content end-->
+
 <style>
 
   body {
     margin: 40px 10px;
     padding: 0;
-    font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;9
+    font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
     font-size: 14px;
   }
 
@@ -106,7 +107,22 @@
   }
 
 </style>
-<!-- summernote 시작 -->
+<style>
+
+  body {
+    margin: 40px 10px;
+    padding: 0;
+    font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+    font-size: 14px;
+  }
+
+  #calendar {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+</style>
+<!-- summernote -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>
 
@@ -120,79 +136,79 @@
     });
   });
 </script>
-<!-- summernote 끝 -->
-
 <script>
-// 시작하면 getList 함수 시작
-$(document).ready(function() {
-	getList();
-});
+  $(document).ready(function() {
 
-// ajax로 스케쥴리스트 가져오기
-function getList(){
-	$.ajax({
-		url : "${root}/schedule/slist/${stf_sq}",
-		type : 'POST',
-		contentType : 'application/json;charset=UTF-8',
-		dataType : 'json',
-		success : function(data){
-			makeList(data);
-		}
-	});
-}
-
-// 스케쥴리스트로 달력이벤트 만들기
-function makeList(data){
-	var sList= data.scheduleList;
-    var eList= "";
+    $('#calendar').fullCalendar({
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,basicWeek,basicDay'
+      },
+      defaultDate: '2018-03-12',
+      navLinks: true, // can click day/week names to navigate views
+      editable: true,
+      eventLimit: true, // allow "more" link when too many events
+      events: [
+        {
+          title: 'NaYeong Made Event',
+          start: '2018-03-01'
+        },
+        {
+          title: 'Long Event',
+          start: '2018-03-07',
+          end: '2018-03-10'
+        },
+        {
+          id: 999,
+          title: 'Repeating Event',
+          start: '2018-03-09T16:00:00'
+        },
+        {
+          id: 999,
+          title: 'Repeating Event',
+          start: '2018-03-16T16:00:00'
+        },
+        {
+          title: 'Conference',
+          start: '2018-03-11',
+          end: '2018-03-13'
+        },
+        {
+          title: 'Meeting',
+          start: '2018-03-12T10:30:00',
+          end: '2018-03-12T12:30:00'
+        },
+        {
+          title: 'Lunch',
+          start: '2018-03-12T12:00:00'
+        },
+        {
+          title: 'Meeting',
+          start: '2018-03-12T14:30:00'
+        },
+        {
+          title: 'Happy Hour',
+          start: '2018-03-12T17:30:00'
+        },
+        {
+          title: 'Dinner',
+          start: '2018-03-12T20:00:00'
+        },
+        {
+          title: 'Birthday Party',
+          start: '2018-03-13T07:00:00'
+        },
+        {
+          title: 'Click for Google',
+          url: 'http://google.com/',
+          start: '2018-03-28'
+        }
+      ]
+    });
+ });
     
-    eList+= "[";
-    for(var i=0; i<sList.length; i++){
-    	if(i!= sList.length-1){ // 처음~ 마지막리스트 전
-    		eList+= "{ \n";
-    		eList+= "id : '"+ sList[i].bs_scd_sq+ "', \n";
-    		eList+= "title : '"+ sList[i].bs_scd_nm+ "', \n";
-    		eList+= "start : '2018-08-"+ (i+1) +"', \n";
-    		eList+= "}, ";
-    	} else { // 마지막리스트일때
-    		eList+= "{ \n";
-	    	eList+= "id : '"+ sList[i].bs_scd_sq+ "', \n";
-	    	eList+= "title : '"+ sList[i].bs_scd_nm+ "', \n";
-	    	eList+= "start : '2018-08-"+ (i+1) +"', \n";
-	    	//eList+= "start : '"+ sList[i].bs_scd_str_dt+ "', \n";
-	    	eList+= "}";
-    	}
-    }
-    eList+= "]";
-	
-	console.log(eList);
-	$('#calendar').fullCalendar({
-	    header: {
-	        left: 'prev,next today',
-	        center: 'title',
-	        right: 'month,basicWeek,basicDay'
-	    },
-	    defaultDate: "${today}",
-	    editable: true,
-	    
-	    eventDrop: function(event){
-	        event.start._i = event.start.format();
-	    },
-	    eventResize: function(event) {
-	        event.end._i = event.end.format();
-	    },
-	    
-	    eventLimit: true, // allow "more" link when too many events
-	    
-	    events: eList
-	    
+    $(document).on("click", "#registBtn", function() {
+		$("#sform").attr("method", "post").attr("action", "${root}/schedule/sadd.kitri").submit();
 	});
-}
-
 </script>
-
-
-
-
-
-

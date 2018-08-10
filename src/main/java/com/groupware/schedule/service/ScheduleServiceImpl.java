@@ -4,8 +4,6 @@ import java.sql.*;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,27 +23,8 @@ public class ScheduleServiceImpl implements ScheduleService {
 	}
 
 	@Override
-	public String getScheduleList(int stf_sq) {
-		List<ScheduleDto> list= sqlSession.getMapper(ScheduleDao.class).getScheduleList(stf_sq);
-		JSONObject json= new JSONObject();
-		JSONArray array= new JSONArray();
-		
-		for(ScheduleDto dto: list) {
-			JSONObject schedule= new JSONObject();
-			schedule.put("bs_scd_sq", dto.getBs_scd_sq());
-			schedule.put("scd_sq", dto.getScd_sq());
-			schedule.put("stf_sq", dto.getStf_sq());
-			schedule.put("bs_scd_nm", dto.getBs_scd_nm());
-			schedule.put("bs_scd_cnt", dto.getBs_scd_cnt());
-			schedule.put("bs_scd_str_dt", dto.getBs_scd_str_dt());
-			schedule.put("bs_scd_end_dt", dto.getBs_scd_end_dt());
-			
-			array.put(schedule);
-		}
-		
-		json.put("scheduleList", array);
-		
-		return json.toString();
+	public List<ScheduleDto> getScheduleList(int stf_sq) {
+		return sqlSession.getMapper(ScheduleDao.class).getScheduleList(stf_sq);
 	}
 
 	@Override
@@ -86,10 +65,5 @@ public class ScheduleServiceImpl implements ScheduleService {
 //			e.printStackTrace();
 //		}
 		sqlSession.getMapper(ScheduleDao.class).addSchedule(dto);
-	}
-
-	@Override
-	public String getToday() {
-		return sqlSession.getMapper(ScheduleDao.class).getToday();
 	}
 }
