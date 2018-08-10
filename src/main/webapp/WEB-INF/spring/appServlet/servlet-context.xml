@@ -42,6 +42,8 @@
    <mvc:resources mapping="/images/**" location="/resources/board/images/"/>
    <mvc:resources mapping="/js/**" location="/resources/board/js/"/>
    <mvc:resources mapping="/fonts/**" location="/resources/board/fonts/"/>
+   <mvc:resources mapping="/easyui/**" location="/resources/easyui/"/>
+   
    
    <!-- file upload -->
 	<beans:bean id="multipartResolver"

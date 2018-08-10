@@ -32,19 +32,18 @@
 										</td>
 									</tr>
 									<tr>
-										<th>받는 사람(* 사원번호 입력) </th>
+										<th>보내는 사람(* 사원번호 입력) </th>
 										<td>
 											<div class="col-xs-4">
-												<input type="text" id="stf_rcv_email" name="stf_rcv_sq" class="form-control">
+												<input type="text" id="stf_rcv_email" name="stf_rcv_sq" class="form-control" value="${userinfo.stf_sq}" readonly="readonly">
 											</div>
 										</td>										
 									</tr>
 									<tr>
-										<th>보내는 사람(* 사원번호 입력) </th>
+										<th>받는 사람(* 사원번호 입력) </th>
 										<td>
 											<div class="col-xs-4">
-												<input type="text" id="stf_snd_email" name="stf_snd_sq" class="form-control"
-												value="${userinfo.stf_sq}" readonly="readonly">
+												<input type="text" id="stf_snd_email" name="stf_snd_sq" class="form-control">
 											</div>
 										</td>										
 									</tr>
@@ -171,27 +170,26 @@
 										<tr class="active">
 											<th align="center">선택</th>
 											<th align="center">제목</th>
-											<th align="center">이름</th>
+											<th align="center">받은사번</th>
 											<th align="center">수신시간</th>
 										</tr>
 									</thead>
 									<tbody>
 									<c:forEach items="${rcvList}" var="emailDto">
 										<tr valign="middle">
-											<td class="eml_rm" data-value="${emailDto.eml_sq}"><input
-												type="checkbox" class="check" value="${emailDto.eml_sq}"></td>
-											<td class="eml_rd" data-value="${emailDto.eml_sq}"><a href='#' data-toggle="modal"
-												data-target="#readModal">${emailDto.eml_nm}</a></td>
-											<td>${emailDto.stf_nm}</td>
+											<td class="eml_rm" data-value="${emailDto.eml_sq}">
+											<input type="checkbox" class="check" value="${emailDto.eml_sq}"></td>
+											<td class="eml_rd" data-value="${emailDto.eml_sq}">
+												<a href='#' data-toggle="modal" data-target="#readModal">${emailDto.eml_nm}</a>
+											</td>
+											<td>${emailDto.stf_snd_sq}</td>
 											<td>${emailDto.rcv_dt}</td>
 										</tr>
 									</c:forEach>
 									</tbody>
 									</table>
 						</div>
-					<div class="unstyled inbox-pagination" align="center">
-						<span>${pageIndexList}</span>
-					</div>
+					
 				</div>
 				</section>
 			</div>

@@ -83,7 +83,6 @@ public class EmailController {
 	
 	@RequestMapping(value = "/rcvList.kitri", method = RequestMethod.GET)
 	public String rcvListAll(HttpServletRequest request,HttpSession session,Model model, @RequestParam Map<String, String> map) throws Exception {
-		
 		String stf_sq;	
 		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 		map.put("stf_sq", memberDto.getStf_sq());	
@@ -104,7 +103,7 @@ public class EmailController {
 		int current_page = 1;
 		// 만약 사용자로부터 페이지를 받아왔다면
 		if (request.getParameter("page") != null) {
-			current_page = Integer.parseInt((String)request.getParameter("page"));
+			current_page = Integer.parseInt((String) request.getParameter("page"));
 		}	
 		// jsp에 뿌릴 페이지 태그를 만들어서 보낸다.
 		String pageIndexList = paging.pageIndexList(totalCnt, current_page);
@@ -165,13 +164,9 @@ public class EmailController {
 		List rcvList = new ArrayList<HashMap<String, Object>>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			// 세션이 있는지 확인한다, 만약 없다면 새로 생성하지 않는다.
 			session = request.getSession(false);
 			String stf_sq = null;
-			// 세션을 불러와 admn_id에 넣는다. 없다면 null이나 ""이가 들어오겟죠
 			stf_sq = (String)session.getAttribute("stf_sq");
-			// 페이징 처리 
-			AjaxPaging paging = new AjaxPaging();
 			String stf_rcv_sq = stf_sq;
 			// 총 게시물 수 
 			params.setStf_rcv_sq(stf_rcv_sq);
@@ -183,15 +178,8 @@ public class EmailController {
 				current_page = Integer.parseInt(params.getPage());
 			}
 			// jsp에 뿌릴 페이지 태그를 만들어서 보낸다.
-			String pageIndexListAjax = paging.pageIndexListAjax(totalCnt, current_page);
-			// SQL 쿼리문에 넣을 조건문
-			int startCount = (current_page - 1) * 10 + 1;
-			int endCount = current_page * 10;
-			params.setStartCount(startCount);
-			params.setEndCount(endCount);
 			params.setStf_rcv_sq(stf_rcv_sq);
 			rcvList = emailService.rcvListAll(params);
-			map.put("pageIndexListAjax", pageIndexListAjax);
 			map.put("rcvList", rcvList);
 			result.putAll(map);
 		} catch(Exception e) {
@@ -311,27 +299,22 @@ public class EmailController {
 	}
 	
 	@RequestMapping(value = "/register.kitri", method = RequestMethod.POST)
-	public String registPOST(EmailDto emailDto,HttpServletRequest request,MultipartFile file,HttpSession session, RedirectAttributes rttr) throws Exception {
+	public String registPOST(EmailDto emailDto,HttpServletRequest request,MultipartFile file, RedirectAttributes rttr) throws Exception {
 		try{
-			System.out.println("메일보내기");
 			FileUpload fileupload = new FileUpload();
-			System.out.println(emailDto.toString());
+			System.out.println("Email DTO : "+emailDto.toString());
 			String savedName = fileupload.uploadfile(file.getOriginalFilename(), file.getBytes(), uploadPath);
-			System.out.println(savedName+"======");
+			System.out.println("저장된 파일이름 : "+savedName);
 			emailDto.setEml_pl_crs("/resources/file/" + savedName);
 			emailDto.setEml_pl_nm(file.getOriginalFilename());
 			
-			//session = request.getSession(false);
-			//String stf_sq = null;
-			//stf_sq = (String)session.getAttribute("stf_sq");
-			//emailDto.setStf_snd_sq(stf_sq);
-			emailService.regist(emailDto);  //eml_tb
-			emailService.regist2(emailDto);  //eml_rcv_tb
+			emailService.regist(emailDto); // eml_tb Insertion.
+			emailService.regist2(emailDto); // eml_rcv_tb Insertion.
 			emailService.regist3(emailDto);  //eml_snd_tb
 			rttr.addFlashAttribute("msg", "SUCCESS");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/email/rcvList?stf_rcv_sq=1";
+		return "redirect:/email/rcvList.kitri";
 	}
 }

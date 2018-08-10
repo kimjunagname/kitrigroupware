@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.groupware.email.dao.EmailDao;
 import com.groupware.email.model.EmailDto;
@@ -30,13 +31,13 @@ public class EmailServiceImpl implements EmailService {
 	@Override
 	public int rcvCount(String stf_rcv_sq) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.getMapper(EmailDao.class).rcvCount(stf_rcv_sq);
 	}
 
 	@Override
 	public List<EmailDto> rcvListAll(EmailDto emailDto) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.getMapper(EmailDao.class).rcvListAll(emailDto);
 	}
 
 	@Override
@@ -72,7 +73,7 @@ public class EmailServiceImpl implements EmailService {
 	@Override
 	public EmailDto read(Map<String, Object> param) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.getMapper(EmailDao.class).read(param);
 	}
 
 	@Override
@@ -82,18 +83,21 @@ public class EmailServiceImpl implements EmailService {
 	}
 
 	@Override
+	@Transactional
 	public void regist(EmailDto emailDto) throws Exception {
 		// TODO Auto-generated method stub
 		sqlSession.getMapper(EmailDao.class).regist(emailDto);
 	}
 
 	@Override
+	@Transactional
 	public void regist2(EmailDto emailDto) throws Exception {
 		// TODO Auto-generated method stub
 		sqlSession.getMapper(EmailDao.class).regist2(emailDto);
 	}
 
 	@Override
+	@Transactional
 	public void regist3(EmailDto emailDto) throws Exception {
 		// TODO Auto-generated method stub
 		sqlSession.getMapper(EmailDao.class).regist3(emailDto);
