@@ -322,8 +322,21 @@ public class ApprovalController {
 		}
 		approvalDto.setStf_sq(memberDto.getStf_sq());
 		int seq = approvalService.writeApproval(approvalDto);
+		int code = approvalDto.getDiv_apv_sq(); 
+		System.out.println("code"+ code);
 		if(seq != 0) {
-			mav.setViewName("/approval/complition"); // /webapp/pds5/list.jsp			
+			if(code == 1) {
+				
+//				return "/approval/list";
+				//리다이렉트를 통해서 /approval/list.kitri 이동
+				mav.setViewName("redirect:/approval/glist.kitri");	
+			}else if(code == 2) {
+				mav.setViewName("redirect:/approval/clist.kitri");
+			}else if(code == 4) {
+				mav.setViewName("redirect:/approval/elist.kitri");
+			}else if(code == 3) {
+				mav.setViewName("redirect:/approval/mlist.kitri");
+			}
 		} else {
 			mav.setViewName("/approval/writefail");
 		}
@@ -332,14 +345,18 @@ public class ApprovalController {
 		return mav;
 	}
 	
-	//@RequestMapping("/mwrite.kitri")
-	//public ModelAndView mwriteApprovalManager(Map<String, Object> map) {
-	//	System.out.println("ApprovalController in!!! -- write");
-		//List<MemberDto> list = approvalService.getListAdminManager();
-		//map.put("menulist", list);
-	//	ModelAndView mav = new ModelAndView();
-	//    mav.setViewName("/approval/mwrite"); // /webapp/pds5/list.jsp
-	//	return mav;
-	//}
+	@RequestMapping(value="/mwrite.kitri", method=RequestMethod.GET)
+	public ModelAndView mwriteApprovalManager(HttpSession session, @RequestParam Map<String, String> map) {
+		System.out.println("ApprovalController in!!! -- GET - mwrite > mwrite");
+		
+		ModelAndView mav = new ModelAndView();
+		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+		map.put("stf_sq", memberDto.getStf_sq());
+		if(map.size() == 0) {
+			map.put("stf_sq", (String) session.getAttribute("stf_sq"));
+		}
+	    mav.setViewName("/approval/mwrite"); // /webapp/pds5/list.jsp
+		return mav;
+	}
 	
 }

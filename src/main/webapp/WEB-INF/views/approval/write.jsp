@@ -76,9 +76,9 @@
 								        		<th></th>
 								        		<th>구분</th>
 								        		<th colspan="7">
-								        			<input type="checkbox" name="div_apv_sq" value="1" checked="checked"> 일반
-								        			<input type="checkbox" name="div_apv_sq" value="2"> 협조
-								        			<input type="checkbox" name="div_apv_sq" value="3"> 기타								        			
+								        			<input type="radio" name="div_apv_sq" value="1" checked="checked"> 일반
+								        			<input type="radio" name="div_apv_sq" value="2"> 협조
+								        			<input type="radio" name="div_apv_sq" value="4"> 기타								        			
 								        		</th>
 								        		<!-- <th></th>
 								        		<th></th>

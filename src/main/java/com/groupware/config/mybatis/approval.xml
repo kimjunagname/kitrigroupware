@@ -14,6 +14,7 @@
 	and APV_TB.STF_SQ = #{stf_sq}
 	and APV_TB.DIV_APV_SQ = '1'
 	and rownum &lt;= '3'
+	order by APV_TB.APV_SQ DESC
 	</select>
 	
 
@@ -26,6 +27,7 @@
 	and APV_TB.STF_SQ = #{stf_sq}
 	and APV_TB.DIV_APV_SQ = '2'
 	and rownum &lt;= '3'
+	order by APV_TB.APV_SQ DESC
 	</select>
 
 	<select id="mListApproval" parameterType="map" resultType="map">
@@ -37,6 +39,7 @@
 	and APV_TB.STF_SQ = #{stf_sq}
 	and APV_TB.DIV_APV_SQ = '3'
 	and rownum &lt;= '3'
+	order by APV_TB.APV_SQ DESC
 	</select>
 
 	<select id="eListApproval" parameterType="map" resultType="map">
@@ -48,6 +51,7 @@
 	and APV_TB.STF_SQ = #{stf_sq}
 	and APV_TB.DIV_APV_SQ = '4'
 	and rownum &lt;= '3'
+	order by APV_TB.APV_SQ DESC
 	</select>
 
 
@@ -59,6 +63,7 @@
 	where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
 	and APV_TB.STF_SQ = #{stf_sq}
 	and APV_TB.DIV_APV_SQ = '1'
+	order by APV_TB.APV_SQ DESC
 	</select>
 	
 
@@ -70,6 +75,7 @@
 	where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
 	and APV_TB.STF_SQ = #{stf_sq}
 	and APV_TB.DIV_APV_SQ = '2'
+	order by APV_TB.APV_SQ DESC
 	</select>
 
 	<select id="tmListApproval" parameterType="map" resultType="map">
@@ -80,6 +86,7 @@
 	where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
 	and APV_TB.STF_SQ = #{stf_sq}
 	and APV_TB.DIV_APV_SQ = '3'
+	order by APV_TB.APV_SQ DESC
 	</select>
 
 	<select id="teListApproval" parameterType="map" resultType="map">
@@ -90,6 +97,7 @@
 	where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
 	and APV_TB.STF_SQ = #{stf_sq}
 	and APV_TB.DIV_APV_SQ = '4'
+	order by APV_TB.APV_SQ DESC
 	</select>
 
 
@@ -219,6 +227,7 @@
     and   DPT_DIV_TB.DPT_SQ = STF_TB.DPT_SQ	
     and APV_TB.STF_SQ = #{stf_sq}
     and APV_TB.APV_SQ = #{seq}
+    order by APV_TB.APV_SQ DESC
 	</select>
 
 

@@ -40,6 +40,14 @@
 								        "sorting": {
 								          "enabled": true
 								        }}'>
+								     <form id="writeForm" name="writeForm" method="post" action="" style="margin: 0px">
+											<div id="attach_file_hdn"></div>
+											
+											<input type="hidden" name="bcode" value="${bcode}">
+											<input type="hidden" name="pg" value="1">
+											<input type="hidden" name="key" value="">
+											<input type="hidden" name="word" value="">
+								        
 									<tbody>
 										<tr data-expanded="true">
 											<td>문서번호</td>
@@ -51,7 +59,9 @@
 
 										<tr>
 											<th>문서분류</td>
-											<td></td>
+											<td>
+												<input type="radio" name="div_apv_sq" value="3" checked="checked"> 메모
+											</td>
 												<td>확인</td>
 												<td></td>
 												<td></td>
@@ -59,22 +69,22 @@
 										<tr>
 											<th>제목</td>
 											 <td colspan="2">
-											 	<input type="text" class="form-control">
+											 	<input type="text" class="form-control" name="apv_nm">
 											 </td>
 											<th></th> 
 										</tr>
 										<tr>
 											<!-- 아래에 썸머노트 rink와 script있음 -->
 												<td colspan="5"><textarea id="summernote" name="content"></textarea></td>
-
 										</tr>
 									</tbody>
+									</form>
 								</table>
 							</div>
 						</div>
 
 						<div class="w3ls_head">
-							<input id = "approval"type="button" value="결재 상신" class="btn btn-info">
+							<input type="button" value="결재상신" class="btn btn-info" id="registerBtn" name="registerBtn">
 							<input id = "cancel"type="button" value="취소" class="btn btn-info">
 						</div>
 					</div>
@@ -83,10 +93,9 @@
 	</section>
 	<!-- </section> 2개는 template.jsp에 위치 -->
 
-<!-- 스크립트 -->
 <!-- summernote -->
-<script	src="${root}/summernote0.8.9dist/dist/summernote-lite.js"></script>
-<script	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>
 
 <script type="text/javascript">
   $(function() {
@@ -99,34 +108,24 @@
   });
 </script>
 
-<script src="${root}/js/board.js"></script>
-<script>
+<script type="text/javascript">
 control = "${root}/approval";
 initPath();
+
 $(document).ready(function() {
-		
-
-	$("#approval").click(function() {
-		$("#bcode").val("");
-		$("#seq").val("");
-		$("#pg").val("1");
-		$("#key").val("");
-		$("#word").val("");
-		$("#commonform").attr("method", "get").attr("action", clistpath).submit();
+	$("#registerBtn").click(function() {
+		if($("#apv_nm").val() == "") {
+			alert("제목입력!!!");
+			return;
+		} else if($("#content").val() == "") {
+			alert("내용입력!!!");
+			return;
+		} else {
+			$("#writeForm").attr("method", "post").attr("action", writepath).submit();
+		}
 	});
-
-	$("#cancel").click(function() {
-		$("#bcode").val("");
-		$("#seq").val("");
-		$("#pg").val("1");
-		$("#key").val("");
-		$("#word").val("");
-		$("#commonform").attr("method", "get").attr("action", elistpath).submit();
-	});
-
-
-});	
-</script>	
+});
+</script>
 
 	
 	

@@ -602,6 +602,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<p>© 2018 KITRIWARE All rights reserved | Design by DC #26 3TEAM</p>
 		</div>
 	</div>
+	
 	<!-- / footer --> </section> <!--main content end--> </section>
 	<script src="${root}/js/bootstrap.js"></script>
 	<script src="${root}/js/jquery.dcjqaccordion.2.7.js"></script>

@@ -91,8 +91,8 @@
 								           <td>${map.APV_MID_SQ}</td>
 								           <td>${map.APV_FNL_SQ}</td>								          
 								          </tr>
-								          </c:forEach>
 								        </tbody>
+										</c:forEach>
 								      </table>
 								      </div>
 								  </div>

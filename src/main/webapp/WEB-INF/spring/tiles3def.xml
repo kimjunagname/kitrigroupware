@@ -119,6 +119,9 @@
        <put-attribute name="body" value="/WEB-INF/views/approval/writefail.jsp" />
  	 </definition>
 
+
+
+
 <!-- 
      <definition name="/approval/writeok" extends="base-definition">
        <put-attribute name="title" value="lsit" />

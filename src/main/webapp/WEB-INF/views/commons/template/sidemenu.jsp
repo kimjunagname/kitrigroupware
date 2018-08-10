@@ -209,9 +209,9 @@ ul.sidebar-menu li a.active i {
                         <span>전자결재</span>
                     </a>
                     <ul class="sub">
-						<li><a href="${root}/approval/list.kitri">처리할 일</a></li>
+						<li><a href="${root}/approval/list.kitri">목록</a></li>
 						<li><a href="${root}/approval/write.kitri">기안</a></li>
-						<li><a href="${root}/approval/mwrite.kitri">메모기안</a></li>
+						<li><a href="${root}/approval/mwrite.kitri">메모보고</a></li>
                     </ul>
                 </li>
                 
