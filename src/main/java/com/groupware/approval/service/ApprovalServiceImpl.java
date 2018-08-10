@@ -133,7 +133,6 @@ public class ApprovalServiceImpl implements ApprovalService {
 
 	@Override
 	public List<ApprovalDto> tmListApproval(Map<String, String> map) {
-		// TODO Auto-generated method stub
 		return sqlSession.getMapper(ApprovalDao.class).tmListApproval(map);
 	}
 
@@ -143,5 +142,11 @@ public class ApprovalServiceImpl implements ApprovalService {
 		return sqlSession.getMapper(ApprovalDao.class).teListApproval(map);
 	}
 
+	@Override
+	public int writeApproval(ApprovalDto approvalDto) {
+		return sqlSession.getMapper(ApprovalDao.class).writeApproval(approvalDto);
+	}
+
+	
 	
 }

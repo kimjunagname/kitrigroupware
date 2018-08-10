@@ -35,7 +35,7 @@ public interface ApprovalDao {
 	//공문 선택 뷰
 	List<ApprovalDto> ViewApproval(Map<String, String> map);
 	
-
+	int writeApproval(ApprovalDto approvalDto);
 	
 	
 }

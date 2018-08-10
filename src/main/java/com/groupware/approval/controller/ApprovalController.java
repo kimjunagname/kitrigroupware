@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -187,54 +188,26 @@ public class ApprovalController {
 			}
 			
 			List <ApprovalDto> tcListApproval = approvalService.tcListApproval(map);
-			//List <ApprovalDto> mListApproval = approvalService.mListApproval(map);
-			//List <ApprovalDto> cListApproval = approvalService.cListApproval(map);
-			
+		
 			List <ApprovalDto> cListCountApproval = approvalService.cListCountApproval(map);
-			//List <ApprovalDto> mListCountApproval = approvalService.mListCountApproval(map);
-			//List <ApprovalDto> eListCountApproval = approvalService.eListCountApproval(map);
 			
 			//진행
 			List <ApprovalDto> cProgress = approvalService.cProgress(map);
-			//List <ApprovalDto> mProgress = approvalService.mProgress(map);
-			//List <ApprovalDto> eProgress = approvalService.eProgress(map);
 			
 			//종료
 			List <ApprovalDto> cEndApproval = approvalService.cEndApproval(map);
-			//List <ApprovalDto> mEndApproval = approvalService.mEndApproval(map);
-			//List <ApprovalDto> eEndApproval = approvalService.eEndApproval(map);		
-			
-			
+						
 			mav.addObject("stf_sq", session.getAttribute("stf_sq"));
 			mav.addObject("cListCountApproval", cListCountApproval);
-			//mav.addObject("mListCountApproval", mListCountApproval);
-			//mav.addObject("eListCountApproval", eListCountApproval);	
-			
 			mav.addObject("tcListApproval", tcListApproval);
-			//mav.addObject("eListApproval", eListApproval);
-			//mav.addObject("mListApproval", mListApproval);	
-			
 			mav.addObject("cProgress", cProgress);
-			//mav.addObject("mProgress", mProgress);
-			//mav.addObject("eProgress", eProgress);			
-			
 			mav.addObject("cEndApproval", cEndApproval);
-			//mav.addObject("mEndApproval", mEndApproval);
-			//mav.addObject("eEndApproval", eEndApproval);		
 			
 			System.out.println("tcListApproval" + tcListApproval);
 			System.out.println("cListCountApproval" + cListCountApproval);
-			//System.out.println("mListCountApproval" + mListCountApproval);
-			//System.out.println("eListCountApproval" + eListCountApproval);
-			
 			System.out.println("cProgress" + cProgress);
-			//System.out.println("mProgress" + mProgress);
-			//System.out.println("eProgress" + eProgress);
-			
 			System.out.println("cEndApproval" + cEndApproval);
-			//System.out.println("mEndApproval" + mEndApproval);
-			//System.out.println("eEndApproval" + eEndApproval);
-			
+
 		    mav.setViewName("/approval/clist"); // /webapp/pds5/list.jsp
 			return mav;
 		}
@@ -273,9 +246,7 @@ public class ApprovalController {
 			
 			System.out.println("teListApproval" + teListApproval);
 			System.out.println("eListCountApproval" + eListCountApproval);
-			
 			System.out.println("eProgress" + eProgress);
-			
 			System.out.println("eEndApproval" + eEndApproval);
 			
 		    mav.setViewName("/approval/elist"); // /webapp/pds5/list.jsp
@@ -324,26 +295,51 @@ public class ApprovalController {
 		    mav.setViewName("/approval/mlist"); // /webapp/pds5/list.jsp
 			return mav;
 		}
+	
+	@RequestMapping(value="/write.kitri", method=RequestMethod.GET)
+		public ModelAndView writeApprovalManager(HttpSession session, @RequestParam Map<String, String> map) {
+			System.out.println("ApprovalController in!!! -- GET - write > write");
+			ModelAndView mav = new ModelAndView();
+			MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+			map.put("stf_sq", memberDto.getStf_sq());
+			if(map.size() == 0) {
+				map.put("stf_sq", (String) session.getAttribute("stf_sq"));
+			}
+			mav.setViewName("/approval/write"); // /webapp/pds5/list.jsp
+			return mav;
+		}	
 		
 		
-	@RequestMapping("/write.kitri")
-	public ModelAndView writeApprovalManager(HttpSession session, @RequestParam Map<String, String> map) {
-		System.out.println("ApprovalController in!!! -- write");
-		//List<MemberDto> list = approvalService.getListAdminManager();
-		//map.put("menulist", list);
+	@RequestMapping(value="/write.kitri", method=RequestMethod.POST)
+	public ModelAndView writeApprovalManager(ApprovalDto approvalDto, HttpSession session, @RequestParam Map<String, String> map,  Model model) {
+		System.out.println("ApprovalController in!!! -- POST - write > complition");
+		
 		ModelAndView mav = new ModelAndView();
-	    mav.setViewName("/approval/write"); // /webapp/pds5/list.jsp
+		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+		map.put("stf_sq", memberDto.getStf_sq());
+		if(map.size() == 0) {
+			map.put("stf_sq", (String) session.getAttribute("stf_sq"));
+		}
+		approvalDto.setStf_sq(memberDto.getStf_sq());
+		int seq = approvalService.writeApproval(approvalDto);
+		if(seq != 0) {
+			mav.setViewName("/approval/complition"); // /webapp/pds5/list.jsp			
+		} else {
+			mav.setViewName("/approval/writefail");
+		}
+		
+		
 		return mav;
 	}
 	
-	@RequestMapping("/mwrite.kitri")
-	public ModelAndView mwriteApprovalManager(Map<String, Object> map) {
-		System.out.println("ApprovalController in!!! -- write");
+	//@RequestMapping("/mwrite.kitri")
+	//public ModelAndView mwriteApprovalManager(Map<String, Object> map) {
+	//	System.out.println("ApprovalController in!!! -- write");
 		//List<MemberDto> list = approvalService.getListAdminManager();
 		//map.put("menulist", list);
-		ModelAndView mav = new ModelAndView();
-	    mav.setViewName("/approval/mwrite"); // /webapp/pds5/list.jsp
-		return mav;
-	}
+	//	ModelAndView mav = new ModelAndView();
+	//    mav.setViewName("/approval/mwrite"); // /webapp/pds5/list.jsp
+	//	return mav;
+	//}
 	
 }

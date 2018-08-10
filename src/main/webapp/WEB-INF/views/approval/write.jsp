@@ -3,6 +3,9 @@
 <%@ include file="/WEB-INF/views/commons/public.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
+<script src="${root}/js/board.js"></script>
+
+
 
 <!-- body start -->
 	<section id="container">
@@ -33,7 +36,13 @@
 								        "sorting": {
 								          "enabled": true
 								        }}' >
-								     
+									     	<form id="writeForm" name="writeForm" method="post" action="" style="margin: 0px">
+											<div id="attach_file_hdn"></div>
+											
+											<input type="hidden" name="bcode" value="${bcode}">
+											<input type="hidden" name="pg" value="1">
+											<input type="hidden" name="key" value="">
+											<input type="hidden" name="word" value="">
 								        <tbody>
 								        	<tr>
 								        		<th></th>
@@ -62,10 +71,15 @@
 								        		<!-- <th></th>  -->
 								        		<th></th>
 											</tr>
+											
 								        	<tr>
 								        		<th></th>
 								        		<th>구분</th>
-								        		<th colspan="7"></th>
+								        		<th colspan="7">
+								        			<input type="checkbox" name="div_apv_sq" value="1" checked="checked"> 일반
+								        			<input type="checkbox" name="div_apv_sq" value="2"> 협조
+								        			<input type="checkbox" name="div_apv_sq" value="3"> 기타								        			
+								        		</th>
 								        		<!-- <th></th>
 								        		<th></th>
 								        		<th></th>
@@ -89,7 +103,7 @@
 								        	<tr>
 								        		<th></th>
 								        		<th>제목</th>
-								        		<th colspan="7"><input type="text" class="form-control"></th>
+								        		<th colspan="7"><input type="text" class="form-control" name="apv_nm"></th>
 								        		<!-- <th></th>
 								        		<th></th>
 								        		<th></th>
@@ -119,14 +133,15 @@
 								           		<td colspan="10"><textarea id="summernote" name="content"></textarea>
 								           		</td>
 								          	</tr>
+								          	
 								          	<tr>
 								           		<td colspan="10">
-									         		<form action="" method="post" enctype="multipart/form-data" name="">
+									         		 <form action="" method="post"  name="">
 												  		<input type="file" name="FileName">
 											    	</form>
 												</td>
 								         	 </tr>
-
+ 												
 								        	<tr>
 								        		<th colspan="10">
 								        			<div>
@@ -204,14 +219,14 @@
 								        		<th>/</th>
 								        		<th></th>
 											</tr>									        
-								        
+								        </form>
 										</tbody>
 									</table>
 								</div>
 							</div>
 
 							<div class="w3ls_head">
-								<input type="button" value="결재상신" class="btn btn-info">
+								<input type="button" value="결재상신" class="btn btn-info" id="registerBtn" name="registerBtn">
 								<input type="button" value="취소" class="btn btn-info">
 							</div>
 						</div>
@@ -233,6 +248,25 @@
       lang: 'ko-KR'      
     });
   });
+</script>
+
+<script type="text/javascript">
+control = "${root}/approval";
+initPath();
+
+$(document).ready(function() {
+	$("#registerBtn").click(function() {
+		if($("#apv_nm").val() == "") {
+			alert("제목입력!!!");
+			return;
+		} else if($("#content").val() == "") {
+			alert("내용입력!!!");
+			return;
+		} else {
+			$("#writeForm").attr("method", "post").attr("action", writepath).submit();
+		}
+	});
+});
 </script>
 
 

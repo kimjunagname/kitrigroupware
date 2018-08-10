@@ -11,6 +11,7 @@ var writepath;
 var replypath;
 var modifypath;
 var deletepath;
+var complitionpath;
 
 function initPath(){
 	listpath = control+"/list.kitri";
@@ -24,6 +25,7 @@ function initPath(){
 	replypath = control+"/reply.kitri";
 	modifypath = control+"/modify.kitri";
 	deletepath = control+"/delete.kitri";
+	complitionpath = control+"/complition.kitri";
 }
 
 function moveBoard(bcode, pg, key, word, path) {

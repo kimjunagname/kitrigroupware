@@ -216,11 +216,21 @@
 	where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
     and   APV_TB.STF_SQ = STF_TB.STF_SQ
     and   STF_TB.RNK_SQ = RNK_TB.RNK_SQ 
-    and   DPT_DIV_TB.DPT_SQ = STF_TB.DPT_SQ	and APV_TB.STF_SQ = #{stf_sq}
+    and   DPT_DIV_TB.DPT_SQ = STF_TB.DPT_SQ	
+    and APV_TB.STF_SQ = #{stf_sq}
     and APV_TB.APV_SQ = #{seq}
 	</select>
 
 
+
+	<insert id="writeApproval" parameterType="ApprovalDto">
+ 	Insert into GROUPWARE.APV_TB (APV_SQ, DIV_APV_SQ, STF_SQ, STF_MID_SQ, STF_FNL_SQ,
+                                  APV_OK_SQ, APV_NM, APV_PL_RT, APV_PL_NM, APV_NO, 
+                                  CONTENT) 
+    values                       (APV_TB_APV_SQ.nextval,#{div_apv_sq},#{stf_sq},null,null,
+                                  null,#{apv_nm},null,null,null,
+                                  #{content} )
+	</insert>
 
 	</mapper>
   
