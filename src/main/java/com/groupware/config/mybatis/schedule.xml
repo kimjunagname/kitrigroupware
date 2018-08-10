@@ -6,9 +6,9 @@
     <mapper namespace="com.groupware.schedule.dao.ScheduleDao">
 	
 	<insert id="addSchedule" parameterType="ScheduleDto">
-	insert into BS_SCD_TB (bs_scd_sq, scd_sq, stf_sq, bs_bs_nm, bs_bs_scd_cnt, bs_scd_str_dt, bs_scd_end_dt)
-	values (BS_SCD_TB_BS_SCD_SQ.nextval, #{scd_sq}, #{stf_sq}, #{bs_bs_nm}, #{bs_bs_scd_cnt}, 
-				to_date(#{bs_scd_str_dt}, 'yyyy-mm-dd hh:mi:ss'), to_date(#{bs_scd_end_dt}, 'yyyy-mm-dd hh:mi:ss'))
+	insert into BS_SCD_TB (BS_SCD_SQ, SCD_SQ, STF_SQ, BS_SCD_NM, BS_SCD_CNT, BS_SCD_STR_DT, BS_SCD_END_DT)
+	values (BS_SCD_TB_BS_SCD_SQ.nextval, #{scd_sq}, #{stf_sq}, #{bs_scd_nm}, #{bs_scd_cnt}, 
+				to_date(#{bs_scd_str_dt}, 'yyyy-mm-dd hh24:mi:ss'), to_date(#{bs_scd_end_dt}, 'yyyy-mm-dd hh24:mi:ss'))
 	</insert>
 	
 	<select id="getScheduleList" parameterType="int" resultType="ScheduleDto">
@@ -20,6 +20,12 @@
 	<select id="getScheduleType" resultType="ScheduleDivisionDto">
 	select *
 	from SCD_DIV_TB
+	order by scd_sq
+	</select>
+	
+	<select id="getToday" resultType="String">
+	select to_char(sysdate, 'yyyy-mm-dd') 
+	from dual
 	</select>
   
   </mapper>
