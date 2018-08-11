@@ -181,8 +181,7 @@ ul.sidebar-menu li a.active i {
                 </li>
                 
                 <!-- 공지사항 -->
-                <li>
-                    <!-- 공지사항 -->
+                
                 <li>
                     <a href="${root}/board/list.kitri?ntc_div_sq=1&ntc_div_nm=공지사항&ntc_sq=&pg=1&key=&word=">
                         <i class="fa fa-bullhorn"></i>
