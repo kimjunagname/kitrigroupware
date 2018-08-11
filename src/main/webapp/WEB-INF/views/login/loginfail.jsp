@@ -52,16 +52,14 @@ $(document).ready(function() {
 <body>
 <div class="log-w3">
 <div class="w3layouts-main">
-	<h2>kitrigroupware</h2>
+	<img src="${root}/images/logo.png" style="display: block; margin-left: auto; margin-right: auto;">
 	
 	<br> 
 	
 		<form name="loginform" method="post" action="">					
-			<input id="stf_sq" type="text" class="form-control ggg" name="stf_sq" placeholder="ID" value="<%= stf_sq%>">
-			<input id="stf_pw" type="password" class="form-control ggg" name="stf_pw" placeholder="PASSWORD">
-			<span><input type="checkbox" name="idsave" <%=ck %> value="saveok"> 아이디 저장</span>
-			<h6><label id="idfind">아이디</label> 또는 <br>
-			<label id="pwfind">비밀번호</label> 찾기</h6>
+			<input id="stf_sq" type="text" class="form-control ggg" name="stf_sq" placeholder="ID">
+			<input id="stf_pw" type="password" class="form-control ggg" name="stf_pw" placeholder="PASSWORD">			
+			<span style="float: right; margin-top: 5px;"><label id="idfind">아이디</label> 또는 <label id="pwfind">비밀번호</label> 찾기</span>
 				<div class="clearfix"></div>
 			<span style="color: red">
 			<br>아이디 또는 비밀번호를다시 확인하세요.<br>

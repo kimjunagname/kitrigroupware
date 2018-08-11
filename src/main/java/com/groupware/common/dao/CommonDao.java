@@ -5,9 +5,9 @@ import java.util.Map;
 public interface CommonDao {
 
 	int getNextSeq();
-	void updateHit(int seq);
+	void updateHit(int ntc_sq);
 	
-	int getNewArticleCount(int bcode);
+	int getNewArticleCount(int ntc_div_sq);
 	int getTotalArticleCount(Map<String, String> map);
 	
 }
