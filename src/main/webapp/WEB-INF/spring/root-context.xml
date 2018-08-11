@@ -29,7 +29,11 @@
 	<!-- <bean id="ds" class="org.springframework.jndi.JndiObjectFactoryBean">
       <property name="jndiName" value="java:comp/env/jdbc/GROUPWARE"/>
 	</bean>  -->
-
+	
+	<!-- uploadPath -->	 
+ 	<bean id="uploadPath" class="java.lang.String">
+ 		<constructor-arg value="D:\\java data\\workspace\\framework\\kitrigroupware\\src\\main\\webapp\\WEB-INF\\upload\\file\\"></constructor-arg> 
+ 	</bean> 
 
     <!-- connection pool -->
 	<!-- 팩토리 빈 설정 파일 만들기 / 위치 알려줌 -->

@@ -189,4 +189,11 @@ public class MemberController {
 		
 		return json.toString();		
 	}
+	
+	@RequestMapping("/logout.kitri")
+	public ModelAndView logout(HttpSession session) {
+		session.invalidate();
+		ModelAndView mav = new ModelAndView("/login/login");
+		return mav;
+	}
 }

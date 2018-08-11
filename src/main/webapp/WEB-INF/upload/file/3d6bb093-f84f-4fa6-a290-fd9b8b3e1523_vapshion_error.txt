@@ -1,0 +1,27 @@
+Wed Dec 30 12:36:06 GMT+0900 2015
+uid : 559514
+1009
+TypeError
+Error #1009
+TypeError: Error #1009
+	at VapMix2Combine/applicationExitHandler()
+
+
+Wed Dec 30 19:31:44 GMT+0900 2015
+uid : 0
+1009
+TypeError
+Error #1009
+TypeError: Error #1009
+	at VapMix2Combine/applicationExitHandler()
+
+
+Wed Dec 30 19:31:52 GMT+0900 2015
+uid : 0
+1009
+TypeError
+Error #1009
+TypeError: Error #1009
+	at VapMix2Combine/applicationExitHandler()
+
+
