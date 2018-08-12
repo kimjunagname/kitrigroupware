@@ -155,6 +155,7 @@ public class CommuteController {
 		}
 		map.put("dpt_sq", memberDto.getDpt_sq() + "");
 		List<LinkedHashMap<String, String>> searchList = commuteService.getCommuteListDepartment(map);
+		System.out.println("searchList.size : "+searchList.size());
 		mav.addObject("commuteList", searchList);
 		mav.addObject("searchDate", map.get("searchDate"));
 		mav.setViewName("/commute/list_department");

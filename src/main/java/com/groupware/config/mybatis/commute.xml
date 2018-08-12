@@ -119,18 +119,28 @@
 	</select>
 	  
 	<select id="getCommuteListDepartment" parameterType="map" resultType="map">
-	select stf_nm, cmt_str_tm, cmt_end_tm, cmt_msg, rnk_sq, rnk_nm, dpt_nm
+	select *
 	from
 		(
-		select sub.stf_nm, c.cmt_str_tm, c.cmt_end_tm, c.cmt_msg, sub.rnk_sq, sub.rnk_nm, sub.dpt_nm, to_char(c.cmt_str_tm, 'yy/mm/dd') dd
+		select sub.stf_sq, sub.stf_nm, c.cmt_str_tm, c.cmt_end_tm, c.cmt_msg, sub.rnk_sq, sub.rnk_nm, sub.dpt_nm, to_char(c.cmt_str_tm, 'yy/mm/dd') dd, sub.scd_nm, sub.bs_scd_str_dt, sub.bs_scd_end_dt
 		from 
 			cmt_tb c,
 		    (
-			    select s.stf_sq, s.stf_nm, rnk.rnk_sq, rnk.rnk_nm, d.dpt_nm
-			    from stf_tb s, dpt_div_tb d, rnk_tb rnk
-			    where s.dpt_sq = d.dpt_sq
-			    and s.dpt_sq = #{dpt_sq}
-			    and s.rnk_sq = rnk.rnk_sq
+			    select stf.stf_sq, stf.stf_nm, stf.rnk_sq, stf.rnk_nm, stf.dpt_nm, scd.scd_sq, scd.bs_scd_str_dt, scd.bs_scd_end_dt, scd.scd_nm
+            from
+                (
+                select s.stf_sq, s.stf_nm, s.dpt_sq, rnk.rnk_sq, rnk.rnk_nm, d.dpt_nm
+                from stf_tb s, dpt_div_tb d, rnk_tb rnk
+                where s.dpt_sq = d.dpt_sq
+                and s.dpt_sq = #{dpt_sq}
+                and s.rnk_sq = rnk.rnk_sq
+                )stf,
+                (
+                select bs.scd_sq, bs.stf_sq, bs.bs_scd_str_dt, bs.bs_scd_end_dt, div.scd_nm
+                from bs_scd_tb bs, scd_div_tb div
+                where bs.scd_sq = div.scd_sq
+                )scd
+            where stf.stf_sq = scd.stf_sq(+)
 		    )sub
 		where c.stf_sq(+) = sub.stf_sq
 		)l,
@@ -146,8 +156,9 @@
 			from dual
 		)r
 	where l.dd = r.dd
+	and l.dd between to_char(bs_scd_str_dt, 'yy/mm/dd') and to_char(bs_scd_end_dt, 'yy/mm/dd')
 	or l.dd is null
-	order by rnk_sq desc
+	order by stf_sq, rnk_sq desc
 	</select>
 </mapper>
   
