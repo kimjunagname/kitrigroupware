@@ -77,7 +77,6 @@ public class CommuteController {
 		if(map.size() == 0) {
 			map.put("stf_sq", (String) session.getAttribute("stf_sq"));
 		}
-//		startDate=2018-08-01&endDate=2018-08-31
 		List<CommuteDto> list = commuteService.getCommuteList(map);
 		System.out.println("list size = " + list.size());
 		int cnt = 0;
@@ -85,11 +84,11 @@ public class CommuteController {
 		for (CommuteDto commuteDto : list) {
 			System.out.println(commuteDto);
 			if(commuteDto.getScd_cnt() > 0) {
-				cnt = commuteDto.getScd_cnt();
+				cnt = commuteDto.getScd_cnt() + 1;
 				scd_nm = commuteDto.getScd_nm();
 			}
 			
-			if(cnt >= 0) {
+			if(cnt > 0) {
 				commuteDto.setScd_nm(scd_nm);
 				cnt--;
 			}
