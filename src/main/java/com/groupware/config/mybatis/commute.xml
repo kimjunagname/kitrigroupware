@@ -38,7 +38,7 @@
 	</update>
 	
 	<select id="getCommuteList" parameterType="map" resultType="CommuteDto">
-	select b.scd_nm, a.cmt_sq, a.stf_sq, a.cmt_str_tm, a.cmt_end_tm, a.cmt_msg, a.days, b.ldt, to_char(trunc(b.ldt, 'dd'), 'mm.dd') || '(' ||to_char(b.ldt, 'dy')|| ')' cmt_dt
+	select b.scd_nm, a.cmt_sq, a.stf_sq, a.cmt_str_tm, a.cmt_end_tm, a.cmt_msg, a.days, b.scd_cnt, b.ldt, to_char(trunc(b.ldt, 'dd'), 'mm.dd') || '(' ||to_char(b.ldt, 'dy')|| ')' cmt_dt
 	from
 	    (
 	        select cmt_sq, stf_sq, cmt_str_tm, cmt_end_tm, cmt_msg, trunc(cmt.cmt_str_tm, 'dd') days
@@ -68,27 +68,51 @@
 		        </choose>
 		        )l,
 		        (
-                    select scd.dt, scd.stf_sq, div.scd_nm
-                    from 
-                    (
-                        select * 
-                        from (
-                                select trunc(bs_scd_str_dt, 'dd') dt, stf_sq, scd_sq
-                                from bs_scd_tb
-                                where stf_sq = #{stf_sq}
-                                order by dt) scda
-                        union
-                        select *
-                        from (
-                                select trunc(bs_scd_end_dt, 'dd') dt, stf_sq, scd_sq
-                                from bs_scd_tb
-                                where stf_sq = #{stf_sq}
-                                order by dt) scdb
-                    )scd, scd_div_tb div
-                    where scd.scd_sq = div.scd_sq
-                    and scd.scd_sq in (3, 5, 6)
+   	   			<choose>
+	   				<when test="startDate != null and startDate != ''">
+                    select bs.*, div.scd_nm, case when bs.strdt != bs.enddt then
+                                        case when bs.searchstr = bs.searchend then null
+                                             when bs.searchstr != bs.searchend then
+                                             case when bs.searchstr >= bs.strdt then
+                                                  case when bs.searchend &lt;= bs.enddt then
+                                                       case when bs.searchend >= bs.enddt then bs.searchend - bs.searchstr
+                                                            when bs.searchend &lt; bs.enddt then bs.enddt - bs.searchstr
+                                                        end
+                                                        
+                                                  end
+                                                  when bs.searchstr &lt; bs.strdt then
+                                                      case when bs.searchend &lt;= bs.enddt then
+                                                           case when bs.searchend >= bs.enddt then bs.searchend - bs.strdt
+                                                                when bs.searchend &lt; bs.enddt then bs.enddt - bs.searchstr
+                                                           end
+                                                           when bs.searchend > bs.enddt then bs.enddt - bs.strdt
+                                                      end
+                                             	  end
+                                        	end
+                                        
+                                 	  end as scd_cnt
+                    </when>
+                    <otherwise>
+                    select bs.*, div.scd_nm, bs.enddt - bs.strdt scd_cnt 
+                    </otherwise>
+                  </choose>
+                    from (
+                            select stf_sq, scd_sq, trunc(bs_scd_str_dt, 'dd') strdt, trunc(bs_scd_end_dt, 'dd') enddt, to_date('${startDate}') searchstr, to_date('${endDate}') searchend
+                            from bs_scd_tb
+                            where stf_sq = #{stf_sq}
+                        )bs, scd_div_tb div
+                    <choose>
+		   				<when test="startDate != null and startDate != ''">
+	                    where bs.enddt >= bs.searchstr and  bs.strdt &lt;= bs.searchend
+	                    and bs.scd_sq = div.scd_sq
+	                    </when>
+	                    <otherwise>
+	                    where bs.scd_sq = div.scd_sq
+	                    </otherwise>
+                    </choose>
+                    and bs.scd_sq in (3, 5, 6)
 		        )r
-	        where l.ldt = r.dt(+)
+	        where l.ldt = r.strdt(+)
 	    ) b
 	where a.days(+) = b.ldt
 	order by b.ldt

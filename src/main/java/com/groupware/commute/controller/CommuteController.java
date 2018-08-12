@@ -43,6 +43,19 @@ public class CommuteController {
 		
 		List<CommuteDto> list = commuteService.getCommuteList(map);
 		System.out.println("list size = " + list.size());
+		int cnt = 0;
+		String scd_nm = null;
+		for (CommuteDto commuteDto : list) {
+			if(commuteDto.getScd_cnt() > 0) {
+				cnt = commuteDto.getScd_cnt();
+				scd_nm = commuteDto.getScd_nm();
+			}
+			
+			if(cnt >= 0) {
+				commuteDto.setScd_nm(scd_nm);
+				cnt--;
+			}
+		}
 		mav.addObject("stf_sq", session.getAttribute("stf_sq"));
 		mav.addObject("commuteList", list);
 		mav.setViewName("/commute/list");
@@ -67,6 +80,20 @@ public class CommuteController {
 //		startDate=2018-08-01&endDate=2018-08-31
 		List<CommuteDto> list = commuteService.getCommuteList(map);
 		System.out.println("list size = " + list.size());
+		int cnt = 0;
+		String scd_nm = null;
+		for (CommuteDto commuteDto : list) {
+			System.out.println(commuteDto);
+			if(commuteDto.getScd_cnt() > 0) {
+				cnt = commuteDto.getScd_cnt();
+				scd_nm = commuteDto.getScd_nm();
+			}
+			
+			if(cnt >= 0) {
+				commuteDto.setScd_nm(scd_nm);
+				cnt--;
+			}
+		}
 		mav.addObject("stf_sq", map.get("stf_sq"));
 		mav.addObject("startDate", map.get("startDate"));
 		mav.addObject("endDate", map.get("endDate"));
@@ -97,7 +124,6 @@ public class CommuteController {
 		}else if("out".equals(check)) {
 			commuteService.punchOut(commuteDto);
 		}
-		ModelAndView mav = new ModelAndView();
 		return "redirect:list.kitri";
 	}
 	
