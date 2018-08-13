@@ -46,6 +46,7 @@ public class CommuteController {
 		int cnt = 0;
 		String scd_nm = null;
 		for (CommuteDto commuteDto : list) {
+			System.out.println(commuteDto);
 			if(commuteDto.getScd_cnt() > 0) {
 				cnt = commuteDto.getScd_cnt();
 				scd_nm = commuteDto.getScd_nm();
@@ -79,6 +80,7 @@ public class CommuteController {
 		}
 		List<CommuteDto> list = commuteService.getCommuteList(map);
 		System.out.println("list size = " + list.size());
+		
 		int cnt = 0;
 		String scd_nm = null;
 		for (CommuteDto commuteDto : list) {

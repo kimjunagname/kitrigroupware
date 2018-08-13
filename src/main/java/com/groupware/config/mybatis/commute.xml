@@ -38,84 +38,91 @@
 	</update>
 	
 	<select id="getCommuteList" parameterType="map" resultType="CommuteDto">
-	select b.scd_nm, a.cmt_sq, a.stf_sq, a.cmt_str_tm, a.cmt_end_tm, a.cmt_msg, a.days, b.scd_cnt, b.ldt, to_char(trunc(b.ldt, 'dd'), 'mm.dd') || '(' ||to_char(b.ldt, 'dy')|| ')' cmt_dt
+	select a.cmt_sq, a.stf_sq, a.cmt_str_tm, a.cmt_end_tm, a.cmt_msg, to_char(trunc(a.dt, 'dd'), 'mm.dd') || '(' ||to_char(a.dt, 'dy')|| ')' cmt_dt, div.scd_nm, b.scd_cnt
 	from
 	    (
+	    select r.dt, c.cmt_sq, c.stf_sq, c.cmt_str_tm, c.cmt_end_tm, c.cmt_msg, c.days
+	    from
+	        (
 	        select cmt_sq, stf_sq, cmt_str_tm, cmt_end_tm, cmt_msg, trunc(cmt.cmt_str_tm, 'dd') days
 	        from cmt_tb cmt
-	        where stf_sq = #{stf_sq}
-	    ) a,
-	    (   
-	    	select *
-	    	from
-	    		(
-	   			<choose>
-	   				<when test="startDate != null and startDate != ''">
-	   				select trunc(to_date(#{startDate}), 'dd')+level-1 ldt
-	   				</when>
-		        	<otherwise>
-		        	select trunc(sysdate, 'MM')+level-1 ldt
-		        	</otherwise>
-		        </choose>
-		        from dual
-	   			<choose>
-	   				<when test="startDate != null and startDate != ''">
-	   				connect by level &lt;= to_date(#{endDate})-trunc(to_date(#{startDate}), 'dd')+1
-	   				</when>
-		        	<otherwise>
-		        	connect by level &lt;= last_day(sysdate)-trunc(sysdate, 'MM')+1
-		        	</otherwise>
-		        </choose>
-		        )l,
-		        (
-   	   			<choose>
-	   				<when test="startDate != null and startDate != ''">
-                    select bs.*, div.scd_nm, case when bs.strdt != bs.enddt then
-                                        case when bs.searchstr = bs.searchend then null
-                                             when bs.searchstr != bs.searchend then
-                                             case when bs.searchstr >= bs.strdt then
-                                                  case when bs.searchend &lt;= bs.enddt then
-                                                       case when bs.searchend >= bs.enddt then bs.searchend - bs.searchstr
-                                                            when bs.searchend &lt; bs.enddt then bs.enddt - bs.searchstr
-                                                        end
-                                                        
-                                                  end
-                                                  when bs.searchstr &lt; bs.strdt then
-                                                      case when bs.searchend &lt;= bs.enddt then
-                                                           case when bs.searchend >= bs.enddt then bs.searchend - bs.strdt
-                                                                when bs.searchend &lt; bs.enddt then bs.enddt - bs.searchstr
-                                                           end
-                                                           when bs.searchend > bs.enddt then bs.enddt - bs.strdt
-                                                      end
-                                             	  end
-                                        	end
-                                        
-                                 	  end as scd_cnt
-                    </when>
-                    <otherwise>
-                    select bs.*, div.scd_nm, bs.enddt - bs.strdt scd_cnt 
-                    </otherwise>
-                  </choose>
-                    from (
-                            select stf_sq, scd_sq, trunc(bs_scd_str_dt, 'dd') strdt, trunc(bs_scd_end_dt, 'dd') enddt, to_date('${startDate}') searchstr, to_date('${endDate}') searchend
-                            from bs_scd_tb
-                            where stf_sq = #{stf_sq}
-                        )bs, scd_div_tb div
-                    <choose>
-		   				<when test="startDate != null and startDate != ''">
-	                    where bs.enddt >= bs.searchstr and  bs.strdt &lt;= bs.searchend
-	                    and bs.scd_sq = div.scd_sq
-	                    </when>
-	                    <otherwise>
-	                    where bs.scd_sq = div.scd_sq
-	                    </otherwise>
-                    </choose>
-                    and bs.scd_sq in (3, 5, 6)
-		        )r
-	        where l.ldt = r.strdt(+)
-	    ) b
-	where a.days(+) = b.ldt
-	order by b.ldt
+	        where stf_sq = ${stf_sq}
+	        )c,
+	        (
+	        <choose>
+				<when test="startDate != null and startDate != ''">
+				select trunc(to_date(#{startDate}), 'dd')+level-1 dt
+				</when>
+			    <otherwise>
+			    select trunc(sysdate, 'MM')+level-1 dt
+			    </otherwise>
+			</choose>
+	        from dual
+			<choose>
+				<when test="startDate != null and startDate != ''">
+				connect by level &lt;= to_date(#{endDate})-trunc(to_date(#{startDate}), 'dd')+1
+				</when>
+				<otherwise>
+				connect by level &lt;= last_day(sysdate)-trunc(sysdate, 'MM')+1
+				</otherwise>
+			</choose>
+        )r  
+    where c.days(+) = r.dt
+    )a,
+    (
+    select l.dt, r.stf_Sq, r.scd_sq, r.strdt, r.enddt, r.scd_cnt
+    from
+    	(
+	    <choose>
+			<when test="startDate != null and startDate != ''">
+			select trunc(to_date(#{startDate}), 'dd')+level-1 dt
+			</when>
+		    <otherwise>
+		    select trunc(sysdate, 'MM')+level-1 dt
+		    </otherwise>
+		</choose>
+	       from dual
+		<choose>
+			<when test="startDate != null and startDate != ''">
+			connect by level &lt;= to_date(#{endDate})-trunc(to_date(#{startDate}), 'dd')+1
+			</when>
+			<otherwise>
+			connect by level &lt;= last_day(sysdate)-trunc(sysdate, 'MM')+1
+			</otherwise>
+		</choose>
+	    )l,
+        (
+        select stf_sq, scd_sq, strdt, enddt, enddt - strdt scd_cnt
+        from
+        	(
+        	<choose>
+				<when test="startDate != null and startDate != ''">
+		    	select stf_sq, scd_sq, case when trunc(bs_scd_str_dt, 'dd') &lt; trunc(to_date('${startDate}'), 'dd') then trunc(to_date('${startDate}'), 'dd')
+	                                        when trunc(bs_scd_str_dt, 'dd') >= trunc(to_date('${startDate}'), 'dd') then trunc(bs_scd_str_dt, 'dd')
+	                                        end as strdt,
+	                                        case when trunc(bs_scd_end_dt, 'dd') &lt; trunc(to_date('${endDate}'), 'dd') then trunc(bs_scd_end_dt, 'dd')
+	                                             when trunc(bs_scd_end_dt, 'dd') >= trunc(to_date('${endDate}'), 'dd') then trunc(to_date('${endDate}'), 'dd')
+	                                        end as enddt
+				</when>
+				<otherwise>
+		    	select stf_sq, scd_sq, case when trunc(bs_scd_str_dt, 'dd') &lt; trunc(sysdate, 'MM') then trunc(sysdate, 'MM')
+	                                        when trunc(bs_scd_str_dt, 'dd') >= trunc(sysdate, 'MM') then trunc(bs_scd_str_dt, 'dd')
+	                                        end as strdt,
+	                                        case when trunc(bs_scd_end_dt, 'dd') &lt; trunc(last_day(sysdate), 'dd') then trunc(bs_scd_end_dt, 'dd')
+	                                             when trunc(bs_scd_end_dt, 'dd') >= trunc(last_day(sysdate), 'dd') then trunc(last_day(sysdate), 'dd')
+	                                        end as enddt
+				</otherwise>
+			</choose>
+            from bs_scd_tb
+            where stf_sq = ${stf_sq}
+            )
+	    where strdt &lt; enddt
+        )r
+    where l.dt = r.strdt(+)
+    )b, scd_div_tb div
+	where a.dt = b.dt
+	and b.scd_sq = div.scd_sq(+)
+	order by a.dt
 	</select>
 	  
 	<select id="getCommuteListDepartment" parameterType="map" resultType="map">
