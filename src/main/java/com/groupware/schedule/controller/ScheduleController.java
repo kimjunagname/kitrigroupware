@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -77,7 +78,6 @@ public class ScheduleController {
 		System.out.println("send_date >> "+ map.get("send_date"));
 		System.out.println("send_time >> "+ map.get("send_time"));
 		System.out.println("content >> "+ map.get("content"));
-		//TODO date에는 24시간 구분이 안됨..? 일단 오전만 가능... 해결해야함	
 		
 		ScheduleDto dto= new ScheduleDto();
 		dto.setScd_sq(Integer.parseInt(scheduleDivisionDto.getScd_nm())); //일정구분번호
@@ -94,5 +94,40 @@ public class ScheduleController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/schedule/test");
 		return mav;
+	}
+	
+	@RequestMapping(value="/sadd.kitri", method=RequestMethod.PUT, produces = "application/json; charset=utf8")
+	public @ResponseBody String addSchedule(@RequestBody ScheduleDto scheduleDto) {
+		System.out.println(scheduleDto.toString());
+		
+		scheduleService.addSchedule(scheduleDto);
+		
+		// httpsession에서 stf_sq 얻어오기
+		int stf_sq= 62; // 임의 사원번호
+		
+		// 사원의 맨마지막 스케쥴 얻어오기
+		String newschedule= scheduleService.getAddSchedule(stf_sq);
+		
+		System.out.println("newschedule >>>> " + newschedule);
+		
+		return newschedule;
+	}
+	
+	@RequestMapping(value="/sdelete/{bs_scd_sq}", method=RequestMethod.GET)
+	public @ResponseBody int deleteSchedule(@PathVariable int bs_scd_sq) {
+		scheduleService.deleteSchedule(bs_scd_sq);
+		return bs_scd_sq;
+	}
+	
+	@RequestMapping(value="/smodify.kitri", method=RequestMethod.PUT, produces = "application/json; charset=utf8")
+	public @ResponseBody String modifySchedule(@RequestBody ScheduleDto scheduleDto) {
+		scheduleService.modifySchedule(scheduleDto);
+		
+		// 가져온 일정번호로 변경된 값 리턴해주기
+		String modifySchedule= scheduleService.getModifySchedule(scheduleDto.getBs_scd_sq());
+		
+		System.out.println("modifySchedule >>> "+ modifySchedule);
+		
+		return modifySchedule;
 	}
 }

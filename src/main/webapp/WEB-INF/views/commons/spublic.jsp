@@ -33,6 +33,7 @@
 <!-- fullcalendar -->
 <script type="text/javascript" src="${root }/js/fullcalendar/lib/moment.min.js"></script>
 <script type="text/javascript" src="${root }/js/fullcalendar/fullcalendar.js"></script>
+<script type="text/javascript" src="${root }/js/fullcalendar/gcal.js"></script>
 
 <link href='${root}/js/fullcalendar/fullcalendar.min.css' rel='stylesheet' />
 <link href='${root}/js/fullcalendar/fullcalendar.print.min.css' rel='stylesheet' media='print' />
