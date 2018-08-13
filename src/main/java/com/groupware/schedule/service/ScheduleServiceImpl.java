@@ -39,6 +39,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 			schedule.put("bs_scd_cnt", dto.getBs_scd_cnt());
 			schedule.put("bs_scd_str_dt", dto.getBs_scd_str_dt());
 			schedule.put("bs_scd_end_dt", dto.getBs_scd_end_dt());
+			schedule.put("scd_nm", dto.getScd_nm());
 			
 			array.put(schedule);
 		}
@@ -91,5 +92,48 @@ public class ScheduleServiceImpl implements ScheduleService {
 	@Override
 	public String getToday() {
 		return sqlSession.getMapper(ScheduleDao.class).getToday();
+	}
+
+	@Override
+	public String getAddSchedule(int stf_sq) {
+		ScheduleDto dto= sqlSession.getMapper(ScheduleDao.class).getAddSchedule(stf_sq);
+		JSONObject json= new JSONObject();
+		json.put("bs_scd_sq", dto.getBs_scd_sq());
+		json.put("scd_sq", dto.getScd_sq());
+		json.put("stf_sq", dto.getStf_sq());
+		json.put("bs_scd_nm", dto.getBs_scd_nm());
+		json.put("bs_scd_cnt", dto.getBs_scd_cnt());
+		json.put("bs_scd_str_dt", dto.getBs_scd_str_dt());
+		json.put("bs_scd_end_dt", dto.getBs_scd_end_dt());
+		json.put("scd_nm", dto.getScd_nm());
+		
+		return json.toString();
+	}
+
+	@Override
+	public void deleteSchedule(int bs_scd_sq) {
+		sqlSession.getMapper(ScheduleDao.class).deleteSchedule(bs_scd_sq);
+	}
+
+	@Override
+	public void modifySchedule(ScheduleDto scheduleDto) {
+		sqlSession.getMapper(ScheduleDao.class).modifySchedule(scheduleDto);
+	}
+
+	@Override
+	public String getModifySchedule(int bs_scd_sq) {
+		ScheduleDto dto= sqlSession.getMapper(ScheduleDao.class).getModifySchedule(bs_scd_sq);
+		
+		JSONObject json= new JSONObject();
+		json.put("bs_scd_sq", dto.getBs_scd_sq());
+		json.put("scd_sq", dto.getScd_sq());
+		json.put("stf_sq", dto.getStf_sq());
+		json.put("bs_scd_nm", dto.getBs_scd_nm());
+		json.put("bs_scd_cnt", dto.getBs_scd_cnt());
+		json.put("bs_scd_str_dt", dto.getBs_scd_str_dt());
+		json.put("bs_scd_end_dt", dto.getBs_scd_end_dt());
+		json.put("scd_nm", dto.getScd_nm());
+		
+		return json.toString();
 	}
 }

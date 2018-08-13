@@ -7,14 +7,15 @@
 	
 	<insert id="addSchedule" parameterType="ScheduleDto">
 	insert into BS_SCD_TB (BS_SCD_SQ, SCD_SQ, STF_SQ, BS_SCD_NM, BS_SCD_CNT, BS_SCD_STR_DT, BS_SCD_END_DT)
-	values (BS_SCD_TB_BS_SCD_SQ.nextval, #{scd_sq}, #{stf_sq}, #{bs_scd_nm}, #{bs_scd_cnt}, 
+	values (BS_SCD_TB_BS_SCD_SQ.nextval, #{scd_sq}, #{stf_sq}, #{bs_scd_nm},                                                                                                      #{bs_scd_cnt}, 
 				to_date(#{bs_scd_str_dt}, 'yyyy-mm-dd hh24:mi:ss'), to_date(#{bs_scd_end_dt}, 'yyyy-mm-dd hh24:mi:ss'))
 	</insert>
 	
 	<select id="getScheduleList" parameterType="int" resultType="ScheduleDto">
 	select * 
-	from BS_SCD_TB
-	where stf_sq= #{stf_sq}
+	from BS_SCD_TB b, SCD_DIV_TB s
+	where stf_sq= 62 AND b.scd_sq= s.scd_sq
+	order by bs_scd_sq
 	</select>
 	
 	<select id="getScheduleType" resultType="ScheduleDivisionDto">
@@ -26,6 +27,34 @@
 	<select id="getToday" resultType="String">
 	select to_char(sysdate, 'yyyy-mm-dd') 
 	from dual
+	</select>
+	
+	<select id="getAddSchedule" parameterType="int" resultType="ScheduleDto">
+	select *
+	from BS_SCD_TB b, SCD_DIV_TB s
+	where b.scd_sq= s.scd_sq and bs_scd_sq = (
+	                    select max(bs_scd_sq)
+	                    from bs_scd_tb
+	                    where stf_sq= #{stf_sq}
+	                   )
+	</select>
+	
+	<delete id="deleteSchedule" parameterType="int">
+	delete from bs_scd_tb
+	where bs_scd_sq= #{bs_scd_sq}
+	</delete>
+	
+	<update id="modifySchedule" parameterType="ScheduleDto">
+	update bs_scd_tb
+	set scd_sq= #{scd_sq}, bs_scd_nm= #{bs_scd_nm}, bs_scd_cnt= #{bs_scd_cnt}, 
+				bs_scd_str_dt= to_date(#{bs_scd_str_dt}, 'yyyy-mm-dd hh24:mi:ss'), bs_scd_end_dt= to_date(#{bs_scd_end_dt}, 'yyyy-mm-dd hh24:mi:ss')
+	where bs_scd_sq= #{bs_scd_sq}
+	</update>
+	
+	<select id="getModifySchedule" parameterType="int" resultType="ScheduleDto">
+	select * 
+	from BS_SCD_TB b, SCD_DIV_TB s
+	where bs_scd_sq= #{bs_scd_sq} AND b.scd_sq= s.scd_sq
 	</select>
   
   </mapper>
