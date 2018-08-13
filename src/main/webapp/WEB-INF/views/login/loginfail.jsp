@@ -52,7 +52,7 @@ $(document).ready(function() {
 <body>
 <div class="log-w3">
 <div class="w3layouts-main">
-	<h2>kitrigroupware</h2>
+	<img src="${root}/images/logo.png"  style="display: block; margin-left: auto; margin-right: auto;">
 	
 	<br> 
 	

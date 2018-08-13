@@ -8,8 +8,8 @@
 <!--logo start-->
 <div class="brand">
 
-    <a href="index.html" class="logo">
-        VISITORS
+    <a href="" class="logo">
+       <img src="${root}/images/logo.png" width= "185" height="60" style="display: block; margin-left: auto; margin-right: auto;">
     </a>
     <div class="sidebar-toggle-box">
         <div class="fa fa-bars"></div>

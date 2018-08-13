@@ -17,7 +17,7 @@ public interface EmailService {
 
 	public int keepCount(String stf_rcv_sq) throws Exception;
 
-	public List<EmailDto> keepListAll(EmailDto evo) throws Exception;
+	public List<EmailDto> keepListAll(EmailDto emailDto) throws Exception;
 
 	public int rcvSearchCount(EmailDto params) throws Exception;
 
@@ -36,5 +36,9 @@ public interface EmailService {
 	public void regist3(EmailDto emailDto) throws Exception;
 
 	public void modify(Map<String, Object> param) throws Exception;
+
+	public EmailDto sendRead(Map<String, Object> param) throws Exception;
+
+	public EmailDto keepRead(Map<String, Object> param) throws Exception;
 
 }

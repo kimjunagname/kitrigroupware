@@ -35,7 +35,7 @@ $(document).ready(function() {
 <body>
 <div class="log-w3 ns">
 <div class="w3layouts-main">
-	<img src="${root}/images/logo.png" style="display: block; margin-left: auto; margin-right: auto;">
+	<img src="${root}/images/logo.png"  style="display: block; margin-left: auto; margin-right: auto;">
 	
 	<br> 
 	

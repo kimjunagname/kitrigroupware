@@ -41,19 +41,15 @@ public class EmailController {
 	@RequestMapping(value="/sndList.kitri", method= RequestMethod.GET)
 	public String sndListAll(HttpServletRequest request,HttpSession session,Model model,  @RequestParam Map<String, String> map) throws Exception {
 		String stf_sq;
-		
 		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-		map.put("stf_sq", memberDto.getStf_sq());
-		
+		map.put("stf_sq", memberDto.getStf_sq());	
 		if(map.size() == 0) {
 			map.put("stf_sq", (String) session.getAttribute("stf_sq"));
-		}
-		
-		// 세션을 불러와 admn_id에 넣는다. 없다면 null이나 ""이가 들어오겟죠
+		}	
 		stf_sq = map.get("stf_sq");
 		
 		if (stf_sq == null || stf_sq.equals(""))
-			return "redirect:/member/login.kitri";
+			return "redirect:/member/login.kitri";	
 		
 		// 페이징 처리
 		AjaxPaging paging = new AjaxPaging();
@@ -127,12 +123,11 @@ public class EmailController {
 		if(map.size() == 0) {
 			map.put("stf_sq", (String) session.getAttribute("stf_sq"));
 		}	
-		// 세션을 불러와 admn_id에 넣는다. 없다면 null이나 ""이가 들어오겟죠
+		
 		stf_sq = map.get("stf_sq");	
 		if (stf_sq == null || stf_sq.equals(""))
 			return "redirect:/member/login.kitri";
-		// 페이징 처리
-		AjaxPaging paging = new AjaxPaging();
+		
 		String stf_rcv_sq = stf_sq;
 		// 총 게시물 수 
 		int totalCnt = emailService.keepCount(stf_rcv_sq);
@@ -142,8 +137,7 @@ public class EmailController {
 		if (request.getParameter("page") != null) {
 			current_page = Integer.parseInt((String)request.getParameter("page"));
 		}
-		// jsp에 뿌릴 페이지 태그를 만들어서 보낸다.
-		String pageIndexList = paging.pageIndexList(totalCnt, current_page);
+		
 		// SQL 쿼리문에 넣을 조건문
 		int startCount = (current_page - 1) * 10 + 1;
 		int endCount = current_page * 10;
@@ -152,8 +146,7 @@ public class EmailController {
 		emailDto.setStartCount(startCount);
 		emailDto.setEndCount(endCount);
 		model.addAttribute("keepList",emailService.keepListAll(emailDto));
-		model.addAttribute("pageIndexList", pageIndexList);
-		// 페이징 처리
+
 		return "/email/keepmaillist";
 	}
 	
@@ -276,7 +269,20 @@ public class EmailController {
 	@RequestMapping(value = "/emailRead.kitri", method = RequestMethod.POST)
 	public EmailDto emailRead(@RequestBody Map<String, Object> param)throws Exception {
 		EmailDto emailDto = emailService.read(param);
-		System.out.println("====" + emailDto.getRcv_dt());
+		return emailDto;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/emailSendRead.kitri", method = RequestMethod.POST)
+	public EmailDto emailSendRead(@RequestBody Map<String, Object> param)throws Exception {
+		EmailDto emailDto = emailService.sendRead(param);
+		return emailDto;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/emailKeepRead.kitri", method = RequestMethod.POST)
+	public EmailDto emailKeepRead(@RequestBody Map<String, Object> param)throws Exception {
+		EmailDto emailDto = emailService.keepRead(param);
 		return emailDto;
 	}
 	

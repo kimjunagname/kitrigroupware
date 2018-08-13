@@ -37,4 +37,8 @@ public interface EmailDao {
 
 	public void modify(Map<String, Object> param) throws Exception;
 	
+	public EmailDto sendRead(Map<String, Object> param) throws Exception;
+	
+	public EmailDto keepRead(Map<String, Object> param) throws Exception;
+	
 }

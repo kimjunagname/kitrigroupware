@@ -25,7 +25,7 @@ public class EmailServiceImpl implements EmailService {
 	@Override
 	public List<EmailDto> sndListAll(EmailDto emailDto) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.getMapper(EmailDao.class).sndListAll(emailDto);
 	}
 
 	@Override
@@ -47,9 +47,9 @@ public class EmailServiceImpl implements EmailService {
 	}
 
 	@Override
-	public List<EmailDto> keepListAll(EmailDto evo) throws Exception {
+	public List<EmailDto> keepListAll(EmailDto emailDto) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.getMapper(EmailDao.class).keepListAll(emailDto);
 	}
 
 	@Override
@@ -106,7 +106,20 @@ public class EmailServiceImpl implements EmailService {
 	@Override
 	public void modify(Map<String, Object> param) throws Exception {
 		// TODO Auto-generated method stub
+		sqlSession.getMapper(EmailDao.class).modify(param);
 		
+	}
+
+	@Override
+	public EmailDto sendRead(Map<String, Object> param) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.getMapper(EmailDao.class).sendRead(param);
+	}
+
+	@Override
+	public EmailDto keepRead(Map<String, Object> param) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.getMapper(EmailDao.class).keepRead(param);
 	}
 			
 }

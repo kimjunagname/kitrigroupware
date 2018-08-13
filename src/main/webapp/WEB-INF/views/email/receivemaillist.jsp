@@ -139,9 +139,6 @@
 										<span>
 											<button class="btn btn-success btn-sm" id="emlKeep">보관하기</button>
 										</span>
-										
-										
-										
 									</div>
 								</h4>
 								</form>
@@ -209,7 +206,6 @@ $(document).ready(function() {
 	// 메일 삭제버튼 눌렀을 때
 	$("#emlRemove").on("click", function() {    
 		var eml = $("#div1").val();
-		alert(eml);
 		emailRemove(eml);
 	 });
 	
@@ -280,7 +276,30 @@ $(document).ready(function() {
 			   }
 			});	
 		}
-		
-	
+  		// 메일 보관함 버튼 눌렀을 때
+		$("#emlKeep").on("click", function() {  
+		   var eml = $("#div1").val();
+			emailKeep(eml);
+		 });
+  
+		function emailKeep(eml) {
+			var params = {
+				eml_sq : eml
+			};
+			$.ajax({
+				url: "${root}/email/emailKeep.kitri",
+				type: "POST",
+				dataType: "text",
+			    data : JSON.stringify(params),
+			    contentType: "application/json; charset=UTF-8",
+			    success: function(result) {
+				    if(result=='SUCCESS'){
+				    	alert("보관함으로 이동하었습니다");
+				    	window.location.reload();
+				    }
+			    }
+			});
+		}
+
 })
 </script>
