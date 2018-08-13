@@ -223,6 +223,7 @@
 <!-- summernote 시작 -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>
+<!-- 공휴일 사용하기 위한 캘린더 -->
 
 <script type="text/javascript">
   $(function() {
@@ -269,6 +270,22 @@ $(document).ready(function() {
 	        event.end._i = event.end.format();
 	    },
 	    
+	    /*googleCalendarApiKey : "AIzaSyDcnW6WejpTOCffshGDDb4neIrXVUA1EAE"   
+            // 예제소스에 적힌 구글캘린더 API 키는 FullCalendar 예제에 있는 API키를 그대로 사용한 것이다.
+        , eventSources : [
+                // 대한민국의 공휴일
+                {
+                      googleCalendarId : "kisg3qklq89ejfh7n7hldksgrc@group.calendar.google.com"
+                    , className : "koHolidays"
+                    , color : "#FF0000"
+                    , textColor : "#FFFFFF"
+                }
+          ],*/
+        googleCalendarApiKey: 'AIzaSyCwK5wYXRcuxOJWOn3I4fD1Zg4z_DQsbSI',
+        events: {
+          googleCalendarId: 'ko.south_korea#holiday@group.v.calendar.google.com'
+        },
+	    
 	    // title 클릭했을 때 event id 가져와서 뿌려주기
 	    eventClick: function(event, element) {
 	    	// 수정모달에 데이터 집어넣기
@@ -298,16 +315,6 @@ $(document).ready(function() {
 		 },
 	    
 	    eventLimit: true, // allow "more" link when too many events
-	    
-	    events: [
-	        {
-	          title:  'My Event',
-	          start:  '2018-08-15T14:30:00',
-	          end:    '2018-08-15T18:30:00',
-	          allDay: false
-	        }
-	        // other events here...
-	      ],
 	      
 	    timeFormat: 'H(:mm)' // uppercase H for 24-hour clock
 	    
