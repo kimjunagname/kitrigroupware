@@ -2,6 +2,73 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/commons/public.jsp" %>
 
+		
+		<!-- 편지쓰기 모달 시작 -->
+		<div class="modal fade" id="insertModal" role="dialog">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">편지쓰기</h4>
+					</div>
+					<div class="modal-body">
+						<form role="form" id="frm" method="post" action="${root}/email/register.kitri" enctype="multipart/form-data">
+							<table id="list" class="table table-striped table-bordered">
+								<colgroup>
+									<col width="30%" />
+									<col width="70%" />
+								</colgroup>
+								<thead>
+								</thead>
+								<tbody>
+									<tr>
+										<th>제목(*)</th>
+										<td><input type="text" id="eml_nm" name="eml_nm"
+											class="form-control" placeholder="이름"></td>
+									</tr>
+									<tr>
+										<th>내용(*)</th>
+										<td>
+										<textarea id="eml_cnt" style="resize: none;" width: 100%" name="eml_cnt" rows="10" class="form-control">
+										</textarea>
+										</td>
+									</tr>
+									<tr>
+										<th>보내는 사람(* 사원번호 입력) </th>
+										<td>
+											<div class="col-xs-4">
+												<input type="text" id="stf_rcv_email" name="stf_rcv_sq" class="form-control" value="${userinfo.stf_sq}" readonly="readonly">
+											</div>
+										</td>										
+									</tr>
+									<tr>
+										<th>받는 사람(* 사원번호 입력) </th>
+										<td>
+											<div class="col-xs-4">
+												<input type="text" id="stf_snd_email" name="stf_snd_sq" class="form-control">
+											</div>
+										</td>										
+									</tr>
+									<tr>
+										<th>파일첨부</th>
+										<td>
+											<input type="file" id="eml_pl_crs" name="file" class="form-control">
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" id="okbutton" class="btn btn-success"
+							data-dismiss="modal">입력</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 편지쓰기  모달 끝 -->
+
 		<!-- 조회모달 시작 -->
 		<div class="modal fade" id="readModal" role="dialog">
 			<div class="modal-dialog modal-lg">
@@ -60,9 +127,12 @@
 						<section class="panel"> 
 							<header class="panel-heading wht-bg">
 								<h4 class="gen-case">
-								<strong>받은 메일함</strong>
+								<strong>받은 메일 보관함</strong>
 								<form id="rightTop" class="pull-right mail-src-position">
 									<div>
+										<span>
+											<button class="btn btn-primary btn-sm" id="send" type="button" data-toggle="modal" data-target="#insertModal">메일작성</button>
+										</span>
 										<span>
 											<button class="btn btn-danger btn-sm" id="emlRemove">편지 삭제</button>
 										</span>
@@ -114,15 +184,20 @@
 	
 	<script type="text/javascript">
 	$(document).ready(function () {
-
-		/*체크박스 클릭했을 때*/
+		
+		// 보내기 버튼 클릭했을 때
+		$("#okbutton").click(function(){   
+		   $("#frm").submit();
+		});
+		
+		// 체크박스 클릭했을 때
 		$(".eml_rm").on("click", function() {
 			var eml = $(this).attr("data-value");
 		 	console.log(eml);
 			 $("#div1").val(eml);
 		});
 		
-		/*메일 삭제*/
+		// 메일 삭제
 		$("#emlRemove").on("click", function() {	    
 			var eml = $("#div1").val();
 			emailRemove(eml);		
@@ -148,7 +223,7 @@
 			});
 		}
 		
-		/* 메일 조회 */ 
+		// 메일 조회 
 		$(".eml_rd").on("click", function() {
 			var eml = $(this).attr("data-value");
 			console.log(eml);

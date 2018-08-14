@@ -127,7 +127,7 @@
 						<section class="panel"> 
 							<header class="panel-heading wht-bg">
 								<h4 class="gen-case">
-								<strong>받은 메일함</strong>
+								<strong>수신 메일함</strong>
 								<form id="rightTop" class="pull-right mail-src-position">
 									<div>
 										<span>
