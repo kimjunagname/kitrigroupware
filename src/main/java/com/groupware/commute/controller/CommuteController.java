@@ -46,6 +46,7 @@ public class CommuteController {
 		int cnt = 0;
 		String scd_nm = null;
 		for (CommuteDto commuteDto : list) {
+			System.out.println(commuteDto);
 			if(commuteDto.getScd_cnt() > 0) {
 				cnt = commuteDto.getScd_cnt();
 				scd_nm = commuteDto.getScd_nm();
@@ -77,19 +78,19 @@ public class CommuteController {
 		if(map.size() == 0) {
 			map.put("stf_sq", (String) session.getAttribute("stf_sq"));
 		}
-//		startDate=2018-08-01&endDate=2018-08-31
 		List<CommuteDto> list = commuteService.getCommuteList(map);
 		System.out.println("list size = " + list.size());
+		
 		int cnt = 0;
 		String scd_nm = null;
 		for (CommuteDto commuteDto : list) {
 			System.out.println(commuteDto);
 			if(commuteDto.getScd_cnt() > 0) {
-				cnt = commuteDto.getScd_cnt();
+				cnt = commuteDto.getScd_cnt() + 1;
 				scd_nm = commuteDto.getScd_nm();
 			}
 			
-			if(cnt >= 0) {
+			if(cnt > 0) {
 				commuteDto.setScd_nm(scd_nm);
 				cnt--;
 			}
@@ -156,6 +157,7 @@ public class CommuteController {
 		}
 		map.put("dpt_sq", memberDto.getDpt_sq() + "");
 		List<LinkedHashMap<String, String>> searchList = commuteService.getCommuteListDepartment(map);
+		System.out.println("searchList.size : "+searchList.size());
 		mav.addObject("commuteList", searchList);
 		mav.addObject("searchDate", map.get("searchDate"));
 		mav.setViewName("/commute/list_department");
