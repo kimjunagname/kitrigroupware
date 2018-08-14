@@ -2,423 +2,459 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/commons/public.jsp"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<title>조직도 관리</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords"
-	content="Visitors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-<script type="application/x-javascript">
-	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
-</script>
-<!-- bootstrap-css -->
-<link rel="stylesheet" href="${root}/css/bootstrap.min.css">
-<!-- //bootstrap-css -->
-<!-- Custom CSS -->
-<link href="${root}/css/project.css" rel='stylesheet' type='text/css' />
-<link href="${root}/css/style-responsive.css" rel="stylesheet" />
-<!-- font CSS -->
-<link
-	href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic'
-	rel='stylesheet' type='text/css'>
-<!-- font-awesome icons -->
-<link rel="stylesheet" href="${root}/css/font.css" type="text/css" />
-<link href="${root}/css/font-awesome.css" rel="stylesheet">
-<!-- //font-awesome icons -->
-<script src="${root}/js/jquery2.0.3.min.js"></script>
-
 <!-- jQuery EasyUi API -->
-<link rel="stylesheet" type="text/css"
-	href="${root}/easyui/themes/default/easyui.css">
-<link rel="stylesheet" type="text/css"
-	href="${root}/easyui/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="${root}/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="${root}/easyui/themes/icon.css">
 <script type="text/javascript" src="${root}/easyui/jquery.easyui.min.js"></script>
-
-</head>
 <body>
-	<section id="container"> <!--header start--> <header
-		class="header fixed-top clearfix"> <!--logo start-->
-	<div class="brand">
-
-		<a href="index.html" class="logo"> KITRIWARE </a>
-		<div class="sidebar-toggle-box">
-			<div class="fa fa-bars"></div>
-		</div>
-	</div>
-	<!--logo end-->
-
-	<div class="nav notify-row" id="top_menu">
-		<!--  notification start -->
-		<ul class="nav top-menu">
-			<!-- settings start -->
-			<li class="dropdown"><a data-toggle="dropdown"
-				class="dropdown-toggle" href="#"> <i class="fa fa-tasks"></i> <span
-					class="badge bg-success">8</span>
-			</a>
-				<ul class="dropdown-menu extended tasks-bar">
-					<li>
-						<p class="">You have 8 pending tasks</p>
-					</li>
-					<li><a href="#">
-							<div class="task-info clearfix">
-								<div class="desc pull-left">
-									<h5>Target Sell</h5>
-									<p>25% , Deadline 12 June’13</p>
-								</div>
-								<span class="notification-pie-chart pull-right"
-									data-percent="45"> <span class="percent"></span>
-								</span>
-							</div>
-					</a></li>
-					<li><a href="#">
-							<div class="task-info clearfix">
-								<div class="desc pull-left">
-									<h5>Product Delivery</h5>
-									<p>45% , Deadline 12 June’13</p>
-								</div>
-								<span class="notification-pie-chart pull-right"
-									data-percent="78"> <span class="percent"></span>
-								</span>
-							</div>
-					</a></li>
-					<li><a href="#">
-							<div class="task-info clearfix">
-								<div class="desc pull-left">
-									<h5>Payment collection</h5>
-									<p>87% , Deadline 12 June’13</p>
-								</div>
-								<span class="notification-pie-chart pull-right"
-									data-percent="60"> <span class="percent"></span>
-								</span>
-							</div>
-					</a></li>
-					<li><a href="#">
-							<div class="task-info clearfix">
-								<div class="desc pull-left">
-									<h5>Target Sell</h5>
-									<p>33% , Deadline 12 June’13</p>
-								</div>
-								<span class="notification-pie-chart pull-right"
-									data-percent="90"> <span class="percent"></span>
-								</span>
-							</div>
-					</a></li>
-
-					<li class="external"><a href="#">See All Tasks</a></li>
-				</ul></li>
-			<!-- settings end -->
-			<!-- inbox dropdown start-->
-			<li id="header_inbox_bar" class="dropdown"><a
-				data-toggle="dropdown" class="dropdown-toggle" href="#"> <i
-					class="fa fa-envelope-o"></i> <span class="badge bg-important">4</span>
-			</a>
-				<ul class="dropdown-menu extended inbox">
-					<li>
-						<p class="red">You have 4 Mails</p>
-					</li>
-					<li><a href="#"> <span class="photo"><img
-								alt="avatar" src="${root}/images/3.png"></span> <span
-							class="subject"> <span class="from">Jonathan Smith</span>
-								<span class="time">Just now</span>
-						</span> <span class="message"> Hello, this is an example msg. </span>
-					</a></li>
-					<li><a href="#"> <span class="photo"><img
-								alt="avatar" src="${root}/images/1.png"></span> <span
-							class="subject"> <span class="from">Jane Doe</span> <span
-								class="time">2 min ago</span>
-						</span> <span class="message"> Nice admin template </span>
-					</a></li>
-					<li><a href="#"> <span class="photo"><img
-								alt="avatar" src="${root}/images/3.png"></span> <span
-							class="subject"> <span class="from">Tasi sam</span> <span
-								class="time">2 days ago</span>
-						</span> <span class="message"> This is an example msg. </span>
-					</a></li>
-					<li><a href="#"> <span class="photo"><img
-								alt="avatar" src="${root}/images/2.png"></span> <span
-							class="subject"> <span class="from">Mr. Perfect</span> <span
-								class="time">2 hour ago</span>
-						</span> <span class="message"> Hi there, its a test </span>
-					</a></li>
-					<li><a href="#">See all messages</a></li>
-				</ul></li>
-			<!-- inbox dropdown end -->
-			<!-- notification dropdown start-->
-			<li id="header_notification_bar" class="dropdown"><a
-				data-toggle="dropdown" class="dropdown-toggle" href="#"> <i
-					class="fa fa-bell-o"></i> <span class="badge bg-warning">3</span>
-			</a>
-				<ul class="dropdown-menu extended notification">
-					<li>
-						<p>Notifications</p>
-					</li>
-					<li>
-						<div class="alert alert-info clearfix">
-							<span class="alert-icon"><i class="fa fa-bolt"></i></span>
-							<div class="noti-info">
-								<a href="#"> Server #1 overloaded.</a>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="alert alert-danger clearfix">
-							<span class="alert-icon"><i class="fa fa-bolt"></i></span>
-							<div class="noti-info">
-								<a href="#"> Server #2 overloaded.</a>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="alert alert-success clearfix">
-							<span class="alert-icon"><i class="fa fa-bolt"></i></span>
-							<div class="noti-info">
-								<a href="#"> Server #3 overloaded.</a>
-							</div>
-						</div>
-					</li>
-
-				</ul></li>
-			<!-- notification dropdown end -->
-		</ul>
-		<!--  notification end -->
-	</div>
-	<div class="top-nav clearfix">
-		<!--search & user info start-->
-		<ul class="nav pull-right top-menu">
-			<li><input type="text" class="form-control search"
-				placeholder=" Search"></li>
-			<!-- user login dropdown start-->
-			<li class="dropdown"><a data-toggle="dropdown"
-				class="dropdown-toggle" href="#"> <img alt=""
-					src="${root}/images/2.png"> <span class="username">John
-						Doe</span> <b class="caret"></b>
-			</a>
-				<ul class="dropdown-menu extended logout">
-					<li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
-					<li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-					<li><a href="login.html"><i class="fa fa-key"></i> Log Out</a></li>
-				</ul></li>
-			<!-- user login dropdown end -->
-
-		</ul>
-		<!--search & user info end-->
-	</div>
-	</header> <!--header end--> <!--sidebar start--> <aside>
-	<div id="sidebar" class="nav-collapse">
-		<!-- sidebar menu start-->
-		<div class="leftside-navigation">
-			<ul class="sidebar-menu" id="nav-accordion">
-				<li><a href="index.html"> <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-				</a></li>
-
-				<li class="sub-menu"><a href="javascript:;"> <i
-						class="fa fa-book"></i> <span>UI Elements</span>
-				</a>
-					<ul class="sub">
-						<li><a href="typography.html">Typography</a></li>
-						<li><a href="glyphicon.html">glyphicon</a></li>
-						<li><a href="grids.html">Grids</a></li>
-					</ul></li>
-				<li><a href="fontawesome.html"> <i class="fa fa-bullhorn"></i>
-						<span>Font awesome </span>
-				</a></li>
-				<li class="sub-menu"><a href="javascript:;"> <i
-						class="fa fa-th"></i> <span>Data Tables</span>
-				</a>
-					<ul class="sub">
-						<li><a href="basic_table.html">Basic Table</a></li>
-						<li><a href="responsive_table.html">Responsive Table</a></li>
-					</ul></li>
-				<li class="sub-menu"><a href="javascript:;"> <i
-						class="fa fa-tasks"></i> <span>Form Components</span>
-				</a>
-					<ul class="sub">
-						<li><a href="form_component.html">Form Elements</a></li>
-						<li><a href="form_validation.html">Form Validation</a></li>
-						<li><a href="dropzone.html">Dropzone</a></li>
-					</ul></li>
-				<li class="sub-menu"><a class="active" href="javascript:;">
-						<i class="fa fa-envelope"></i> <span>Mail </span>
-				</a>
-					<ul class="sub">
-						<li><a href="${root}/email/emaillist.kitri">수신 메일함</a></li>
-						<li><a href="${root}/email/sendlist.kitri">발신 메일함</a></li>
-						<li><a href="${root}/email/keeplist.kitri">받은 메일 보관함</a></li>
-					</ul></li>
-				<li class="sub-menu"><a href="javascript:;"> <i
-						class=" fa fa-bar-chart-o"></i> <span>Charts</span>
-				</a>
-					<ul class="sub">
-						<li><a href="chartjs.html">Chart js</a></li>
-						<li><a href="flot_chart.html">Flot Charts</a></li>
-					</ul></li>
-				<li class="sub-menu"><a href="javascript:;"> <i
-						class=" fa fa-bar-chart-o"></i> <span>Maps</span>
-				</a>
-					<ul class="sub">
-						<li><a href="google_map.html">Google Map</a></li>
-						<li><a href="vector_map.html">Vector Map</a></li>
-					</ul></li>
-				<li class="sub-menu"><a href="javascript:;"> <i
-						class="fa fa-glass"></i> <span>Extra</span>
-				</a>
-					<ul class="sub">
-						<li><a href="gallery.html">Gallery</a></li>
-						<li><a href="404.html">404 Error</a></li>
-						<li><a href="registration.html">Registration</a></li>
-					</ul></li>
-				<li class="sub-menu"><a class="active" href="javascript:;">
-						<i class="fa fa-user"></i> <span>관리자</span>
-				</a>
-					<ul class="sub">
-						<li><a href="${root}/email/emaillist.kitri">조직도 관리</a></li>
-						<li><a href="${root}/email/sendlist.kitri">기능1</a></li>
-						<li><a href="${root}/email/keeplist.kitri">기능2</a></li>
-					</ul></li>
-			</ul>
-		</div>
-		<!-- sidebar menu end-->
-	</div>
-	</aside> 
-	<!--sidebar end--> 
+	<section id="container"> 
 	<!-- 조직관리 모달 시작 -->
 	<div class="modal fade" id="DeptModal" role="dialog">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">조직관리</h4>
-				</div>
-				<div class="modal-body">
-					<div>
-						<table class="tableMiddle table table-hover">
-							<tr>
-								<td><a href="#">기획부</a></td>
-							</tr>
-							<tr>
-								<td><a href="#">개발부</a></td>
-							</tr>
-							<tr>
-								<td><a href="#">경영부</a></td>
-							</tr>
-							<tr>
-								<td><a href="#">홍보부</a></td>
-							</tr>
-						</table>
+			<div class="modal-dialog">
+				<div class="modal-content">
+				
+					<div class="modal-header">
+						<button type="button" id="deptClose" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">조직 관리</h4>
 					</div>
-				</div>
-				<div class="modal-footer">
-					<div align="left">
-						<strong>추가할 부서명 입력</strong>
+					<div class="modal-body">
+						<div id="dpt_sq_dept" class="form-group well">
+							<c:forEach items="${selectDpt_Div_Tb}" var="map">
+								<div class="has-feedback" data-value="${map.DPT_SQ}">
+									<div class="deptDiv" data-value="${map.DPT_SQ}">${map.DPT_NM}</div>						
+									<button id="deptDelete">삭제</button>				
+								</div>
+							</c:forEach>
+						</div>
+						<div class="modal-footer">
+							<div class="col-xs-10 col-md-10 leftNoPadding">
+								<input type="text" id="addDept" class="form-control" placeholder="부서명">
+							</div>
+							<button type="button" id="deptInsert" class="btn btn-success col-xs-2 col-md-2 leftNoPadding rightNoPadding">추가</button>
+						</div>
 					</div>
-					<input type="text" class="form-control" placeholder="추가 부서명 입력">
-					<span>
-						<button type="button" id="applybutton" class="btn btn-primary btn-sm" data-dismiss="modal">등록</button>
-						<button type="button" id="okbutton" class="btn btn-success btn-sm" data-dismiss="modal">닫기</button>
-					</span>
 				</div>
 			</div>
 		</div>
-	</div>
 	<!-- 조직관리 모달 끝   --> 
 	
-	<!-- 구성원 추가 모달 --> 
-	<div class="modal fade" id="PersonModal" role="dialog">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">구성원 추가</h4>
-				</div>
-				<div class="modal-body">
-					<div>
-						<table class="tableMiddle table table-striped" enctype="multipart/form-data">
-							<tr>
-								<td>사진등록</td>
-								<td><input type="file" id="applyphoto" class="form-control">
-								이미지는 가로 96px, 세로 126px를 준수해 주세요.<br>(*)이 작성된 칸은 필수항목 입니다.</td>
-							</tr>
-							<tr>
-								<td>이름(*)</td>
-								<td><input type="text" id="name" class="form-control"></td>
-							</tr>
-							<tr>
-								<td>비밀번호(*)</td>
-								<td><input type="password" id="pass" class="form-control"></td>
-							</tr>
-							<tr>
-								<td>비밀번호 확인(*)</td>
-								<td><input type="password" id="passcheck" class="form-control"></td>
-							</tr>
-							<tr>
-								<td>사원번호(*)</td>
-								<td><input type="text" id="memberno" class="form-control"></td>
-							</tr>
-							<tr>
-								<td>권한(*)</td>
-								<td><input type="text" id="author" class="form-control"></td>
-							</tr>
-							<tr>
-								<td>직급(*)</td>
-								<td><input type="text" id="grade" class="form-control"></td>
-							</tr>
-							<tr>
-								<td>주소(*)</td>
-								<td>
-									<input type="text" id="address" class="col-xs-4" readonly="readonly">
-									&nbsp;
-									<span>
-										<button class="btn btn-primary btn-sm" id="addressBtn"
-								type="button" data-toggle="modal" data-target="#zip_codeModal">주소검색</button>
-									</span>
-								</td>
-							</tr>
-							<tr>
-								<td>상세주소(*)</td>
-								<td>
-									<input type="text" id="address" class="form-control">
-								</td>
-							</tr>
-							<tr>
-								<td>이메일(*)</td>
-								<td>
-									<input type="text" id="email" class="form-control">
-								</td>
-							</tr>
-							<tr>
-								<td>휴대폰(*)</td>
-								<td>
-									<input type="text" id="tel1" class="col-xs-2">
-									<input type="text" id="tel2" class="col-xs-2">
-									<input type="text" id="tel3" class="col-xs-2">
-								</td>
-							</tr>
-							<tr>
-								<td>내선번호</td>
-								<td>
-									<input type="text" id="companytel1" class="col-xs-2">
-									<input type="text" id="companytel2" class="col-xs-2">
-									<input type="text" id="companytel3" class="col-xs-2">
-								</td>
-							</tr>
+	<!-- 구성원 수정  모달 --> 
+	<div class="modal fade" id="insertModal" role="dialog">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">구성원 추가</h4>
+					</div>
+					<div class="modal-body">
+						<table class="tableMiddle table table-striped table-bordered ">
+							<colgroup>
+								<col width="30%" />
+								<col width="70%" />
+							</colgroup>
+							<thead>
+							</thead>
+							<form name="officerInsertForm" method="post">
+								<tbody>
+									<tr>
+										<th>이름(*)</th>
+										<td>
+										<input type="text" id="stf_nm_in" name="stf_nm" class="form-control" placeholder="이름">
+										</td>
+									</tr>
+									<tr>
+										<th>비밀번호(*)</th>
+										<td>
+											<div id="stf_pw1_Div">
+												<input type="password" id="stf_pw_in" name="stf_pw" class="form-control" placeholder="비밀번호"> 
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<th>비밀번호 확인(*)</th>
+										<td>
+											<input type="password" id="stf_pwcheck_in" name="stf_pwcheck" class="form-control" placeholder="비밀번호 확인"> 
+										</td>
+									</tr>
+									<tr>
+										<th>권한(*)</th>
+										<td>
+										 <select id="admn_sq_in" name="admn_sq" class="form-control">
+												<option value="1">일반 사용자</option>    
+        										<option value="2">회원 관리자</option>   				
+        										<option value="3">총괄 관리자</option>          
+										</select>						
+										</td>
+									</tr>
+									<tr>
+										<th>부서(*)</th>
+										<td>
+										<select id="dpt_sq_in" name="dpt_sq" class="form-control">
+												<c:forEach items="${selectDpt_Div_Tb}" var="map">
+														<option value="${map.DPT_SQ}">${map.DPT_NM}</option>
+												</c:forEach>
+										</select>
+										</td>
+									</tr>
+									<tr>
+										<th>직급(*)</th>
+										<td><select id="rnk_sq_in" name="rnk_sq" class="form-control">
+												<c:forEach items="${selectRnk_Tb}" var="map">
+													<option value="${map.RNK_SQ}">${map.RNK_NM}</option>
+												</c:forEach>
+										</select></td>
+									</tr>
+									<tr>
+										<th>우편번호(*)</th>
+										<td>
+											<div class="col-sm-9 col-md-10 leftNoPadding">
+												<input type="text" id="stf_zip_add_in" name="stf_zip_add" class="form-control" placeholder="우편번호" readonly="readonly">
+											</div>
+											<button class="btn btn-primary" id="zipcode_in" type="button" data-toggle="modal" data-target="#zip_codeModal">주소검색</button>						
+										</td>
+									</tr>
+									<tr>
+										<th>주소(*)</th>
+										<td>
+											<div class="col-sm-9 col-md-10 leftNoPadding">
+												<input type="text" id="stf_cm_add_in" name="stf_cm_add"
+													class="form-control" placeholder="주소" readonly="readonly">
+											</div>					
+										</td>
+									</tr>
+									<tr>
+										<th>상세주소(*)</th>
+										<td><input type="text" id="stf_dt_add_in" name="stf_dt_add"
+											class="form-control" placeholder="상세주소"></td>
+									</tr>
+									<tr>
+										<th>이메일(*)</th>
+										<td>
+										<input type="text" id="stf_eml1_in" name="stf_eml1"
+											 placeholder="이메일1">@
+										<input type="text" id="stf_eml2_in" name="stf_eml2"
+											 value="gmail.com" readonly="readonly"> 
+										</td>
+									</tr>
+									<tr>
+										<th>휴대폰(*)</th>
+										<td>
+											<div class="col-sm-2 col-md-2 leftNoPadding rightNoPadding">
+												<select id="stf_ph1_up_in" name="stf_ph1" class="form-control">
+													<option value="010">010</option>
+													<option value="011">011</option>
+													<option value="019">019</option>
+												</select>
+											</div>
+											<div class="col-sm-1 col-md-1 text-center leftNoPadding rightNoPadding">
+												<h5>-</h5>
+											</div>
+											<div class="col-sm-4 col-md-4 leftNoPadding rightNoPadding">
+												<input type="text" id="stf_ph2_in" name="stf_ph2" class="form-control telNumMax" />
+											</div>
+											<div
+												class="col-sm-1 col-md-1 text-center leftNoPadding rightNoPadding">
+												<h5>-</h5>
+											</div>
+											<div class="col-sm-4 col-md-4 leftNoPadding rightNoPadding">
+												<input type="text" id="stf_ph3_in" name="stf_ph3" class="form-control telNumMax"/>	
+											</div> 
+										</td>
+									</tr>
+									<tr>
+										<th>내선번호</th>
+										<td>
+											<div class="col-sm-2 col-md-2 leftNoPadding rightNoPadding">
+												<select class="form-control" name="stf_bs_ph1" id="stf_bs_ph1_in">
+        											<option>02</option>
+        											<option>031</option>
+        											<option>032</option>
+        										</select>  
+											</div>
+											<div class="col-sm-1 col-md-1 text-center leftNoPadding rightNoPadding">
+												<h5>-</h5>
+											</div>
+											<div class="col-sm-4 col-md-4 leftNoPadding rightNoPadding">
+												<input type="text" id="stf_bs_ph2_in" name="stf_bs_ph2" class="form-control telNumMax" />
+											</div>
+											<div class="col-sm-1 col-md-1 text-center leftNoPadding rightNoPadding">
+												<h5>-</h5>
+											</div>
+											<div class="col-sm-4 col-md-4 leftNoPadding rightNoPadding">
+												<input type="text" id="stf_bs_ph3_in" name="stf_bs_ph3" class="form-control telNumMax" />
+											</div> 
+										</td>
+									</tr>
+									<tr>
+										<th>입사일(*)</th>
+										<td>
+										<input type="date" id="stf_ent_in" name="stf_ent" class="form-control" placeholder="입사일"></td>
+									</tr>
+								</tbody>
+							</form>
 						</table>
 					</div>
-				</div>
-				<div class="modal-footer">
-					<span>
-						<button type="button" id="applybutton" class="btn btn-primary btn-sm" data-dismiss="modal">등록</button>
-						<button type="button" id="okbutton" class="btn btn-success btn-sm" data-dismiss="modal">닫기</button>
-					</span>
+					<div class="modal-footer">
+						<button type="button" id="officerInsert" class="btn btn-success">추가</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	<!-- 구성원 추가 모달 끝  -->
 	
-	<!-- 우편번호 조회 모달 -->
+	<!-- 구성원 수정  모달 --> 
+	<div class="modal fade" id="updateModal" role="dialog">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">구성원 수정</h4>
+					</div>
+					<div class="modal-body">
+						<table class="tableMiddle table table-striped table-bordered ">
+							<colgroup>
+								<col width="30%" />
+								<col width="70%" />
+							</colgroup>
+							<thead>
+							</thead>
+							<form name="officerUpdateForm" method="post">
+								<tbody>
+									<tr>
+										<th>이름(*)</th>
+										<td>
+										<input type="text" id="stf_nm" name="stf_nm" class="form-control" placeholder="이름">
+										</td>
+									</tr>
+									<tr>
+										<th>비밀번호(*)</th>
+										<td>
+											<div id="stf_pw1_Div">
+												<input type="password" id="stf_pw" name="stf_pw" class="form-control" placeholder="비밀번호"> 
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<th>비밀번호 확인(*)</th>
+										<td>
+											<input type="password" id="stf_pwcheck" name="stf_pwcheck" class="form-control" placeholder="비밀번호 확인"> 
+										</td>
+									</tr>
+									<tr>
+										<th>권한(*)</th>
+										<td>
+										 <select id="admn_sq" name="admn_sq" class="form-control">
+												<option value="1">일반 사용자</option>    
+        										<option value="2">회원 관리자</option>   				
+        										<option value="3">총괄 관리자</option>          
+										</select>						
+										</td>
+									</tr>
+									<tr>
+										<th>부서(*)</th>
+										<td>
+										<select id="dpt_sq" name="dpt_sq" class="form-control">
+												<c:forEach items="${selectDpt_Div_Tb}" var="map">
+														<option value="${map.DPT_SQ}">${map.DPT_NM}</option>
+												</c:forEach>
+										</select>
+										</td>
+									</tr>
+									<tr>
+										<th>직급(*)</th>
+										<td><select id="rnk_sq" name="rnk_sq" class="form-control">
+												<c:forEach items="${selectRnk_Tb}" var="map">
+													<option value="${map.RNK_SQ}">${map.RNK_NM}</option>
+												</c:forEach>
+										</select></td>
+									</tr>
+									<tr>
+										<th>우편번호(*)</th>
+										<td>
+											<div class="col-sm-9 col-md-10 leftNoPadding">
+												<input type="text" id="stf_zip_add" name="stf_zip_add" class="form-control" placeholder="우편번호" readonly="readonly">
+											</div>
+											<button class="btn btn-primary" id="zipcode" type="button" data-toggle="modal" data-target="#zip_codeModal">주소검색</button>						
+										</td>
+									</tr>
+									<tr>
+										<th>주소(*)</th>
+										<td>
+											<div class="col-sm-9 col-md-10 leftNoPadding">
+												<input type="text" id="stf_cm_add" name="stf_cm_add"
+													class="form-control" placeholder="주소" readonly="readonly">
+											</div>					
+										</td>
+									</tr>
+									<tr>
+										<th>상세주소(*)</th>
+										<td><input type="text" id="stf_dt_add" name="stf_dt_add"
+											class="form-control" placeholder="상세주소"></td>
+									</tr>
+									<tr>
+										<th>사원번호(*)</th>
+										<td><input type="text" id="stf_sq" name="stf_sq"
+											class="form-control" readonly="readonly" placeholder="사원번호"></td>
+									</tr>
+									<tr>
+										<th>이메일(*)</th>
+										<td>
+										<input type="text" id="stf_eml1" name="stf_eml1"
+											 placeholder="이메일1">@
+										<input type="text" id="stf_eml2" name="stf_eml2"
+											 placeholder="이메일2" > 
+										</td>
+									</tr>
+									<tr>
+										<th>휴대폰(*)</th>
+										<td>
+											<div class="col-sm-2 col-md-2 leftNoPadding rightNoPadding">
+												<select id="stf_ph1_up" name="stf_ph1" class="form-control">
+													<option value="010">010</option>
+													<option value="011">011</option>
+													<option value="019">019</option>
+												</select>
+											</div>
+											<div class="col-sm-1 col-md-1 text-center leftNoPadding rightNoPadding">
+												<h5>-</h5>
+											</div>
+											<div class="col-sm-4 col-md-4 leftNoPadding rightNoPadding">
+												<input type="text" id="stf_ph2" name="stf_ph2" class="form-control telNumMax" />
+											</div>
+											<div
+												class="col-sm-1 col-md-1 text-center leftNoPadding rightNoPadding">
+												<h5>-</h5>
+											</div>
+											<div class="col-sm-4 col-md-4 leftNoPadding rightNoPadding">
+												<input type="text" id="stf_ph3" name="stf_ph3" class="form-control telNumMax"/>	
+											</div> 
+										</td>
+									</tr>
+									<tr>
+										<th>내선번호</th>
+										<td>
+											<div class="col-sm-2 col-md-2 leftNoPadding rightNoPadding">
+												<select class="form-control" name="stf_bs_ph1" id="stf_bs_ph1">
+        											<option>02</option>
+        											<option>031</option>
+        											<option>032</option>
+        										</select>  
+											</div>
+											<div class="col-sm-1 col-md-1 text-center leftNoPadding rightNoPadding">
+												<h5>-</h5>
+											</div>
+											<div class="col-sm-4 col-md-4 leftNoPadding rightNoPadding">
+												<input type="text" id="stf_bs_ph2" name="stf_bs_ph2" class="form-control telNumMax" />
+											</div>
+											<div class="col-sm-1 col-md-1 text-center leftNoPadding rightNoPadding">
+												<h5>-</h5>
+											</div>
+											<div class="col-sm-4 col-md-4 leftNoPadding rightNoPadding">
+												<input type="text" id="stf_bs_ph3" name="stf_bs_ph3" class="form-control telNumMax" />
+											</div> 
+										</td>
+									</tr>
+									<tr>
+										<th>입사일(*)</th>
+										<td>
+										<input type="date" id="stf_ent" name="stf_ent" class="form-control" placeholder="입사일"></td>
+									</tr>
+								</tbody>
+							</form>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" id="officerUpdate" class="btn btn-success">수정</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	<!-- 구성원 수정 모달 끝  -->
+	
+	<!-- 구성원 퇴사  모달 --> 
+	<div class="modal fade" id="layoffModal" role="dialog">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">구성원 퇴사</h4>
+					</div>
+					<div class="modal-body">
+						<table class="tableMiddle table table-striped table-bordered ">
+							<colgroup>
+								<col width="30%" />
+								<col width="70%" />
+							</colgroup>
+							<thead>
+							</thead>
+							<form name="officerLayoffForm" method="post">
+								<tbody>
+									<tr>
+										<th>이름(*)</th>
+										<td>
+										<input type="text" id="stf_nm_lo" name="stf_nm" class="form-control" placeholder="이름" readonly="readonly">
+										</td>
+									</tr>
+									<tr>
+										<th>권한(*)</th>
+										<td>
+										 <select id="admn_sq_lo" name="admn_sq" class="form-control" disabled>
+												<option value="1">일반 사용자</option>    
+        										<option value="2">회원 관리자</option>   				
+        										<option value="3">총괄 관리자</option>        
+										</select>						
+										</td>
+									</tr>
+									<tr>
+										<th>부서(*)</th>
+										<td>
+										<select id="dpt_sq_lo" name="dpt_sq" class="form-control" disabled>
+												<c:forEach items="${selectDpt_Div_Tb}" var="map">
+													<option value="${map.DPT_SQ}">${map.DPT_NM}</option>
+												</c:forEach>
+										</select>
+										</td>
+									</tr>
+									<tr>
+										<th>직급(*)</th>
+										<td><select id="rnk_sq_lo" name="rnk_sq" class="form-control" disabled>
+												<c:forEach items="${selectRnk_Tb}" var="map">
+													<option value="${map.RNK_SQ}">${map.RNK_NM}</option>
+												</c:forEach>
+										</select></td>
+									</tr>
+									
+									<tr>
+										<th>사원번호(*)</th>
+										<td><input type="text" id="stf_sq_lo" name="stf_sq"
+											class="form-control" readonly="readonly" placeholder="사원번호"></td>
+									</tr>
+									<tr>
+										<th>이메일(*)</th>
+										<td>
+										<input type="text" id="stf_eml1_lo" name="stf_eml1"
+											 placeholder="이메일1" readonly="readonly">@
+										<input type="text" id="stf_eml2_lo" name="stf_eml2"
+											 placeholder="이메일2" readonly="readonly"> 
+										</td>
+									</tr>
+								</tbody>
+							</form>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<strong>퇴사 처리 하겠습니까?</strong>
+						<button type="button" id="officerLayoff" class="btn btn-success">퇴사</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	<!-- 구성원 탈퇴 모달 끝  -->
+	
+	<!-- 우편번호 조회(수정용) 모달  -->
 	<div class="modal fade" id="zip_codeModal" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -455,13 +491,52 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
     </div>
 	</div>
-	<!--  우편번호 조회 모달 끝 -->
+	<!--  우편번호 조회 (수정용)모달 끝 -->
 	
-	<!-- 구성원 조회 /수정/삭제 모달 --> 
+	<!-- 우편번호 조회(추가용) 모달  -->
+	<div class="modal fade" id="zip_codeModal_1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title" id="myModalLabel">우편번호</h3>
+            </div>    
+            <div class="modal-body text-center">
+                 <form id = "zip_codeForm1">
+                         <div class = "input-group">
+                            <span class = "input-group-addon">동 입력</span>
+                            <input type="text" class = "form-control" name="query" id="query1">
+                            <span class = "input-group-btn">                                                
+                                <input type="submit" class = "btn btn-warning" value="검색" id="searchBtn_1" onkeydown="javascript:if(event.keyCode==13)">                                            
+                            </span>
+                        </div>
+                </form>
+                <p>
+                </p>
+                <div>
+                <div style="width:100%; height:200px; overflow:auto">
+                       <table class = "table text-center">
+                        <thead>
+                            <tr>
+                                <th style="width:150px;">우편번호</th>
+                                <th style="width:600px;">주소</th>
+                                </tr>
+                        </thead>
+                        <tbody id="zip_codeList1"></tbody>
+                    </table>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	</div>
+	<!--  우편번호 조회(추가용) 모달 끝 -->
+
 	
-	<!-- 구성원 조회 /수정/삭제 모달 끝  -->
-	<!--main content start--> <section id="main-content"> <section
-		class="wrapper">
+	
+	<!--main content start--> 
+	<section id="main-content"> 
+	<section class="wrapper">
 	<div class="mail-w3agile">
 		<!-- page start-->
 		<!-- 조직도 왼쪽 -->
@@ -472,144 +547,720 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="panel">
 						<font size="5"><strong>조직도 관리</strong></font>
 						<!-- 버튼 위치 조절 수동 -->
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<!----------------->
+						<!--- 접속대상이 총괄관리자 일 경우에만 버튼 보이게 하기 --->
+						<c:if test="${userinfo.admn_sq == 3}">
 						<span align="left">
 							<button class="btn btn-primary btn-sm" id="deptManage"
 								type="button" data-toggle="modal" data-target="#DeptModal">관리</button>
 						</span>
+						</c:if>
 					</div>
 					<ul class="easyui-tree">
-						<li><span>KITRIWARE</span>
-							<ul>
-								<li data-options="state:'opened'"><span>기획부</span>
-									<ul>
-										<li><span>이부장</span></li>
-										<li><span>김과장</span></li>
-										<li><span>이대리</span></li>
-										<li><span>박사원</span></li>
-									</ul></li>
-								<li><span>개발부</span>
-									<ul>
-										<li>박부장</li>
-										<li>서과장</li>
-										<li>함대리</li>
-										<li>이사원</li>
-									</ul></li>
-								<li><span>경영부</span>
-									<ul>
-										<li>서부장</li>
-										<li>임과장</li>
-										<li>송대리</li>
-										<li>김사원</li>
-									</ul></li>
-								<li><span>홍보부</span>
-									<ul>
-										<li>서부장</li>
-										<li>임과장</li>
-										<li>박대리</li>
-										<li>박사원</li>
-									</ul></li>
-								<!-- data 둘어갈 시 원상복귀 시키기 -->
-								<!-- <ul>
+						 <li>
+						 	<span>KITRI 주식회사</span>
+								 <ul>
 									<c:forEach items="${selectDpt_Div_Tb}" var="dptmap">
-										<li data-options="state:'closed'"><span>${dptmap.DPT_NM}</span>
+										<li data-options="state:'open'">
+											<span>${dptmap.DPT_NM}</span>
 											<ul>
-												<c:forEach items="${selectOrganization}" var="stfmap">
+												<c:forEach items="${selectStf_tb}" var="stfmap">
 													<c:if test="${dptmap.DPT_NM eq stfmap.DPT_NM}">
-														<li>[${stfmap.DPT_NM}/${stfmap.RNK_NM}]
-															${stfmap.STF_NM}</li>
+														<li>
+														[${stfmap.RNK_NM}] ${stfmap.STF_NM}
+														</li>
 													</c:if>
 												</c:forEach>
-											</ul></li>
-									</c:forEach> -->
-								<!------------------------->
-							</ul></li>
+											</ul>
+										</li>
+									</c:forEach> 
+							</ul>
+						</li>
 					</ul>
 				</div>
 				</section>
 			</div>
 			<!-- 조직도 왼쪽 메뉴 끝 -->
 			<div class="col-sm-14 col-md-9">
-				<section class="panel"> <header
-					class="panel-heading wht-bg">
+				<section class="panel"> 
+				<header class="panel-heading wht-bg">
 				<h4 class="gen-case">
-					<b>구성원 보기</b>
+					<b>구성원 관리</b>
 				</header>
 				</h4>
 				<div id="rightBottom">
-					<span> <label>전체 : </label> <span id="userCount">
-							<!-- ${officerListCount}-->
-					</span>명 <input type="hidden" id="navStfNm" value="${navStfNm }" />
-					</span> &nbsp; <span>
-						<button class="btn btn-success btn-sm" id="manage" type="button"
-							data-toggle="modal" data-target="#PersonModal">구성원 추가</button>
+					<c:if test="${(userinfo.admn_sq == 2) || (userinfo.admn_sq==3)}">
+					<span>
+						<!-- 접속 대상이 총괄 or 회원관리자 일 경우에만 사용 가능. -->
+						<button type="button" id="officerInsertModal" class="btn btn-primary btn-sm"  
+								data-backdrop="static" data-toggle="modal">추가</button>
+						<button type="button" id="officerUpdateModal" class="btn btn-warning btn-sm"  
+								data-backdrop="static" data-toggle="modal">수정</button>
+						<button type="button" id="officerLayoffModal" class="btn btn-danger btn-sm" 
+								data-backdrop="static" data-toggle="modal">퇴사</button>
+					</c:if>			
+						<!-- 구성원 검색 -->
+						<select id="cate">
+							<option value="1">이름</option>
+							<option value="2">직급</option>
+							<option value="3">부서</option>
+						</select>  
+						<input type="text" id="keyword">
+						<button type="button" class="btn btn-success btn-sm" id="search">검색</button>
+						<button type="button" class="btn btn-primary btn-sm" id="alllist">전체보기</button>									
 					</span>
 				</div>
 				<div class="table-responsive">
 					<table id="officerList" class="tableMiddle table table-hover">
 						<colgroup>
-							<col width="96PX" />
-							<col width="15%" />
-							<col width="15%" />
-							<col width="15%" />
-							<col width="15%" />
-							<col width="15%" />
-							<col width="15%" />
+							<col width="3%"/>
+							<col width="10%"/>
+							<col width="15%"/>
+							<col width="15%"/>
+							<col width="14%"/>
+							<col width="17%"/>
+							<col width="35%"/>
+							<col width="30%"/>
+							<col width="20%"/>
 						</colgroup>
 						<thead>
 							<tr class="active">
-								<th class="text-center">사진</th>
+								<th class="text-center"></th>
+								<th class="text-center">사번</th>
 								<th class="text-center">이름</th>
 								<th class="text-center">직급</th>
-								<th class="text-center">조직</th>
-								<th class="text-center">핸드폰번호</th>
-								<th class="text-center">내선번호</th>
-								<th class="text-center">이메일</th>
+								<th class="text-center">부서</th>
+								<th class="text-center">휴대폰</th>
+								<th class="text-center">메일</th>
 							</tr>
 						</thead>
-						<!-- 
 								<tbody>
 									<c:forEach items="${officerList}" var="map">
-										<tr>
-											<td class="text-center"><input type="checkbox" id=""></td>
-											<td class="text-center"><img src="${map.STF_PT_RT}" class="profileImg"/></td>
-											<td class="text-center">${map.STF_NM}</td>
-											<td class="text-center">${map.RNK_NM}</td>
-											<td class="text-center">${map.DPT_NM}</td>
-											<td class="text-center">${map.STF_PH}</td>
-											<td class="text-center">${map.STF_BS_PH}</td>
-											<td class="text-center">${map.STF_EML}</td>
+										<tr id="officelist">
+											<td>
+												<input type="radio" name= "stf_sq" class="radio" value="${map.STF_SQ}">
+											</td>
+											<td>${map.STF_SQ}</td>
+											<td>${map.STF_NM}</td>
+											<td>${map.RNK_NM}</td>
+											<td>${map.DPT_NM}</td>
+											<td>${map.STF_PH1}-${map.STF_PH2}-${map.STF_PH3}</td>
+											<td>${map.STF_EML1}@${map.STF_EML2}</td>
 										</tr>
 									</c:forEach>
-								</tbody>
-								--->
+								</tbody>						
 					</table>
-					<div class="unstyled inbox-pagination" align="center">AJAX
-						Paging 처리</div>
+					<div class="unstyled inbox-pagination" align="center">
+						 ${pageIndexList}
+					</div>
 				</div>
 				</section>
 			</div>
 		</div>
-
 		<!-- page end-->
 	</div>
-	</section> <!-- footer -->
-	<div class="footer">
-		<div class="wthree-copyright">
-			<p>© 2018 KITRIWARE All rights reserved | Design by DC #26 3TEAM</p>
-		</div>
-	</div>
+	</section>
 	
-	<!-- / footer --> </section> <!--main content end--> </section>
-	<script src="${root}/js/bootstrap.js"></script>
-	<script src="${root}/js/jquery.dcjqaccordion.2.7.js"></script>
-	<script src="${root}/js/scripts.js"></script>
-	<script src="${root}/js/jquery.slimscroll.js"></script>
-	<script src="${root}/js/jquery.nicescroll.js"></script>
-	<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="${root}/js/flot-chart/excanvas.min.js"></script><![endif]-->
-	<script src="${root}/js/jquery.scrollTo.js"></script>
-</body>
-</html>
+	<!-- 기능부 스크립트 시작 -->
+	<script type="text/javascript">
+	<!-- JQUERY SCRIPT -->
+	$(document).ready(function() {
+		// 우편번호 검색기능(구성원 추가)
+		$("#searchBtn").click(function(e){
+			$('body').css('overflow-y', 'hidden');
+	        e.preventDefault();
+	        // AJAX
+	        $.ajax({
+	            // organization controller 진입 url
+	            url : '${root}/organization/zipcodeList.kitri',
+	            // zip_codeForm을 serialize 해줍니다.
+	            data : $("#zip_codeForm").serialize(),
+	            type : "POST",
+	            // dataType 은 json형태로 보냅니다.
+	            dataType : "json",
+	            success : function(result){
+	                $("#zip_codeList").empty();
+	                var html = "";
+	                if(result.errorCode != null && result.errorCode != ""){
+	                    html += "<tr>";
+	                    html += "    <td colspan='2'>";
+	                    html +=            result.errorMessage;
+	                    html += "    </td>";
+	                    html += "</tr>";
+	                }
+	                else{
+	                    // 검색결과를 list에 담는다.
+	                    var list = result.list;   
+	                    for(var i = 0; i < list.length; i++){
+	                        html += "<tr>";
+	                        html += "    <td>";
+	                        // 우편번호
+	                        var zipcode = list[i].zipcode;
+	                        // 주소
+	                        var address = list[i].address;
+	                        html +=         list[i].zipcode;
+	                        html += "    </td>";
+	                        html += "    <td>";
+	                        html +=     '<a href="#" onclick="put(\'' + list[i].address + '\',\'' + zipcode + '\')">' + address + '</a>';
+	                        html += "    </td>";
+	                        html += "</tr>";
+	                    }
+	                }
+	                // 완성된 html(우편번호 list)를 zip_codeList밑에 append
+	                $("#zip_codeList").append(html);	                
+	            }
+	        });
+	   	 });
+		// 우편번호검색(구성원 수정)
+		$("#searchBtn_1").click(function(e){
+				$('body').css('overflow-y', 'hidden');
+	       		e.preventDefault();
+	        	// AJAX
+	       		 $.ajax({
+	            	// organization controller 진입 url
+	            	url : '${root}/organization/zipcodeList.kitri',
+	            	// zip_codeForm을 serialize 해줍니다.
+	            	data : $("#zip_codeForm1").serialize(),
+	            	type : "POST",
+	            	// dataType 은 json형태로 보냅니다.
+	            	dataType : "json",
+	            	success : function(result){
+	                	$("#zip_codeList").empty();
+	                	var html = "";
+	                	if(result.errorCode != null && result.errorCode != ""){
+	                    	html += "<tr>";
+	                    	html += "    <td colspan='2'>";
+	                    	html +=            result.errorMessage;
+	                    	html += "    </td>";
+	                    	html += "</tr>";
+	                	}
+	               	 	else {
+	                    	// 검색결과를 list에 담는다.
+	                    	var list = result.list;   
+	                    	for(var i = 0; i < list.length; i++){
+	                        	html += "<tr>";
+	                        	html += "    <td>";
+	                        	// 우편번호
+	                        	var zipcode = list[i].zipcode;
+	                        	// 주소
+	                        	var address = list[i].address;
+	                        	html +=         list[i].zipcode;
+	                        	html += "    </td>";
+	                        	html += "    <td>";
+	                        	html +=     '<a href="#" onclick="put(\'' + list[i].address + '\',\'' + zipcode + '\')">' + address + '</a>';
+	                        	html += "    </td>";
+	                        	html += "</tr>";
+	                    	}
+	                	}
+	                // 완성된 html(우편번호 list)를 zip_codeList밑에 append
+	                $("#zip_codeList1").append(html);	                
+	            }
+	        });
+	   	 });
+		
+		// 사원 검색
+		$("#search").on("click", function() {
+			if ($("#keyword").val() == "") {
+				alert("검색어를 최소 1글자 이상 입력해주세요.");
+				return;
+			} else if ($("#keyword").val() != "")
+				var params = {
+					cate : $("#cate").val(),
+					keyword : $("#keyword").val()
+			};
+		   officerListSearch(params);
+		});
+		// AJAX 페이징 처리
+		$(document).on("click", "#pageIndexListAjax > li > a", function() {
+			 var params = {
+					cate : $("#cate").val(),
+					keyword : $("#keyword").val(),
+					page : $(this).attr("data-page")
+				};
+			officerListSearch(params);
+		});
+		
+		// 한글 입력 방지
+		$("#stf_eml, #stf_sq1").on("keyup", function() {
+			$(this).val($(this).val().replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, ""));
+		});
+		// 업데이트 숫자만 입력
+		$(".telNumMax").on("keyup", function() {
+			$(this).val($(this).val().replace(/[^0-9]/gi, ""));
+			// 전화번호 최대 입력 방지
+			if ($(this).val().length > 4) {
+				$(this).val($(this).val().substring(0, 4));
+			}	
+			if ($(this).attr("id") == "phoneNum2" || $(this).attr("id") == "phoneNum3") {
+				var phoneNum = $("#phoneNum1").val() + "-" + $("#phoneNum2").val() + "-" + $("#phoneNum3").val();
+				$("#stf_ph").val(phoneNum);
+			}
+			else if ($(this).attr("id") == "telNum2" || $(this).attr("id") == "telNum3") {
+				var telNum = $("#telNum1").val() + "-" + $("#telNum2").val() + "-" + $("#telNum3").val();
+				$("#stf_bs_ph").val(telNum);
+			}			
+			else if ($(this).attr("id") == "phoneNum2_up" || $(this).attr("id") == "phoneNum3_up") {
+				var phoneNum = $("#phoneNum1_up").val() + "-" + $("#phoneNum2_up").val() + "-" + $("#phoneNum3_up").val();
+				$("#stf_ph_up").val(phoneNum);
+			}
+			else if ($(this).attr("id") == "telNum2_up" || $(this).attr("id") == "telNum3_up") {
+				var telNum = $("#telNum1_up").val() + "-" + $("#telNum2_up").val() + "-" + $("#telNum3_up").val();
+				$("#stf_bs_ph_up").val(telNum);
+			}
+		});				
+		// 최대 입력 방지 1
+		$("#stf_sq1, #stf_sq1_up").on("keyup", function() {
+			if ($(this).val().length > 10) {
+				$(this).val($(this).val().substring(0, 10));
+			}
+		});
+		// 최대 입력 방지 2
+		$("#stf_dt_add").on("keyup", function() {
+			if ($(this).val().length > 33) {
+				$(this).val($(this).val().substring(0, 33));
+			}
+		});
+		
+		// 구성원 추가 모달 띄우기
+		$("#officerInsertModal").on("click", function() {	
+			$("#officerInsertModal").attr("data-target", "#insertModal");
+		});
+		
+		// 구성원 수정 모달 띄우기
+		$("#officerUpdateModal").on("click", function() {	
+			if ($(".radio").is(":checked") == false) {
+				alert("사원을 선택해주세요.");
+				return;
+			}
+			$("#officerUpdateModal").attr("data-target", "#updateModal");		
+			selectUpdateOfficer();
+		});
+		
+		// 구성원 탈퇴 모달 띄우기
+		$("#officerLayoffModal").on("click", function() {	
+			if ($(".radio").is(":checked") == false) {
+				alert("사원을 선택해주세요.");
+				return;
+			}
+			$("#officerLayoffModal").attr("data-target", "#layoffModal");
+			selectLayoffOfficer();
+		});
+		
+		// 구성원 탈퇴
+		$("#officerLayoff").click(function(){
+			document.officerLayoffForm.action = "${root}/organization/officerLayoff.kitri";
+			document.officerLayoffForm.submit();
+		});
+		
+		// 구성원 추가
+		$("#officerInsert").click(function() {
+			if ($("#stf_nm_in").val() == "") {
+				alert("이름을 확인해주세요.");
+				return;
+			} else if ($("#stf_pw_in").val() != $("#stf_pwcheck_in").val()) {
+				alert("비밀번호를 확인해주세요.");
+				return;
+			} else if ($("#stf_cm_add_in").val() == ""
+					|| $("#stf_dt_add_in").val() == "") {
+				alert("주소를 확인해주세요.");
+				return;
+			} else if ($("#stf_eml1_in").val() == "") {
+				alert("이메일을 확인해주세요.");
+				return;
+			} else if ($("#stf_eml2_in").val() == "") {
+				alert("이메일을 확인해주세요.");
+				return;
+			} else if ($("#stf_ph1_in").val() == "") {
+				alert("휴대폰 번호를 확인해주세요.");
+				return;
+			} else if ($("#stf_ph2_in").val() == "") {
+				alert("휴대폰 번호를 확인해주세요.");
+				return;
+			} else if ($("#stf_ph3_in").val() == "") {
+				alert("휴대폰 번호를 확인해주세요.");
+				return;
+			} else if ($("#stf_bs_ph1_in").val() == "") {
+				alert("내선번호를 확인해주세요.");
+				return;
+			} else if ($("#stf_bs_ph2_in").val() == "") {
+				alert("내선번호를 확인해주세요.");
+				return;
+			} else if ($("#stf_bs_ph3_in").val() == "") {
+				alert("내선번호를 확인해주세요.");
+				return;
+			} else if ($("#stf_ent_up_in").val() == "") {
+				alert("입사일을 확인해주세요.");
+				return;
+			} else {
+				document.officerInsertForm.action = "${root}/organization/officerInsert.kitri";
+				document.officerInsertForm.submit();
+			}
+		});
+		
+		// 구성원 수정
+		$("#officerUpdate").click(function() {
+			if ($("#stf_nm").val() == "") {
+				alert("이름을 확인해주세요.");
+				return;
+			} else if ($("#stf_pw").val() != $("#stf_pwcheck").val()) {
+				alert("비밀번호를 확인해주세요.");
+				return;
+			} else if ($("#stf_cm_add").val() == ""
+					|| $("#stf_dt_add").val() == "") {
+				alert("주소를 확인해주세요.");
+				return;
+			} else if ($("#stf_eml1").val() == "") {
+				alert("이메일을 확인해주세요.");
+				return;
+			} else if ($("#stf_eml2").val() == "") {
+				alert("이메일을 확인해주세요.");
+				return;
+			} else if ($("#stf_ph1").val() == "") {
+				alert("휴대폰 번호를 확인해주세요.");
+				return;
+			} else if ($("#stf_ph2").val() == "") {
+				alert("휴대폰 번호를 확인해주세요.");
+				return;
+			} else if ($("#stf_ph3").val() == "") {
+				alert("휴대폰 번호를 확인해주세요.");
+				return;
+			} else if ($("#stf_bs_ph1").val() == "") {
+				alert("내선번호를 확인해주세요.");
+				return;
+			} else if ($("#stf_bs_ph2").val() == "") {
+				alert("내선번호를 확인해주세요.");
+				return;
+			} else if ($("#stf_bs_ph3").val() == "") {
+				alert("내선번호를 확인해주세요.");
+				return;
+			} else if ($("#stf_ent_up").val() == "") {
+				alert("입사일을 확인해주세요.");
+				return;
+			} else {
+				document.officerUpdateForm.action = "${root}/organization/officerUpdate.kitri";
+				document.officerUpdateForm.submit();
+			}
+		});
+		
+
+		// 최대 입력방지 3
+		$(document).on("keyup", "#addDept, #deptNmUp", function() {
+			if ($(this).val().length > 8) {
+				$(this).val($(this).val().substring(0, 8));
+			}
+		});
+			
+		// 부서명 삭제
+		$(document).on("click", "#deptDelete", function() {
+			var dpt_sq = $(this).parent().children("div").attr("data-value");
+			deptDelete(dpt_sq);
+		});
+		
+		// 부서명 입력
+		$("#deptInsert").on("click", function() {
+			deptInsert();
+		});
+		
+		// 조직도 닫은 후 강제 redirect
+		$("#deptClose").on("click", function() {
+			window.location = '${root}/organization/organization.kitri';
+		});
+		// 전체 클릭하면 전체 명단 보일수 있도록 강제로 redirect
+		$("#alllist").on("click", function() {
+			window.location = '${root}/organization/organization.kitri';
+		});
+		// 셀렉터 특정값 option 삭제
+		$("#dpt_sq").find("option").each(function(){
+			if(this.value == "100"){
+				$(this).remove();
+			}
+		});
+		$("#rnk_sq").find("option").each(function(){
+			if(this.value == "50"){
+				$(this).remove();
+			}
+		});
+	});
+	
+	/// JAVA SCRIPT ///
+	// 원하는 우편번호 선택시 함수 실행
+	function put(address,zipcode){
+    	var address = address;
+    	var zipcode = zipcode;
+    	// 모달창 닫고, 선택값 대입
+    	$('#zip_codeModal').removeClass('in');
+    	$('#zip_codeModal_1').removeClass('in');
+    	$("#stf_zip_add").val(zipcode);
+    	$("#stf_cm_add").val(address);
+    	$("#stf_zip_add_in").val(zipcode);
+    	$("#stf_cm_add_in").val(address);
+        $("#zip_codeList").empty();
+	}
+
+	// 사원검색
+	function officerListSearch(params) {
+		$.ajax({
+			url : "${root}/organization/officerListSearch.kitri",
+			type : "POST",
+			dataType : "json",
+			data : JSON.stringify(params),
+			contentType : "application/json; charset=UTF-8",
+			beforeSend : function() {
+				$("#userCount").empty();
+				$("#officerList > tbody").empty();
+				$("#pageIndexList").empty();
+			},
+			success : function(data) {
+				var officerListCount = data.officerListCount;
+				var officerList = data.officerList;
+				var pageIndexListAjax = data.pageIndexListAjax;
+				$("#userCount").html(officerListCount);
+				var tbody = $("#officerList > tbody");
+				$.each(officerList,	function(idx, val) {
+					tbody.append($('<tr>').append($('<td>',	{html : "<input type='radio' class='radio' value='"+val.STF_SQ+"'>"}))
+										  .append($('<td>',	{text : val.STF_SQ}))
+										  .append($('<td>',	{text : val.STF_NM}))
+										  .append($('<td>',	{text : val.RNK_NM}))
+										  .append($('<td>',	{text : val.DPT_NM}))
+										  .append($('<td>',	{text : val.ADMN_PW})));
+				});		
+				$("#pageIndexList").html(pageIndexListAjax);
+			},
+			error : function(request, status, error) {
+				alert("list search fail :: error code: "
+						+ request.status + "\n" + "error message: "
+						+ error + "\n");
+			}
+		});
+	}
+	// 사원번호 중복 검색
+	function selectStf_sq(data) {
+		var params = {
+			stf_sq : data
+		};
+		$.ajax({
+			url : "${root}/organization/selectStf_Sq.kitri",
+			type : "POST",
+			dataType : "text",
+			data : JSON.stringify(params),
+			contentType : "application/json; charset=UTF-8",
+			beforeSend : function() {
+				$("#stf_sq").val("");
+				$("#stf_sq_up").val("");
+			},
+			success : function(data) {
+				var result = Number(data);
+				if (result > 0) {
+					alert("이미 존재하는 사원번호 입니다.");
+					$("#stf_sq_Div").attr("class", "has-error has-feedback");
+					$("#stf_sq_Span").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+					$("#stf_sq_Div_up").attr("class", "has-error has-feedback");
+					$("#stf_sq_Span_up").attr("class", "glyphicon glyphicon-remove form-control-feedback");
+				} else if (result == 0) {
+					$("#stf_sq").val($("#stf_sq1").val());
+					$("#stf_sq_up").val($("#stf_sq1_up").val());
+					$("#stf_sq_Div").attr("class", "has-success has-feedback");
+					$("#stf_sq_Span").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+					$("#stf_sq_Div_up").attr("class", "has-success has-feedback");
+					$("#stf_sq_Span_up").attr("class", "glyphicon glyphicon-ok form-control-feedback");
+				}
+			},
+			error : function(request, status, error) {
+				alert("list search fail :: error code: "
+						+ request.status + "\n" + "error message: "
+						+ error + "\n");
+			}
+		});
+	}
+	// 사원 정보 불러오기
+	function selectUpdateOfficer() {
+		var stf_sq = $("input[type=radio]:checked").val();
+		var params = {
+				stf_sq : stf_sq
+		};
+		$.ajax({
+			url : "${root}/organization/selectUpdateOfficer.kitri",
+			type : "POST",
+			dataType : "json",
+			data : JSON.stringify(params),
+			contentType : "application/json; charset=UTF-8",
+			beforeSend : function() {		
+			},
+			success : function(data) {
+				$("#stf_sq").val(data.STF_SQ);
+				$("#stf_nm").val(data.STF_NM);
+				$("#admn_sq").val(data.ADMN_SQ);
+				$("#dpt_sq").val(data.DPT_SQ);
+				$("#rnk_sq").val(data.RNK_SQ);
+				$("#stf_cm_add").val(data.STF_CM_ADD);
+				$("#stf_dt_add").val(data.STF_DT_ADD);
+				$("#stf_eml1").val(data.STF_EML1);
+				$("#stf_eml2").val(data.STF_EML2);
+				$("#stf_ph1").val(data.STF_PH1);
+				$("#stf_ph2").val(data.STF_PH2);
+				$("#stf_ph3").val(data.STF_PH3);
+						
+				$("#stf_bs_ph1").val(data.STF_BS_PH1);
+				$("#stf_bs_ph2").val(data.STF_BS_PH2);
+				$("#stf_bs_ph3").val(data.STF_BS_PH3);
+			},
+			error : function(request, status, error) {
+				alert("list search fail :: error code: "
+						+ request.status + "\n" + "error message: "
+						+ error + "\n");
+			}
+		});
+	}
+	// 퇴사할 사원의 정보를 조회하기
+	function selectLayoffOfficer(){
+		var stf_sq = $("input[type=radio]:checked").val();
+		var params = {
+				stf_sq : stf_sq
+		};	
+		$.ajax({
+			url : "${root}/organization/selectUpdateOfficer.kitri",
+			type : "POST",
+			dataType : "json",
+			data : JSON.stringify(params),
+			contentType : "application/json; charset=UTF-8",
+			beforeSend : function() {
+
+			},
+			success : function(data) {
+				$("#stf_nm_lo").val(data.STF_NM);
+				$("#admn_sq_lo").val(data.ADMN_SQ);
+				$("#dpt_sq_lo").val(data.DPT_SQ);
+				$("#rnk_sq_lo").val(data.RNK_SQ);
+				$("#stf_sq_lo").val(data.STF_SQ);
+				$("#stf_eml1_lo").val(data.STF_EML1);
+				$("#stf_eml2_lo").val(data.STF_EML2);
+			},
+			error : function(request, status, error) {
+				alert("list search fail :: error code: "
+						+ request.status + "\n" + "error message: "
+						+ error + "\n");
+			}
+		});
+	}
+	
+	// 부서명 등록
+	function deptInsert() {
+		var params = {
+				dpt_nm : $("#addDept").val()
+		};
+		$.ajax({
+			url : "${root}/organization/deptInsert.kitri",
+			type : "POST",
+			dataType : "text",
+			data : JSON.stringify(params),
+			contentType : "application/json; charset=UTF-8",
+			beforeSend : function() {
+				$("#addDept").val("");
+			},
+			success : function(data) {
+				if (data > 0) {
+					alert("부서 추가를 성공하였습니다.");
+					deptList();
+				}
+				else if (data == 0) {
+					alert("부서 추가를 실패하였습니다.");
+				}
+			},
+			error : function(request, status, error) {
+				alert("list search fail :: error code: "
+						+ request.status + "\n" + "error message: "
+						+ error + "\n");
+			}
+		});
+	}
+	// 부서명 다시 가져오기
+	function deptList(dpt_sq, dpt_nm) {
+		$.ajax({
+			url : "${root}/organization/selectDpt_Div_Tb.kitri",
+			type : "POST",
+			dataType : "json",
+			contentType : "application/json; charset=UTF-8",
+			beforeSend : function() {
+				$("#dpt_sq_dept").empty();
+			},
+			success : function(data) {		
+				var div = $("#dpt_sq_dept");	
+				$.each(data, function(idx, val) {
+					if (val.DPT_SQ != dpt_sq) {
+						//div.append($('<div>', {class : "deptDiv", "data-value" : val.DPT_SQ, text : val.DPT_NM}))
+						div.append($('<div>', {"class" : "has-feedback"})
+						   .append($('<div>', {"class" : "deptDiv", "data-value" : val.DPT_SQ, text : val.DPT_NM}))
+						   .append($('<button>', {id: "deptDelete", text:"삭제"})))
+					}
+				});
+			},
+			error : function(request, status, error) {
+				alert("list search fail :: error code: "
+						+ request.status + "\n" + "error message: "
+						+ error + "\n");
+			}
+		});
+	}	
+	// 동일한 부서명 체크
+	function selectDeptNm() {
+		var params = {
+				dpt_nm : $("#deptNmUp").val()
+		};
+		$.ajax({
+			url : "${root}/organization/selectDeptNm.kitri",
+			type : "POST",
+			dataType : "text",
+			data : JSON.stringify(params),
+			contentType : "application/json; charset=UTF-8",
+			beforeSend : function() {		
+			},
+			success : function(data) {
+				if (data > 0) {
+					alert("같은 이름의 부서명이 존재합니다.");
+				}
+				else if (data == 0) {
+					deptUpdate();
+				}
+			},
+			error : function(request, status, error) {
+				alert("list search fail :: error code: "
+						+ request.status + "\n" + "error message: "
+						+ error + "\n");
+			}
+		});
+	}	
+	// 부서명 삭제
+	function deptDelete(data) {
+		var params = {
+				dpt_sq : data		
+		};
+		$.ajax({
+			url : "${root}/organization/deptDelete.kitri",
+			type : "POST",
+			dataType : "text",
+			data : JSON.stringify(params),
+			contentType : "application/json; charset=UTF-8",
+			beforeSend : function() {		
+			},
+			success : function(data) {	
+				if (data > 0) {
+					alert("부서 삭제를 성공하였습니다.");
+					deptList();
+				}
+				else if (data == 0) {
+					alert("부서 삭제를 실패하였습니다.");
+				}
+				else if (data == -1) {
+					alert("부서에 임직원이 존재하여 삭제할 수 없습니다.");
+				}
+				
+			},
+			error : function(request, status, error) {
+				alert("list search fail :: error code: "
+						+ request.status + "\n" + "error message: "
+						+ error + "\n");
+			}
+		});
+	}
+	</script>

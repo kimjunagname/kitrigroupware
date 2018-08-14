@@ -325,18 +325,18 @@ public class ApprovalController {
 		int code = approvalDto.getDiv_apv_sq(); 
 		System.out.println("code"+ code);
 		if(seq != 0) {
-			if(code == 1) {
-				
+		//	if(code == 1) {
+			mav.setViewName("redirect:/approval/select.kitri");
 //				return "/approval/list";
 				//리다이렉트를 통해서 /approval/list.kitri 이동
-				mav.setViewName("redirect:/approval/glist.kitri");	
-			}else if(code == 2) {
-				mav.setViewName("redirect:/approval/clist.kitri");
-			}else if(code == 4) {
-				mav.setViewName("redirect:/approval/elist.kitri");
-			}else if(code == 3) {
-				mav.setViewName("redirect:/approval/mlist.kitri");
-			}
+			//	mav.setViewName("redirect:/approval/glist.kitri");	
+		//	}else if(code == 2) {
+		//		mav.setViewName("redirect:/approval/clist.kitri");
+		//	}else if(code == 4) {
+		//		mav.setViewName("redirect:/approval/elist.kitri");
+		//	}else if(code == 3) {
+		//		mav.setViewName("redirect:/approval/mlist.kitri");
+		//	}
 		} else {
 			mav.setViewName("/approval/writefail");
 		}
@@ -356,6 +356,21 @@ public class ApprovalController {
 			map.put("stf_sq", (String) session.getAttribute("stf_sq"));
 		}
 	    mav.setViewName("/approval/mwrite"); // /webapp/pds5/list.jsp
+		return mav;
+	}
+	
+	
+	@RequestMapping(value="/select.kitri", method=RequestMethod.GET)
+	public ModelAndView selectApprovalManager(HttpSession session, @RequestParam Map<String, String> map) {
+		System.out.println("ApprovalController -- GET - select > select");
+		
+		ModelAndView mav = new ModelAndView();
+		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+		map.put("stf_sq", memberDto.getStf_sq());
+		if(map.size() == 0) {
+			map.put("stf_sq", (String) session.getAttribute("stf_sq"));
+		}
+	    mav.setViewName("/approval/select"); // /webapp/pds5/list.jsp
 		return mav;
 	}
 	

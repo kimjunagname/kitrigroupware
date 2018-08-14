@@ -42,6 +42,7 @@
    <mvc:resources mapping="/images/**" location="/resources/board/images/"/>
    <mvc:resources mapping="/js/**" location="/resources/board/js/"/>
    <mvc:resources mapping="/fonts/**" location="/resources/board/fonts/"/>
+   <mvc:resources mapping="/easyui/**" location="/resources/easyui/"/>
    <mvc:resources mapping="/summernote0.8.9dist/**" location="/resources/board/summernote0.8.9dist/"/>
    
    
@@ -60,6 +61,11 @@
 		<beans:property name="order" value="2"/> 
 	</beans:bean>
 	  -->
+
+	<!-- uploadPath -->	 
+ 	<beans:bean id="uploadPath" class="java.lang.String">
+ 		<beans:constructor-arg value="D:\\javadata\\workspace\\framework\\kitrigroupware\\src\\main\\webapp\\WEB-INF\\upload\\file\\" />
+ 	</beans:bean> 
 
  
   	  <!-- 타일즈 설정: 시작 -->

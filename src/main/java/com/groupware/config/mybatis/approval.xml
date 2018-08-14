@@ -186,6 +186,7 @@
 	and APV_TB.DIV_APV_SQ = '2'
 	</select>
 
+	<!-- count-->
 	<select id="eEndApproval" parameterType="map" resultType="map">
 	select count(APV_TB.STF_FNL_SQ) eEndApproval 
     from APV_TB, DIV_APV_TB
@@ -194,6 +195,7 @@
 	and APV_TB.DIV_APV_SQ = '4'
 	</select>
 
+	<!-- count-->
 	<select id="mEndApproval" parameterType="map" resultType="map">
 	select count(APV_TB.STF_FNL_SQ) mEndApproval 
     from APV_TB, DIV_APV_TB
@@ -214,6 +216,7 @@
     and APV_TB.APV_SQ = #{seq}
 	</select>
 	 -->
+	<!-- 기안지 view-->
 	<select id="ViewApproval" parameterType="map" resultType="map">
     select DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
 	       APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
@@ -231,15 +234,47 @@
 	</select>
 
 
-
+	<!-- 기안지 작성 -->
 	<insert id="writeApproval" parameterType="ApprovalDto">
  	Insert into GROUPWARE.APV_TB (APV_SQ, DIV_APV_SQ, STF_SQ, STF_MID_SQ, STF_FNL_SQ,
                                   APV_OK_SQ, APV_NM, APV_PL_RT, APV_PL_NM, APV_NO, 
                                   CONTENT) 
     values                       (APV_TB_APV_SQ.nextval,#{div_apv_sq},#{stf_sq},null,null,
-                                  null,#{apv_nm},null,null,null,
-                                  #{content} )
+                                  4,#{apv_nm},null,null,null,
+                                  #{content})
 	</insert>
 
-	</mapper>
+	
+	<!-- 중간승인자 선택 -->
+	<update id="selectMiddleApproval" parameterType="ApprovalDto">
+	update apv_tb
+	set stf_mid_sq = #{stf_mid_sq}
+	where  apv_sq = #{apv_sq}
+	</update>
+
+	<!-- 최종승인자 선택 -->
+	<update id="selectFnlApprovalSelect" parameterType="ApprovalDto">
+	update apv_tb
+	set stf_fnl_sq = #{stf_fnl_sq}
+	where  apv_sq = #{apv_sq}
+	</update>
+
+	<!-- 중간결재 (최초: 4)(진행: 3)(최종: 1)-->
+	<update id="middleApproval" parameterType="ApprovalDto">
+	update apv_tb
+	set apv_ok_sq = 3
+	where  apv_sq = #{apv_sq}
+	</update>
+
+	<!-- 최종결재 (최초: 4)(진행: 3)(최종: 1)-->
+	<update id="fnlApproval" parameterType="ApprovalDto">
+	update apv_tb
+	set apv_ok_sq = 1
+	where  apv_sq = #{apv_sq}
+	</update>
+
+
+
+  
+  	</mapper>
   
