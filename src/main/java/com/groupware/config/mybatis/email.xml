@@ -3,7 +3,89 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.groupware.email.dao.EmailDao">
-
+  
+  <insert id="regist">
+  INSERT INTO eml_tb(eml_sq,eml_nm,eml_cnt,eml_pl_nm,eml_pl_crs)
+  VALUES(SEQ_EML.NEXTVAL,#{eml_nm},#{eml_cnt},#{eml_pl_nm},#{eml_pl_crs})
+  </insert>
+  
+  <insert id="regist2">
+  INSERT INTO eml_rcv_tb(rcv_eml_sq,stf_snd_sq,eml_sq, ipt_sq, rcv_dt)
+  VALUES(SEQ_RCV_EML.NEXTVAL,#{stf_snd_sq},
+  (SELECT eml_sq from eml_tb
+  where eml_sq = (SELECT MAX(eml_sq)AS eml_sq FROM eml_tb)),1,SYSDATE)
+  </insert>
+  
+  <insert id="regist3">
+  INSERT INTO eml_snd_tb(snd_eml_sq,snd_rcv_sq,eml_sq,snd_dt)
+  VALUES(SEQ_SND_EML.NEXTVAL,#{stf_rcv_sq},
+  (SELECT eml_sq from eml_tb where eml_sq = 
+  (SELECT MAX(eml_sq)AS eml_sq FROM eml_tb)),SYSDATE)
+  </insert>
+  
+  <select id="rcvCount" resultType="int">
+  SELECT COUNT(*)AS CNT
+  FROM EML_RCV_TB
+  WHERE ipt_sq=1
+  and stf_snd_sq=#{stf_rcv_sq}
+  </select>
+  
+  <select id="rcvListAll" resultType="com.groupware.email.model.EmailDto">
+  SELECT ROWNUM AS RNUM ,B.*, A.STF_SND_SQ, A.RCV_DT 
+  FROM(SELECT * FROM EML_RCV_TB WHERE ipt_sq=1 AND stf_snd_sq=#{stf_rcv_sq}
+  ORDER BY rcv_eml_sq DESC)A, EML_TB B
+  WHERE A.EML_SQ = B.EML_SQ
+  </select>
+   
+   <select id="read" parameterType= "Map" resultType="EmailDto">
+   SELECT B.eml_sq, B.eml_pl_nm, B.eml_pl_crs, B.eml_nm, A.stf_snd_sq, B.eml_cnt, 
+   to_char(A.rcv_dt,'YYYY-MM-DD HH24:MI:SS') as rcv_dt
+   FROM EML_RCV_TB A, EML_TB B
+   WHERE A.EML_SQ = B.EML_SQ AND A.EML_SQ=#{eml_sq}
+   ORDER BY B.EML_SQ ASC
+   </select>
+   
+   <delete id="remove" parameterType="Map">
+	DELETE FROM EML_RCV_TB WHERE eml_sq = #{eml_sq}
+   </delete>
+   
+   <update id="modify" parameterType="Map">
+	UPDATE EML_RCV_TB SET ipt_sq = 2 WHERE eml_sq = #{eml_sq}
+	</update>
+	
+	<select id="sndCount" resultType="int">
+	SELECT COUNT(*)AS CNT
+	FROM EML_SND_TB WHERE snd_rcv_sq=#{stf_snd_sq}
+	</select>
+	
+	<select id="sndListAll" resultType="EmailDto">
+	SELECT ROWNUM AS RNUM, B.*, A.SND_RCV_SQ, A.SND_DT
+    FROM(SELECT * FROM EML_SND_TB where snd_rcv_sq = #{stf_snd_sq}
+    ORDER BY snd_eml_sq desc)A, EML_TB B
+    WHERE A.EML_SQ = B.EML_SQ
+	</select>
+	
+   <select id="sendRead" parameterType= "Map" resultType="EmailDto">
+    SELECT B.eml_sq, B.eml_pl_nm, B.eml_pl_crs, B.eml_nm, A.snd_rcv_sq, B.eml_cnt, 
+	A.snd_dt
+	FROM EML_SND_TB A, EML_TB B
+	WHERE A.EML_SQ = B.EML_SQ AND A.EML_SQ= #{eml_sq}
+	ORDER BY B.EML_SQ ASC
+   </select>
+   
+   <select id="keepListAll" resultType="com.groupware.email.model.EmailDto">
+  	SELECT ROWNUM AS RNUM ,B.*, A.STF_SND_SQ, A.RCV_DT 
+  	FROM(SELECT * FROM EML_RCV_TB WHERE ipt_sq=2 AND stf_snd_sq=#{stf_rcv_sq}
+ 	ORDER BY rcv_eml_sq DESC)A, EML_TB B
+  	WHERE A.EML_SQ = B.EML_SQ
+   </select>
+   
+   <select id="keepRead" parameterType= "Map" resultType="EmailDto">
+   SELECT B.eml_sq, B.eml_pl_nm, B.eml_pl_crs, B.eml_nm, A.stf_snd_sq, B.eml_cnt, 
+   to_char(A.rcv_dt,'YYYY-MM-DD HH24:MI:SS') as rcv_dt
+   FROM EML_RCV_TB A, EML_TB B
+   WHERE A.EML_SQ = B.EML_SQ AND A.EML_SQ=#{eml_sq} AND ipt_sq=2
+   ORDER BY B.EML_SQ ASC
+   </select>
 
 </mapper>
-  

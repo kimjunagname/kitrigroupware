@@ -10,14 +10,12 @@
 <!--main content start-->
 <section id="main-content">
 	<section class="wrapper">
-			<h1><b>결재작성</b></h1><hr>
+			<h1><b>결재선 선택</b></h1><hr>
 			<div class="table-agile-info">
 			    <div class="row">
+			    	
 			    	<div class="col-lg-6">
-                        <div class="panel-body"><h4>· 결재양식리스트</h4></div>
-                	</div>
-			    	<div class="col-lg-6">
-                        <div class="panel-body"><h4>· 결재양식정보</h4></div>
+                        <div class="panel-body"><h4>· 결재자선 선택</h4></div>
 	                        <div class="col-lg-12">
 									 <div class="panel panel-default">
 									    <div>
@@ -33,24 +31,25 @@
 									        }}'>
 									         <tbody>
 									          <tr data-expanded="true">
-									            <td>카테고리</td>
-									            <td>카테고리이름</td>
+									            <td>중간결재자</td>
+									            <td>
+						            				<div class="clearfix">
+														<a href="#" class="btn btn-sm btn-default" id="searchBtn">중간 결재자</a>
+									            	</div>
+									            </td>
 									          </tr>
 									          <tr>
 									            <td>문서명</td>
-									            <td>문서이름</td>
+									            <td>
+									            	<input type="button" value="최종 결재자" id="selectFnlApprovalSelect">
+									            </td>
 									          </tr>
-									          <tr>
-									            <td>등록일</td>
-									            <td>2018.07.22</td>
-									          </tr>
+									          
 									        </tbody>
 									      </table>
 									      </div>
 									  </div>
 							</div>
-							
-						<div class="panel-body"><h4>· 결재양식미리보기</h4></div>
 						
                 	</div>
 				</div>
@@ -60,91 +59,191 @@
 <!--main content end-->
 </section>
 <!-- morris JavaScript -->	
+
+<!--main content end--><!--main content end--><!--main content end--><!--main content end--><!--main content end-->
+<!--main content end--><!--main content end--><!--main content end--><!--main content end--><!--main content end-->
+<!--main content end--><!--main content end--><!--main content end--><!--main content end--><!--main content end-->
+<!--main content end--><!--main content end--><!--main content end--><!--main content end--><!--main content end-->
+<!--main content end--><!--main content end--><!--main content end--><!--main content end--><!--main content end-->
+<!--main content end--><!--main content end--><!--main content end--><!--main content end--><!--main content end-->
+
+<!-- Modal --><!-- Modal --><!-- Modal --><!-- Modal --><!-- Modal --><!-- Modal --><!-- Modal --><!-- Modal -->
+<!-- Modal --><!-- Modal --><!-- Modal --><!-- Modal --><!-- Modal --><!-- Modal --><!-- Modal --><!-- Modal -->
+                            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="timeMngBtn1" class="modal fade">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                                        <h4 class="modal-title">출퇴근등록</h4>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <form class="form-horizontal" role="form" id="punchForm">
+                                            <div class="form-group">
+                                                <label for="now" class="col-lg-2 col-sm-2 control-label">일시</label>
+                                                <div class="col-lg-10">
+                                                    <input type="text" class="form-control" id="toDay" placeholder="00:00" readonly="readonly">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="radio" class="col-lg-2 col-sm-2 control-label">출퇴근</label>
+                                                <div class="col-lg-10">
+                                                   <div >
+					                                    <input type="radio" name="punch" id="punchIn" value="in" checked="">
+					                                    	출근
+					                                    <input type="radio" name="punch" id="punchOut" value="out">
+				                                    		퇴근
+                           						   </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                               <label for="text" class="col-lg-2 col-sm-2 control-label">사유</label>
+                                                <div class="col-lg-offset-2 col-lg-10">
+                                                    <div class="checkbox">
+                                                          <div class="col-lg-10">
+															<textarea rows="5" cols="40" name="cmt_msg"></textarea>
+	                                                      </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-lg-offset-2 col-lg-10">
+                                                    <button type="button" class="btn btn-default" id="punchBtn">저장</button>
+                                                    <button aria-hidden="true" data-dismiss="modal" class="btn btn-default" type="button">취소</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="timeMngBtn2" class="modal fade">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                                        <h4 class="modal-title">근태구분 작성</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="form-horizontal" role="form">
+                                            <div class="form-group">
+                                                <label for="now" class="col-lg-2 col-sm-2 control-label">날짜</label>
+                                                <div class="col-md-6">
+                                                	<input type="date" name="" id="" class="form-control form-inline">~<input type="date" name="" id="" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="radio" class="col-lg-2 col-sm-2 control-label">대분류</label>
+                                                <div class="col-lg-10">
+                                                   <div >
+											        <select class="input-sm form-control w-sm inline v-middle">
+											          <option value="0">외근</option>
+											          <option value="1">출장</option>
+											          <option value="2">휴가</option>
+											          <option value="3">휴일근무</option>
+											        </select>
+                           						   </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="radio" class="col-lg-2 col-sm-2 control-label">소분류</label>
+                                                <div class="col-lg-10">
+                                                   <div >
+											        <select class="input-sm form-control w-sm inline v-middle">
+											          <option value="0">출근후외근</option>
+											          <option value="1">현장직접외근</option>
+											          <!-- 
+											          <option value="0">국내출장</option>
+											          <option value="1">해외출장</option>
+											           -->
+											          
+											          <!-- 
+											          <option value="0">연차</option>
+											          <option value="1">월차</option>
+											          <option value="2">외출</option>
+											           -->
+											          
+											        </select>
+                           						   </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                               <label for="text" class="col-lg-2 col-sm-2 control-label">사유</label>
+                                                <div class="col-lg-offset-2 col-lg-10">
+                                                    <div class="checkbox">
+                                                          <div class="col-lg-10">
+															<textarea rows="5" cols="40"></textarea>
+	                                                      </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-lg-offset-2 col-lg-10">
+                                                    <button type="button" class="btn btn-default" id="">저장</button>
+                                                    <button aria-hidden="true" data-dismiss="modal" class="btn btn-default" type="button">취소</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+<!-- Modal --><!-- Modal --><!-- Modal --><!-- Modal --><!-- Modal --><!-- Modal --><!-- Modal --><!-- Modal -->
+<!-- Modal --><!-- Modal --><!-- Modal --><!-- Modal --><!-- Modal --><!-- Modal --><!-- Modal --><!-- Modal -->
+
+</section>
+
 <script>
-	$(document).ready(function() {
-		//BOX BUTTON SHOW AND CLOSE
-	   jQuery('.small-graph-box').hover(function() {
-		  jQuery(this).find('.box-button').fadeIn('fast');
-	   }, function() {
-		  jQuery(this).find('.box-button').fadeOut('fast');
-	   });
-	   jQuery('.small-graph-box .box-close').click(function() {
-		  jQuery(this).closest('.small-graph-box').fadeOut(200);
-		  return false;
-	   });
-	   
-	    //CHARTS
-	    function gd(year, day, month) {
-			return new Date(year, month - 1, day).getTime();
-		}
+$(document).ready(function(){
+	setDate();
+});
+var date = new Date();
+$("#searchBtn").click(function() {
+	var cmt_str_tm = $("#startDate").val();
+	var cmt_end_tm = $("#endDate").val();
+	if(cmt_end_tm < cmt_str_tm){
+		alert("종료 일이 시작일 보다 빠를 수 없습니다.");
+		return;
+	}else{
+		$("#searchFrom").attr("method", "post").attr("action", "${root}/commute/list.kitri").submit();
+	}
+});
+
+$("#punchBtn").click(function() {
+	$("#punchForm").attr("method", "post").attr("action", "${root}/commute/punch.kitri").submit();
+});
+
+$("#punchInBtn").click(function() {
+	var now = date.toISOString().slice(0,10);
+	var check = $("td[strTm^='"+ now +"']");
+	if(check.text() != ""){
+		$("#punchIn").attr("disabled", "disabled");
+		$("#punchOut").attr("checked", "checked");
+	}
+	$("#toDay").val(now + " " +date.toLocaleTimeString());
+});
+
+function setDate(){
+	var startDate = "${startDate}";
+	var endDate = "${endDate}";
+	if(startDate == "" && endDate == ""){
+		var year = date.getFullYear();
+		var month = date.getMonth();
+		var lastDay = new Date(year, month+1, 1);
 		
-		graphArea2 = Morris.Area({
-			element: 'hero-area',
-			padding: 10,
-        behaveLikeLine: true,
-        gridEnabled: false,
-        gridLineColor: '#dddddd',
-        axes: true,
-        resize: true,
-        smooth:true,
-        pointSize: 0,
-        lineWidth: 0,
-        fillOpacity:0.85,
-			data: [
-				{period: '2015 Q1', iphone: 2668, ipad: null, itouch: 2649},
-				{period: '2015 Q2', iphone: 15780, ipad: 13799, itouch: 12051},
-				{period: '2015 Q3', iphone: 12920, ipad: 10975, itouch: 9910},
-				{period: '2015 Q4', iphone: 8770, ipad: 6600, itouch: 6695},
-				{period: '2016 Q1', iphone: 10820, ipad: 10924, itouch: 12300},
-				{period: '2016 Q2', iphone: 9680, ipad: 9010, itouch: 7891},
-				{period: '2016 Q3', iphone: 4830, ipad: 3805, itouch: 1598},
-				{period: '2016 Q4', iphone: 15083, ipad: 8977, itouch: 5185},
-				{period: '2017 Q1', iphone: 10697, ipad: 4470, itouch: 2038},
-			
-			],
-			lineColors:['#eb6f6f','#926383','#eb6f6f'],
-			xkey: 'period',
-            redraw: true,
-            ykeys: ['iphone', 'ipad', 'itouch'],
-            labels: ['All Visitors', 'Returning Visitors', 'Unique Visitors'],
-			pointSize: 2,
-			hideHover: 'auto',
-			resize: true
-		});
-		
-	   
-	});
-	</script>
-<!-- calendar -->
-	<script type="text/javascript" src="${root}/js/monthly.js"></script>
-	<script type="text/javascript">
-		$(window).load( function() {
-
-			$('#mycalendar').monthly({
-				mode: 'event',
-				
-			});
-
-			$('#mycalendar2').monthly({
-				mode: 'picker',
-				target: '#mytarget',
-				setWidth: '250px',
-				startHidden: true,
-				showTrigger: '#mytarget',
-				stylePast: true,
-				disablePast: true
-			});
-
-		switch(window.location.protocol) {
-		case 'http:':
-		case 'https:':
-		// running on a server, should be good.
-		break;
-		case 'file:':
-		alert('Just a heads-up, events will not work when run locally.');
-		}
-
-		});
-	</script>
-	<!-- //calendar -->
+		$("#startDate").val(lastDay.toISOString().slice(0,8) + "01");
+		$("#endDate").val(lastDay.toISOString().slice(0,10));
+	}else{
+		$("#startDate").val(startDate);
+		$("#endDate").val(endDate);
+	}	
+};
+</script>
 
