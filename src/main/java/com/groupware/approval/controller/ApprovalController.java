@@ -1,8 +1,11 @@
 package com.groupware.approval.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.groupware.approval.model.ApprovalDto;
 import com.groupware.approval.service.ApprovalService;
 import com.groupware.member.model.MemberDto;
+import com.groupware.organization.service.OrganizationService;
 
 
 @Controller
@@ -25,6 +30,10 @@ public class ApprovalController {
 	
 	@Autowired
 	private ApprovalService approvalService;
+	
+	@Autowired
+	private OrganizationService organizationService;
+
 	
 	@RequestMapping(value="/list.kitri", method=RequestMethod.GET)
 	public ModelAndView listApprovalManager(HttpSession session, @RequestParam Map<String, String> map) {
@@ -296,19 +305,80 @@ public class ApprovalController {
 			return mav;
 		}
 	
-	@RequestMapping(value="/write.kitri", method=RequestMethod.GET)
-		public ModelAndView writeApprovalManager(HttpSession session, @RequestParam Map<String, String> map) {
-			System.out.println("ApprovalController in!!! -- GET - write > write");
-			ModelAndView mav = new ModelAndView();
-			MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-			map.put("stf_sq", memberDto.getStf_sq());
-			if(map.size() == 0) {
-				map.put("stf_sq", (String) session.getAttribute("stf_sq"));
-			}
-			mav.setViewName("/approval/write"); // /webapp/pds5/list.jsp
-			return mav;
-		}	
+//	@RequestMapping(value="/write.kitri", method=RequestMethod.GET)
+//		public ModelAndView writeApprovalManager(HttpSession session, @RequestParam Map<String, String> map) {
+//			System.out.println("ApprovalController in!!! -- GET - write > write");
+//			ModelAndView mav = new ModelAndView();
+//			MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+//			map.put("stf_sq", memberDto.getStf_sq());
+//			if(map.size() == 0) {
+//				map.put("stf_sq", (String) session.getAttribute("stf_sq"));
+//			}
+//			mav.setViewName("/approval/write"); // /webapp/pds5/list.jsp
+//			return mav;
+//		}	
 		
+	
+		
+	@RequestMapping(value="/write.kitri", method=RequestMethod.GET)
+	public ModelAndView writeApprovalManager(HttpSession session, @RequestParam Map<String, String> map, Model model, HttpServletRequest request, RedirectAttributes attr) throws  Exception{
+		System.out.println("ApprovalController in!!! -- GET - write > write");
+		
+	     // 필요없는건 나중에 삭제 예정
+	    List officerList = new ArrayList<HashMap<String, Object>>();
+	    int officerListCount = 0;
+	    Map params = new HashMap<String, Object>();
+	    List selectStf_tb = new ArrayList<HashMap<String, Object>>();
+	    List selectAdmn_Tb = new ArrayList<HashMap<String, Object>>();
+	    List selectRnk_Tb = new ArrayList<HashMap<String, Object>>();
+	    List selectDpt_Div_Tb = new ArrayList<HashMap<String, Object>>();
+	    ModelAndView mav = new ModelAndView();
+	    
+	    try {
+	         officerListCount = organizationService.officerListCount(params);
+	         selectStf_tb = organizationService.selectStf_tb();
+	         selectAdmn_Tb = organizationService.selectAdmn_Tb();
+	         selectRnk_Tb = organizationService.selectRnk_Tb();
+	         selectDpt_Div_Tb = organizationService.selectDpt_Div_Tb();
+	         // 총 게시물 수 
+	         int totalCnt = officerListCount;
+	         // 현재 페이지 초기화
+	         int current_page = 1;
+	         // 만약 사용자로부터 페이지를 받아왔다면
+	         if (request.getParameter("page") != null) {
+	            current_page = Integer.parseInt((String)request.getParameter("page"));
+	         }
+	    
+		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+		map.put("stf_sq", memberDto.getStf_sq());
+		if(map.size() == 0) {
+			map.put("stf_sq", (String) session.getAttribute("stf_sq"));
+		}
+		
+		 //model.addAttribute("myInfoList", myInfoList);
+        model.addAttribute("officerList", officerList);
+        model.addAttribute("officerListCount", officerListCount);
+        model.addAttribute("selectStf_tb", selectStf_tb);
+        model.addAttribute("selectAdmn_Tb", selectAdmn_Tb);
+        model.addAttribute("selectRnk_Tb", selectRnk_Tb);
+        model.addAttribute("selectDpt_Div_Tb", selectDpt_Div_Tb);
+        
+        mav.addObject("officerList", officerList);
+        mav.addObject("officerListCount", officerListCount);
+        mav.addObject("selectStf_tb", selectStf_tb);
+        mav.addObject("selectAdmn_Tb", selectAdmn_Tb);
+        mav.addObject("selectRnk_Tb", selectRnk_Tb);
+        mav.addObject("selectDpt_Div_Tb", selectDpt_Div_Tb);
+    	
+        mav.setViewName("/approval/write"); // /webapp/pds5/list.jsp
+	   
+	    }catch(Exception e) {
+	    	e.printStackTrace();
+	    }
+		
+		return mav;
+	}	
+	
 		
 	@RequestMapping(value="/write.kitri", method=RequestMethod.POST)
 	public ModelAndView writeApprovalManager(ApprovalDto approvalDto, HttpSession session, @RequestParam Map<String, String> map,  Model model) {

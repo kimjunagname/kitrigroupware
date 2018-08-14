@@ -38,7 +38,7 @@
 		</div>
 	<!-- 조직관리 모달 끝   --> 
 	
-	<!-- 구성원 수정  모달 --> 
+	<!-- 구성원 추가  모달 --> 
 	<div class="modal fade" id="insertModal" role="dialog">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
