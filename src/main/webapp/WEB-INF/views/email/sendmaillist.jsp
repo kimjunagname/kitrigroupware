@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/commons/public.jsp" %> 
+<!-- jQuery EasyUi API -->
+<link rel="stylesheet" type="text/css" href="${root}/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="${root}/easyui/themes/icon.css">
+<script type="text/javascript" src="${root}/easyui/jquery.easyui.min.js"></script>
 		<!-- 조회모달 시작 -->
 		<div class="modal fade" id="readModal" role="dialog">
 			<div class="modal-dialog modal-lg">

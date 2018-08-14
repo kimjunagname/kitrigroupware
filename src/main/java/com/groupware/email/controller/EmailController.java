@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.groupware.email.model.EmailDto;
 import com.groupware.email.service.EmailService;
 import com.groupware.member.model.MemberDto;
+import com.groupware.organization.service.OrganizationService;
 import com.groupware.util.AjaxPaging;
 import com.groupware.util.FileUpload;
 
@@ -34,6 +35,9 @@ public class EmailController {
 
 	@Autowired
 	private EmailService emailService;
+	
+	@Autowired
+	private OrganizationService organizationService;
 	
 	@Resource(name = "uploadPath")
 	private String uploadPath;
@@ -88,6 +92,14 @@ public class EmailController {
 		
 		stf_sq = map.get("stf_sq");	
 		
+		List officerList = new ArrayList<HashMap<String, Object>>();
+		int officerListCount = 0;
+		Map params = new HashMap<String, Object>();
+		List selectStf_tb = new ArrayList<HashMap<String, Object>>();
+		List selectAdmn_Tb = new ArrayList<HashMap<String, Object>>();
+		List selectRnk_Tb = new ArrayList<HashMap<String, Object>>();
+		List selectDpt_Div_Tb = new ArrayList<HashMap<String, Object>>();
+		
 		if (stf_sq == null || stf_sq.equals(""))
 			return "redirect:/member/login.kitri";
 		// 페이징 처리
@@ -103,6 +115,14 @@ public class EmailController {
 		}	
 		// jsp에 뿌릴 페이지 태그를 만들어서 보낸다.
 		String pageIndexList = paging.pageIndexList(totalCnt, current_page);
+		
+		// 부서 + 회원정보 추가
+		officerListCount = organizationService.officerListCount(params);
+		selectStf_tb = organizationService.selectStf_tb();
+		selectAdmn_Tb = organizationService.selectAdmn_Tb();
+		selectRnk_Tb = organizationService.selectRnk_Tb();
+		selectDpt_Div_Tb = organizationService.selectDpt_Div_Tb();
+		
 		// SQL 쿼리문에 넣을 조건문
 		int startCount = (current_page - 1) * 10 + 1;
 		int endCount = current_page * 10;
@@ -111,7 +131,15 @@ public class EmailController {
 		emailDto.setStartCount(startCount);
 		emailDto.setEndCount(endCount);
 		model.addAttribute("rcvList",emailService.rcvListAll(emailDto));
-		model.addAttribute("pageIndexList", pageIndexList);		
+		model.addAttribute("pageIndexList", pageIndexList);	
+		// 회원정보 받기 추가
+		model.addAttribute("officerList", officerList);
+		model.addAttribute("officerListCount", officerListCount);
+		model.addAttribute("selectStf_tb", selectStf_tb);
+		model.addAttribute("selectAdmn_Tb", selectAdmn_Tb);
+		model.addAttribute("selectRnk_Tb", selectRnk_Tb);
+		model.addAttribute("selectDpt_Div_Tb", selectDpt_Div_Tb);
+		
 		return "/email/receivemaillist";
 	}
 	
@@ -129,6 +157,15 @@ public class EmailController {
 			return "redirect:/member/login.kitri";
 		
 		String stf_rcv_sq = stf_sq;
+		
+		List officerList = new ArrayList<HashMap<String, Object>>();
+		int officerListCount = 0;
+		Map params = new HashMap<String, Object>();
+		List selectStf_tb = new ArrayList<HashMap<String, Object>>();
+		List selectAdmn_Tb = new ArrayList<HashMap<String, Object>>();
+		List selectRnk_Tb = new ArrayList<HashMap<String, Object>>();
+		List selectDpt_Div_Tb = new ArrayList<HashMap<String, Object>>();
+		
 		// 총 게시물 수 
 		int totalCnt = emailService.keepCount(stf_rcv_sq);
 		// 현재 페이지 초기화
@@ -145,8 +182,23 @@ public class EmailController {
 		emailDto.setStf_rcv_sq(stf_rcv_sq);
 		emailDto.setStartCount(startCount);
 		emailDto.setEndCount(endCount);
+		
+		// 부서 + 회원정보 추가
+		officerListCount = organizationService.officerListCount(params);
+		selectStf_tb = organizationService.selectStf_tb();
+		selectAdmn_Tb = organizationService.selectAdmn_Tb();
+		selectRnk_Tb = organizationService.selectRnk_Tb();
+		selectDpt_Div_Tb = organizationService.selectDpt_Div_Tb();
+		
 		model.addAttribute("keepList",emailService.keepListAll(emailDto));
-
+		// 회원정보 받기 추가
+		model.addAttribute("officerList", officerList);
+		model.addAttribute("officerListCount", officerListCount);
+		model.addAttribute("selectStf_tb", selectStf_tb);
+		model.addAttribute("selectAdmn_Tb", selectAdmn_Tb);
+		model.addAttribute("selectRnk_Tb", selectRnk_Tb);
+		model.addAttribute("selectDpt_Div_Tb", selectDpt_Div_Tb);
+	
 		return "/email/keepmaillist";
 	}
 	

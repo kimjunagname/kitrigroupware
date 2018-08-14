@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/commons/public.jsp" %> 
+
+<!-- jQuery EasyUi API -->
+<link rel="stylesheet" type="text/css" href="${root}/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="${root}/easyui/themes/icon.css">
+<script type="text/javascript" src="${root}/easyui/jquery.easyui.min.js"></script>
+
 	<!-- 편지쓰기 모달 시작 -->
 	<div class="modal fade" id="insertModal" role="dialog">
 			<div class="modal-dialog modal-lg">
@@ -43,7 +49,10 @@
 										<th>받는 사람(* 사원번호 입력) </th>
 										<td>
 											<div class="col-xs-4">
-												<input type="text" id="stf_snd_email" name="stf_snd_sq" class="form-control">
+												<input type="text" id="stf_snd_email" name="stf_snd_sq" class="form-control" readonly="readonly" > 
+												<span>
+													<button class="btn btn-primary btn-sm" id="searchNo" type="button" data-toggle="modal" data-target="#selectMemberModal">사원번호 검색</button>
+												</span>
 											</div>
 										</td>										
 									</tr>
@@ -117,6 +126,42 @@
 		</div>
 		<!-- 메일 조회시 부트스트랩 모달 끝 -->
 		
+		<!-- 메일 쓰기 회원정보 모달 시작 -->
+		<div class="modal fade" id="selectMemberModal" role="dialog">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">보내는 사원을 선택하세요.</h4>
+					</div>
+				<div class="modal-body">
+					<div id="dpt_sq_dept" class="form-group well">
+						<ul class="easyui-tree" id="tt">
+							<li><span>KITRI 주식회사</span>
+								<ul>
+								<c:forEach items="${selectDpt_Div_Tb}" var="dptmap">
+									<li data-options="state:'open'"><span>${dptmap.DPT_NM}</span>
+										<ul>
+											<c:forEach items="${selectStf_tb}" var="stfmap">
+												<c:if test="${dptmap.DPT_NM eq stfmap.DPT_NM}">
+													<li>${stfmap.RNK_NM}|${stfmap.STF_SQ}|${stfmap.STF_NM}</li>
+												</c:if>
+											</c:forEach>
+										</ul></li>
+								</c:forEach>
+								</ul></li>
+						</ul>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="selectMember" class="btn btn-success">선택</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+				</div>
+			</div>
+		</div>
+		</div>
+	
+		<!-- 메일 쓰기 회원정보 모달 끝 -->
 		<!--main content start--> 
 		<section id="main-content"> 
 			<section class="wrapper">
@@ -190,9 +235,27 @@
 <!-- 기능단 스크립트 부 -->
 <script type="text/javascript">
 $(document).ready(function() {
+	
 	// 메일 전송 버튼
 	$("#okbutton").click(function() {
 		$("#frm").submit();
+	});
+	
+	// 메일 쓰기 - 사번 가져오기
+	$("#selectMember").click(function() {
+		 var node = $('#tt').tree('getSelected');
+		    if (node){
+		        var s = node.text;
+		        if (node.attributes){
+					s += ","+node.attributes.p1+","+node.attributes.p2;
+		        }
+		        var jbSplit = s.split('|', 3);
+		   		for ( var i in jbSplit ) {
+		   			jbSplit[i];
+		        }
+		        $('#selectMemberModal').modal('hide');
+		     	$('#stf_snd_email').val(jbSplit[1]);
+		    }    
 	});
 		
 	// 체크박스 클릭했을때 eml_sq 값을 가져옴
@@ -300,6 +363,9 @@ $(document).ready(function() {
 			    }
 			});
 		}
+		
+		
+
 
 })
 </script>
