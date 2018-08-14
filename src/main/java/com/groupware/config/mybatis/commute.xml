@@ -92,7 +92,9 @@
 		</choose>
 	    )l,
         (
-        select stf_sq, scd_sq, strdt, enddt, enddt - strdt scd_cnt
+        select stf_sq, scd_sq, strdt, enddt, case when enddt = strdt then 1
+                                                  when enddt != strdt then enddt - strdt
+                                             end as scd_cnt
         from
         	(
         	<choose>
@@ -116,7 +118,7 @@
             from bs_scd_tb
             where stf_sq = ${stf_sq}
             )
-	    where strdt &lt; enddt
+	    where strdt &lt;= enddt
         )r
     where l.dt = r.strdt(+)
     )b, scd_div_tb div
