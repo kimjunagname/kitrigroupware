@@ -8,8 +8,8 @@
 <!--logo start-->
 <div class="brand">
 
-    <a href="index.html" class="logo">
-        VISITORS
+    <a href="#" class="logo">
+        KITRI
     </a>
     <div class="sidebar-toggle-box">
         <div class="fa fa-bars"></div>
@@ -22,10 +22,11 @@
     <ul class="nav top-menu">
         <!-- settings start -->
         <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            <a class="dropdown-toggle" href="${root}/schedule/pschedule.kitri">
                 <i class="fa fa-tasks"></i>
-                <span class="badge bg-success">8</span>
+              <!--   <span class="badge bg-success">4</span> -->
             </a>
+            <!-- 
             <ul class="dropdown-menu extended tasks-bar">
                 <li>
                     <p class="">You have 8 pending tasks</p>
@@ -88,13 +89,16 @@
                 </li>
             </ul>
         </li>
+        -->
         <!-- settings end -->
+        
         <!-- inbox dropdown start-->
         <li id="header_inbox_bar" class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            <a class="dropdown-toggle" href="${root}/email/rcvList.kitri">
                 <i class="fa fa-envelope-o"></i>
-                <span class="badge bg-important">4</span>
+                <!-- <span class="badge bg-important"> 3</span> -->
             </a>
+            <!-- 
             <ul class="dropdown-menu extended inbox">
                 <li>
                     <p class="red">You have 4 Mails</p>
@@ -103,8 +107,8 @@
                     <a href="#">
                         <span class="photo"><img alt="avatar" src="${root}/images/3.png"></span>
                                 <span class="subject">
-                                <span class="from">Jonathan Smith</span>
-                                <span class="time">Just now</span>
+                                <span class="from"></span>
+                                <span class="time"></span>
                                 </span>
                                 <span class="message">
                                     Hello, this is an example msg.
@@ -147,19 +151,23 @@
                                 </span>
                     </a>
                 </li>
+                 
                 <li>
                     <a href="#">See all messages</a>
                 </li>
             </ul>
+            -->
         </li>
+
         <!-- inbox dropdown end -->
         <!-- notification dropdown start-->
         <li id="header_notification_bar" class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            <a class="dropdown-toggle" href="${root}/commute/list.kitri">
 
                 <i class="fa fa-bell-o"></i>
-                <span class="badge bg-warning">3</span>
+                <!-- <span class="badge bg-warning"> 0 </span> -->
             </a>
+            <!-- 
             <ul class="dropdown-menu extended notification">
                 <li>
                     <p>Notifications</p>
@@ -190,6 +198,7 @@
                 </li>
 
             </ul>
+                     -->
         </li>
         <!-- notification dropdown end -->
     </ul>
@@ -205,13 +214,11 @@
         <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                 <img alt="" src="${root}/images/2.png">
-                <span class="username">John Doe</span>
+                <span class="username">${userinfo.stf_nm}</span>
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
-                <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-                <li><a href="login.html"><i class="fa fa-key"></i> Log Out</a></li>
+                <li><a href="${root}/member/logout.kitri"><i class="fa fa-key"></i>로그아웃</a></li>
             </ul>
         </li>
         <!-- user login dropdown end -->
@@ -221,4 +228,5 @@
 </div>
 </header>
 <!--header end-->
+
 

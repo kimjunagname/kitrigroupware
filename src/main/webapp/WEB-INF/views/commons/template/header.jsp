@@ -22,7 +22,7 @@
     <ul class="nav top-menu">
         <!-- settings start -->
         <li class="dropdown">
-            <a class="dropdown-toggle" href="${root}/schedule/test.kitri">
+            <a class="dropdown-toggle" href="${root}/schedule/pschedule.kitri">
                 <i class="fa fa-tasks"></i>
               <!--   <span class="badge bg-success">4</span> -->
             </a>
