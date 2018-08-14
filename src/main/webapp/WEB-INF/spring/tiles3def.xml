@@ -220,6 +220,11 @@
  
  
   <!-- 나영 -->
+    <definition name="/schedule/personalSchedule" extends="schedule">
+       <put-attribute name="title" value="pschedule" />
+       <put-attribute name="body" value="/WEB-INF/views/schedule/personalSchedule.jsp" />
+   </definition>
+   
     <definition name="/schedule/test" extends="schedule">
        <put-attribute name="title" value="test" />
        <put-attribute name="body" value="/WEB-INF/views/schedule/test.jsp" />

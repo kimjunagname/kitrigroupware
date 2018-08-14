@@ -19,13 +19,6 @@
 </script>
 </head>
 <body>
-	<br>
-	<br>
-	<br>
-	<!-- Body
-		================================================== 
-	-->
-	
 	<div id="sheader">
 		<tiles:insertAttribute name="sheader" />
 	</div>

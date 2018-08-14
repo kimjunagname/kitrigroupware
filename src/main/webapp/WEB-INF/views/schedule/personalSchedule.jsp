@@ -12,7 +12,6 @@
 			<div class="table-agile-info">
 				<div class="row">
 					<!--main content start-->
-					
 					<!-- Calendar 시작 -->
 					<div id="divCalendar">
 						<div id="calendar"></div>
@@ -206,7 +205,6 @@
 <!--main content end-->
 <style type="text/css">
     body {
-        margin: 40px 10px;
         padding: 0;       
         font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
         font-size: 14px;
@@ -434,6 +432,12 @@ $(document).on("click", "#registBtn", function() {
 		});
 	//}
 });
+
+// 빈 호면 클릭했을 때 등록하기 모달창 띄워주기
+$('#calendar').on('click','.fc-day',function(){
+	$("#myModal").modal();
+});
+
 
 // 등록하기 눌렀을 때 DB에 데이터 INSERT & AJAX로 화면에 띄워주기
 function addList(data){

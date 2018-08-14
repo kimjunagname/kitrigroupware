@@ -12,7 +12,7 @@
 <%
 String root = request.getContextPath();
 
-response.sendRedirect(root + "/schedule/test.kitri");
+response.sendRedirect(root + "/schedule/pschedule.kitri");
 %>
 </body>
 </html>

@@ -29,10 +29,10 @@ public class ScheduleController {
 	@Autowired
 	private ScheduleService scheduleService;
 	
-	@RequestMapping(value="/test.kitri")
+	@RequestMapping(value="/pschedule.kitri")
 	public ModelAndView viewSchedule(Map<String, Object> map, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/schedule/test");
+		mav.setViewName("/schedule/personalSchedule");
 		
 //		MemberDto memberDto= (MemberDto) session.getAttribute("userInfo");
 //		if(memberDto!= null)
@@ -66,6 +66,11 @@ public class ScheduleController {
 		System.out.println(scheduleList);
 		
 		return scheduleList;
+	}
+	
+	@RequestMapping(value="/test.kitri")
+	public String test() {
+		return "/schedule/test";
 	}
 	
 	@RequestMapping(value="/sadd.kitri", method=RequestMethod.POST)
