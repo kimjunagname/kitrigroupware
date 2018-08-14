@@ -181,11 +181,12 @@ ul.sidebar-menu li a.active i {
                 </li>
                 
                 <!-- 공지사항 -->
+                
                 <li>
-                    <a href="fontawesome.html">
+                    <a href="${root}/board/list.kitri?ntc_div_sq=1&ntc_div_nm=공지사항&ntc_sq=&pg=1&key=&word=">
                         <i class="fa fa-bullhorn"></i>
                         <span>공지사항</span>
-                    </a>
+                    </a>                
                 </li>
                 
                 <!-- 메일  -->
@@ -229,7 +230,7 @@ ul.sidebar-menu li a.active i {
                 
                 <!-- 자유 게시판 -->
                 <li>
-                    <a href="fontawesome.html">
+                     <a href="${root}/board/list.kitri?ntc_div_sq=2&ntc_div_nm=자유게시판&ntc_sq=&pg=1&key=&word=">
                         <i class="fa fa-bullhorn"></i>
                         <span>자유 게시판</span>
                     </a>

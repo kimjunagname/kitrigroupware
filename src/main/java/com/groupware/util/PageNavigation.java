@@ -73,78 +73,53 @@ public class PageNavigation {
 
 	public void makeNavigator() {
 		StringBuffer tmpNavigator = new StringBuffer();
-		int listSize = KitriConstance.BOARD_LIST_SIZE;//TODO 나중에 사진이랑 비교...
-		int pageSize = KitriConstance.NAVIGATOR_SIZE;
-		System.out.println("pageNO >>>>>>>>>>>" + pageNo);
-		int preEnd = (pageNo - 1) / pageSize * pageSize;
-		System.out.println("preend >>>>>>>>>>>> " + preEnd);
-		
-		tmpNavigator.append("<table cellpadding='0' cellspacing='0' border='0'>\n");
-		tmpNavigator.append(" <tr>\n");
-		if (this.isNowFirst()) {
-			tmpNavigator.append("  <td><font color='#999999'>\n<a href='javascript:totalArticle()'>");
-			tmpNavigator.append("   <img src='" + root + "/img/board/icon_prev02.gif' width='7' height='11' border='0' align='absmiddle' hspace='3'>최신목록</a>\n");
-			tmpNavigator.append("   <img src='" + root + "/img/board/icon_prev01_dim.gif' width='3' height='11' border='0' align='absmiddle' hspace='3'>\n");
-			tmpNavigator.append("   이전</font>\n");
-		} else {
-			tmpNavigator.append("  <td>\n<a href='javascript:totalArticle()'>");
-			tmpNavigator.append("   <img src='" + root + "/img/board/icon_prev02.gif' width='7' height='11' border='0' align='absmiddle' hspace='3'>최신목록 </a>\n");
-			tmpNavigator.append("   <a href='javascript:listArticle(" + preEnd + ")'>");
-			tmpNavigator.append("   <img src='" + root + "/img/board/icon_prev01_dim.gif' width='3' height='11' border='0' align='absmiddle' hspace='3'>\n");
-			tmpNavigator.append("   이전</a>");
-		}
-		tmpNavigator.append("  \n</td>\n");
-		tmpNavigator.append("  <td style='padding: 0 5 0 5'>\n");
-		tmpNavigator.append("   <table cellpadding='5' cellspacing='0' border='0'>\n");
-		//cellpadding 5로하면 페이징 처리됨
-		tmpNavigator.append("    <tr>\n");
-		tmpNavigator.append("     <td width='1' nowrap><img src='" + root + "/img/board/n_tab.gif' width='1'");
-		tmpNavigator.append(" height='11' border='0' align='absmiddle'><br>");
-		tmpNavigator.append("     </td>\n");
-		
-		int startPage = preEnd + 1;
-		int endPage = preEnd + pageSize;
-		if(endPage > totalPageCount)
-			endPage = totalPageCount;
-		System.out.println("start ::: " + startPage + "\tend ::: " + endPage);
-		for (int i = startPage; i <= endPage; i++) {
-			if (pageNo == i) {
-				tmpNavigator.append("     <td style='padding:0 17 0 17;' nowrap><font class='text_acc_02'><b>" + i + "</b></font></td>\n");
-				tmpNavigator.append("     <td width='1' nowrap><img src='" + root + "/img/board/n_tab.gif' width='1'");
-				tmpNavigator.append(" height='11' border='0' align='absmiddle'><br>\n");
-			} else {
-				tmpNavigator.append("     <td style='padding:0 17 0 17;' nowrap><a href='javascript:listArticle(" + i + ")'>" + i + "</td>\n");
-				tmpNavigator.append("     <td width='1' nowrap><img src='" + root + "/img/board/n_tab.gif' width='1'");
-				tmpNavigator.append(" height='11' border='0' align='absmiddle'><br>\n");
-			}
-		}
-		tmpNavigator.append("     </td>\n");
-		tmpNavigator.append("    </tr>\n");
-		tmpNavigator.append("   </table>\n");
-		tmpNavigator.append("  </td>\n");
-		tmpNavigator.append("  <td>\n");
-		
-		if (this.isNowEnd()) {
-			tmpNavigator.append("   <font color='#999999'>다음<img");
-			tmpNavigator.append("   src='" + root + "/img/board/icon_next01_dim.gif' width='3' height='11'");
-			tmpNavigator.append(" border='0' align='absmiddle' hspace='3'> \n");
-			tmpNavigator.append("   끝목록<img src='" + root + "/img/board/icon_next02_dim.gif' width='7' height='11'");
-			tmpNavigator.append(" border='0' align='absmiddle' hspace='3'></font>\n");
-		} else {
-			tmpNavigator.append("   <a href='javascript:listArticle(" + (preEnd + pageSize + 1) + ")'>다음<img");
-			tmpNavigator.append(" src='" + root + "/img/board/icon_next01_dim.gif' width='3' height='11'");
-			tmpNavigator.append(" border='0' align='absmiddle' hspace='3'></a>\n");
-			tmpNavigator.append("   <a href='javascript:listArticle(" + totalPageCount + ")'>끝목록<img src='" + root + "/img/board/icon_next02_dim.gif' width='7' height='11'");
-			tmpNavigator.append(" border='0' align='absmiddle' hspace='3'>\n");
-		}
+	      
+	      int listSize = KitriConstance.BOARD_LIST_SIZE; //TODO 나중에 앨범이랑 비교
+	      int pageSize = KitriConstance.NAVIGATOR_SIZE;
+	      
+	      int preEnd = (pageNo -1) / pageSize * pageSize;
 
-		tmpNavigator.append("  </td>\n");
-		tmpNavigator.append(" </tr>\n");
-		tmpNavigator.append("</table>\n");
+	      tmpNavigator.append("<ul class='pagination' style='float: right;'> \n");
+	   
+	      if (this.isNowFirst()) {//최신목록이면 링크x
+	         tmpNavigator.append("<li class='page-item'><a id='firstpage' href='#' style='color: black;'>최신목록</a></li> \n");
+	         tmpNavigator.append("<li class='page-item'><a href='#' style='color: black;'>Previous</a></li> \n");         
+	      } else {//최신이 아니면 링크o 
+	         tmpNavigator.append("<li class='page-item'><a id='totalarticle' href='#' style='color: black;'>최신목록</a></li> \n");
+	         tmpNavigator.append("<li class='page-item'><a  class='mvpage' move-page-no='" + preEnd + "' href='#' style='color: black;'>Previous</a></li> \n");         
+	      }      
+	      
+	      int startPage = preEnd +1;
+	      int endPage = preEnd + pageSize;
+	      if(endPage > totalPageCount) {
+	         endPage = totalPageCount;
+	      }
+	      
+	      for (int i = startPage; i <= endPage; i++) {
+	         if (pageNo == i) {
+	            tmpNavigator.append("<li class='page-item active'><a  href='#' style='background-color: #56aebf; border-color: #56aebf'>" + i + "</a></li> \n");
+	            
+	         } else {
+	            tmpNavigator.append("<li class='page-item'><a class='mvpage' move-page-no='" + i + "' href='#' style='color: #56aebf;'>" + i + "</a></li> \n");
+	            
+	         }
+	      }
+	            
+	      if (this.isNowEnd()) {//마지막 페이지면 링크x
+	         tmpNavigator.append("<li class='page-item'><a href='#' style='color: black;'>Next</a></li>");
+	         tmpNavigator.append("<li class='page-item'><a href='#' style='color: black;'>끝목록</a></li>");
+	         
+	      } else {//마지막 페이지가 아니면 링크o  
+	         tmpNavigator.append("<li class='page-item'><a class='mvpage' move-page-no='" + (preEnd + pageSize + 1) + "' href='#' style='color: black;'>Next</a></li>");
+	         tmpNavigator.append("<li class='page-item'><a class='mvpage' move-page-no='" + totalPageCount + "' href='#' style='color: black;'>끝목록</a></li>");
+	         
+	      }
+	   
+	      tmpNavigator.append("</ul> \n");
 
-		this.navigator = tmpNavigator.toString();
-	}
-
+	      this.navigator = tmpNavigator.toString();
+	   }
+	
 	@Override
 	public String toString() {
 		return "PageNavigation [root=" + root + ", pageNo=" + pageNo + ", newArticleCount=" + newArticleCount

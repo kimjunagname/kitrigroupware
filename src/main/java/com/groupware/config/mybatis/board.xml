@@ -4,6 +4,75 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.groupware.board.dao.BoardDao">
 
-
+	<select id="listArticle" parameterType="map" resultType="BoardDto">
+	
+	select b.* 
+	from ( 
+	    select rownum rn, a.* 
+	    from ( 
+	        select b.ntc_sq, b.ntc_div_sq, b.stf_sq, b.ntc_nm, b.ntc_cnt, b.ntc_hits,
+	                r.STF_NM, 
+	                 case  
+	                    when to_char(ntc_dt, 'yymmdd') = to_char(sysdate, 'yymmdd') 
+	                    then to_char(ntc_dt, 'hh24:mi:ss') 
+	                    else to_char(ntc_dt, 'yy.mm.dd') 
+	                end ntc_dt 
+	        from NTC_TB b, STF_TB r 
+	        where b.STF_SQ = r.STF_SQ
+	        and b.ntc_div_sq = #{ntc_div_sq}
+	        
+	        <if test="word != null and word != ''">
+				<choose>
+				<when test="key == 'ntc_nm'">
+					and b.ntc_nm like '%'||#{word}||'%'
+				</when>
+				<otherwise>
+					and r.stf_nm = #{word}
+				</otherwise>
+				</choose>
+			</if>	        
+	        	    
+	        order by b.ntc_sq desc 
+	        ) a 
+	    where rownum  &lt;= #{end} 
+	    ) b 
+	where b.rn &gt; #{start} 		
+	</select>	
+	
+	<insert id="writeArticle" parameterType="BoardDto">	
+	insert into ntc_tb(ntc_sq,ntc_div_sq,stf_sq,ntc_nm,ntc_cnt,ntc_dt,ntc_hits)
+	values(#{ntc_sq},#{ntc_div_sq},#{stf_sq},#{ntc_nm},#{ntc_cnt},sysdate,0)	
+	</insert>
+	
+	<select id="viewArticle" parameterType="int" resultType="BoardDto">
+	select b.ntc_sq, b.ntc_div_sq, b.stf_sq, b.ntc_nm, b.ntc_cnt, b.ntc_hits,r.STF_NM,
+		case  
+	    	when to_char(ntc_dt, 'yymmdd') = to_char(sysdate, 'yymmdd') 
+	    	then to_char(ntc_dt, 'hh24:mi:ss') 
+	   		else to_char(ntc_dt, 'yy.mm.dd') 
+	        end ntc_dt		
+	from NTC_TB b, STF_TB r 
+	where b.STF_SQ = r.STF_SQ
+	and b.ntc_sq = #{ntc_sq}
+	</select>
+	
+	<select id="getArticle" parameterType="int" resultType="BoardDto">
+		select b.ntc_sq, b.ntc_div_sq, b.stf_sq, b.ntc_nm, b.ntc_cnt, b.ntc_hits,r.STF_NM,b.ntc_dt		
+		from NTC_TB b, STF_TB r 
+		where b.STF_SQ = r.STF_SQ
+		and b.ntc_sq = #{ntc_sq}	
+	</select>
+	
+	<update id="modifyArticle" parameterType="BoardDto">
+		update ntc_tb
+		set ntc_nm = #{ntc_nm}, ntc_cnt = #{ntc_cnt}
+		where ntc_sq = #{ntc_sq}
+	</update>
+	
+	<delete id="deleteArticle" parameterType="int">
+		delete from ntc_tb
+		where ntc_sq = #{ntc_sq}
+	</delete>
+	
 </mapper>
   

@@ -3,6 +3,40 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.groupware.common.dao.CommonDao">
+  <mapper namespace="com.groupware.common.dao.CommonDao">  	
   
+  <select id="getNextSeq" resultType="int">
+	select ntc_tb_ntc_sq.nextval
+	from dual
+	</select>
+	
+	<select id="getNewArticleCount" parameterType="int" resultType="int">
+		select count(ntc_sq)
+		from ntc_tb
+		where ntc_div_sq = #{ntc_div_sq}
+		and to_char(ntc_dt, 'yymmdd') = to_char(sysdate,'yymmdd')
+	</select>
+	
+	<select id="getTotalArticleCount" parameterType="map" resultType="int">
+		select count(b.ntc_sq)
+		from ntc_tb b, STF_TB r 
+		where ntc_div_sq = #{ntc_div_sq}
+		and b.STF_SQ = r.STF_SQ
+		<if test="word != null and word != ''">
+        	<choose>
+        		<when test="key == 'ntc_nm'">
+        		and b.ntc_nm like '%'||#{word}||'%'
+        		</when>
+        		<otherwise>
+        		and r.stf_nm = #{word}
+        		</otherwise>
+        	</choose>
+        </if>
+	</select>
+	
+	<update id="updateHit" parameterType="int">
+	update ntc_tb
+	set ntc_hits = ntc_hits + 1
+	where ntc_sq = #{ntc_sq}
+	</update>
   </mapper>

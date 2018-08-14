@@ -8,9 +8,10 @@ public class CommuteDto {
 	private String cmt_str_tm; /* 출근시간 */
 	private String cmt_end_tm; /* 퇴근시간 */
 	private String cmt_msg; /* 메시지 */
-	private String cmt_dt;	/* 날짜 */ 
-	private String scd_nm;  /* 상태 */
-	
+	private String cmt_dt; /* 날짜 */
+	private String scd_nm; /* 상태 */
+	private int scd_cnt; /* 남은일정일 */
+
 	public int getCmt_sq() {
 		return cmt_sq;
 	}
@@ -66,5 +67,21 @@ public class CommuteDto {
 	public void setScd_nm(String scd_nm) {
 		this.scd_nm = scd_nm;
 	}
+
+	public int getScd_cnt() {
+		return scd_cnt;
+	}
+
+	public void setScd_cnt(int scd_cnt) {
+		this.scd_cnt = scd_cnt;
+	}
+
+	@Override
+	public String toString() {
+		return "CommuteDto [cmt_str_tm=" + cmt_str_tm + ", cmt_end_tm=" + cmt_end_tm + ", cmt_dt=" + cmt_dt
+				+ ", scd_nm=" + scd_nm + ", scd_cnt=" + scd_cnt + "]";
+	}
+
+	
 	
 }

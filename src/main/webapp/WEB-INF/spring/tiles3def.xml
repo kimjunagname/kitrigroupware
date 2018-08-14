@@ -138,6 +138,46 @@
  
  <!-- 은진 -->
   	
+  	<definition name="/board/list" extends="base-definition">
+       <put-attribute name="title" value="lsit" />
+       <put-attribute name="body" value="/WEB-INF/views/board/list.jsp" />
+     </definition>
+     
+     <definition name="/board/write" extends="base-definition">
+       <put-attribute name="title" value="lsit" />
+       <put-attribute name="body" value="/WEB-INF/views/board/write.jsp" />
+     </definition>
+     
+     <definition name="/board/writeok" extends="base-definition">
+       <put-attribute name="title" value="lsit" />
+       <put-attribute name="body" value="/WEB-INF/views/board/writeok.jsp" />
+     </definition>
+     
+     <definition name="/board/writefail" extends="base-definition">
+       <put-attribute name="title" value="lsit" />
+       <put-attribute name="body" value="/WEB-INF/views/board/writefail.jsp" />
+     </definition>
+     
+     <definition name="/board/view" extends="base-definition">
+       <put-attribute name="title" value="lsit" />
+       <put-attribute name="body" value="/WEB-INF/views/board/view.jsp" />
+     </definition>
+     
+     <definition name="/board/modify" extends="base-definition">
+       <put-attribute name="title" value="lsit" />
+       <put-attribute name="body" value="/WEB-INF/views/board/modify.jsp" />
+     </definition>
+     
+     <definition name="/board/modifyok" extends="base-definition">
+       <put-attribute name="title" value="lsit" />
+       <put-attribute name="body" value="/WEB-INF/views/board/modifyok.jsp" />
+     </definition>
+     
+     <definition name="/board/deleteok" extends="base-definition">
+       <put-attribute name="title" value="lsit" />
+       <put-attribute name="body" value="/WEB-INF/views/board/deleteok.jsp" />
+     </definition>
+      	
   	<definition name="/login/idfindfail" extends="login">       
        <put-attribute name="body" value="/WEB-INF/views/login/idfindfail.jsp" />
  	 </definition> 

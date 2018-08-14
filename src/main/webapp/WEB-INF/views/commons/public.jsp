@@ -13,5 +13,11 @@
 <!-- font-awesome icons -->
 <link rel="stylesheet" href="${root}/css/font.css" type="text/css"/>
 <link href="${root}/css/font-awesome.css" rel="stylesheet"> 
-
+<!-- font kr -->
+<link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+<link href="http://fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
+<style type="text/css">
+.jg{font-family: 'Jeju Gothic', sans-serif;}
+.ns{font-family: 'Noto Sans KR', sans-serif;}
+</style>
 
