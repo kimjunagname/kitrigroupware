@@ -83,6 +83,13 @@ public class ApprovalDto  {
 	public void setApv_no(String apv_no) {
 		this.apv_no = apv_no;
 	}
+	@Override
+	public String toString() {
+		return "ApprovalDto [apv_sq=" + apv_sq + ", div_apv_sq=" + div_apv_sq + ", stf_sq=" + stf_sq + ", stf_mid_sq="
+				+ stf_mid_sq + ", stf_fnl_sq=" + stf_fnl_sq + ", apv_ok_sq=" + apv_ok_sq + ", apv_nm=" + apv_nm
+				+ ", apv_pl_rt=" + apv_pl_rt + ", apv_pl_nm=" + apv_pl_nm + ", apv_no=" + apv_no + ", content="
+				+ content + "]";
+	}
 	
 	
 	

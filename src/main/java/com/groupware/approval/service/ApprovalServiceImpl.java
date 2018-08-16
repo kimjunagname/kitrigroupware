@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.groupware.approval.dao.ApprovalDao;
 import com.groupware.approval.model.ApprovalDto;
+import com.groupware.email.dao.EmailDao;
 
 @Service
 public class ApprovalServiceImpl implements ApprovalService {
@@ -41,6 +42,7 @@ public class ApprovalServiceImpl implements ApprovalService {
 	//기타공문
 	@Override
 	public List<ApprovalDto> eListApproval(Map<String, String> map) {
+		System.out.println("eliste");
 		return sqlSession.getMapper(ApprovalDao.class).eListApproval(map);
 	}
 
@@ -148,5 +150,77 @@ public class ApprovalServiceImpl implements ApprovalService {
 	}
 
 	
+	//1차 결재
+	@Override
+	public List<ApprovalDto> gListOneApprovalRequest(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.getMapper(ApprovalDao.class).gListOneApprovalRequest(map);
+	}
+
+	@Override
+	public List<ApprovalDto> cListOneApprovalRequest(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.getMapper(ApprovalDao.class).cListOneApprovalRequest(map);
+	}
+
+	@Override
+	public List<ApprovalDto> eListOneApprovalRequest(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.getMapper(ApprovalDao.class).eListOneApprovalRequest(map);
+	}
+
+	@Override
+	public List<ApprovalDto> mListOneApprovalRequest(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.getMapper(ApprovalDao.class).mListOneApprovalRequest(map);
+	}
+
 	
+	//2차 결재요청
+	@Override
+	public List<ApprovalDto> gListTwoApprovalRequest(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.getMapper(ApprovalDao.class).gListTwoApprovalRequest(map);
+	}
+
+	@Override
+	public List<ApprovalDto> cListTwoApprovalRequest(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.getMapper(ApprovalDao.class).cListTwoApprovalRequest(map);
+	}
+
+	@Override
+	public List<ApprovalDto> eListTwoApprovalRequest(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.getMapper(ApprovalDao.class).eListTwoApprovalRequest(map);
+	}
+
+	@Override
+	public List<ApprovalDto> mListTwoApprovalRequest(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return  sqlSession.getMapper(ApprovalDao.class).mListTwoApprovalRequest(map);
+	}
+
+	//중간 결재
+	@Override
+	public void middleApproval(Map<String, Object> param)  throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.getMapper(ApprovalDao.class).middleApproval(param);
+	}
+	
+	/*
+	@Override
+	public void modify(Map<String, Object> param) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.getMapper(EmailDao.class).modify(param);
+		
+	}
+	*/
+	
+	//최종 결재
+	@Override
+	public void fnlApproval(Map<String, Object> param) throws Exception{
+		// TODO Auto-generated method stub
+		sqlSession.getMapper(ApprovalDao.class).fnlApproval(param);
+	}
 }
