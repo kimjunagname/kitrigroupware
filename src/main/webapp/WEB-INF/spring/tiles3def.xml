@@ -22,7 +22,7 @@
 	
 
 	<definition name="schedule" template="/WEB-INF/views/commons/template/template2.jsp">
-<put-attribute name="sheader" value="/WEB-INF/views/commons/template/sheader.jsp"/>
+	<put-attribute name="sheader" value="/WEB-INF/views/commons/template/sheader.jsp"/>
 		<put-attribute name="spublic" value="/WEB-INF/views/commons/spublic.jsp"/>
 	    <put-attribute name="sidemenu" value="/WEB-INF/views/commons/template/sidemenu.jsp"/> 
 		<put-attribute name="body" value=""/>
@@ -225,9 +225,9 @@
        <put-attribute name="body" value="/WEB-INF/views/schedule/personalSchedule.jsp" />
    </definition>
    
-    <definition name="/schedule/test" extends="schedule">
-       <put-attribute name="title" value="test" />
-       <put-attribute name="body" value="/WEB-INF/views/schedule/test.jsp" />
+    <definition name="/schedule/adminSchedule" extends="schedule">
+       <put-attribute name="title" value="aschedule" />
+       <put-attribute name="body" value="/WEB-INF/views/schedule/adminSchedule.jsp" />
    </definition>
    
  

@@ -1,9 +1,11 @@
 package com.groupware.schedule.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +20,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.groupware.member.model.MemberDto;
+import com.groupware.organization.service.OrganizationService;
 import com.groupware.schedule.model.ScheduleDivisionDto;
 import com.groupware.schedule.model.ScheduleDto;
 import com.groupware.schedule.service.ScheduleService;
+import com.groupware.util.AjaxPaging;
 
 @Controller
 @RequestMapping("/schedule")
@@ -29,8 +33,11 @@ public class ScheduleController {
 	@Autowired
 	private ScheduleService scheduleService;
 	
+	@Autowired
+	private OrganizationService organizationService;
+	
 	@RequestMapping(value="/pschedule.kitri")
-	public ModelAndView viewSchedule(Map<String, Object> map, HttpSession session) {
+	public ModelAndView viewPSchedule(Map<String, Object> map, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/schedule/personalSchedule");
 		
@@ -54,6 +61,80 @@ public class ScheduleController {
 		
 		String today= scheduleService.getToday();
 		mav.addObject("today", today); //return type > String
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/aschedule.kitri")
+	public ModelAndView viewASchedule(Map<String, Object> map, HttpSession session, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/schedule/adminSchedule");
+		
+		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+		if(memberDto == null) {
+			mav.setViewName("redirect:/");
+			return mav;
+		}
+		
+		// 일정구분
+		List<ScheduleDivisionDto> typeList= scheduleService.getScheduleType();
+		Map<String, String> stype= new HashMap<String, String>();
+		
+		for (int i = 0; i < typeList.size(); i++) {
+			stype.put(typeList.get(i).getScd_sq()+ "", typeList.get(i).getScd_nm());
+		}
+		//stype.put("일정구분번호", "일정명");
+		
+		mav.addObject("stype", stype);
+		mav.addObject("ScheduleDivisionDto", new ScheduleDivisionDto());
+		
+		String today= scheduleService.getToday();
+		mav.addObject("today", today); //return type > String
+		
+		List officerList = new ArrayList<HashMap<String, Object>>();
+		int officerListCount = 0;
+		Map params = new HashMap<String, Object>();
+		List selectStf_tb = new ArrayList<HashMap<String, Object>>();
+		List selectAdmn_Tb = new ArrayList<HashMap<String, Object>>();
+		List selectRnk_Tb = new ArrayList<HashMap<String, Object>>();
+		List selectDpt_Div_Tb = new ArrayList<HashMap<String, Object>>();
+		try {
+			officerListCount = organizationService.officerListCount(params);
+			selectStf_tb = organizationService.selectStf_tb();
+			selectAdmn_Tb = organizationService.selectAdmn_Tb();
+			selectRnk_Tb = organizationService.selectRnk_Tb();
+			selectDpt_Div_Tb = organizationService.selectDpt_Div_Tb();
+			// ����¡ ó�� 
+			AjaxPaging paging = new AjaxPaging();
+			// �� �Խù� �� 
+			int totalCnt = officerListCount;
+			// ���� ������ �ʱ�ȭ
+			int current_page = 1;
+			// ���� ����ڷκ��� �������� �޾ƿԴٸ�
+			if (request.getParameter("page") != null) {
+				current_page = Integer.parseInt((String)request.getParameter("page"));
+			}
+			// jsp�� �Ѹ� ������ �±׸� ���� ������.
+			String pageIndexList = paging.pageIndexList(totalCnt, current_page);
+			// SQL �������� ���� ���ǹ�
+			int startCount = (current_page - 1) * 10 + 1;
+			int endCount = current_page * 10;
+			params.put("startCount", startCount);
+			params.put("endCount", endCount);
+			officerList = organizationService.officerList(params);
+			mav.addObject("pageIndexList", pageIndexList);
+			//����¡ ó��
+			//mav.addObject("myInfoList", myInfoList);
+			mav.addObject("officerList", officerList);
+			mav.addObject("officerListCount", officerListCount);
+			mav.addObject("selectStf_tb", selectStf_tb);
+			mav.addObject("selectAdmn_Tb", selectAdmn_Tb);
+			mav.addObject("selectRnk_Tb", selectRnk_Tb);
+			mav.addObject("selectDpt_Div_Tb", selectDpt_Div_Tb);
+
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		return mav;
 	}

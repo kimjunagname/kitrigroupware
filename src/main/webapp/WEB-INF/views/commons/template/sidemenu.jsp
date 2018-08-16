@@ -222,7 +222,9 @@ ul.sidebar-menu li a.active i {
                         <span>일정관리</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="${root}/schedule/pschedule.kitri">일정등록/전체일정</a></li>
+                        <li><a href="${root}/schedule/aschedule.kitri">관리자 일정보기</a></li>
+                        <li><a href="">부서 일정보기</a></li>
+                        <li><a href="${root}/schedule/pschedule.kitri">개인 일정보기</a></li>
                     </ul>
                 </li>
                 
