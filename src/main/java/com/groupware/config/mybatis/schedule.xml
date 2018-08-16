@@ -14,7 +14,7 @@
 	<select id="getScheduleList" parameterType="int" resultType="ScheduleDto">
 	select * 
 	from BS_SCD_TB b, SCD_DIV_TB s
-	where stf_sq= 62 AND b.scd_sq= s.scd_sq
+	where stf_sq= #{stf_sq} AND b.scd_sq= s.scd_sq
 	order by bs_scd_sq
 	</select>
 	

@@ -9,7 +9,7 @@
 	<section id="main-content">
 		<section class="wrapper">
 			<div class="table-agile-info">
-			<h2 class="jg">개인 스케쥴</h2>			
+			<h2 class="jg">개인 일정보기</h2>			
 			<hr style="clear: left;">
 			
 				<div class="row">
@@ -364,6 +364,23 @@ function makeList(data){
 	
 	// 하나하나 추가해준다
 	for(var i=0; i<sList.length; i++){
+		var scolor= "";
+		if(sList[i].scd_nm== "미팅"){ //미팅, 파랑
+			scolor= "#3399ff";
+		} else if(sList[i].scd_nm== "외근"){ //외근, 주황
+			scolor= "#ff9900";
+		} else if(sList[i].scd_nm== "출장"){ //출장, 노랑
+			scolor= "#efc050";
+		} else if(sList[i].scd_nm== "병가"){ //병가, 하늘
+			scolor= "#33ccff";
+		} else if(sList[i].scd_nm== "연차"){ //연차, 초록
+			scolor= "#006600";
+		} else if(sList[i].scd_nm== "반차"){ //반차, 연두
+			scolor= "#33ff00";
+		} else {//7, 교육, 회색
+			scolor= "gray";
+		}
+	
 		$('#calendar').fullCalendar('addEventSource', [{
 	        id: sList[i].bs_scd_sq,
 	        // select 값 가져오기
@@ -371,9 +388,10 @@ function makeList(data){
 	        start: sList[i].bs_scd_str_dt,
 	        end: sList[i].bs_scd_end_dt,
 	        content: sList[i].bs_scd_cnt,
-	        sname: sList[i].scd_nm // 일정이름
+	        sname: sList[i].scd_nm, 
+	        color: scolor,
+	        textColor: 'white'
 	    }]);
-		
 	//	alert("for문 안 >>> title : "+ sList[i].bs_scd_nm+ " end : "+ sList[i].bs_scd_end_dt);
 	}
 	
