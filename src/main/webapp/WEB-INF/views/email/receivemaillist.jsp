@@ -239,6 +239,7 @@ $(document).ready(function() {
 	// 메일 전송 버튼
 	$("#okbutton").click(function() {
 		$("#frm").submit();
+		alert("메일이 정상적으로 전송되었습니다.");
 	});
 	
 	// 메일 쓰기 - 사번 가져오기
