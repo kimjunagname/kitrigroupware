@@ -79,7 +79,7 @@ $(document).ready(function() {
   					<span>비밀번호</span>
   				</div>
   				<div class="col-sm-8">
-  					<input type="text" class="form-control gg" name="stf_pw" id="stf_pw"  placeholder="비밀번호(8자 이상)">
+  					<input type="password" class="form-control gg" name="stf_pw" id="stf_pw"  placeholder="비밀번호">
   				</div>
   			</div>
   			
@@ -88,7 +88,7 @@ $(document).ready(function() {
   					<span>비밀번호 재확인</span>
   				</div>
   				<div class="col-sm-8">
-  					<input type="text" class="form-control gg" name="stf_pwcheck" id="stf_pwcheck" placeholder="비밀번호 재확인">
+  					<input type="password" class="form-control gg" name="stf_pwcheck" id="stf_pwcheck" placeholder="비밀번호 재확인">
   				</div>  				
 			</div>
 			 

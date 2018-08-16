@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+  <mapper namespace="com.groupware.board.dao.BoardRpyDao">
+  	
+  	<insert id="writeRpy" parameterType="BoardRpyDto">
+	insert into rpy_tb (rpy_sq, ntc_sq, stf_sq, rtf_cnt, rtf_dt, rpy_mod)
+	values (RPY_TB_RPY_SQ.nextval, #{ntc_sq}, #{stf_sq}, #{rtf_cnt}, sysdate, sysdate)
+	</insert>
+
+	<select id="listRpy" parameterType="int" resultType="BoardRpyDto">
+	select r.rpy_sq, r.ntc_sq, r.stf_sq, r.rtf_cnt, r.rtf_dt, r.rpy_mod, s.stf_nm, s.stf_pt_rt, s.stf_pt_nm
+	from rpy_tb r, stf_tb s
+	where r.ntc_sq = #{ntc_sq}
+	and r.stf_sq = s.stf_sq
+	order by r.rpy_sq desc
+	</select>
+	
+	<update id="modifyRpy" parameterType="BoardRpyDto">
+	update rpy_tb
+	set rtf_cnt = #{rtf_cnt}, rpy_mod = sysdate
+	where rpy_sq = #{rpy_sq}
+	</update>
+	
+	<delete id="deleteRpy" parameterType="int">
+	delete rpy_tb
+	where rpy_sq = #{rpy_sq}
+	</delete>
+	
+  </mapper>
+  

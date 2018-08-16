@@ -13,12 +13,10 @@
 		<typeAlias alias="ApprovalDto" type="com.groupware.approval.model.ApprovalDto" />
 		<typeAlias alias="ApprovalOkDto" type="com.groupware.approval.model.ApprovalOkDto" />
 
-		<typeAlias alias="BoardDataDto" type="com.groupware.board.model.BoardDataDto" /> 
-		<typeAlias alias="BoardDivisionDto" type="com.groupware.board.model.BoardDivisionDto" />
-		<typeAlias alias="BoardDto" type="com.groupware.board.model.BoardDto" />
-		<typeAlias alias="BoardListDto"	type="com.groupware.board.model.BoardListDto" />
+		
+		<typeAlias alias="BoardDto" type="com.groupware.board.model.BoardDto" />	
 		<typeAlias alias="BoardRpyDto" type="com.groupware.board.model.BoardRpyDto" />
-		<typeAlias alias="NoticboardDto" type="com.groupware.board.model.NoticboardDto" />
+		
 
 		<typeAlias alias="CommonDto" type="com.groupware.common.model.CommonDto" />
 

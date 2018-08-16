@@ -2,59 +2,73 @@ package com.groupware.board.model;
 
 public class BoardRpyDto {
 
-	private int dt_rpy_sq; /* 리플번호 */
-	private String stf_sq; /* 사원번호 */
-	private int data_sq;/* 자료번호 */
-	private String dt_rpy_cnt; /* 내용 */
-	private String dt_rpy_dt; /* 작성일 */
-	private String dt_rpy_mod; /* 최종수정일 */
-
-	public int getDt_rpy_sq() {
-		return dt_rpy_sq;
+	private int rpy_sq; 
+	private int ntc_sq;
+	private String stf_sq;
+	private String rtf_cnt;
+	private String rtf_dt;
+	private String rpy_mod;
+	private String stf_nm;
+	private String stf_pt_rt;
+	private String stf_pt_nm;
+		
+	
+	
+	public String getStf_nm() {
+		return stf_nm;
 	}
-
-	public void setDt_rpy_sq(int dt_rpy_sq) {
-		this.dt_rpy_sq = dt_rpy_sq;
+	public void setStf_nm(String stf_nm) {
+		this.stf_nm = stf_nm;
 	}
-
+	public String getStf_pt_rt() {
+		return stf_pt_rt;
+	}
+	public void setStf_pt_rt(String stf_pt_rt) {
+		this.stf_pt_rt = stf_pt_rt;
+	}
+	public String getStf_pt_nm() {
+		return stf_pt_nm;
+	}
+	public void setStf_pt_nm(String stf_pt_nm) {
+		this.stf_pt_nm = stf_pt_nm;
+	}
+	public int getRpy_sq() {
+		return rpy_sq;
+	}
+	public void setRpy_sq(int rpy_sq) {
+		this.rpy_sq = rpy_sq;
+	}
+	public int getNtc_sq() {
+		return ntc_sq;
+	}
+	public void setNtc_sq(int ntc_sq) {
+		this.ntc_sq = ntc_sq;
+	}
 	public String getStf_sq() {
 		return stf_sq;
 	}
-
 	public void setStf_sq(String stf_sq) {
 		this.stf_sq = stf_sq;
 	}
-
-	public int getData_sq() {
-		return data_sq;
+	public String getRtf_cnt() {
+		return rtf_cnt;
 	}
-
-	public void setData_sq(int data_sq) {
-		this.data_sq = data_sq;
+	public void setRtf_cnt(String rtf_cnt) {
+		this.rtf_cnt = rtf_cnt;
 	}
-
-	public String getDt_rpy_cnt() {
-		return dt_rpy_cnt;
+	public String getRtf_dt() {
+		return rtf_dt;
 	}
-
-	public void setDt_rpy_cnt(String dt_rpy_cnt) {
-		this.dt_rpy_cnt = dt_rpy_cnt;
+	public void setRtf_dt(String rtf_dt) {
+		this.rtf_dt = rtf_dt;
 	}
-
-	public String getDt_rpy_dt() {
-		return dt_rpy_dt;
+	public String getRpy_mod() {
+		return rpy_mod;
 	}
-
-	public void setDt_rpy_dt(String dt_rpy_dt) {
-		this.dt_rpy_dt = dt_rpy_dt;
+	public void setRpy_mod(String rpy_mod) {
+		this.rpy_mod = rpy_mod;
 	}
-
-	public String getDt_rpy_mod() {
-		return dt_rpy_mod;
-	}
-
-	public void setDt_rpy_mod(String dt_rpy_mod) {
-		this.dt_rpy_mod = dt_rpy_mod;
-	}
+	
+	
 
 }
