@@ -34,11 +34,11 @@ public class ScheduleController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/schedule/personalSchedule");
 		
-//		MemberDto memberDto= (MemberDto) session.getAttribute("userInfo");
-//		if(memberDto!= null)
-//			System.out.println("if 문 들어왔따!!!! \n 이름 >>> "+ memberDto.getStf_nm());
-//		else
-//			System.out.println("memberDto 못 받아왔다!!!");
+		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+		if(memberDto == null) {
+			mav.setViewName("redirect:/");
+			return mav;
+		}
 		
 		// 일정구분
 		List<ScheduleDivisionDto> typeList= scheduleService.getScheduleType();
@@ -90,9 +90,18 @@ public class ScheduleController {
 		dto.setStf_sq("62");
 		dto.setBs_scd_nm(map.get("sname"));//제목
 		dto.setBs_scd_cnt(map.get("content")); //내용
-		dto.setBs_scd_str_dt(map.get("sstart_date")+ " "+ map.get("sstart_time")+ ":00"); //시작일
-		dto.setBs_scd_end_dt(map.get("send_date")+ " "+ map.get("send_time")+ ":00"); //종료일
+		System.out.println("************************************ if 문 전 ************************************");
+		if(map.get("sstart_time")!= null) {
+			System.out.println("날짜 if 들어갔다");
+			dto.setBs_scd_str_dt(map.get("sstart_date")+ " "+ map.get("sstart_time")+ ":00"); //시작일
+			dto.setBs_scd_end_dt(map.get("send_date")+ " "+ map.get("send_time")+ ":00"); //종료일
+		} else {
+			System.out.println("날짜 else 들어갔따");
+			dto.setBs_scd_str_dt(map.get("sstart_date")+ " 23:59:59"); //시작일
+			dto.setBs_scd_end_dt(map.get("send_date")+ " 23:59:59"); //종료일
+		}
 		//form : 2018-08-08 00:00:00
+		System.out.println("************************************ if 문 후 ************************************");
 		
 		scheduleService.addSchedule(dto);
 		
@@ -104,6 +113,8 @@ public class ScheduleController {
 	@RequestMapping(value="/sadd.kitri", method=RequestMethod.PUT, produces = "application/json; charset=utf8")
 	public @ResponseBody String addSchedule(@RequestBody ScheduleDto scheduleDto) {
 		System.out.println(scheduleDto.toString());
+		
+//		endTime= 
 		
 		scheduleService.addSchedule(scheduleDto);
 		
@@ -126,13 +137,17 @@ public class ScheduleController {
 	
 	@RequestMapping(value="/smodify.kitri", method=RequestMethod.PUT, produces = "application/json; charset=utf8")
 	public @ResponseBody String modifySchedule(@RequestBody ScheduleDto scheduleDto) {
+		System.out.println("modify dto >>> "+ scheduleDto);
 		scheduleService.modifySchedule(scheduleDto);
 		
 		// 가져온 일정번호로 변경된 값 리턴해주기
 		String modifySchedule= scheduleService.getModifySchedule(scheduleDto.getBs_scd_sq());
-		
 		System.out.println("modifySchedule >>> "+ modifySchedule);
 		
-		return modifySchedule;
+		// 다시 전체일정 가져오기
+		String scheduleList= scheduleService.getScheduleList(scheduleDto.getBs_scd_sq());
+		System.out.println(scheduleList);
+		
+		return scheduleList;
 	}
 }

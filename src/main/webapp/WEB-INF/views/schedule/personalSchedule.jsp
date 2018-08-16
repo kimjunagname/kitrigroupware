@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<c:set var= "stf_sq" value= "62"></c:set>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <!-- body start -->
 <section id="container">
@@ -10,6 +9,9 @@
 	<section id="main-content">
 		<section class="wrapper">
 			<div class="table-agile-info">
+			<h2 class="jg">개인 스케쥴</h2>			
+			<hr style="clear: left;">
+			
 				<div class="row">
 					<!--main content start-->
 					<!-- Calendar 시작 -->
@@ -43,7 +45,7 @@
 											<div class="col-lg-10">
 											<!-- spring form 태그로 select 불러오기 -->
 											<form:form commandName="ScheduleDivisionDto">
-												<form:select path="Scd_nm" items="${stype}" id="sselect"></form:select>
+												<form:select path="Scd_nm" items="${stype}" id="sselect" onchange="javascript:changeForm();"></form:select>
 											</form:form>
 											</div>
 										</div>
@@ -51,14 +53,14 @@
 										<label class="col-lg-2 col-sm-2 control-label">시작날짜</label>
 											<div class="col-lg-10">
 												<input type="date" name="sstart_date" id="sstart_date"> 
-												<input type="time" name="sstart_time" id="sstart_time">
+												<input type="time" name="sstart_time" id="sstart_time" class="st">
 											</div>
 										</div>
 									<div class="form-group">
 										<label class="col-lg-2 col-sm-2 control-label">종료날짜</label>
 										<div class="col-lg-10">
 											<input type="date" name="send_date" id="send_date"> 
-											<input type="time" name="send_time" id="send_time">
+											<input type="time" name="send_time" id="send_time" class="st">
 										</div>
 									</div>
 									<div class="form-group">
@@ -96,11 +98,8 @@
 								
 								<!-- MODAL BODY -->
 								<div class="modal-body" id="modalBody">
-									<div class="form-group">
-										<div align= "center"><label class="col-lg-2">아이디</label></div>
-											<!-- spring form 태그로 select 불러오기 -->
-											<label class="col-lg-10" id="pid"></label>
-										</div>
+								<!-- hidden value -->
+								<input type="hidden" id="pid"></label>
 									<div class="form-group">
 										<div align= "center"><label class="col-lg-2">구분</label></div>
 											<!-- spring form 태그로 select 불러오기 -->
@@ -119,7 +118,7 @@
 											<label class="col-lg-10" id="psubject"></label>
 									</div>
 									<div class="form-group">
-										<div align= "center"><label class="col-lg-2"></label></div>
+										<div align= "center"><label class="col-lg-2">내용</label></div>
 										<div id="pcontent" class="col-lg-10">
 										</div>
 									</div>
@@ -156,22 +155,22 @@
 											<div class="col-lg-10">
 											<!-- spring form 태그로 select 불러오기 -->
 											<form:form commandName="ScheduleDivisionDto">
-												<form:select path="Scd_nm" items="${stype}" id="mselect"></form:select>
+												<form:select path="Scd_nm" items="${stype}" id="mselect" onchange="javascript:changeForm();"></form:select>
 											</form:form>
 											</div>
 										</div>
 									<div class="form-group">
 										<label class="col-lg-2 col-sm-2 control-label">시작날짜</label>
 											<div class="col-lg-10">
-												<input type="date" name="mstart_date" id="mstart_date"> 
-												<input type="time" name="mstart_time" id="mstart_time">
+												<input type="date" name="mstart_date" id="mstart_date">
+												<input type="time" name="mstart_time" id="mstart_time" class="mt">
 											</div>
 										</div>
 									<div class="form-group">
 										<label class="col-lg-2 col-sm-2 control-label">종료날짜</label>
 										<div class="col-lg-10">
 											<input type="date" name="mend_date" id="mend_date"> 
-											<input type="time" name="mend_time" id="mend_time">
+											<input type="time" name="mend_time" id="mend_time" class="mt">
 										</div>
 									</div>
 									<div class="form-group">
@@ -305,17 +304,25 @@ $(document).ready(function() {
 	    // title 클릭했을 때 event id 가져와서 뿌려주기
 	    eventClick: function(event, element) {
 	    	// 수정모달에 데이터 집어넣기
-	    	$("#pid").text(event.id);
+	    	$("#pid").val(event.id);
 	    	$("#pselect").text(event.sname);
         	$("#psubject").text(event.title);
+        	
+
+    		alert(event.end);
         	
         	// Fri Aug 31 2018 09:00:00 GMT+0000 > 기본형
         	// new Date(event.start).toISOString() > format 바꾸기
         	// 2018-08-31T09:00:00.000Z > 바뀐 format
-        	$("#pstart").text(new Date(event.start).toISOString().slice(0, 10) + " "+ new Date(event.start).toISOString().slice(11, 19));
-        	
-        	//$("#pend").text(moment(event.end).format('YYYY-MM-DD hh:mm:ss'));
-        	$("#pend").text(new Date(event.end).toISOString().slice(0, 10) + " "+ new Date(event.end).toISOString().slice(11, 19));
+        	if($("#pselect").text()== "출장" ||$("#pselect").text()== "병가" || $("#pselect").text()== "연차"){
+        		$("#pstart").text(new Date(event.start).toISOString().slice(0, 10));
+        		$("#pend").text(new Date(event.end).toISOString().slice(0, 10));
+        	} else {
+				$("#pstart").text(new Date(event.start).toISOString().slice(0, 10) + " "+ new Date(event.start).toISOString().slice(11, 19));
+	        	
+	        	//$("#pend").text(moment(event.end).format('YYYY-MM-DD hh:mm:ss'));
+	        	$("#pend").text(new Date(event.end).toISOString().slice(0, 10) + " "+ new Date(event.end).toISOString().slice(11, 19));
+        	}
         	
         	$("#pcontent").html(event.content);
         	
@@ -341,7 +348,7 @@ $(document).ready(function() {
 // ajax로 스케쥴리스트 가져오기
 function getList(){
 	$.ajax({
-		url : "${root}/schedule/slist/${stf_sq}",
+		url : "${root}/schedule/slist/${userinfo.stf_sq}",
 		type : 'POST',
 		contentType : 'application/json;charset=UTF-8',
 		dataType : 'json',
@@ -366,6 +373,8 @@ function makeList(data){
 	        content: sList[i].bs_scd_cnt,
 	        sname: sList[i].scd_nm // 일정이름
 	    }]);
+		
+	//	alert("for문 안 >>> title : "+ sList[i].bs_scd_nm+ " end : "+ sList[i].bs_scd_end_dt);
 	}
 	
     /*
@@ -392,34 +401,53 @@ function makeList(data){
 
 // 등록하기 눌렀을 때 이벤트
 $(document).on("click", "#registBtn", function() {
-	// $("#sform").attr("method", "post").attr("action", "${root}/schedule/sadd.kitri").submit();
-	
-	// 일정구분 선택
-	var selectValue= $("#sselect option:selected").val();
-
-	// TODO 사원번호 집어넣기
-	
-	var sstart_date= $("#sstart_date").val();
-	var sstart_time= $("#sstart_time").val();
-	
-	var send_date= $("#send_date").val();
-	var send_time= $("#send_time").val();
-	
-	var sname= $("#sname").val();
-	var scontent= $("#summernote").val();
-	
-	var parameter= JSON.stringify({
-			'scd_sq' : selectValue,
-			'stf_sq' : 62,
-			'bs_scd_nm' : sname,
-			'bs_scd_cnt' : scontent,
-			'bs_scd_str_dt' : sstart_date+ " "+ sstart_time,
-			'bs_scd_end_dt' : send_date+ " "+ send_time
-	});
-	
-	alert(parameter);
+	if($("#summernote").val().trim().length== 0){
+		alert("내용을 적어주세요");
+	} else if($("#sstart_date").val()== '' || $("#send_date").val()== ''){
+		alert("날짜를 적어주세요");
+	} else if($("#sname").val()== ''){
+		alert("제목을 적어주세요");
+	} else { // 유효성검사 모두 만족할 때
+		// $("#sform").attr("method", "post").attr("action", "${root}/schedule/sadd.kitri").submit();
 		
-	//if(scontent.trim().length!= 0){
+		// 일정구분 선택
+		var selectValue= $("#sselect option:selected").val();
+	
+		// TODO 사원번호 집어넣기
+		
+		var sstart_date= $("#sstart_date").val();
+		var send_date= $("#send_date").val();
+		
+		var	sstart_time= $("#sstart_time").val();
+		var send_time= "";
+		
+		if($("#mstart_time").val()== ''){
+			alert("if 문 안! 23:59 setting")
+			send_time= "23:59";
+		} else { //null일 때, length가 0이 일때
+			alert("else 문 안!")
+			send_time= $("#send_time").val();
+		}
+		
+		var sname= $("#sname").val();
+		var scontent= $("#summernote").val();
+		
+		if(sstart_date+ " "+ sstart_time > send_date+ " "+ send_time){ //end가 start보다 작으면
+			alert("종료 일이 시작일 보다 빠를 수 없습니다.");
+			return;
+		} else {
+			var parameter= JSON.stringify({
+					'scd_sq' : selectValue,
+					'stf_sq' : ${userinfo.stf_sq},
+					'bs_scd_nm' : sname,
+					'bs_scd_cnt' : scontent,
+					'bs_scd_str_dt' : sstart_date+ " "+ sstart_time,
+					'bs_scd_end_dt' : send_date+ " "+ send_time
+			});
+		}
+		
+		alert(parameter);
+			
 		$.ajax({
 			url : "${root}/schedule/sadd.kitri",
 			type : 'PUT',
@@ -430,11 +458,14 @@ $(document).on("click", "#registBtn", function() {
 				addList(data);
 			}
 		});
-	//}
+	}
 });
 
 // 빈 호면 클릭했을 때 등록하기 모달창 띄워주기
 $('#calendar').on('click','.fc-day',function(){
+	alert($(this).attr('data-date'));
+	$("#sstart_date").val($(this).attr('data-date'));
+	$("#send_date").val($(this).attr('data-date'));
 	$("#myModal").modal();
 });
 
@@ -442,10 +473,12 @@ $('#calendar').on('click','.fc-day',function(){
 // 등록하기 눌렀을 때 DB에 데이터 INSERT & AJAX로 화면에 띄워주기
 function addList(data){
 	$('#calendar').fullCalendar('addEventSource', [{
-		// TODO 값 추가하기
         id: data.bs_scd_sq,
         title: data.bs_scd_nm,
-        start: data.bs_scd_str_dt
+        start: data.bs_scd_str_dt,
+        end: data.bs_scd_end_dt,
+        content: data.bs_scd_cnt,
+        sname: data.scd_nm
     }]);
 }
 
@@ -471,7 +504,7 @@ function viewContent(sid){
 // 삭제하기 버튼 눌렀을때
 $(document).on("click", "#deleteBtn", function() {
 	if(confirm("정말 삭제하시겠습니까?")){
-		var id= $("#pid").text();
+		var id= $("#pid").val();
 		
 		$.ajax({
 			url : "${root}/schedule/sdelete/" + id,
@@ -495,6 +528,16 @@ $(document).on("click", "#modifyBtn", function() {
 	for(var i=1; i<options.length; i++){
 		if(options.eq(i).text() == stxt){
 			$("#mselect option:eq(" + i + ")").attr("selected", "selected");
+			
+			var mitem =i+1;
+			
+			alert("mitem >>> "+ mitem);
+
+			if(mitem== 3 || mitem== 4 || mitem== 5)
+				$(".mt").css("display", "none");
+			else
+				$(".mt").css("display", "");
+			
 			break;
 		}
 	}
@@ -512,7 +555,7 @@ $(document).on("click", "#modifyBtn", function() {
 });
 
 $(document).on("click", "#mModifyBtn", function() {
-	var id= $("#pid").text();
+	var id= $("#pid").val();
 	
 	// 일정구분 선택
 	var selectValue= $("#mselect option:selected").val();
@@ -520,18 +563,27 @@ $(document).on("click", "#mModifyBtn", function() {
 	// TODO 사원번호 집어넣기
 	
 	var mstart_date= $("#mstart_date").val();
-	var mstart_time= $("#mstart_time").val();
-	
 	var mend_date= $("#mend_date").val();
-	var mend_time= $("#mend_time").val();
+	
+	var mstart_time= $("#mstart_time").val();
+	var mend_time= "";
+	
+	if($("#mstart_time").val()== ''){
+		alert("if 문 안! 23:59 setting")
+		mend_time= "23:59";
+	} else { //null일 때, length가 0이 일때
+		alert("else 문 안!")
+		mend_time= $("#mend_time").val();
+	}
 	
 	var mname= $("#mname").val();
 	var mcontent= $("#msummernote").val();
 	
+	alert("수정한 제목 >> "+ mname);
 	var parameter= JSON.stringify({
 			'bs_scd_sq' : id, // 사내일정번호
 			'scd_sq' : selectValue, //일정구분번호
-			'stf_sq' : 62, //사원번호 TMI
+			'stf_sq' : ${userinfo.stf_sq}, //사원번호 TMI
 			'bs_scd_nm' : mname, // 제목
 			'bs_scd_cnt' : mcontent, // 내용
 			'bs_scd_str_dt' : mstart_date+ " "+ mstart_time, //시작일
@@ -555,9 +607,11 @@ $(document).on("click", "#mModifyBtn", function() {
 });
 
 function modifySchedule(data){
-	var event = $("#calendar").fullCalendar("clientEvents");
-	for(var i=0; i<event.length; i++){
-		$('#calendar').fullCalendar('removeEvents', event[i].id);
+	var sList= data.scheduleList;
+	
+	// 기존의 리스트를 불러와서 삭제
+	for(var i=0; i<sList.length; i++){
+		$('#calendar').fullCalendar('removeEvents', sList[i].bs_scd_sq);
 	}
 	
 	getList();
@@ -574,6 +628,34 @@ function modifySchedule(data){
 	
 	$('#calendar').fullCalendar('updateEvent', event);
 	*/
+}
+
+// 선택된 스케쥴에 따라 시간 보이냐, 보이지 않느냐
+function changeForm(){
+	/* 리스트
+	1	미팅
+	2	외근
+	3	출장
+	4	병가
+	5	연차
+	6	반차
+	7	교육
+	*/
+	// 등록하기
+	var sitem = $("#sselect").val();
+
+	if(sitem== 3 || sitem== 4 || sitem== 5)
+		$(".st").css("display", "none");
+	else
+		$(".st").css("display", "");
+	
+	// 수정하기
+	var mitem = $("#mselect").val();
+
+	if(mitem== 3 || mitem== 4 || mitem== 5)
+		$(".mt").css("display", "none");
+	else
+		$(".mt").css("display", "");
 }
 
 </script>
