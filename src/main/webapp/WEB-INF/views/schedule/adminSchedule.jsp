@@ -5,14 +5,60 @@
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <!-- body start -->
 <section id="container">
-	<!--main content start-->
-	<section id="main-content">
-		<section class="wrapper">
-			<div class="table-agile-info">
-			<h2 class="jg">개인 일정보기</h2>			
-			<hr style="clear: left;">
+	<!--main content start--> 
+	<section id="main-content"> 
+	<section class="wrapper">
+	<div class="mail-w3agile">
+		<!-- page start-->
+		<!-- 조직도 왼쪽 -->
+		<div class="row">
+			<div id="leftMenu" class="col-sm-4 col-md-3">
+				<section id="leftTop">
+				<div class="panel-body">
+					<div class="panel">
+						<font size="5"><strong>조직도 관리</strong></font>
+						<!-- 버튼 위치 조절 수동 -->
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<!----------------->
+						<!--- 접속대상이 총괄관리자 일 경우에만 버튼 보이게 하기 --->
+						<!-- 나중에 풀것 -->
+						<!---<c:if test="${userinfo.admn_sq == 3}">
+						<span align="left">
+							<button class="btn btn-primary btn-sm" id="deptManage"
+								type="button" data-toggle="modal" data-target="#DeptModal">관리</button>
+						</span>
+						</c:if>-->
+					</div>
+					<ul class="easyui-tree">
+						 <li>
+						 	<span>KITRI 주식회사</span>
+								 <ul>
+									<c:forEach items="${selectDpt_Div_Tb}" var="dptmap">
+										<li data-options="state:'open'">
+											<span>${dptmap.DPT_NM}</span>
+											<ul>
+												<c:forEach items="${selectStf_tb}" var="stfmap">
+													<c:if test="${dptmap.DPT_NM eq stfmap.DPT_NM}">
+														 <li>${stfmap.RNK_NM}|${stfmap.STF_SQ}|${stfmap.STF_NM}</li>
+													</c:if>
+												</c:forEach>
+											</ul>
+										</li>
+									</c:forEach> 
+							</ul>
+						</li>
+					</ul>
+				</div>
+				</section>
+			</div>
+			<!-- 조직도 왼쪽 메뉴 끝 -->
 			
-				<div class="row">
+			<div class="col-sm-14 col-md-9">
+				<section class="panel"> 
+				<header class="panel-heading wht-bg">
+				<h4 class="jg"></h4>			
+				</header>
+				<div class="row" style="background-color:white">
 					<!--main content start-->
 					<!-- Calendar 시작 -->
 					<div id="divCalendar">
@@ -196,8 +242,11 @@
 					
 					<!--main content end-->
 				</div>
+				</section>
 			</div>
-		</section>
+		</div>
+		<!-- page end-->
+	</div>
 	</section>
 
 </section>
@@ -210,13 +259,18 @@
     }
 
     #calendar {
-        max-width: 900px;
+        max-width: 700px;
         margin: 0 auto;
     }
     
     .fc-day-number.fc-sat.fc-past { color:#0000FF; }     /* 토요일 */
     .fc-day-number.fc-sun.fc-past { color:#FF0000; }     /* 일요일 */
 </style>
+<!-- jQuery EasyUi API -->
+<link rel="stylesheet" type="text/css" href="${root}/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="${root}/easyui/themes/icon.css">
+<script type="text/javascript" src="${root}/easyui/jquery.easyui.min.js"></script>
+
 <!-- summernote 시작 -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>

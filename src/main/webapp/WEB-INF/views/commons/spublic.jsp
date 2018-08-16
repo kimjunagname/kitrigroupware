@@ -29,6 +29,13 @@
 <script src="${root}/js/jquery.slimscroll.js"></script>
 <script src="${root}/js/jquery.nicescroll.js"></script>
 
+<!-- font kr -->
+<link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+<link href="http://fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
+<style type="text/css">
+.jg{font-family: 'Jeju Gothic', sans-serif;}
+.ns{font-family: 'Noto Sans KR', sans-serif;}
+</style>
 
 <!-- fullcalendar -->
 <script type="text/javascript" src="${root }/js/fullcalendar/lib/moment.min.js"></script>
