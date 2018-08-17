@@ -91,7 +91,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td align="left">00:00</td>
+            <td align="left" id="totalLate">00:00</td>
           </tr>
       </table>
     </div>
@@ -244,9 +244,9 @@
 <script>
 $(document).ready(function(){
 	setDate();
-	var d = new Date();
-	var d2 = new Date(d);
-	d2.setMinutes(d.getMinutes()+10);
+	var nowDate = new Date();
+	var calcDate = new Date(nowDate);
+	//calcDate.setMinutes(nowDate.getMinutes()+10);
 //	alert(d2.getHours() + "시"+d2.getMinutes());
 	
 	$("td:contains('토')").css('color', 'blue');
@@ -264,11 +264,17 @@ $(document).ready(function(){
 			var lateStr = "";
 			if(hours > 0){
 				lateStr = hours + "시간";
+				calcDate.setHours(calcDate.getHours()+hours);
 			}
 			if(mins > 0){
 				lateStr += mins + "분";
+				calcDate.setMinutes(calcDate.getMinutes()+mins);
 			}
 			$(this).siblings(".late").text(lateStr);
+			var str = calcDate.getHours()-nowDate.getHours()+"시간";
+			str += calcDate.getMinutes()-nowDate.getMinutes() + "분";
+			$("#totalLate").text(str);
+			
 		}
 	});
 });
