@@ -78,8 +78,8 @@
         <c:forEach var="cmt" items="${commuteList}">
           <tr>
             <td>${cmt.cmt_dt}</td>
-            <td strTm="${cmt.cmt_str_tm}">${fn:substring(cmt.cmt_str_tm, 0, 16)}</td>
-            <td endTm="${cmt.cmt_end_tm}">${fn:substring(cmt.cmt_end_tm, 0, 16)}</td>
+            <td strTm="${cmt.cmt_str_tm}">${fn:substring(cmt.cmt_str_tm, 11, 16)}</td>
+            <td endTm="${cmt.cmt_end_tm}">${fn:substring(cmt.cmt_end_tm, 11, 16)}</td>
             <td>${cmt.scd_nm}</td>
             <td class="late"></td>
             <td>${cmt.cmt_msg}</td>
@@ -244,12 +244,17 @@
 <script>
 $(document).ready(function(){
 	setDate();
+	var d = new Date();
+	var d2 = new Date(d);
+	d2.setMinutes(d.getMinutes()+10);
+//	alert(d2.getHours() + "시"+d2.getMinutes());
+	
 	$("td:contains('토')").css('color', 'blue');
 	$("td:contains('일')").css('color', 'red');
 	
 	$("td[strTm]:not(:empty)").each(function(i, item){
-		var ymd = $(this).text().split(" ")[0].split("-");
-		var hms = $(this).text().split(" ")[1].split(":");
+		var ymd = $(this).attr("strTm").split(" ")[0].split("-");
+		var hms = $(this).attr("strTm").split(" ")[1].split(":");
 		
 		var chkTm = new Date(Date.UTC(ymd[0], ymd[1], ymd[2], 09, 00, 00));
 		var strTm = new Date(Date.UTC(ymd[0], ymd[1], ymd[2], hms[0], hms[1], 00));
