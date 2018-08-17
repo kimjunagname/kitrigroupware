@@ -243,6 +243,9 @@
 <script>
 $(document).ready(function(){
 	setDate();
+	
+	$("td:contains('토')").css('color', 'blue');
+	$("td:contains('일')").css('color', 'red');
 });
 var date = new Date();
 $("#searchBtn").click(function() {
