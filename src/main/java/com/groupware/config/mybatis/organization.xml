@@ -62,7 +62,7 @@
 	WHERE ADMN.ADMNN_SQ = STF.ADMN_SQ
 	AND RNK.RNK_SQ = STF.RNK_SQ
 	AND DD.DPT_SQ = STF.DPT_SQ
-	AND DD.DPT_SQ NOT IN('100')
+	AND DD.DPT_SQ NOT IN('0')
 	AND RNK.RNK_SQ NOT IN('50')
   	</select>
   	
@@ -91,7 +91,7 @@
 	<select id="selectDpt_Div_Tb" parameterType="Map" resultType="Map">
 	SELECT DPT_SQ, DPT_NM
 	FROM DPT_DIV_TB
-	WHERE DPT_SQ NOT IN('100')
+	WHERE DPT_SQ NOT IN('0')
 	ORDER BY DPT_SQ
 	</select>
 	
@@ -156,7 +156,7 @@
 	<update id="officerLayoff" parameterType="OrganizationDto">
 	UPDATE STF_TB
 	SET ADMN_SQ = '50',
-	DPT_SQ = '100',
+	DPT_SQ = '0',
 	RNK_SQ = '50',
 	STF_EML1 = 'layoff',
 	STF_EML2 = 'layoff.com'
