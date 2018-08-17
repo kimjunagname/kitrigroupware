@@ -6,10 +6,17 @@
   
     <mapper namespace="com.groupware.member.dao.MemberDao">
     
+    <select id="dptlist" resultType="MemberRankDto">
+    select *
+    from dpt_div_tb
+    where DPT_SQ != 0
+    </select>
+    
     <select id="login" parameterType="map" resultType="MemberDto">
     SELECT *
 	FROM stf_tb
 	WHERE stf_sq = #{stf_sq} AND stf_pw = #{stf_pw}
+	and admn_sq != 50
     </select>	
     
     <insert id="registerMember" parameterType="MemberDto">

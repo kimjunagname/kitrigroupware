@@ -93,7 +93,7 @@
           </div>
 	  </section>
 		<!-- page end-->
-	</section> 
+
 	
 <script type="text/javascript">
 

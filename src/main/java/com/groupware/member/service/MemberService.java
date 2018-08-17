@@ -1,11 +1,15 @@
 package com.groupware.member.service;
 
+import java.util.List;
 import java.util.Map;
 import com.groupware.member.model.MemberDto;
+import com.groupware.member.model.MemberRankDto;
 
 
 
 public interface MemberService {
+	
+	public List<MemberRankDto> dptlist();
 
 	public MemberDto login(Map<String, String> map);
 	
