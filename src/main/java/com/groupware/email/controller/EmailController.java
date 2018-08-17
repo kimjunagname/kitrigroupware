@@ -1,5 +1,6 @@
 package com.groupware.email.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,9 +8,12 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -19,7 +23,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.groupware.email.model.EmailDto;
@@ -38,6 +44,9 @@ public class EmailController {
 	
 	@Autowired
 	private OrganizationService organizationService;
+	
+	private WebApplicationContext context = null;
+
 	
 	@Resource(name = "uploadPath")
 	private String uploadPath;
@@ -374,5 +383,15 @@ public class EmailController {
 			e.printStackTrace();
 		}
 		return "redirect:/email/rcvList.kitri";
+	}
+	@RequestMapping(value="/download.kitri")
+	public ModelAndView Download(@RequestParam (value="fileFullPath") String fileFullPath,  HttpServletRequest request,  HttpServletResponse response) throws Exception {
+		//LOGGER.debug("callDownload : "+ fileFullPath);
+		System.out.println("다운로드 경로 및 파일 : "+fileFullPath);
+		File downloadFile = new File(fileFullPath);
+		if(!downloadFile.canRead()){
+			throw new Exception("File can't read(파일을 찾을 수 없습니다)");
+		}
+		return new ModelAndView("fileDownloadView","downloadFile",downloadFile);	
 	}
 }

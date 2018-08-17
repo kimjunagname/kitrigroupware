@@ -315,12 +315,20 @@
 			        var eml_cnt = data.eml_cnt;
 			    	var stf_nm = data.stf_snd_sq;
 			    	var rcv_dt = data.rcv_dt;
+			    	var eml_pl_crs = data.eml_pl_crs;
 			    	
 			    	$("#eml_pl_nm1").text(eml_pl_nm);
 			    	$("#eml_nm1").text(eml_nm);
 			 	    $("#eml_cnt1").text(eml_cnt);
 			    	$("#stf_nm1").text(stf_nm);
 			    	$("#rcv_dt1").text(rcv_dt);
+			    	
+			    	var filePath = "D:/javadata/workspace/framework/kitrigroupware/src/main"+eml_pl_crs;
+				    if(eml_pl_nm != null){
+				    	$("#eml_pl_nm1").html('<a href=${root}/email/download.kitri?fileFullPath='+filePath+'>'+ eml_pl_nm +'</a>');
+				    } else if(eml_pl_nm == null){
+				    	$("#eml_pl_nm1").html("등록된 파일이 없습니다.");
+				    }
 			    
 			    },
 			    error: function(request, status, error) {

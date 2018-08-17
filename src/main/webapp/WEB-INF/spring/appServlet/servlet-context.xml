@@ -53,6 +53,10 @@
 		<beans:property name="maxUploadSize" value="5242880" />
 		<beans:property name="maxInMemorySize" value="1048576" />
 	</beans:bean>
+	
+
+
+
      
      <!-- 
 	<beans:bean	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -61,8 +65,14 @@
 		<beans:property name="order" value="2"/> 
 	</beans:bean>
 	  -->
+	 
+	<!-- BeanNameViewResolver 파일 다운로드 -->
+	<beans:bean id="fileDownloadView" class="com.groupware.util.FileDownloadView"/>
+	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+  		<beans:property name="order" value="0"/> 
+	</beans:bean>
+	
 
- 
   	  <!-- 타일즈 설정: 시작 -->
       <!-- 아래 타일즈를 위한  TilesViewResolver, TilesConfigurer는 스프링3.2 이상에서만...-->
       <beans:bean id="tilesviewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" > 

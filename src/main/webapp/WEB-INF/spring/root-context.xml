@@ -32,7 +32,7 @@
 	
 	<!-- uploadPath -->	 
  	<bean id="uploadPath" class="java.lang.String">
- 		<constructor-arg value="D:\\java data\\workspace\\framework\\kitrigroupware\\src\\main\\webapp\\WEB-INF\\upload\\file\\"></constructor-arg> 
+ 		<constructor-arg value="D:\\javadata\\workspace\\framework\\kitrigroupware\\src\\main\\webapp\\WEB-INF\\upload\\file\\"></constructor-arg> 
  	</bean> 
 
     <!-- connection pool -->
@@ -83,6 +83,8 @@
 			</props>
 		</property>
 	</bean>
+	
+	
 	
 	<!-- 트랜젝션 -->
 	<!-- 

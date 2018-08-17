@@ -239,7 +239,6 @@ $(document).ready(function() {
 	// 메일 전송 버튼
 	$("#okbutton").click(function() {
 		$("#frm").submit();
-		alert("메일이 정상적으로 전송되었습니다.");
 	});
 	
 	// 메일 쓰기 - 사번 가져오기
@@ -326,13 +325,18 @@ $(document).ready(function() {
 			    var eml_cnt = data.eml_cnt;
 			    var stf_snd_sq = data.stf_snd_sq;
 			   	var rcv_dt = data.rcv_dt;
-			    //$("#eml_pl_nm1").text(eml_pl_nm);
+			   	var eml_pl_crs = data.eml_pl_crs;
 			    $("#eml_nm1").text(eml_nm);
 			 	$("#eml_cnt1").text(eml_cnt);
 			    $("#stf_nm1").text(stf_snd_sq);
 			    $("#rcv_dt1").text(rcv_dt); 
-			    $("#eml_pl_nm1").text(eml_pl_crs);
-		    	$("#eml_pl_nm1").html(eml_pl_nm);
+			    $("#eml_pl_nm1").text(eml_pl_nm);
+			    var filePath = "D:/javadata/workspace/framework/kitrigroupware/src/main"+eml_pl_crs;
+			    if(eml_pl_nm != null){
+			    	$("#eml_pl_nm1").html('<a href=${root}/email/download.kitri?fileFullPath='+filePath+'>'+ eml_pl_nm +'</a>');
+			    } else if(eml_pl_nm == null){
+			    	$("#eml_pl_nm1").html("등록된 파일이 없습니다.");
+			    }
   
 			 },
 			 error: function(request, status, error) {
@@ -364,9 +368,5 @@ $(document).ready(function() {
 			    }
 			});
 		}
-		
-		
-
-
 })
 </script>
