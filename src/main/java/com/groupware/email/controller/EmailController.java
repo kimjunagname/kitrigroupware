@@ -60,10 +60,7 @@ public class EmailController {
 			map.put("stf_sq", (String) session.getAttribute("stf_sq"));
 		}	
 		stf_sq = map.get("stf_sq");
-		
-		if (stf_sq == null || stf_sq.equals(""))
-			return "redirect:/member/login.kitri";	
-		
+			
 		// 페이징 처리
 		AjaxPaging paging = new AjaxPaging();
 		String stf_snd_sq = stf_sq;
