@@ -16,7 +16,7 @@
 				<section id="leftTop">
 				<div class="panel-body">
 					<div class="panel">
-						<font size="5"><strong>조직도 관리</strong></font>
+						<font size="5"><strong>조직도</strong></font>
 						<!-- 버튼 위치 조절 수동 -->
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<!----------------->
@@ -39,7 +39,8 @@
 											<ul>
 												<c:forEach items="${selectStf_tb}" var="stfmap">
 													<c:if test="${dptmap.DPT_NM eq stfmap.DPT_NM}">
-														 <li>${stfmap.RNK_NM}|${stfmap.STF_SQ}|${stfmap.STF_NM}</li>
+														 <!-- <li>${stfmap.RNK_NM}|${stfmap.STF_SQ}|${stfmap.STF_NM}</li> -->
+														 <li>[${stfmap.RNK_NM}]${stfmap.STF_NM}<font color="white">]${stfmap.STF_SQ}</font></li>
 													</c:if>
 												</c:forEach>
 											</ul>
@@ -412,9 +413,14 @@ function getList(){
 	});
 }
 
+var savedList; // 받아온 리스트 저장하기
 // 스케쥴리스트로 달력이벤트 만들기
 function makeList(data){
 	var sList= data.scheduleList;
+	savedList= sList;
+	//for(var i=0; i<sList.length; i++){
+	//	$('#calendar').fullCalendar('removeEvents', sList[i].bs_scd_sq);
+	//}
 	
 	// 하나하나 추가해준다
 	for(var i=0; i<sList.length; i++){
@@ -544,13 +550,33 @@ $('#calendar').on('click','.fc-day',function(){
 
 // 등록하기 눌렀을 때 DB에 데이터 INSERT & AJAX로 화면에 띄워주기
 function addList(data){
+	var scolor= "";
+	if(data.scd_nm== "미팅"){ //미팅, 파랑
+		scolor= "#3399ff";
+	} else if(data.scd_nm== "외근"){ //외근, 주황
+		scolor= "#ff9900";
+	} else if(data.scd_nm== "출장"){ //출장, 노랑
+		scolor= "#efc050";
+	} else if(data.scd_nm== "병가"){ //병가, 하늘
+		scolor= "#33ccff";
+	} else if(data.scd_nm== "연차"){ //연차, 초록
+		scolor= "#006600";
+	} else if(data.scd_nm== "반차"){ //반차, 연두
+		scolor= "#33ff00";
+	} else {//7, 교육, 회색
+		scolor= "gray";
+	}
+
 	$('#calendar').fullCalendar('addEventSource', [{
         id: data.bs_scd_sq,
+        // select 값 가져오기
         title: data.bs_scd_nm,
         start: data.bs_scd_str_dt,
         end: data.bs_scd_end_dt,
         content: data.bs_scd_cnt,
-        sname: data.scd_nm
+        sname: data.scd_nm, 
+        color: scolor,
+        textColor: 'white'
     }]);
 }
 
@@ -730,6 +756,34 @@ function changeForm(){
 		$(".mt").css("display", "");
 }
 
+$(function () {
+    $('.tree-title').click(function () {
+        alert("text >> "+ $(this).text());
+        var arr = $(this).text().split("]");
+    	
+    	// 기존의 리스트를 불러와서 삭제
+    	alert("기존 이벤트 지워주기");
+    	for(var i=0; i<savedList.length; i++){
+    		$('#calendar').fullCalendar('removeEvents', savedList[i].bs_scd_sq);
+    	} // 기존 이벤트 지워주기
+    	
+    	// 새 이벤트 뿌려주기
+    	alert("새 이벤트 뿌려주기")
+    	getMemberList(arr[2]); // 사번
+    });
+});
+
+function getMemberList(stf_sq){
+	$.ajax({
+		url : "${root}/schedule/slist/"+ stf_sq,
+		type : 'POST',
+		contentType : 'application/json;charset=UTF-8',
+		dataType : 'json',
+		success : function(data){
+			makeList(data);
+		}
+	});
+}
 </script>
 
 

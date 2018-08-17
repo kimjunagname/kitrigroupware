@@ -488,15 +488,35 @@ $('#calendar').on('click','.fc-day',function(){
 });
 
 
-// 등록하기 눌렀을 때 DB에 데이터 INSERT & AJAX로 화면에 띄워주기
+//등록하기 눌렀을 때 DB에 데이터 INSERT & AJAX로 화면에 띄워주기
 function addList(data){
+	var scolor= "";
+	if(data.scd_nm== "미팅"){ //미팅, 파랑
+		scolor= "#3399ff";
+	} else if(data.scd_nm== "외근"){ //외근, 주황
+		scolor= "#ff9900";
+	} else if(data.scd_nm== "출장"){ //출장, 노랑
+		scolor= "#efc050";
+	} else if(data.scd_nm== "병가"){ //병가, 하늘
+		scolor= "#33ccff";
+	} else if(data.scd_nm== "연차"){ //연차, 초록
+		scolor= "#006600";
+	} else if(data.scd_nm== "반차"){ //반차, 연두
+		scolor= "#33ff00";
+	} else {//7, 교육, 회색
+		scolor= "gray";
+	}
+
 	$('#calendar').fullCalendar('addEventSource', [{
         id: data.bs_scd_sq,
+        // select 값 가져오기
         title: data.bs_scd_nm,
         start: data.bs_scd_str_dt,
         end: data.bs_scd_end_dt,
         content: data.bs_scd_cnt,
-        sname: data.scd_nm
+        sname: data.scd_nm, 
+        color: scolor,
+        textColor: 'white'
     }]);
 }
 
