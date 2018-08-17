@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.groupware.member.dao.MemberDao;
 import com.groupware.member.model.MemberDto;
+import com.groupware.member.model.MemberRankDto;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -40,6 +41,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MemberDto findPw(Map<String, String> map) {
 		return sqlSession.getMapper(MemberDao.class).findPw(map);
+	}
+
+	@Override
+	public List<MemberRankDto> dptlist() {		
+		return sqlSession.getMapper(MemberDao.class).dptlist();
 	}
 
 	

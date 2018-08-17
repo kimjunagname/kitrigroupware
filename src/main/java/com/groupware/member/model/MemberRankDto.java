@@ -1,19 +1,20 @@
 package com.groupware.member.model;
 
 public class MemberRankDto {
-	private int rnk_sq; /* 직급구분번호 */
-	private String rnk_nm; /* 직급명 */
+	private int dpt_sq; /* 부서구분번호 */
+	private String dpt_nm; /* 부서명 */
 	
-	public int getRnk_sq() {
-		return rnk_sq;
+	public int getDpt_sq() {
+		return dpt_sq;
 	}
-	public void setRnk_sq(int rnk_sq) {
-		this.rnk_sq = rnk_sq;
+	public void setDpt_sq(int dpt_sq) {
+		this.dpt_sq = dpt_sq;
 	}
-	public String getRnk_nm() {
-		return rnk_nm;
+	public String getDpt_nm() {
+		return dpt_nm;
 	}
-	public void setRnk_nm(String rnk_nm) {
-		this.rnk_nm = rnk_nm;
-	}
+	public void setDpt_nm(String dpt_nm) {
+		this.dpt_nm = dpt_nm;
+	}	
+	
 }

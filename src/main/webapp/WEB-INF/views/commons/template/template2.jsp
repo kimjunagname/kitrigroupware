@@ -6,6 +6,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
+<c:if test="${userinfo == null}">
+<script>
+alert("회원 전용 서비스입니다");
+document.location.href = "${root}/index.jsp";
+</script>
+</c:if>
 
 <!DOCTYPE html>
 <html>
@@ -19,25 +25,28 @@
 </script>
 </head>
 <body>
-	<div id="sheader">
-		<tiles:insertAttribute name="sheader" />
-	</div>
-	<div id="spublic">
-		<tiles:insertAttribute name="spublic" />
-	</div>
-	 
-	<div id="sidemenu">
-		<tiles:insertAttribute name="sidemenu" />
-	</div>	
+	
+	<tiles:insertAttribute name="sheader" />
+	
+	
+	<tiles:insertAttribute name="spublic" />
 	
 	 
-	<div id="body">
-		<tiles:insertAttribute name="body" />
-	</div>
+	
+	<tiles:insertAttribute name="sidemenu" />
+	
+	 
+	
+	<tiles:insertAttribute name="body" />
+	
 
-	<div id="footer">
-		<tiles:insertAttribute name="footer" />
-	</div>
+	
+	<tiles:insertAttribute name="footer" />
+	
+	</section>
+		<!--main content end-->
+	</section>
+	
 <!-- 	Body
 		================================================== 
 	-->

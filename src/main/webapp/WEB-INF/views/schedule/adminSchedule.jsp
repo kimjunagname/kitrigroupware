@@ -249,7 +249,7 @@
 	</div>
 	</section>
 
-</section>
+
 <!--main content end-->
 <style type="text/css">
     body {
