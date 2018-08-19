@@ -56,5 +56,17 @@
 	from BS_SCD_TB b, SCD_DIV_TB s
 	where bs_scd_sq= #{bs_scd_sq} AND b.scd_sq= s.scd_sq
 	</select>
+	
+	<select id="getDeptScheduleList" parameterType="int" resultType="ScheduleDto">
+	select b.*, s.scd_nm, st.stf_nm, st.dpt_sq
+	from BS_SCD_TB b, SCD_DIV_TB s, (   select *
+	                                    from stf_tb
+	                                    where dpt_sq= ( select dpt_sq 
+	                                                    from stf_tb 
+	                                                    where stf_sq= #{stf_sq})
+	                                ) st
+	where b.scd_sq= s.scd_sq AND b.stf_sq= st.stf_sq
+	order by b.stf_sq
+	</select>
   
   </mapper>

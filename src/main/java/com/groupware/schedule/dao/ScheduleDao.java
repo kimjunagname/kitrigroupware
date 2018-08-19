@@ -20,4 +20,6 @@ public interface ScheduleDao {
 	void modifySchedule(ScheduleDto scheduleDto);
 
 	ScheduleDto getModifySchedule(int bs_scd_sq);
+
+	List<ScheduleDto> getDeptScheduleList(int stf_sq);
 }

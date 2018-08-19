@@ -64,6 +64,35 @@ public class ScheduleController {
 
 		return mav;
 	}
+	
+	@RequestMapping(value = "/dschedule.kitri")
+	public ModelAndView viewDSchedule(Map<String, Object> map, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/schedule/departmentSchedule");
+		
+		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+		if (memberDto == null) {
+			mav.setViewName("redirect:/");
+			return mav;
+		}
+		
+		// 일정구분
+		List<ScheduleDivisionDto> typeList = scheduleService.getScheduleType();
+		Map<String, String> stype = new HashMap<String, String>();
+		
+		for (int i = 0; i < typeList.size(); i++) {
+			stype.put(typeList.get(i).getScd_sq() + "", typeList.get(i).getScd_nm());
+		}
+		// stype.put("일정구분번호", "일정명");
+		
+		mav.addObject("stype", stype);
+		mav.addObject("ScheduleDivisionDto", new ScheduleDivisionDto());
+		
+		String today = scheduleService.getToday();
+		mav.addObject("today", today); // return type > String
+		
+		return mav;
+	}
 
 	@RequestMapping(value = "/aschedule.kitri")
 	public ModelAndView viewASchedule(Map<String, Object> map, HttpSession session, HttpServletRequest request) {
@@ -144,12 +173,22 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/slist/{stf_sq}", method = RequestMethod.POST, produces = "application/json; charset=utf8")
-	public @ResponseBody String list(@PathVariable(value = "stf_sq") int stf_sq) {
+	public @ResponseBody String personalList(@PathVariable(value = "stf_sq") int stf_sq) {
 		// 스케쥴리스트 가져오기, json 형태로 된 string 타입
 		String scheduleList = scheduleService.getScheduleList(stf_sq);
 
 		System.out.println(scheduleList);
 
+		return scheduleList;
+	}
+	
+	@RequestMapping(value = "/sDeptList/{stf_sq}", method = RequestMethod.POST, produces = "application/json; charset=utf8")
+	public @ResponseBody String deptList(@PathVariable(value = "stf_sq") int stf_sq) {
+		// 스케쥴리스트 가져오기, json 형태로 된 string 타입
+		String scheduleList = scheduleService.getDeptScheduleList(stf_sq);
+		
+		System.out.println("dept scheduleList >>> "+ scheduleList);
+		
 		return scheduleList;
 	}
 
@@ -173,7 +212,7 @@ public class ScheduleController {
 		ScheduleDto dto = new ScheduleDto();
 		dto.setScd_sq(Integer.parseInt(scheduleDivisionDto.getScd_nm())); // 일정구분번호
 		// TODO 사원번호 집어넣기
-		dto.setStf_sq("62");
+		dto.setStf_sq(map.get("stf_sq"));
 		dto.setBs_scd_nm(map.get("sname"));// 제목
 		dto.setBs_scd_cnt(map.get("content")); // 내용
 		System.out.println("************************************ if 문 전 ************************************");
@@ -205,10 +244,10 @@ public class ScheduleController {
 		scheduleService.addSchedule(scheduleDto);
 
 		// httpsession에서 stf_sq 얻어오기
-		int stf_sq = 62; // 임의 사원번호
+//		int stf_sq = 62; // 임의 사원번호
 
 		// 사원의 맨마지막 스케쥴 얻어오기
-		String newschedule = scheduleService.getAddSchedule(stf_sq);
+		String newschedule = scheduleService.getAddSchedule(Integer.parseInt(scheduleDto.getStf_sq()));
 
 		System.out.println("newschedule >>>> " + newschedule);
 

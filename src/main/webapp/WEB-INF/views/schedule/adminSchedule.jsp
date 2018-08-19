@@ -250,7 +250,7 @@
 	</div>
 	</section>
 
-
+</section>
 <!--main content end-->
 <style type="text/css">
     body {
@@ -299,6 +299,7 @@
 <!-- summernote 끝 -->
 
 <script>
+var member_sq= ${userinfo.stf_sq}; //기존 session에서 받아온 갖ㅄ
 // 시작하면 getList 함수 시작
 $(document).ready(function() {
 	getList();
@@ -403,7 +404,7 @@ $(document).ready(function() {
 // ajax로 스케쥴리스트 가져오기
 function getList(){
 	$.ajax({
-		url : "${root}/schedule/slist/${userinfo.stf_sq}",
+		url : "${root}/schedule/slist/"+ member_sq,
 		type : 'POST',
 		contentType : 'application/json;charset=UTF-8',
 		dataType : 'json',
@@ -414,6 +415,7 @@ function getList(){
 }
 
 var savedList; // 받아온 리스트 저장하기
+
 // 스케쥴리스트로 달력이벤트 만들기
 function makeList(data){
 	var sList= data.scheduleList;
@@ -491,8 +493,6 @@ $(document).on("click", "#registBtn", function() {
 		// 일정구분 선택
 		var selectValue= $("#sselect option:selected").val();
 	
-		// TODO 사원번호 집어넣기
-		
 		var sstart_date= $("#sstart_date").val();
 		var send_date= $("#send_date").val();
 		
@@ -516,7 +516,7 @@ $(document).on("click", "#registBtn", function() {
 		} else {
 			var parameter= JSON.stringify({
 					'scd_sq' : selectValue,
-					'stf_sq' : ${userinfo.stf_sq},
+					'stf_sq' : member_sq, //변할 수 있음
 					'bs_scd_nm' : sname,
 					'bs_scd_cnt' : scontent,
 					'bs_scd_str_dt' : sstart_date+ " "+ sstart_time,
@@ -539,7 +539,7 @@ $(document).on("click", "#registBtn", function() {
 	}
 });
 
-// 빈 호면 클릭했을 때 등록하기 모달창 띄워주기
+// 빈 화면 클릭했을 때 등록하기 모달창 띄워주기
 $('#calendar').on('click','.fc-day',function(){
 	alert($(this).attr('data-date'));
 	$("#sstart_date").val($(this).attr('data-date'));
@@ -550,6 +550,19 @@ $('#calendar').on('click','.fc-day',function(){
 
 // 등록하기 눌렀을 때 DB에 데이터 INSERT & AJAX로 화면에 띄워주기
 function addList(data){
+	alert(data.bs_scd_sq);
+	// savedList["scheduleList"].push({"id":data.bs_scd_sq});
+	
+	if(savedList== ''){ //값이 비었다면
+		savedList= new Array();
+		var scheduleList= new Object();
+		
+		scheduleList.id= data.bs_scd_sq;
+		savedList.push(scheduleList);
+	} else {
+		savedList.push({"id":data.bs_scd_sq}); //json array 마지막에 id값 추가()
+	}
+	
 	var scolor= "";
 	if(data.scd_nm== "미팅"){ //미팅, 파랑
 		scolor= "#3399ff";
@@ -681,7 +694,7 @@ $(document).on("click", "#mModifyBtn", function() {
 	var parameter= JSON.stringify({
 			'bs_scd_sq' : id, // 사내일정번호
 			'scd_sq' : selectValue, //일정구분번호
-			'stf_sq' : ${userinfo.stf_sq}, //사원번호 TMI
+			'stf_sq' : member_sq, //사원번호 TMI
 			'bs_scd_nm' : mname, // 제목
 			'bs_scd_cnt' : mcontent, // 내용
 			'bs_scd_str_dt' : mstart_date+ " "+ mstart_time, //시작일
@@ -705,11 +718,11 @@ $(document).on("click", "#mModifyBtn", function() {
 });
 
 function modifySchedule(data){
-	var sList= data.scheduleList;
+	//var sList= data.scheduleList;
 	
 	// 기존의 리스트를 불러와서 삭제
-	for(var i=0; i<sList.length; i++){
-		$('#calendar').fullCalendar('removeEvents', sList[i].bs_scd_sq);
+	for(var i=0; i<savedList.length; i++){
+		$('#calendar').fullCalendar('removeEvents', savedList[i].bs_scd_sq);
 	}
 	
 	getList();
@@ -760,11 +773,15 @@ $(function () {
     $('.tree-title').click(function () {
         alert("text >> "+ $(this).text());
         var arr = $(this).text().split("]");
+        
+        member_sq= arr[2]; // 사원번호 변경하기
     	
     	// 기존의 리스트를 불러와서 삭제
     	alert("기존 이벤트 지워주기");
     	for(var i=0; i<savedList.length; i++){
-    		$('#calendar').fullCalendar('removeEvents', savedList[i].bs_scd_sq);
+    		alert("sq >>> "+ savedList[i].bs_scd_sq);
+    		if(savedList[i].bs_scd_sq!= 'undefined')
+    			$('#calendar').fullCalendar('removeEvents', savedList[i].bs_scd_sq);
     	} // 기존 이벤트 지워주기
     	
     	// 새 이벤트 뿌려주기

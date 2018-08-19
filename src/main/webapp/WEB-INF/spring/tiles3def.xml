@@ -230,6 +230,11 @@
        <put-attribute name="body" value="/WEB-INF/views/schedule/adminSchedule.jsp" />
    </definition>
    
+    <definition name="/schedule/departmentSchedule" extends="schedule">
+       <put-attribute name="title" value="dschedule" />
+       <put-attribute name="body" value="/WEB-INF/views/schedule/departmentSchedule.jsp" />
+   </definition>
+   
  
  <!-- 
     <definition name="/approval/list" extends="base-definition">

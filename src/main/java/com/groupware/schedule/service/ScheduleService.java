@@ -20,4 +20,6 @@ public interface ScheduleService {
 	void modifySchedule(ScheduleDto scheduleDto);
 
 	String getModifySchedule(int bs_scd_sq);
+
+	String getDeptScheduleList(int stf_sq);
 }
