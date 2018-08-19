@@ -148,12 +148,14 @@ public class ScheduleServiceImpl implements ScheduleService {
 			schedule.put("bs_scd_sq", dto.getBs_scd_sq());
 			schedule.put("scd_sq", dto.getScd_sq());
 			schedule.put("stf_sq", dto.getStf_sq());
-			schedule.put("bs_scd_nm", dto.getStf_nm()+ " : "+ dto.getBs_scd_nm());
+			schedule.put("bs_scd_nm", dto.getBs_scd_nm());
+			//schedule.put("bs_scd_nm", dto.getStf_nm()+ " : "+ dto.getBs_scd_nm());
 			//제목 >> 홍길동 : 일정이름
 			schedule.put("bs_scd_cnt", dto.getBs_scd_cnt());
 			schedule.put("bs_scd_str_dt", dto.getBs_scd_str_dt());
 			schedule.put("bs_scd_end_dt", dto.getBs_scd_end_dt());
 			schedule.put("scd_nm", dto.getScd_nm());
+			schedule.put("stf_nm", dto.getStf_nm()); //사원이름
 			
 			array.put(schedule);
 		}

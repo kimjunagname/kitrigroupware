@@ -313,11 +313,9 @@ $(document).ready(function() {
 	    	// 수정모달에 데이터 집어넣기
 	    	$("#pid").val(event.id);
 	    	$("#pselect").text(event.sname);
-        	$("#psubject").text(event.title);
+        	$("#psubject").text(event.subject);
         	
 
-    		alert(event.end);
-        	
         	// Fri Aug 31 2018 09:00:00 GMT+0000 > 기본형
         	// new Date(event.start).toISOString() > format 바꾸기
         	// 2018-08-31T09:00:00.000Z > 바뀐 format
@@ -385,18 +383,18 @@ function makeList(data){
 		} else if(sList[i].scd_nm== "반차"){ //반차, 연두
 			scolor= "#33ff00";
 		} else {//7, 교육, 회색
-			alert("색깔 등록 이름 >> "+ sList[i].scd_nm);
 			scolor= "gray";
 		}
 	
 		$('#calendar').fullCalendar('addEventSource', [{
 	        id: sList[i].bs_scd_sq,
 	        // select 값 가져오기
-	        title: sList[i].bs_scd_nm,
+	        title: "["+ sList[i].scd_nm+ "]"+ sList[i].stf_nm,
 	        start: sList[i].bs_scd_str_dt,
 	        end: sList[i].bs_scd_end_dt,
 	        content: sList[i].bs_scd_cnt,
 	        sname: sList[i].scd_nm, 
+	        subject: sList[i].bs_scd_nm, //수정모달에서 불러올 제목
 	        stf_sq: sList[i].stf_sq,
 	        color: scolor,
 	        textColor: 'white'
@@ -519,12 +517,13 @@ function addList(data){
 	$('#calendar').fullCalendar('addEventSource', [{
         id: data.bs_scd_sq,
         // select 값 가져오기
-        title: data.bs_scd_nm,
+        title: "["+ sList[i].scd_nm+ "]"+ sList[i].stf_nm,
         start: data.bs_scd_str_dt,
         end: data.bs_scd_end_dt,
         content: data.bs_scd_cnt,
         sname: data.scd_nm, 
         stf_sq: sList[i].stf_sq,
+        subject: sList[i].bs_scd_nm,
         color: scolor,
         textColor: 'white'
     }]);
@@ -642,7 +641,7 @@ $(document).on("click", "#mModifyBtn", function() {
 		
 	//if(scontent.trim().length!= 0){
 		$.ajax({
-			url : "${root}/schedule/smodify.kitri",
+			url : "${root}/schedule/dmodify.kitri",
 			type : 'PUT',
 			contentType : 'application/json;charset=UTF-8',
 			dataType : 'json',

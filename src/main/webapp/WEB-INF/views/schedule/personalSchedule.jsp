@@ -305,7 +305,7 @@ $(document).ready(function() {
 	    	// 수정모달에 데이터 집어넣기
 	    	$("#pid").val(event.id);
 	    	$("#pselect").text(event.sname);
-        	$("#psubject").text(event.title);
+        	$("#psubject").text(event.subject);
         	
 
     		alert(event.end);
@@ -383,11 +383,12 @@ function makeList(data){
 		$('#calendar').fullCalendar('addEventSource', [{
 	        id: sList[i].bs_scd_sq,
 	        // select 값 가져오기
-	        title: sList[i].bs_scd_nm,
+	        title: "["+sList[i].scd_nm+"]"+sList[i].bs_scd_nm,
 	        start: sList[i].bs_scd_str_dt,
 	        end: sList[i].bs_scd_end_dt,
 	        content: sList[i].bs_scd_cnt,
 	        sname: sList[i].scd_nm, 
+	        subject: sList[i].bs_scd_nm,
 	        color: scolor,
 	        textColor: 'white'
 	    }]);
@@ -509,11 +510,12 @@ function addList(data){
 	$('#calendar').fullCalendar('addEventSource', [{
         id: data.bs_scd_sq,
         // select 값 가져오기
-        title: data.bs_scd_nm,
+        title: "["+data.scd_nm+"]"+data.bs_scd_nm,
         start: data.bs_scd_str_dt,
         end: data.bs_scd_end_dt,
         content: data.bs_scd_cnt,
         sname: data.scd_nm, 
+        subject: data.bs_scd_nm,
         color: scolor,
         textColor: 'white'
     }]);

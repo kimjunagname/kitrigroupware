@@ -262,17 +262,27 @@ public class ScheduleController {
 
 	@RequestMapping(value = "/smodify.kitri", method = RequestMethod.PUT, produces = "application/json; charset=utf8")
 	public @ResponseBody String modifySchedule(@RequestBody ScheduleDto scheduleDto) {
-		System.out.println("modify dto >>> " + scheduleDto);
 		scheduleService.modifySchedule(scheduleDto);
 
 		// 가져온 일정번호로 변경된 값 리턴해주기
 		String modifySchedule = scheduleService.getModifySchedule(scheduleDto.getBs_scd_sq());
-		System.out.println("modifySchedule >>> " + modifySchedule);
 
 		// 다시 전체일정 가져오기
-		String scheduleList = scheduleService.getScheduleList(scheduleDto.getBs_scd_sq());
-		System.out.println(scheduleList);
+		String scheduleList = scheduleService.getScheduleList(Integer.parseInt(scheduleDto.getStf_sq()));
 
+		return scheduleList;
+	}
+	
+	@RequestMapping(value = "/dmodify.kitri", method = RequestMethod.PUT, produces = "application/json; charset=utf8")
+	public @ResponseBody String deptModifySchedule(@RequestBody ScheduleDto scheduleDto) {
+		scheduleService.modifySchedule(scheduleDto);
+		
+		// 가져온 일정번호로 변경된 값 리턴해주기
+		String modifySchedule = scheduleService.getModifySchedule(scheduleDto.getBs_scd_sq());
+		
+		// 다시 전체일정 가져오기
+		String scheduleList = scheduleService.getDeptScheduleList(Integer.parseInt(scheduleDto.getStf_sq()));
+		
 		return scheduleList;
 	}
 }
