@@ -5,6 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 
+
 <!-- body start -->
 	<section id="container">
 
@@ -154,15 +155,34 @@
 									        		<th>${map.DPT_NM}</th>
 									        		<th>${map.STF_NM}</th>
 								        		</c:forEach>
-									        		<th></th>
 								        		<c:forEach items="${ViewApproval}" var="map">
-									        		<th>인사과</th>
-									        		<th>함은진</th>
+									        		<th>
+									        		 <form role="form">
+                           								<input id="div1" name="div1" type="hidden" value="${map.APV_SQ}">
+                      								  </form>
+									        		</th>
+									        		<th>${map.MID_DIV_NM}</th>
+									        		<th>
+									        		${map.MID_NM_1} 
+									        			<span>
+                                 							<button class="btn btn-success btn-sm" id="midApp">결재하기</button>
+                              							</span>
+									        		</th>
 								        		</c:forEach>
-									        		<th></th>
 								        		<c:forEach items="${ViewApproval}" var="map">
-									        		<th>인사과</th>
-									        		<th>송민섭</th>
+									        		<th>
+									        		 <form role="form">
+                           								<input id="div2" name="div2" type="hidden" value="${map.APV_SQ}">
+                      								  </form>
+									        		</th>
+								        		
+									        		<th>${map.FNL_DIV_NM}</th>
+									        		<th>
+									        		${map.FNL_NM_1}
+									        			<span>
+                                 							<button class="btn btn-success btn-sm" id="fnlApp">결재하기</button>
+                              							</span>
+									        		</th>
 								        		</c:forEach>
 									        		<th></th>
 											</tr>																																																			        		
@@ -180,7 +200,7 @@
 											</tr>									        
 											<tr>
 								        		<th></th>
-								        		<th>시행</th>
+								        		<th>기안</th>
 								        		<c:forEach items="${ViewApproval}" var="map">
 								        			<th colspan="4">${map.APV_CR_DATE}</th>
 								        		<!-- <th></th>
@@ -275,6 +295,65 @@ $(document).ready(function() {
 		$("#commonform").attr("method", "get").attr("action", mlistpath).submit();
 	});
 
+	
+	
+    // 중간결재 버튼 눌렀을 때
+    $("#midApp").click("click", function() {
+    
+       var mid = $("#div1").val();
+       midApproval(mid);
+     });
+
+    function midApproval(mid) {
+       var params = {
+          apv_sq : mid
+       };
+       $.ajax({
+          url: "${root}/approval/midApproval.kitri",
+          type: "POST",
+          dataType: "text",
+           data : JSON.stringify(params),
+           contentType: "application/json; charset=UTF-8",
+           success: function(result) {
+              if(result=='SUCCESS'){
+                 alert("1차 결재가 되었습니다.");
+                 window.location.reload();
+              }
+           }
+       });
+    }
+	
+    
+    // 최종결재 버튼 눌렀을 때
+    $("#fnlApp").click("click", function() {
+    
+       var fnl = $("#div2").val();
+       fnlApproval(fnl);
+     });
+
+    function fnlApproval(fnl) {
+       var params = {
+          apv_sq : fnl
+       };
+       $.ajax({
+          url: "${root}/approval/fnlApproval.kitri",
+          type: "POST",
+          dataType: "text",
+           data : JSON.stringify(params),
+           contentType: "application/json; charset=UTF-8",
+           success: function(result) {
+              if(result=='SUCCESS'){
+                 alert("2차 결재가 되었습니다.");
+                 window.location.reload();
+              }
+           }
+       });
+    }   
+    
+    
+    
+    
+    
 });	
 </script>	
 

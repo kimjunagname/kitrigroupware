@@ -43,7 +43,7 @@
 			</div>
 			<div class="modal-body">
 				<div id="dpt_sq_dept" class="form-group well">
-					<ul class="easyui-tree">
+					<ul class="easyui-tree" id="tt">
 						<li><span>KITRI 주식회사</span>
 							<ul>
 								<c:forEach items="${selectDpt_Div_Tb}" var="dptmap">
@@ -51,7 +51,7 @@
 										<ul>
 											<c:forEach items="${selectStf_tb}" var="stfmap">
 												<c:if test="${dptmap.DPT_NM eq stfmap.DPT_NM}">
-													<li>[${stfmap.RNK_NM}] ${stfmap.STF_NM}</li>
+													<li>${stfmap.RNK_NM}|${stfmap.STF_SQ}|${stfmap.STF_NM}</li>
 												</c:if>
 											</c:forEach>
 										</ul></li>
@@ -61,16 +61,55 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" id="officerInsert" class="btn btn-success">추가</button>
+				<button type="button" id="selectMid" onclick="javascript:getMidSelected();" class="easyui-linkbutton">선택</button>
+				<!-- <a href="#" class="easyui-linkbutton" onclick="getSelected()">GetSelected</a> btn btn-success id="getofficer" -->
 				<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
 			</div>
 		</div>
 	</div>
 </div>
-<!-- 구성원 추가 모달 끝  -->
+
 
 <!-- 최종 결재자 선택 모달 -->
-
+<!-- 2. 모달 추가(아디 변경: app_fnl_select_Modal >> app_fnl_select_Modal) -->
+<div class="modal fade" id="app_fnl_select_Modal" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">최종 결재자 선택</h4>
+			</div>
+			<div class="modal-body">
+			
+			<!--  3. 모달 추가 id:변경 dpt_sq_dept > 부서번호 dpt_sq_dept2-->
+				<div id="dpt_sq_dept2" class="form-group well">
+				
+				<!--  4. 모달 추가 id:변경 tt > 부서번호 tt2-->
+					<ul class="easyui-tree" id="tt2">
+						<li><span>KITRI 주식회사</span>
+							<ul>
+								<c:forEach items="${selectDpt_Div_Tb}" var="dptmap">
+									<li data-options="state:'open'"><span>${dptmap.DPT_NM}</span>
+										<ul>
+											<c:forEach items="${selectStf_tb}" var="stfmap">
+												<c:if test="${dptmap.DPT_NM eq stfmap.DPT_NM}">
+													<li>${stfmap.RNK_NM}|${stfmap.STF_SQ}|${stfmap.STF_NM}</li>
+												</c:if>
+											</c:forEach>
+										</ul></li>
+								</c:forEach>
+							</ul></li>
+					</ul>
+				</div>
+			</div>
+			<div class="modal-footer">
+			    <!-- 모달 - onclick 수정 javascript:getMidSelected > javascript:getFnlSelected() -->
+				<button type="button" id="selectFnl" onclick="javascript:getFnlSelected();" class="easyui-linkbutton">선택</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 
 
@@ -107,6 +146,7 @@
 	<!--main content start-->
 	<section id="main-content">
 		<section class="wrapper">
+			<h1><b>기안지 작성</b></h1><hr>
 			<div class="table-agile-info">
 				<div class="row">
 
@@ -129,8 +169,7 @@
 								        }}'>
 									<form id="writeForm" name="writeForm" method="post" action=""
 										style="margin: 0px">
-										<div id="attach_file_hdn"></div>
-
+										<div id="attach_file_hdn"></div>										
 										<input type="hidden" name="bcode" value="${bcode}"> <input
 											type="hidden" name="pg" value="1"> <input
 											type="hidden" name="key" value=""> <input
@@ -230,9 +269,9 @@
 
 											<tr>
 												<td colspan="10">
-													<form action="" method="post" name="">
+													<!-- <form action="" method="post" name=""> -->
 														<input type="file" name="FileName">
-													</form>
+													<!-- </form>  -->
 												</td>
 											</tr>
 
@@ -265,14 +304,22 @@
 															data-toggle="modal">중간결재</button>
 													</div>
 												</th>
-												<th><input type="text" id="" name=""/ ></th>
+												<th>
+													<input type="text" class="form-control" readonly="readonly" id="stf_mid_sq" name="stf_mid_sq">
+												</th>
 												<th>
 													<div class="w3ls_head">
-														<input type="button" value="최종 선택" class="btn btn-info"
-															id="stf_fnl_Btn" name="stf_fnl_Btn">
+													<!-- 모달만들기 1 / 버튼을 만든다(아이디 변경) app_Fnl_modal-->
+														<button type="button" id="app_Fnl_modal"
+															class="btn btn-primary btn-sm" data-backdrop="static"
+															data-toggle="modal">최종결재</button>
 													</div>
 												</th>
-												<th><input type="text" id="" name=""/ ></th>
+												<!-- 모달 추가 >> app_fnl_select -->
+												<th>
+													<input type="text" class="form-control" readonly="readonly" id="stf_fnl_sq" name="stf_fnl_sq">
+												</th>
+												
 												<th></th>
 												<th></th>
 												<th></th>
@@ -332,9 +379,8 @@
 						</div>
 
 						<div class="w3ls_head">
-							<input type="button" value="결재상신" class="btn btn-info"
-								id="registerBtn" name="registerBtn"> <input
-								type="button" value="취소" class="btn btn-info">
+							<input type="button" value="결재상신" class="btn btn-info" id="registerBtn" name="registerBtn"> 
+							<input type="button" value="취소" class="btn btn-info">
 						</div>
 					</div>
 				</div>
@@ -380,7 +426,18 @@
 											"#app_mid_select_Modal");
 								});
 
-						$("#registerBtn").click(
+						// 최종결재자 모달 Open >> 모달 띄워지는것 확인
+						//모달 추가 jquery 추가 app_fnl_select_Modal / app_Fnl_modal
+						$("#app_Fnl_modal").on(
+								"click",
+								function() {
+									$("#app_Fnl_modal").attr("data-target",
+											"#app_fnl_select_Modal");
+								});
+						
+						//click
+						$("#registerBtn").on(
+								"click",
 								function() {
 									if ($("#apv_nm").val() == "") {
 										alert("제목입력!!!");
@@ -388,13 +445,77 @@
 									} else if ($("#content").val() == "") {
 										alert("내용입력!!!");
 										return;
-									} else {
+									}else if ($("#stf_mid_sq").val() == "") {
+										alert("mid" + stf_mid_sq);
+										return;
+									} else if ($("#stf_fnl_sq").val() == "") {
+										alert("fnl" + stf_fnl_sq);
+										return;
+									}  else {
+										//alert($("#stf_mid_sq").val());
+										//alert($("#stf_fnl_sq").val());
 										$("#writeForm").attr("method", "post")
 												.attr("action", writepath)
 												.submit();
 									}
 								});
 					});
+			
+			//중간결재자 데이터 split 및 가져오기
+			function getMidSelected(){
+	            var node = $('#tt').tree('getSelected');
+	            if (node){
+	                var s = node.text;
+	                if (node.attributes){
+						s += ","+node.attributes.p1+","+node.attributes.p2;
+	                }
+	                
+	                var jbSplit = s.split('|', 3);
+	           		for ( var i in jbSplit ) {
+	           			jbSplit[i];
+	                    //   document.write( '<p>' + jbSplit[i] + '</p>' );
+	                }
+	                
+	                //$('#app_mid_select_Modal').removeClass('in');
+	                $('#app_mid_select_Modal').modal('hide');
+		         	//$('#app_mid_select').val(jbSplit[1]);
+		         	$('#stf_mid_sq').val(jbSplit[1]);
+		         	//alert(jbSplit[1]);
+		         	
+		         	
+
+	            }    
+	        }
+			
+			//최종 결재자 데이터 split 및 가져오기 
+			//모달 추가 java 스크립트 >> #tt >> #tt1 getSelected jeasyui 기본 함수값 getMidSelected() >> getFnlSelected() 
+			function getFnlSelected(){
+	            var node = $('#tt2').tree('getSelected');
+	            if (node){
+	                var s2 = node.text;
+	                if (node.attributes){
+						s2 += ","+node.attributes.p1+","+node.attributes.p2;
+	                }
+	                
+	                var jbSplit2 = s2.split('|', 3);
+	           		for ( var i in jbSplit2 ) {
+	           			jbSplit2[i];
+	                    //   document.write( '<p>' + jbSplit[i] + '</p>' );
+	                }
+	                
+	                //$('#app_mid_select_Modal').removeClass('in');
+					//app_mid_select_Modal >> app_fnl_select_Modal 
+	                $('#app_fnl_select_Modal').modal('hide');
+					//app_mid_select >> app_fnl_select
+		         	//$('#app_fnl_select').val(jbSplit2[1]);
+					$('#stf_fnl_sq').val(jbSplit2[1]);
+		         	//alert(jbSplit2[1]);
+		         	
+
+	            }    
+	        }
+			
+			
 		</script>
 
 

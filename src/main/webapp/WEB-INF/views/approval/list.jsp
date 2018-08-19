@@ -13,6 +13,8 @@
 			<div class="table-agile-info">
 			    <div class="row">
 			    			<!-- 1단 -->
+			    			
+						<h3><b>진행현황</b></h3><hr>
 			                <div class="col-lg-3">
 			                <h5>· 일반공문</h5><br>
 								 <div class="panel panel-default">
@@ -38,7 +40,7 @@
 								        </tbody>
 								       <tbody>
 								        <tr>
-								       		<td>결재 진행중</td>
+								       		<td>결재 진행 중</td>
 								         	<c:forEach items="${gProgress}" var="map">
 								            	<td>${map.PROGRESS} 건</td>
 								        	</c:forEach>
@@ -82,7 +84,7 @@
 								        </tbody>
 								       <tbody>
 								        <tr>
-								       		<td>결재 진행중</td>
+								       		<td>결재 진행 중</td>
 								         	<c:forEach items="${cProgress}" var="map">
 								            	<td>${map.PROGRESS} 건</td>
 								        	</c:forEach>
@@ -126,7 +128,7 @@
 								        </tbody>
 								       <tbody>
 								        <tr>
-								       		<td>결재 진행중</td>
+								       		<td>결재 진행 중</td>
 								         	<c:forEach items="${eProgress}" var="map">
 								            	<td>${map.PROGRESS} 건</td>
 								        	</c:forEach>
@@ -189,7 +191,9 @@
 								  </div>
 						    </div>
 						    
-						    <!-- 2단 -->
+						    
+						  <h3><b>결재 - 진행</b></h3><hr>
+						    <!-- 2단 진행중 시작 -->
 						    <div class="col-lg-12">
 			                <h5>· 일반</h5><br>
 								 <div class="panel panel-default">
@@ -219,8 +223,8 @@
 								           <td>${map.APV_SQ}</td>
 								           <td>${map.APV_CR_DATE}</td>
 								           <td>${map.APV_NM}</td>
-								           <td>${map.APV_MID_SQ}</td>
-								           <td>${map.APV_FNL_SQ}</td>								          
+								           <td>${map.MID_NM_1}</td>
+								           <td>${map.FNL_NM_1}</td>									          
 								          </tr>
 								          </c:forEach>
 								        </tbody>
@@ -259,8 +263,8 @@
 								           <td>${map.APV_SQ}</td>
 								           <td>${map.APV_CR_DATE}</td>
 								           <td>${map.APV_NM}</td>
-								           <td>${map.APV_MID_SQ}</td>
-								           <td>${map.APV_FNL_SQ}</td>	
+								           <td>${map.MID_NM_1}</td>
+								           <td>${map.FNL_NM_1}</td>	
 								          </tr>
 								          </c:forEach>
 								        </tbody>
@@ -299,8 +303,8 @@
 								           <td>${map.APV_SQ}</td>
 								           <td>${map.APV_CR_DATE}</td>
 								           <td>${map.APV_NM}</td>
-								           <td>${map.APV_MID_SQ}</td>
-								           <td>${map.APV_FNL_SQ}</td>	
+								           <td>${map.MID_NM_1}</td>
+								           <td>${map.FNL_NM_1}</td>	
 								          </tr>
 								          </c:forEach>
 								        </tbody>
@@ -339,8 +343,8 @@
 								           <td>${map.APV_SQ}</td>
 								           <td>${map.APV_CR_DATE}</td>
 								           <td>${map.APV_NM}</td>
-								           <td>${map.APV_MID_SQ}</td>
-								           <td>${map.APV_FNL_SQ}</td>								          
+								           <td>${map.MID_NM_1}</td>
+								           <td>${map.FNL_NM_1}</td>								          
 								          </tr>
 								          </c:forEach>
 								        </tbody>
@@ -348,7 +352,336 @@
 								      </div>
 								  </div>
 						    </div>
-						  <!-- 5단 -->
+						  <!-- 5단 진행중 종료 -->
+						    
+						    
+						  <!-- 2단 1차 결재  시작 -->
+						  <h3><b>1차 결재 요청 문서</b></h3><hr>
+						    <div class="col-lg-12">
+			                <h5>· 일반</h5><br>
+								 <div class="panel panel-default">
+								    <div>
+								      <table class="table" ui-jq="footable" ui-options='{
+								        "paging": {
+								          "enabled": true
+								        },
+								        "filtering": {
+								          "enabled": true
+								        },
+								        "sorting": {
+								          "enabled": true
+								        }}'>
+								         <thead>
+								          <tr data-expanded="true">
+								           <th data-breakpoints="xs">문서번호</th>
+								           <th data-breakpoints="xs">기안일자</th>
+								           <th data-breakpoints="xs">제목</th>
+								           <th data-breakpoints="xs">중간결재자</th>
+								           <th data-breakpoints="xs">최종결재자</th>
+								          </tr>
+								         </thead>
+								         <tbody>
+								          <c:forEach items="${gListOneApprovalRequest}" var="map">
+								          <tr class="posting"  APV_TB_apv_seq="${map.APV_SQ}" >
+								           <td>${map.APV_SQ}</td>
+								           <td>${map.APV_CR_DATE}</td>
+								           <td>${map.APV_NM}</td>
+								           <td>${map.MID_NM_1}</td>
+								           <td>${map.FNL_NM_1}</td>									          
+								          </tr>
+								          </c:forEach>
+								        </tbody>
+								      </table>
+								      </div>
+								  </div>
+						    </div>
+						    
+						    <!-- 3단 -->
+						    <div class="col-lg-12">
+			                <h5>· 협조</h5><br>
+								 <div class="panel panel-default">
+								    <div>
+								      <table class="table" ui-jq="footable" ui-options='{
+								        "paging": {
+								          "enabled": true
+								        },
+								        "filtering": {
+								          "enabled": true
+								        },
+								        "sorting": {
+								          "enabled": true
+								        }}'>
+								         <thead>
+								          <tr data-expanded="true">
+								           <th data-breakpoints="xs">문서번호</th>
+								           <th data-breakpoints="xs">기안일자</th>
+								           <th data-breakpoints="xs">제목</th>
+								           <th data-breakpoints="xs">중간결재자</th>
+								           <th data-breakpoints="xs">최종결재자</th>
+								          </tr>
+								         </thead>
+								         <tbody>
+								          <c:forEach items="${cListOneApprovalRequest}" var="map">
+								          <tr class="posting"  APV_TB_apv_seq="${map.APV_SQ}">
+								           <td>${map.APV_SQ}</td>
+								           <td>${map.APV_CR_DATE}</td>
+								           <td>${map.APV_NM}</td>
+								           <td>${map.MID_NM_1}</td>
+								           <td>${map.FNL_NM_1}</td>	
+								          </tr>
+								          </c:forEach>
+								        </tbody>
+								      </table>
+								      </div>
+								  </div>
+						    </div>
+						    
+						    <!-- 4단 -->
+						    <div class="col-lg-12">
+			                <h5>· 기타</h5><br>
+								 <div class="panel panel-default">
+								    <div>
+								      <table class="table" ui-jq="footable" ui-options='{
+								        "paging": {
+								          "enabled": true
+								        },
+								        "filtering": {
+								          "enabled": true
+								        },
+								        "sorting": {
+								          "enabled": true
+								        }}'>
+								         <thead>
+								          <tr data-expanded="true">
+								           <th data-breakpoints="xs">문서번호</th>
+								           <th data-breakpoints="xs">기안일자</th>
+								           <th data-breakpoints="xs">제목</th>
+								           <th data-breakpoints="xs">중간결재자</th>
+								           <th data-breakpoints="xs">최종결재자</th>
+								          </tr>
+								         </thead>
+								         <tbody>
+								          <c:forEach items="${eListOneApprovalRequest}" var="map">
+								          <tr class="posting"  APV_TB_apv_seq="${map.APV_SQ}">
+								           <td>${map.APV_SQ}</td>
+								           <td>${map.APV_CR_DATE}</td>
+								           <td>${map.APV_NM}</td>
+								           <td>${map.MID_NM_1}</td>
+								           <td>${map.FNL_NM_1}</td>	
+								          </tr>
+								          </c:forEach>
+								        </tbody>
+								      </table>
+								      </div>
+								  </div>
+						    </div>
+						    
+						    <!-- 5단 -->
+						    <div class="col-lg-12">
+			                <h5>· 메모보고</h5><br>
+								 <div class="panel panel-default">
+								    <div>
+								      <table class="table" ui-jq="footable" ui-options='{
+								        "paging": {
+								          "enabled": true
+								        },
+								        "filtering": {
+								          "enabled": true
+								        },
+								        "sorting": {
+								          "enabled": true
+								        }}'>
+								         <thead>
+								          <tr data-expanded="true">
+								           <th data-breakpoints="xs">문서번호</th>
+								           <th data-breakpoints="xs">기안일자</th>
+								           <th data-breakpoints="xs">제목</th>
+								           <th data-breakpoints="xs">중간결재자</th>
+								           <th data-breakpoints="xs">최종결재자</th>
+								          </tr>
+								         </thead>
+								         <tbody>
+								          <c:forEach items="${mListOneApprovalRequest}" var="map">
+								          <tr id=mposting  APV_TB_apv_seq="${map.APV_SQ}">
+								           <td>${map.APV_SQ}</td>
+								           <td>${map.APV_CR_DATE}</td>
+								           <td>${map.APV_NM}</td>
+								           <td>${map.MID_NM_1}</td>
+								           <td>${map.FNL_NM_1}</td>								          
+								          </tr>
+								          </c:forEach>
+								        </tbody>
+								      </table>
+								      </div>
+								  </div>
+						    </div>
+						  <!-- 5단 1차 결재 끝 -->
+						    
+						    
+						  <!-- 2차 결재 2단 -->
+						<h3><b>2차 결재 요청 문서</b></h3><hr>
+						    <div class="col-lg-12">
+			                <h5>· 일반</h5><br>
+								 <div class="panel panel-default">
+								    <div>
+								      <table class="table" ui-jq="footable" ui-options='{
+								        "paging": {
+								          "enabled": true
+								        },
+								        "filtering": {
+								          "enabled": true
+								        },
+								        "sorting": {
+								          "enabled": true
+								        }}'>
+								         <thead>
+								          <tr data-expanded="true">
+								           <th data-breakpoints="xs">문서번호</th>
+								           <th data-breakpoints="xs">기안일자</th>
+								           <th data-breakpoints="xs">제목</th>
+								           <th data-breakpoints="xs">중간결재자</th>
+								           <th data-breakpoints="xs">최종결재자</th>
+								          </tr>
+								         </thead>
+								         <tbody>
+								          <c:forEach items="${gListTwoApprovalRequest}" var="map">
+								          <tr class="posting"  APV_TB_apv_seq="${map.APV_SQ}" >
+								           <td>${map.APV_SQ}</td>
+								           <td>${map.APV_CR_DATE}</td>
+								           <td>${map.APV_NM}</td>
+								           <td>${map.MID_NM_1}</td>
+								           <td>${map.FNL_NM_1}</td>									          
+								          </tr>
+								          </c:forEach>
+								        </tbody>
+								      </table>
+								      </div>
+								  </div>
+						    </div>
+						    
+						    <!-- 3단 -->
+						    <div class="col-lg-12">
+			                <h5>· 협조</h5><br>
+								 <div class="panel panel-default">
+								    <div>
+								      <table class="table" ui-jq="footable" ui-options='{
+								        "paging": {
+								          "enabled": true
+								        },
+								        "filtering": {
+								          "enabled": true
+								        },
+								        "sorting": {
+								          "enabled": true
+								        }}'>
+								         <thead>
+								          <tr data-expanded="true">
+								           <th data-breakpoints="xs">문서번호</th>
+								           <th data-breakpoints="xs">기안일자</th>
+								           <th data-breakpoints="xs">제목</th>
+								           <th data-breakpoints="xs">중간결재자</th>
+								           <th data-breakpoints="xs">최종결재자</th>
+								          </tr>
+								         </thead>
+								         <tbody>
+								          <c:forEach items="${cListTwoApprovalRequest}" var="map">
+								          <tr class="posting"  APV_TB_apv_seq="${map.APV_SQ}">
+								           <td>${map.APV_SQ}</td>
+								           <td>${map.APV_CR_DATE}</td>
+								           <td>${map.APV_NM}</td>
+								           <td>${map.MID_NM_1}</td>
+								           <td>${map.FNL_NM_1}</td>	
+								          </tr>
+								          </c:forEach>
+								        </tbody>
+								      </table>
+								      </div>
+								  </div>
+						    </div>
+						    
+						    <!-- 4단 -->
+						    <div class="col-lg-12">
+			                <h5>· 기타</h5><br>
+								 <div class="panel panel-default">
+								    <div>
+								      <table class="table" ui-jq="footable" ui-options='{
+								        "paging": {
+								          "enabled": true
+								        },
+								        "filtering": {
+								          "enabled": true
+								        },
+								        "sorting": {
+								          "enabled": true
+								        }}'>
+								         <thead>
+								          <tr data-expanded="true">
+								           <th data-breakpoints="xs">문서번호</th>
+								           <th data-breakpoints="xs">기안일자</th>
+								           <th data-breakpoints="xs">제목</th>
+								           <th data-breakpoints="xs">중간결재자</th>
+								           <th data-breakpoints="xs">최종결재자</th>
+								          </tr>
+								         </thead>
+								         <tbody>
+								          <c:forEach items="${eListTwoApprovalRequest}" var="map">
+								          <tr class="posting"  APV_TB_apv_seq="${map.APV_SQ}">
+								           <td>${map.APV_SQ}</td>
+								           <td>${map.APV_CR_DATE}</td>
+								           <td>${map.APV_NM}</td>
+								           <td>${map.MID_NM_1}</td>
+								           <td>${map.FNL_NM_1}</td>	
+								          </tr>
+								          </c:forEach>
+								        </tbody>
+								      </table>
+								      </div>
+								  </div>
+						    </div>
+						    
+						    <!-- 5단 -->
+						    <div class="col-lg-12">
+			                <h5>· 메모보고</h5><br>
+								 <div class="panel panel-default">
+								    <div>
+								      <table class="table" ui-jq="footable" ui-options='{
+								        "paging": {
+								          "enabled": true
+								        },
+								        "filtering": {
+								          "enabled": true
+								        },
+								        "sorting": {
+								          "enabled": true
+								        }}'>
+								         <thead>
+								          <tr data-expanded="true">
+								           <th data-breakpoints="xs">문서번호</th>
+								           <th data-breakpoints="xs">기안일자</th>
+								           <th data-breakpoints="xs">제목</th>
+								           <th data-breakpoints="xs">중간결재자</th>
+								           <th data-breakpoints="xs">최종결재자</th>
+								          </tr>
+								         </thead>
+								         <tbody>
+								          <c:forEach items="${mListTwoApprovalRequest}" var="map">
+								          <tr id=mposting  APV_TB_apv_seq="${map.APV_SQ}">
+								           <td>${map.APV_SQ}</td>
+								           <td>${map.APV_CR_DATE}</td>
+								           <td>${map.APV_NM}</td>
+								           <td>${map.MID_NM_1}</td>
+								           <td>${map.FNL_NM_1}</td>								          
+								          </tr>
+								          </c:forEach>
+								        </tbody>
+								      </table>
+								      </div>
+								  </div>
+						    </div>
+						  <!-- 5단 2차 결재 종료-->
+						    
+						    
+
 						
 			      </div>
 			</div>

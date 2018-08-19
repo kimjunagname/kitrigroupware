@@ -213,7 +213,16 @@
         <!-- user login dropdown start-->
         <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <img alt="" src="${root}/images/2.png">
+                
+                <c:choose>
+       	   			<c:when test="${userinfo.stf_pt_rt != null && userinfo.stf_pt_nm != null}">
+       	   				<img src="${root}/upload/profile/${userinfo.stf_pt_rt}/${userinfo.stf_pt_nm}" style="width: 40px; height: 40px; ">       	   		
+       	   			</c:when> 
+       	  			<c:otherwise>	
+						<img src="${root}/images/noimage.png" style="width: 40px; height: 40px;">	
+					</c:otherwise>  
+				</c:choose>		
+                
                 <span class="username">${userinfo.stf_nm}</span>
                 <b class="caret"></b>
             </a>

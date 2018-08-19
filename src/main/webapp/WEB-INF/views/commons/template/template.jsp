@@ -5,7 +5,13 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<c:set var="root" value="${pageContext.request.contextPath}"/>
+<c:if test="${userinfo == null}">
+<script>
+alert("회원 전용 서비스입니다");
+document.location.href = "${root}/index.jsp";
+</script>
+</c:if>
 <!DOCTYPE html>
 <html>
 <head>

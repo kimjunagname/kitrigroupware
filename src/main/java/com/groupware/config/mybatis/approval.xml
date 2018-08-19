@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 	<mapper namespace="com.groupware.approval.dao.ApprovalDao">
-	
+	<!--  
 	<select id="gListApproval" parameterType="map" resultType="map">
 	select DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
 	       APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
@@ -16,8 +16,45 @@
 	and rownum &lt;= '3'
 	order by APV_TB.APV_SQ DESC
 	</select>
+-->
+	<!-- 일반 1 협조 2 메모 3 기타 4 -->
+	<select id="gListApproval" parameterType="map" resultType="map">	
+	select mid_rnk.rnk_nm mid_nm,fnl_rnk.rnk_nm fnl_nm, apv3.*
+	from rnk_tb mid_rnk, rnk_tb fnl_rnk,
+	(
+	select mid_div.dpt_nm mid_div_nm, fnl_div.dpt_nm fnl_div_nm, apv2.*
+	from dpt_div_tb mid_div, dpt_div_tb fnl_div, 
+	(
+	select stf_mid.stf_nm mid_nm_1, stf_mid.DPT_SQ mid_dpt, stf_mid.rnk_sq mid_rnk_sq, stf_fnl.stf_nm fnl_nm_1,  stf_fnl.DPT_SQ fnl_dpt, stf_fnl.rnk_sq fnl_rnk_sq, apv.*
+	from stf_tb stf_mid, stf_tb stf_fnl,
+	(
+	    select DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
+	          APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
+	          APV_TB.APV_NO, to_char(trunc(APV_TB.APV_CR_DATE), 'yyyy.mm.dd') as "APV_CR_DATE", to_char(APV_TB.CONTENT)  as "CONTENT", 
+	           RNK_TB.RNK_NM, DPT_DIV_TB.DPT_NM, STF_TB.STF_BS_PH1, STF_TB.STF_BS_PH2, STF_TB.STF_BS_PH3, STF_TB.STF_EML1, STF_TB.STF_EML2,
+	           STF_TB.STF_CM_ADD, STF_TB.STF_ZIP_ADD, STF_TB.STF_NM, stf_tb.dpt_sq
+	    from APV_TB, DIV_APV_TB, STF_TB, RNK_TB, DPT_DIV_TB
+	   where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+	    and   APV_TB.STF_SQ = STF_TB.STF_SQ
+	    and   STF_TB.RNK_SQ = RNK_TB.RNK_SQ 
+	    and   DPT_DIV_TB.DPT_SQ = STF_TB.DPT_SQ   
+	    and APV_TB.STF_SQ =  #{stf_sq}
+	    and APV_TB.DIV_APV_SQ = '1'
+	 )apv   
+	 where stf_mid.stf_sq = apv.stf_mid_sq
+	 and stf_fnl.stf_sq = apv.stf_fnl_sq
+	)apv2
+	where mid_div.dpt_sq = apv2.mid_dpt
+	and fnl_div.dpt_sq = apv2.fnl_dpt
+	)apv3
+	where mid_rnk.RNK_SQ = apv3.mid_rnk_sq
+	and fnl_rnk.RNK_SQ = apv3.fnl_rnk_sq
+	and APV_OK_SQ = '4'
+	and rownum &lt;= '3'
+	order by APV_SQ DESC
+	</select>
 	
-
+	<!-- 
 	<select id="cListApproval" parameterType="map" resultType="map">
 	select  DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
 	        APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
@@ -29,7 +66,47 @@
 	and rownum &lt;= '3'
 	order by APV_TB.APV_SQ DESC
 	</select>
+ -->
 
+	<!-- 일반 1 협조 2 메모 3 기타 4 -->
+	<select id="cListApproval" parameterType="map" resultType="map">
+	select mid_rnk.rnk_nm mid_nm,fnl_rnk.rnk_nm fnl_nm, apv3.*
+		from rnk_tb mid_rnk, rnk_tb fnl_rnk,
+		(
+		select mid_div.dpt_nm mid_div_nm, fnl_div.dpt_nm fnl_div_nm, apv2.*
+		from dpt_div_tb mid_div, dpt_div_tb fnl_div, 
+		(
+		select stf_mid.stf_nm mid_nm_1, stf_mid.DPT_SQ mid_dpt, stf_mid.rnk_sq mid_rnk_sq, stf_fnl.stf_nm fnl_nm_1,  stf_fnl.DPT_SQ fnl_dpt, stf_fnl.rnk_sq fnl_rnk_sq, apv.*
+		from stf_tb stf_mid, stf_tb stf_fnl,
+		(
+		    select DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
+		          APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
+		          APV_TB.APV_NO, to_char(trunc(APV_TB.APV_CR_DATE), 'yyyy.mm.dd') as "APV_CR_DATE", to_char(APV_TB.CONTENT)  as "CONTENT", 
+		           RNK_TB.RNK_NM, DPT_DIV_TB.DPT_NM, STF_TB.STF_BS_PH1, STF_TB.STF_BS_PH2, STF_TB.STF_BS_PH3, STF_TB.STF_EML1, STF_TB.STF_EML2,
+		           STF_TB.STF_CM_ADD, STF_TB.STF_ZIP_ADD, STF_TB.STF_NM, stf_tb.dpt_sq
+		    from APV_TB, DIV_APV_TB, STF_TB, RNK_TB, DPT_DIV_TB
+		   where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+		    and   APV_TB.STF_SQ = STF_TB.STF_SQ
+		    and   STF_TB.RNK_SQ = RNK_TB.RNK_SQ 
+		    and   DPT_DIV_TB.DPT_SQ = STF_TB.DPT_SQ   
+		    and APV_TB.STF_SQ =  #{stf_sq}
+		    and APV_TB.DIV_APV_SQ = '2'
+		 )apv   
+		 where stf_mid.stf_sq = apv.stf_mid_sq
+		 and stf_fnl.stf_sq = apv.stf_fnl_sq
+		)apv2
+		where mid_div.dpt_sq = apv2.mid_dpt
+		and fnl_div.dpt_sq = apv2.fnl_dpt
+		)apv3
+		where mid_rnk.RNK_SQ = apv3.mid_rnk_sq
+		and fnl_rnk.RNK_SQ = apv3.fnl_rnk_sq
+		and APV_OK_SQ = '4'
+		and rownum &lt;= '3'
+		order by APV_SQ DESC
+	</select>
+
+
+<!-- 
 	<select id="mListApproval" parameterType="map" resultType="map">
 	select  DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
 	        APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
@@ -41,7 +118,46 @@
 	and rownum &lt;= '3'
 	order by APV_TB.APV_SQ DESC
 	</select>
-
+ -->
+ 
+ 	<!-- 일반 1 협조 2 메모 3 기타 4 -->
+ 
+	<select id="mListApproval" parameterType="map" resultType="map">
+	select mid_rnk.rnk_nm mid_nm,fnl_rnk.rnk_nm fnl_nm, apv3.*
+		from rnk_tb mid_rnk, rnk_tb fnl_rnk,
+		(
+		select mid_div.dpt_nm mid_div_nm, fnl_div.dpt_nm fnl_div_nm, apv2.*
+		from dpt_div_tb mid_div, dpt_div_tb fnl_div, 
+		(
+		select stf_mid.stf_nm mid_nm_1, stf_mid.DPT_SQ mid_dpt, stf_mid.rnk_sq mid_rnk_sq, stf_fnl.stf_nm fnl_nm_1,  stf_fnl.DPT_SQ fnl_dpt, stf_fnl.rnk_sq fnl_rnk_sq, apv.*
+		from stf_tb stf_mid, stf_tb stf_fnl,
+		(
+		    select DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
+		          APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
+		          APV_TB.APV_NO, to_char(trunc(APV_TB.APV_CR_DATE), 'yyyy.mm.dd') as "APV_CR_DATE", to_char(APV_TB.CONTENT)  as "CONTENT", 
+		           RNK_TB.RNK_NM, DPT_DIV_TB.DPT_NM, STF_TB.STF_BS_PH1, STF_TB.STF_BS_PH2, STF_TB.STF_BS_PH3, STF_TB.STF_EML1, STF_TB.STF_EML2,
+		           STF_TB.STF_CM_ADD, STF_TB.STF_ZIP_ADD, STF_TB.STF_NM, stf_tb.dpt_sq
+		    from APV_TB, DIV_APV_TB, STF_TB, RNK_TB, DPT_DIV_TB
+		   where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+		    and   APV_TB.STF_SQ = STF_TB.STF_SQ
+		    and   STF_TB.RNK_SQ = RNK_TB.RNK_SQ 
+		    and   DPT_DIV_TB.DPT_SQ = STF_TB.DPT_SQ   
+		    and APV_TB.STF_SQ =  #{stf_sq}
+		    and APV_TB.DIV_APV_SQ = '3'
+		 )apv   
+		 where stf_mid.stf_sq = apv.stf_mid_sq
+		 and stf_fnl.stf_sq = apv.stf_fnl_sq
+		)apv2
+		where mid_div.dpt_sq = apv2.mid_dpt
+		and fnl_div.dpt_sq = apv2.fnl_dpt
+		)apv3
+		where mid_rnk.RNK_SQ = apv3.mid_rnk_sq
+		and fnl_rnk.RNK_SQ = apv3.fnl_rnk_sq
+		and APV_OK_SQ = '4'
+	    and rownum &lt;= '3'
+		order by APV_SQ DESC
+	</select>
+<!-- 
 	<select id="eListApproval" parameterType="map" resultType="map">
 	select  DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
 	        APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
@@ -53,8 +169,48 @@
 	and rownum &lt;= '3'
 	order by APV_TB.APV_SQ DESC
 	</select>
+ -->
+ 
+ 	<!-- 일반 1 협조 2 메모 3 기타 4 -->
+ 
+	<select id="eListApproval" parameterType="map" resultType="map">
+	select mid_rnk.rnk_nm mid_nm,fnl_rnk.rnk_nm fnl_nm, apv3.*
+	from rnk_tb mid_rnk, rnk_tb fnl_rnk,
+	(
+	select mid_div.dpt_nm mid_div_nm, fnl_div.dpt_nm fnl_div_nm, apv2.*
+	from dpt_div_tb mid_div, dpt_div_tb fnl_div, 
+	(
+	select stf_mid.stf_nm mid_nm_1, stf_mid.DPT_SQ mid_dpt, stf_mid.rnk_sq mid_rnk_sq, stf_fnl.stf_nm fnl_nm_1,  stf_fnl.DPT_SQ fnl_dpt, stf_fnl.rnk_sq fnl_rnk_sq, apv.*
+	from stf_tb stf_mid, stf_tb stf_fnl,
+	(
+	    select DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
+	          APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
+	          APV_TB.APV_NO, to_char(trunc(APV_TB.APV_CR_DATE), 'yyyy.mm.dd') as "APV_CR_DATE", to_char(APV_TB.CONTENT)  as "CONTENT", 
+	           RNK_TB.RNK_NM, DPT_DIV_TB.DPT_NM, STF_TB.STF_BS_PH1, STF_TB.STF_BS_PH2, STF_TB.STF_BS_PH3, STF_TB.STF_EML1, STF_TB.STF_EML2,
+	           STF_TB.STF_CM_ADD, STF_TB.STF_ZIP_ADD, STF_TB.STF_NM, stf_tb.dpt_sq
+	    from APV_TB, DIV_APV_TB, STF_TB, RNK_TB, DPT_DIV_TB
+	   where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+	    and   APV_TB.STF_SQ = STF_TB.STF_SQ
+	    and   STF_TB.RNK_SQ = RNK_TB.RNK_SQ 
+	    and   DPT_DIV_TB.DPT_SQ = STF_TB.DPT_SQ   
+	    and APV_TB.STF_SQ = #{stf_sq}
+	    and APV_TB.DIV_APV_SQ = '4'
+	 )apv   
+	 where stf_mid.stf_sq = apv.stf_mid_sq
+	 and stf_fnl.stf_sq = apv.stf_fnl_sq
+	)apv2
+	where mid_div.dpt_sq = apv2.mid_dpt
+	and fnl_div.dpt_sq = apv2.fnl_dpt
+	)apv3
+	where mid_rnk.RNK_SQ = apv3.mid_rnk_sq
+	and fnl_rnk.RNK_SQ = apv3.fnl_rnk_sq
+	and APV_OK_SQ = '4'
+	and rownum &lt;= '3'
+	order by APV_SQ DESC
+	</select>
 
 
+<!--  
 	<select id="tgListApproval" parameterType="map" resultType="map">
 	select DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
 	       APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
@@ -65,8 +221,48 @@
 	and APV_TB.DIV_APV_SQ = '1'
 	order by APV_TB.APV_SQ DESC
 	</select>
-	
+-->	
 
+ 	<!-- 일반 1 협조 2 메모 3 기타 4 -->
+ 	<!-- 일반 결재대기 List -->
+	<select id="tgListApproval" parameterType="map" resultType="map">
+	select mid_rnk.rnk_nm mid_nm,fnl_rnk.rnk_nm fnl_nm, apv3.*
+	from rnk_tb mid_rnk, rnk_tb fnl_rnk,
+	(
+	select mid_div.dpt_nm mid_div_nm, fnl_div.dpt_nm fnl_div_nm, apv2.*
+	from dpt_div_tb mid_div, dpt_div_tb fnl_div, 
+	(
+	select stf_mid.stf_nm mid_nm_1, stf_mid.DPT_SQ mid_dpt, stf_mid.rnk_sq mid_rnk_sq, stf_fnl.stf_nm fnl_nm_1,  stf_fnl.DPT_SQ fnl_dpt, stf_fnl.rnk_sq fnl_rnk_sq, apv.*
+	from stf_tb stf_mid, stf_tb stf_fnl,
+	(
+	    select DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
+	          APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
+	          APV_TB.APV_NO, to_char(trunc(APV_TB.APV_CR_DATE), 'yyyy.mm.dd') as "APV_CR_DATE", to_char(APV_TB.CONTENT)  as "CONTENT", 
+	           RNK_TB.RNK_NM, DPT_DIV_TB.DPT_NM, STF_TB.STF_BS_PH1, STF_TB.STF_BS_PH2, STF_TB.STF_BS_PH3, STF_TB.STF_EML1, STF_TB.STF_EML2,
+	           STF_TB.STF_CM_ADD, STF_TB.STF_ZIP_ADD, STF_TB.STF_NM, stf_tb.dpt_sq
+	    from APV_TB, DIV_APV_TB, STF_TB, RNK_TB, DPT_DIV_TB
+	   where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+	    and   APV_TB.STF_SQ = STF_TB.STF_SQ
+	    and   STF_TB.RNK_SQ = RNK_TB.RNK_SQ 
+	    and   DPT_DIV_TB.DPT_SQ = STF_TB.DPT_SQ   
+	    and APV_TB.STF_SQ =  #{stf_sq}
+	    and APV_TB.DIV_APV_SQ = '1'
+	 )apv   
+	 where stf_mid.stf_sq = apv.stf_mid_sq
+	 and stf_fnl.stf_sq = apv.stf_fnl_sq
+	)apv2
+	where mid_div.dpt_sq = apv2.mid_dpt
+	and fnl_div.dpt_sq = apv2.fnl_dpt
+	)apv3
+	where mid_rnk.RNK_SQ = apv3.mid_rnk_sq
+	and fnl_rnk.RNK_SQ = apv3.fnl_rnk_sq
+	and APV_OK_SQ = '4'
+	order by APV_SQ DESC
+	</select>
+
+
+
+<!-- 
 	<select id="tcListApproval" parameterType="map" resultType="map">
 	select  DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
 	        APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
@@ -77,7 +273,47 @@
 	and APV_TB.DIV_APV_SQ = '2'
 	order by APV_TB.APV_SQ DESC
 	</select>
-
+ -->
+ 
+  	<!-- 일반 1 협조 2 메모 3 기타 4 -->
+  		<!-- 협조 결재대기 List -->
+ 	<select id="tcListApproval" parameterType="map" resultType="map">
+	select mid_rnk.rnk_nm mid_nm,fnl_rnk.rnk_nm fnl_nm, apv3.*
+	from rnk_tb mid_rnk, rnk_tb fnl_rnk,
+	(
+	select mid_div.dpt_nm mid_div_nm, fnl_div.dpt_nm fnl_div_nm, apv2.*
+	from dpt_div_tb mid_div, dpt_div_tb fnl_div, 
+	(
+	select stf_mid.stf_nm mid_nm_1, stf_mid.DPT_SQ mid_dpt, stf_mid.rnk_sq mid_rnk_sq, stf_fnl.stf_nm fnl_nm_1,  stf_fnl.DPT_SQ fnl_dpt, stf_fnl.rnk_sq fnl_rnk_sq, apv.*
+	from stf_tb stf_mid, stf_tb stf_fnl,
+	(
+	    select DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
+	          APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
+	          APV_TB.APV_NO, to_char(trunc(APV_TB.APV_CR_DATE), 'yyyy.mm.dd') as "APV_CR_DATE", to_char(APV_TB.CONTENT)  as "CONTENT", 
+	           RNK_TB.RNK_NM, DPT_DIV_TB.DPT_NM, STF_TB.STF_BS_PH1, STF_TB.STF_BS_PH2, STF_TB.STF_BS_PH3, STF_TB.STF_EML1, STF_TB.STF_EML2,
+	           STF_TB.STF_CM_ADD, STF_TB.STF_ZIP_ADD, STF_TB.STF_NM, stf_tb.dpt_sq
+	    from APV_TB, DIV_APV_TB, STF_TB, RNK_TB, DPT_DIV_TB
+	   where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+	    and   APV_TB.STF_SQ = STF_TB.STF_SQ
+	    and   STF_TB.RNK_SQ = RNK_TB.RNK_SQ 
+	    and   DPT_DIV_TB.DPT_SQ = STF_TB.DPT_SQ   
+	    and APV_TB.STF_SQ =  #{stf_sq}
+	    and APV_TB.DIV_APV_SQ = '2'
+	 )apv   
+	 where stf_mid.stf_sq = apv.stf_mid_sq
+	 and stf_fnl.stf_sq = apv.stf_fnl_sq
+	)apv2
+	where mid_div.dpt_sq = apv2.mid_dpt
+	and fnl_div.dpt_sq = apv2.fnl_dpt
+	)apv3
+	where mid_rnk.RNK_SQ = apv3.mid_rnk_sq
+	and fnl_rnk.RNK_SQ = apv3.fnl_rnk_sq
+	and APV_OK_SQ = '4'
+	order by APV_SQ DESC
+	</select>
+ 
+ 
+ <!-- 
 	<select id="tmListApproval" parameterType="map" resultType="map">
 	select  DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
 	        APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
@@ -99,8 +335,85 @@
 	and APV_TB.DIV_APV_SQ = '4'
 	order by APV_TB.APV_SQ DESC
 	</select>
+ -->
+ 
+  	<!-- 일반 1 협조 2 메모 3 기타 4 -->
+  	<!-- 기타 결재대기 List -->
+ 	<select id="teListApproval" parameterType="map" resultType="map">
+	select mid_rnk.rnk_nm mid_nm,fnl_rnk.rnk_nm fnl_nm, apv3.*
+	from rnk_tb mid_rnk, rnk_tb fnl_rnk,
+	(
+	select mid_div.dpt_nm mid_div_nm, fnl_div.dpt_nm fnl_div_nm, apv2.*
+	from dpt_div_tb mid_div, dpt_div_tb fnl_div, 
+	(
+	select stf_mid.stf_nm mid_nm_1, stf_mid.DPT_SQ mid_dpt, stf_mid.rnk_sq mid_rnk_sq, stf_fnl.stf_nm fnl_nm_1,  stf_fnl.DPT_SQ fnl_dpt, stf_fnl.rnk_sq fnl_rnk_sq, apv.*
+	from stf_tb stf_mid, stf_tb stf_fnl,
+	(
+	    select DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
+	          APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
+	          APV_TB.APV_NO, to_char(trunc(APV_TB.APV_CR_DATE), 'yyyy.mm.dd') as "APV_CR_DATE", to_char(APV_TB.CONTENT)  as "CONTENT", 
+	           RNK_TB.RNK_NM, DPT_DIV_TB.DPT_NM, STF_TB.STF_BS_PH1, STF_TB.STF_BS_PH2, STF_TB.STF_BS_PH3, STF_TB.STF_EML1, STF_TB.STF_EML2,
+	           STF_TB.STF_CM_ADD, STF_TB.STF_ZIP_ADD, STF_TB.STF_NM, stf_tb.dpt_sq
+	    from APV_TB, DIV_APV_TB, STF_TB, RNK_TB, DPT_DIV_TB
+	   where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+	    and   APV_TB.STF_SQ = STF_TB.STF_SQ
+	    and   STF_TB.RNK_SQ = RNK_TB.RNK_SQ 
+	    and   DPT_DIV_TB.DPT_SQ = STF_TB.DPT_SQ   
+	    and APV_TB.STF_SQ =  #{stf_sq}
+	    and APV_TB.DIV_APV_SQ = '4'
+	 )apv   
+	 where stf_mid.stf_sq = apv.stf_mid_sq
+	 and stf_fnl.stf_sq = apv.stf_fnl_sq
+	)apv2
+	where mid_div.dpt_sq = apv2.mid_dpt
+	and fnl_div.dpt_sq = apv2.fnl_dpt
+	)apv3
+	where mid_rnk.RNK_SQ = apv3.mid_rnk_sq
+	and fnl_rnk.RNK_SQ = apv3.fnl_rnk_sq
+	and APV_OK_SQ = '4'
+	order by APV_SQ DESC
+	</select> 
+ 
+ 
+   	<!-- 일반 1 협조 2 메모 3 기타 4 -->
+   	<!-- 메모 결재대기 List -->
+ 	<select id="tmListApproval" parameterType="map" resultType="map">
+	select mid_rnk.rnk_nm mid_nm,fnl_rnk.rnk_nm fnl_nm, apv3.*
+	from rnk_tb mid_rnk, rnk_tb fnl_rnk,
+	(
+	select mid_div.dpt_nm mid_div_nm, fnl_div.dpt_nm fnl_div_nm, apv2.*
+	from dpt_div_tb mid_div, dpt_div_tb fnl_div, 
+	(
+	select stf_mid.stf_nm mid_nm_1, stf_mid.DPT_SQ mid_dpt, stf_mid.rnk_sq mid_rnk_sq, stf_fnl.stf_nm fnl_nm_1,  stf_fnl.DPT_SQ fnl_dpt, stf_fnl.rnk_sq fnl_rnk_sq, apv.*
+	from stf_tb stf_mid, stf_tb stf_fnl,
+	(
+	    select DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
+	          APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
+	          APV_TB.APV_NO, to_char(trunc(APV_TB.APV_CR_DATE), 'yyyy.mm.dd') as "APV_CR_DATE", to_char(APV_TB.CONTENT)  as "CONTENT", 
+	           RNK_TB.RNK_NM, DPT_DIV_TB.DPT_NM, STF_TB.STF_BS_PH1, STF_TB.STF_BS_PH2, STF_TB.STF_BS_PH3, STF_TB.STF_EML1, STF_TB.STF_EML2,
+	           STF_TB.STF_CM_ADD, STF_TB.STF_ZIP_ADD, STF_TB.STF_NM, stf_tb.dpt_sq
+	    from APV_TB, DIV_APV_TB, STF_TB, RNK_TB, DPT_DIV_TB
+	   where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+	    and   APV_TB.STF_SQ = STF_TB.STF_SQ
+	    and   STF_TB.RNK_SQ = RNK_TB.RNK_SQ 
+	    and   DPT_DIV_TB.DPT_SQ = STF_TB.DPT_SQ   
+	    and APV_TB.STF_SQ =  #{stf_sq}
+	    and APV_TB.DIV_APV_SQ = '3'
+	 )apv   
+	 where stf_mid.stf_sq = apv.stf_mid_sq
+	 and stf_fnl.stf_sq = apv.stf_fnl_sq
+	)apv2
+	where mid_div.dpt_sq = apv2.mid_dpt
+	and fnl_div.dpt_sq = apv2.fnl_dpt
+	)apv3
+	where mid_rnk.RNK_SQ = apv3.mid_rnk_sq
+	and fnl_rnk.RNK_SQ = apv3.fnl_rnk_sq
+	and APV_OK_SQ = '4'
+	order by APV_SQ DESC
+	</select> 
 
 
+    <!--  
 	<select id="gListCountApproval" parameterType="map" resultType="map">
     select count(DIV_APV_TB.DIV_APV_NM) as "GLISTCOUNT"
 	from APV_TB, DIV_APV_TB
@@ -108,7 +421,19 @@
 	and APV_TB.STF_SQ = #{stf_sq}
 	and APV_TB.DIV_APV_SQ = '1'
 	</select>
-
+ 	 -->
+ 	 
+ 	 
+ 	<!-- 일반 1 협조 2 메모 3 기타 4  // 일반 기안지 총계-->
+ 	<select id="gListCountApproval" parameterType="map" resultType="map">   
+ 	select count(APV_TB.APV_OK_SQ) as "GLISTCOUNT"
+	from APV_TB
+	where APV_TB.APV_OK_SQ BETWEEN 1 AND 4 
+    AND APV_TB.STF_SQ = #{stf_sq} 
+    and APV_TB.DIV_APV_SQ = '1'
+  	</select>
+  	 	
+ <!-- 
 	<select id="cListCountApproval" parameterType="map" resultType="map">
     select count(DIV_APV_TB.DIV_APV_NM) as "CLISTCOUNT" 
 	from APV_TB, DIV_APV_TB
@@ -116,7 +441,20 @@
 	and APV_TB.STF_SQ = #{stf_sq}
 	and APV_TB.DIV_APV_SQ = '2'
 	</select>
+ -->
+ 
+	<!-- 일반 1 협조 2 메모 3 기타 4  // 협조 기안지 총계-->
+ 	<select id="cListCountApproval" parameterType="map" resultType="map">   
+ 	select count(APV_TB.APV_OK_SQ) as "CLISTCOUNT"
+	from APV_TB
+	where APV_TB.APV_OK_SQ BETWEEN 1 AND 4 
+    AND APV_TB.STF_SQ = #{stf_sq} 
+    and APV_TB.DIV_APV_SQ = '2'
+  	</select>
 	
+	
+	
+	<!-- 
 	<select id="mListCountApproval" parameterType="map" resultType="map">
     select count(DIV_APV_TB.DIV_APV_NM) as "MLISTCOUNT"  
 	from APV_TB, DIV_APV_TB
@@ -124,7 +462,22 @@
 	and APV_TB.STF_SQ = #{stf_sq}
 	and APV_TB.DIV_APV_SQ = '3'
 	</select>
-
+  	-->
+ 
+ 	<!-- 일반 1 협조 2 메모 3 기타 4  // 메모 기안지 총계-->
+ 	<select id="mListCountApproval" parameterType="map" resultType="map">   
+ 	select count(APV_TB.APV_OK_SQ) as "MLISTCOUNT"
+	from APV_TB
+	where APV_TB.APV_OK_SQ BETWEEN 1 AND 4 
+    AND APV_TB.STF_SQ = #{stf_sq} 
+    and APV_TB.DIV_APV_SQ = '3'
+  	</select>
+	
+ 
+ 
+ 
+ 
+ <!-- 
 	<select id="eListCountApproval" parameterType="map" resultType="map">
     select count(DIV_APV_TB.DIV_APV_NM) as "ELISTCOUNT" 
 	from APV_TB, DIV_APV_TB
@@ -132,8 +485,23 @@
 	and APV_TB.STF_SQ = #{stf_sq}
 	and APV_TB.DIV_APV_SQ = '4'
 	</select>
+ -->
+ 
+ 
+ 	<!-- 일반 1 협조 2 메모 3 기타 4  // 기타 기안지 총계-->
+ 	<select id="eListCountApproval" parameterType="map" resultType="map">   
+ 	select count(APV_TB.APV_OK_SQ) as "ELISTCOUNT"
+	from APV_TB
+	where APV_TB.APV_OK_SQ BETWEEN 1 AND 4 
+    AND APV_TB.STF_SQ = #{stf_sq} 
+    and APV_TB.DIV_APV_SQ = '4'
+  	</select>
+	
+	
+	
+	
 
-	<!-- 일반 진행 -->
+	<!-- 
 	<select id="gProgress" parameterType="map" resultType="map">
     select count(DIV_APV_TB.DIV_APV_NM) - count(APV_TB.STF_FNL_SQ) Progress
 	from APV_TB, DIV_APV_TB
@@ -141,8 +509,23 @@
 	and APV_TB.STF_SQ = #{stf_sq}
 	and APV_TB.DIV_APV_SQ = '1'
 	</select>
-
+	 -->
+	 
+	
+	<!-- 일반 진행 -->
+	<!-- 일반 1 협조 2 메모 3 기타 4 --> 
+	<select id="gProgress" parameterType="map" resultType="map">
+    select count(APV_TB.APV_OK_SQ) as "PROGRESS"
+	from APV_TB
+	where APV_TB.APV_OK_SQ BETWEEN 3 AND 4 
+    AND APV_TB.STF_SQ = #{stf_sq}
+    and APV_TB.DIV_APV_SQ = '1'
+    </select>
+	
+	
+	 
 	<!-- 협조 진행 -->
+	<!-- 
 	<select id="cProgress" parameterType="map" resultType="map">
     select count(DIV_APV_TB.DIV_APV_NM) - count(APV_TB.STF_FNL_SQ) Progress
 	from APV_TB, DIV_APV_TB
@@ -150,8 +533,21 @@
 	and APV_TB.STF_SQ = #{stf_sq}
 	and APV_TB.DIV_APV_SQ = '2'
 	</select>
-
+     -->
+     
+    <!-- 협조 진행 -->
+	<!-- 일반 1 협조 2 메모 3 기타 4 --> 
+	<select id="cProgress" parameterType="map" resultType="map">
+    select count(APV_TB.APV_OK_SQ) as "PROGRESS"
+	from APV_TB
+	where APV_TB.APV_OK_SQ BETWEEN 3 AND 4 
+    AND APV_TB.STF_SQ = #{stf_sq}
+    and APV_TB.DIV_APV_SQ = '2'
+    </select>
+     
+     
 	<!-- 기타 진행 -->
+	<!-- 
 	<select id="eProgress" parameterType="map" resultType="map">
     select count(DIV_APV_TB.DIV_APV_NM) - count(APV_TB.STF_FNL_SQ) Progress
 	from APV_TB, DIV_APV_TB
@@ -159,8 +555,22 @@
 	and APV_TB.STF_SQ = #{stf_sq}
 	and APV_TB.DIV_APV_SQ = '4'
 	</select>
+ 	-->
+ 	
+    <!-- 기타 진행 -->
+	<!-- 일반 1 협조 2 메모 3 기타 4 --> 
+	<select id="eProgress" parameterType="map" resultType="map">
+    select count(APV_TB.APV_OK_SQ) as "PROGRESS"
+	from APV_TB
+	where APV_TB.APV_OK_SQ BETWEEN 3 AND 4 
+    AND APV_TB.STF_SQ = #{stf_sq}
+    and APV_TB.DIV_APV_SQ = '4'
+    </select>
+
+
 
 	<!-- 메모 진행 -->
+	<!-- 
 	<select id="mProgress" parameterType="map" resultType="map">
     select count(DIV_APV_TB.DIV_APV_NM) - count(APV_TB.STF_FNL_SQ) Progress
 	from APV_TB, DIV_APV_TB
@@ -168,8 +578,22 @@
 	and APV_TB.STF_SQ = #{stf_sq}
 	and APV_TB.DIV_APV_SQ = '3'
 	</select>
+	 -->
+
+    <!-- 메모 진행 -->
+	<!-- 일반 1 협조 2 메모 3 기타 4 --> 
+	<select id="mProgress" parameterType="map" resultType="map">
+    select count(APV_TB.APV_OK_SQ) as "PROGRESS"
+	from APV_TB
+	where APV_TB.APV_OK_SQ BETWEEN 3 AND 4 
+    AND APV_TB.STF_SQ = #{stf_sq}
+    and APV_TB.DIV_APV_SQ = '3'
+    </select>
+
+
 
 	<!-- 일반결재완결 -->
+	<!-- 
 	<select id="gEndApproval" parameterType="map" resultType="map">
     select count(APV_TB.STF_FNL_SQ) gEndApproval 
     from APV_TB, DIV_APV_TB
@@ -177,7 +601,19 @@
 	and APV_TB.STF_SQ = #{stf_sq}
 	and APV_TB.DIV_APV_SQ = '1'
 	</select>
+	 -->
 
+	<!-- 일반결재완결 -->
+	<!-- 일반 1 협조 2 메모 3 기타 4 --> 
+	<select id="gEndApproval" parameterType="map" resultType="map">
+    select count(APV_TB.APV_OK_SQ) as "GENDAPPROVAL"
+	from APV_TB
+	where APV_TB.STF_SQ = #{stf_sq} 
+	and APV_TB.APV_OK_SQ = '2'
+    and APV_TB.DIV_APV_SQ = '1'
+    </select>
+
+<!-- 
 	<select id="cEndApproval" parameterType="map" resultType="map">
 	select count(APV_TB.STF_FNL_SQ) cEndApproval 
     from APV_TB, DIV_APV_TB
@@ -185,8 +621,21 @@
 	and APV_TB.STF_SQ = '62'
 	and APV_TB.DIV_APV_SQ = '2'
 	</select>
+ -->
+	<!-- 협조결재완결 -->
+	<!-- 일반 1 협조 2 메모 3 기타 4 --> 
+	<select id="cEndApproval" parameterType="map" resultType="map">
+    select count(APV_TB.APV_OK_SQ) as "CENDAPPROVAL"
+	from APV_TB
+	where APV_TB.STF_SQ = #{stf_sq} 
+	and APV_TB.APV_OK_SQ = '2'
+    and APV_TB.DIV_APV_SQ = '2'
+    </select>
+
+
 
 	<!-- count-->
+	<!-- 
 	<select id="eEndApproval" parameterType="map" resultType="map">
 	select count(APV_TB.STF_FNL_SQ) eEndApproval 
     from APV_TB, DIV_APV_TB
@@ -194,8 +643,22 @@
 	and APV_TB.STF_SQ = #{stf_sq}
 	and APV_TB.DIV_APV_SQ = '4'
 	</select>
+ 	-->
+
+	<!-- 기타결재완결 -->
+	<!-- 일반 1 협조 2 메모 3 기타 4 --> 
+	<select id="eEndApproval" parameterType="map" resultType="map">
+    select count(APV_TB.APV_OK_SQ) as "EENDAPPROVAL"
+	from APV_TB
+	where APV_TB.STF_SQ = #{stf_sq} 
+	and APV_TB.APV_OK_SQ = '2'
+    and APV_TB.DIV_APV_SQ = '4'
+    </select>
+
+
 
 	<!-- count-->
+	<!-- 
 	<select id="mEndApproval" parameterType="map" resultType="map">
 	select count(APV_TB.STF_FNL_SQ) mEndApproval 
     from APV_TB, DIV_APV_TB
@@ -203,7 +666,17 @@
 	and APV_TB.STF_SQ = #{stf_sq}
 	and APV_TB.DIV_APV_SQ = '3'
 	</select>
-
+	 -->
+	 
+	 <!-- 메모결재완결 -->
+	<!-- 일반 1 협조 2 메모 3 기타 4 --> 
+	<select id="mEndApproval" parameterType="map" resultType="map">
+    select count(APV_TB.APV_OK_SQ) as "MENDAPPROVAL"
+	from APV_TB
+	where APV_TB.STF_SQ = #{stf_sq} 
+	and APV_TB.APV_OK_SQ = '2'
+    and APV_TB.DIV_APV_SQ = '3'
+    </select>
 	<!-- 결재 로그인 대상자가 클릭한 공문 내용 가져오기 -->
 	<!-- 
 	<select id="ViewApproval" parameterType="map" resultType="map">
@@ -217,6 +690,7 @@
 	</select>
 	 -->
 	<!-- 기안지 view-->
+	<!-- 
 	<select id="ViewApproval" parameterType="map" resultType="map">
     select DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
 	       APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
@@ -232,6 +706,363 @@
     and APV_TB.APV_SQ = #{seq}
     order by APV_TB.APV_SQ DESC
 	</select>
+     -->
+
+
+
+	<!-- 일반 1 협조 2 메모 3 기타 4 -->
+	<!-- 일반 - 1차 결재 요청 -->
+	<select id="gListOneApprovalRequest" parameterType="map" resultType="map">	
+	select mid_rnk.rnk_nm mid_nm,fnl_rnk.rnk_nm fnl_nm, apv3.*
+	from rnk_tb mid_rnk, rnk_tb fnl_rnk,
+	(
+	select mid_div.dpt_nm mid_div_nm, fnl_div.dpt_nm fnl_div_nm, apv2.*
+	from dpt_div_tb mid_div, dpt_div_tb fnl_div, 
+	(
+	select stf_mid.stf_nm mid_nm_1, stf_mid.DPT_SQ mid_dpt, stf_mid.rnk_sq mid_rnk_sq, stf_fnl.stf_nm fnl_nm_1,  stf_fnl.DPT_SQ fnl_dpt, stf_fnl.rnk_sq fnl_rnk_sq, apv.*
+	from stf_tb stf_mid, stf_tb stf_fnl,
+	(
+	    select DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
+	          APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
+	          APV_TB.APV_NO, to_char(trunc(APV_TB.APV_CR_DATE), 'yyyy.mm.dd') as "APV_CR_DATE", to_char(APV_TB.CONTENT)  as "CONTENT", 
+	           RNK_TB.RNK_NM, DPT_DIV_TB.DPT_NM, STF_TB.STF_BS_PH1, STF_TB.STF_BS_PH2, STF_TB.STF_BS_PH3, STF_TB.STF_EML1, STF_TB.STF_EML2,
+	           STF_TB.STF_CM_ADD, STF_TB.STF_ZIP_ADD, STF_TB.STF_NM, stf_tb.dpt_sq
+	    from APV_TB, DIV_APV_TB, STF_TB, RNK_TB, DPT_DIV_TB
+	   where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+	    and   APV_TB.STF_SQ = STF_TB.STF_SQ
+	    and   STF_TB.RNK_SQ = RNK_TB.RNK_SQ 
+	    and   DPT_DIV_TB.DPT_SQ = STF_TB.DPT_SQ   
+	    and APV_TB.STF_MID_SQ =  #{stf_sq}
+	    and APV_TB.DIV_APV_SQ = '1'
+	 )apv   
+	 where stf_mid.stf_sq = apv.stf_mid_sq
+	 and stf_fnl.stf_sq = apv.stf_fnl_sq
+	)apv2
+	where mid_div.dpt_sq = apv2.mid_dpt
+	and fnl_div.dpt_sq = apv2.fnl_dpt
+	)apv3
+	where mid_rnk.RNK_SQ = apv3.mid_rnk_sq
+	and fnl_rnk.RNK_SQ = apv3.fnl_rnk_sq
+	and APV_OK_SQ = '4'
+	and rownum &lt;= '3'
+	order by APV_SQ DESC
+	</select>
+
+
+	<!-- 일반 1 협조 2 메모 3 기타 4 -->
+	<!-- 협조 - 1차 결재 요청 -->
+	<select id="cListOneApprovalRequest" parameterType="map" resultType="map">	
+	select mid_rnk.rnk_nm mid_nm,fnl_rnk.rnk_nm fnl_nm, apv3.*
+	from rnk_tb mid_rnk, rnk_tb fnl_rnk,
+	(
+	select mid_div.dpt_nm mid_div_nm, fnl_div.dpt_nm fnl_div_nm, apv2.*
+	from dpt_div_tb mid_div, dpt_div_tb fnl_div, 
+	(
+	select stf_mid.stf_nm mid_nm_1, stf_mid.DPT_SQ mid_dpt, stf_mid.rnk_sq mid_rnk_sq, stf_fnl.stf_nm fnl_nm_1,  stf_fnl.DPT_SQ fnl_dpt, stf_fnl.rnk_sq fnl_rnk_sq, apv.*
+	from stf_tb stf_mid, stf_tb stf_fnl,
+	(
+	    select DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
+	          APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
+	          APV_TB.APV_NO, to_char(trunc(APV_TB.APV_CR_DATE), 'yyyy.mm.dd') as "APV_CR_DATE", to_char(APV_TB.CONTENT)  as "CONTENT", 
+	           RNK_TB.RNK_NM, DPT_DIV_TB.DPT_NM, STF_TB.STF_BS_PH1, STF_TB.STF_BS_PH2, STF_TB.STF_BS_PH3, STF_TB.STF_EML1, STF_TB.STF_EML2,
+	           STF_TB.STF_CM_ADD, STF_TB.STF_ZIP_ADD, STF_TB.STF_NM, stf_tb.dpt_sq
+	    from APV_TB, DIV_APV_TB, STF_TB, RNK_TB, DPT_DIV_TB
+	   where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+	    and   APV_TB.STF_SQ = STF_TB.STF_SQ
+	    and   STF_TB.RNK_SQ = RNK_TB.RNK_SQ 
+	    and   DPT_DIV_TB.DPT_SQ = STF_TB.DPT_SQ   
+	    and APV_TB.STF_MID_SQ =  #{stf_sq}
+	    and APV_TB.DIV_APV_SQ = '2'
+	 )apv   
+	 where stf_mid.stf_sq = apv.stf_mid_sq
+	 and stf_fnl.stf_sq = apv.stf_fnl_sq
+	)apv2
+	where mid_div.dpt_sq = apv2.mid_dpt
+	and fnl_div.dpt_sq = apv2.fnl_dpt
+	)apv3
+	where mid_rnk.RNK_SQ = apv3.mid_rnk_sq
+	and fnl_rnk.RNK_SQ = apv3.fnl_rnk_sq
+	and APV_OK_SQ = '4'
+	and rownum &lt;= '3'
+	order by APV_SQ DESC
+	</select>
+
+
+
+	<!-- 일반 1 협조 2 메모 3 기타 4 -->
+	<!-- 메모 - 1차 결재 요청 -->
+	<select id="mListOneApprovalRequest" parameterType="map" resultType="map">	
+	select mid_rnk.rnk_nm mid_nm,fnl_rnk.rnk_nm fnl_nm, apv3.*
+	from rnk_tb mid_rnk, rnk_tb fnl_rnk,
+	(
+	select mid_div.dpt_nm mid_div_nm, fnl_div.dpt_nm fnl_div_nm, apv2.*
+	from dpt_div_tb mid_div, dpt_div_tb fnl_div, 
+	(
+	select stf_mid.stf_nm mid_nm_1, stf_mid.DPT_SQ mid_dpt, stf_mid.rnk_sq mid_rnk_sq, stf_fnl.stf_nm fnl_nm_1,  stf_fnl.DPT_SQ fnl_dpt, stf_fnl.rnk_sq fnl_rnk_sq, apv.*
+	from stf_tb stf_mid, stf_tb stf_fnl,
+	(
+	    select DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
+	          APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
+	          APV_TB.APV_NO, to_char(trunc(APV_TB.APV_CR_DATE), 'yyyy.mm.dd') as "APV_CR_DATE", to_char(APV_TB.CONTENT)  as "CONTENT", 
+	           RNK_TB.RNK_NM, DPT_DIV_TB.DPT_NM, STF_TB.STF_BS_PH1, STF_TB.STF_BS_PH2, STF_TB.STF_BS_PH3, STF_TB.STF_EML1, STF_TB.STF_EML2,
+	           STF_TB.STF_CM_ADD, STF_TB.STF_ZIP_ADD, STF_TB.STF_NM, stf_tb.dpt_sq
+	    from APV_TB, DIV_APV_TB, STF_TB, RNK_TB, DPT_DIV_TB
+	   where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+	    and   APV_TB.STF_SQ = STF_TB.STF_SQ
+	    and   STF_TB.RNK_SQ = RNK_TB.RNK_SQ 
+	    and   DPT_DIV_TB.DPT_SQ = STF_TB.DPT_SQ   
+	    and APV_TB.STF_MID_SQ =  #{stf_sq}
+	    and APV_TB.DIV_APV_SQ = '3'
+	 )apv   
+	 where stf_mid.stf_sq = apv.stf_mid_sq
+	 and stf_fnl.stf_sq = apv.stf_fnl_sq
+	)apv2
+	where mid_div.dpt_sq = apv2.mid_dpt
+	and fnl_div.dpt_sq = apv2.fnl_dpt
+	)apv3
+	where mid_rnk.RNK_SQ = apv3.mid_rnk_sq
+	and fnl_rnk.RNK_SQ = apv3.fnl_rnk_sq
+	and APV_OK_SQ = '4'
+	and rownum &lt;= '3'
+	order by APV_SQ DESC
+	</select>
+
+
+	<!-- 일반 1 협조 2 메모 3 기타 4 -->
+	<!-- 기타 - 1차 결재 요청 -->
+	<select id="eListOneApprovalRequest" parameterType="map" resultType="map">	
+	select mid_rnk.rnk_nm mid_nm,fnl_rnk.rnk_nm fnl_nm, apv3.*
+	from rnk_tb mid_rnk, rnk_tb fnl_rnk,
+	(
+	select mid_div.dpt_nm mid_div_nm, fnl_div.dpt_nm fnl_div_nm, apv2.*
+	from dpt_div_tb mid_div, dpt_div_tb fnl_div, 
+	(
+	select stf_mid.stf_nm mid_nm_1, stf_mid.DPT_SQ mid_dpt, stf_mid.rnk_sq mid_rnk_sq, stf_fnl.stf_nm fnl_nm_1,  stf_fnl.DPT_SQ fnl_dpt, stf_fnl.rnk_sq fnl_rnk_sq, apv.*
+	from stf_tb stf_mid, stf_tb stf_fnl,
+	(
+	    select DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
+	          APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
+	          APV_TB.APV_NO, to_char(trunc(APV_TB.APV_CR_DATE), 'yyyy.mm.dd') as "APV_CR_DATE", to_char(APV_TB.CONTENT)  as "CONTENT", 
+	           RNK_TB.RNK_NM, DPT_DIV_TB.DPT_NM, STF_TB.STF_BS_PH1, STF_TB.STF_BS_PH2, STF_TB.STF_BS_PH3, STF_TB.STF_EML1, STF_TB.STF_EML2,
+	           STF_TB.STF_CM_ADD, STF_TB.STF_ZIP_ADD, STF_TB.STF_NM, stf_tb.dpt_sq
+	    from APV_TB, DIV_APV_TB, STF_TB, RNK_TB, DPT_DIV_TB
+	   where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+	    and   APV_TB.STF_SQ = STF_TB.STF_SQ
+	    and   STF_TB.RNK_SQ = RNK_TB.RNK_SQ 
+	    and   DPT_DIV_TB.DPT_SQ = STF_TB.DPT_SQ   
+	    and APV_TB.STF_MID_SQ =  #{stf_sq}
+	    and APV_TB.DIV_APV_SQ = '4'
+	 )apv   
+	 where stf_mid.stf_sq = apv.stf_mid_sq
+	 and stf_fnl.stf_sq = apv.stf_fnl_sq
+	)apv2
+	where mid_div.dpt_sq = apv2.mid_dpt
+	and fnl_div.dpt_sq = apv2.fnl_dpt
+	)apv3
+	where mid_rnk.RNK_SQ = apv3.mid_rnk_sq
+	and fnl_rnk.RNK_SQ = apv3.fnl_rnk_sq
+	and APV_OK_SQ = '4'
+	and rownum &lt;= '3'
+	order by APV_SQ DESC
+	</select>
+
+
+	<!-- 일반 1 협조 2 메모 3 기타 4 -->
+	<!-- 일반 - 2차 결재 요청 -->
+	<select id="gListTwoApprovalRequest" parameterType="map" resultType="map">	
+	select mid_rnk.rnk_nm mid_nm,fnl_rnk.rnk_nm fnl_nm, apv3.*
+	from rnk_tb mid_rnk, rnk_tb fnl_rnk,
+	(
+	select mid_div.dpt_nm mid_div_nm, fnl_div.dpt_nm fnl_div_nm, apv2.*
+	from dpt_div_tb mid_div, dpt_div_tb fnl_div, 
+	(
+	select stf_mid.stf_nm mid_nm_1, stf_mid.DPT_SQ mid_dpt, stf_mid.rnk_sq mid_rnk_sq, stf_fnl.stf_nm fnl_nm_1,  stf_fnl.DPT_SQ fnl_dpt, stf_fnl.rnk_sq fnl_rnk_sq, apv.*
+	from stf_tb stf_mid, stf_tb stf_fnl,
+	(
+	    select DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
+	          APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
+	          APV_TB.APV_NO, to_char(trunc(APV_TB.APV_CR_DATE), 'yyyy.mm.dd') as "APV_CR_DATE", to_char(APV_TB.CONTENT)  as "CONTENT", 
+	           RNK_TB.RNK_NM, DPT_DIV_TB.DPT_NM, STF_TB.STF_BS_PH1, STF_TB.STF_BS_PH2, STF_TB.STF_BS_PH3, STF_TB.STF_EML1, STF_TB.STF_EML2,
+	           STF_TB.STF_CM_ADD, STF_TB.STF_ZIP_ADD, STF_TB.STF_NM, stf_tb.dpt_sq
+	    from APV_TB, DIV_APV_TB, STF_TB, RNK_TB, DPT_DIV_TB
+	   where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+	    and   APV_TB.STF_SQ = STF_TB.STF_SQ
+	    and   STF_TB.RNK_SQ = RNK_TB.RNK_SQ 
+	    and   DPT_DIV_TB.DPT_SQ = STF_TB.DPT_SQ   
+	    and APV_TB.STF_FNL_SQ =  #{stf_sq}
+	    and APV_TB.DIV_APV_SQ = '1'
+	 )apv   
+	 where stf_mid.stf_sq = apv.stf_mid_sq
+	 and stf_fnl.stf_sq = apv.stf_fnl_sq
+	)apv2
+	where mid_div.dpt_sq = apv2.mid_dpt
+	and fnl_div.dpt_sq = apv2.fnl_dpt
+	)apv3
+	where mid_rnk.RNK_SQ = apv3.mid_rnk_sq
+	and fnl_rnk.RNK_SQ = apv3.fnl_rnk_sq
+	and APV_OK_SQ = '3'
+	and rownum &lt;= '3'
+	order by APV_SQ DESC
+	</select>
+
+
+	<!-- 일반 1 협조 2 메모 3 기타 4 -->
+	<!-- 협조 - 2차 결재 요청 -->
+	<select id="cListTwoApprovalRequest" parameterType="map" resultType="map">	
+	select mid_rnk.rnk_nm mid_nm,fnl_rnk.rnk_nm fnl_nm, apv3.*
+	from rnk_tb mid_rnk, rnk_tb fnl_rnk,
+	(
+	select mid_div.dpt_nm mid_div_nm, fnl_div.dpt_nm fnl_div_nm, apv2.*
+	from dpt_div_tb mid_div, dpt_div_tb fnl_div, 
+	(
+	select stf_mid.stf_nm mid_nm_1, stf_mid.DPT_SQ mid_dpt, stf_mid.rnk_sq mid_rnk_sq, stf_fnl.stf_nm fnl_nm_1,  stf_fnl.DPT_SQ fnl_dpt, stf_fnl.rnk_sq fnl_rnk_sq, apv.*
+	from stf_tb stf_mid, stf_tb stf_fnl,
+	(
+	    select DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
+	          APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
+	          APV_TB.APV_NO, to_char(trunc(APV_TB.APV_CR_DATE), 'yyyy.mm.dd') as "APV_CR_DATE", to_char(APV_TB.CONTENT)  as "CONTENT", 
+	           RNK_TB.RNK_NM, DPT_DIV_TB.DPT_NM, STF_TB.STF_BS_PH1, STF_TB.STF_BS_PH2, STF_TB.STF_BS_PH3, STF_TB.STF_EML1, STF_TB.STF_EML2,
+	           STF_TB.STF_CM_ADD, STF_TB.STF_ZIP_ADD, STF_TB.STF_NM, stf_tb.dpt_sq
+	    from APV_TB, DIV_APV_TB, STF_TB, RNK_TB, DPT_DIV_TB
+	   where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+	    and   APV_TB.STF_SQ = STF_TB.STF_SQ
+	    and   STF_TB.RNK_SQ = RNK_TB.RNK_SQ 
+	    and   DPT_DIV_TB.DPT_SQ = STF_TB.DPT_SQ   
+	    and APV_TB.STF_FNL_SQ =  #{stf_sq}
+	    and APV_TB.DIV_APV_SQ = '2'
+	 )apv   
+	 where stf_mid.stf_sq = apv.stf_mid_sq
+	 and stf_fnl.stf_sq = apv.stf_fnl_sq
+	)apv2
+	where mid_div.dpt_sq = apv2.mid_dpt
+	and fnl_div.dpt_sq = apv2.fnl_dpt
+	)apv3
+	where mid_rnk.RNK_SQ = apv3.mid_rnk_sq
+	and fnl_rnk.RNK_SQ = apv3.fnl_rnk_sq
+	and APV_OK_SQ = '3'
+	and rownum &lt;= '3'
+	order by APV_SQ DESC
+	</select>
+
+
+
+	<!-- 일반 1 협조 2 메모 3 기타 4 -->
+	<!-- 메모 - 2차 결재 요청 -->
+	<select id="mListTwoApprovalRequest" parameterType="map" resultType="map">	
+	select mid_rnk.rnk_nm mid_nm,fnl_rnk.rnk_nm fnl_nm, apv3.*
+	from rnk_tb mid_rnk, rnk_tb fnl_rnk,
+	(
+	select mid_div.dpt_nm mid_div_nm, fnl_div.dpt_nm fnl_div_nm, apv2.*
+	from dpt_div_tb mid_div, dpt_div_tb fnl_div, 
+	(
+	select stf_mid.stf_nm mid_nm_1, stf_mid.DPT_SQ mid_dpt, stf_mid.rnk_sq mid_rnk_sq, stf_fnl.stf_nm fnl_nm_1,  stf_fnl.DPT_SQ fnl_dpt, stf_fnl.rnk_sq fnl_rnk_sq, apv.*
+	from stf_tb stf_mid, stf_tb stf_fnl,
+	(
+	    select DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
+	          APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
+	          APV_TB.APV_NO, to_char(trunc(APV_TB.APV_CR_DATE), 'yyyy.mm.dd') as "APV_CR_DATE", to_char(APV_TB.CONTENT)  as "CONTENT", 
+	           RNK_TB.RNK_NM, DPT_DIV_TB.DPT_NM, STF_TB.STF_BS_PH1, STF_TB.STF_BS_PH2, STF_TB.STF_BS_PH3, STF_TB.STF_EML1, STF_TB.STF_EML2,
+	           STF_TB.STF_CM_ADD, STF_TB.STF_ZIP_ADD, STF_TB.STF_NM, stf_tb.dpt_sq
+	    from APV_TB, DIV_APV_TB, STF_TB, RNK_TB, DPT_DIV_TB
+	   where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+	    and   APV_TB.STF_SQ = STF_TB.STF_SQ
+	    and   STF_TB.RNK_SQ = RNK_TB.RNK_SQ 
+	    and   DPT_DIV_TB.DPT_SQ = STF_TB.DPT_SQ   
+	    and APV_TB.STF_FNL_SQ =  #{stf_sq}
+	    and APV_TB.DIV_APV_SQ = '3'
+	 )apv   
+	 where stf_mid.stf_sq = apv.stf_mid_sq
+	 and stf_fnl.stf_sq = apv.stf_fnl_sq
+	)apv2
+	where mid_div.dpt_sq = apv2.mid_dpt
+	and fnl_div.dpt_sq = apv2.fnl_dpt
+	)apv3
+	where mid_rnk.RNK_SQ = apv3.mid_rnk_sq
+	and fnl_rnk.RNK_SQ = apv3.fnl_rnk_sq
+	and APV_OK_SQ = '3'
+	and rownum &lt;= '3'
+	order by APV_SQ DESC
+	</select>
+
+
+	<!-- 일반 1 협조 2 메모 3 기타 4 -->
+	<!-- 기타 - 2차 결재 요청 -->
+	<select id="eListTwoApprovalRequest" parameterType="map" resultType="map">	
+	select mid_rnk.rnk_nm mid_nm,fnl_rnk.rnk_nm fnl_nm, apv3.*
+	from rnk_tb mid_rnk, rnk_tb fnl_rnk,
+	(
+	select mid_div.dpt_nm mid_div_nm, fnl_div.dpt_nm fnl_div_nm, apv2.*
+	from dpt_div_tb mid_div, dpt_div_tb fnl_div, 
+	(
+	select stf_mid.stf_nm mid_nm_1, stf_mid.DPT_SQ mid_dpt, stf_mid.rnk_sq mid_rnk_sq, stf_fnl.stf_nm fnl_nm_1,  stf_fnl.DPT_SQ fnl_dpt, stf_fnl.rnk_sq fnl_rnk_sq, apv.*
+	from stf_tb stf_mid, stf_tb stf_fnl,
+	(
+	    select DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
+	          APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
+	          APV_TB.APV_NO, to_char(trunc(APV_TB.APV_CR_DATE), 'yyyy.mm.dd') as "APV_CR_DATE", to_char(APV_TB.CONTENT)  as "CONTENT", 
+	           RNK_TB.RNK_NM, DPT_DIV_TB.DPT_NM, STF_TB.STF_BS_PH1, STF_TB.STF_BS_PH2, STF_TB.STF_BS_PH3, STF_TB.STF_EML1, STF_TB.STF_EML2,
+	           STF_TB.STF_CM_ADD, STF_TB.STF_ZIP_ADD, STF_TB.STF_NM, stf_tb.dpt_sq
+	    from APV_TB, DIV_APV_TB, STF_TB, RNK_TB, DPT_DIV_TB
+	   where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+	    and   APV_TB.STF_SQ = STF_TB.STF_SQ
+	    and   STF_TB.RNK_SQ = RNK_TB.RNK_SQ 
+	    and   DPT_DIV_TB.DPT_SQ = STF_TB.DPT_SQ   
+	    and APV_TB.STF_FNL_SQ =  #{stf_sq}
+	    and APV_TB.DIV_APV_SQ = '4'
+	 )apv   
+	 where stf_mid.stf_sq = apv.stf_mid_sq
+	 and stf_fnl.stf_sq = apv.stf_fnl_sq
+	)apv2
+	where mid_div.dpt_sq = apv2.mid_dpt
+	and fnl_div.dpt_sq = apv2.fnl_dpt
+	)apv3
+	where mid_rnk.RNK_SQ = apv3.mid_rnk_sq
+	and fnl_rnk.RNK_SQ = apv3.fnl_rnk_sq
+	and APV_OK_SQ = '3'
+	and rownum &lt;= '3'
+	order by APV_SQ DESC
+	</select>
+
+
+
+
+
+
+	<!-- 기안지 view-->
+	<select id="ViewApproval" parameterType="map" resultType="map">
+	select mid_rnk.rnk_nm mid_nm,fnl_rnk.rnk_nm fnl_nm, apv3.*
+	from rnk_tb mid_rnk, rnk_tb fnl_rnk,
+	(
+	select mid_div.dpt_nm mid_div_nm, fnl_div.dpt_nm fnl_div_nm, apv2.*
+	from dpt_div_tb mid_div, dpt_div_tb fnl_div, 
+	(
+	select stf_mid.stf_nm mid_nm_1, stf_mid.DPT_SQ mid_dpt, stf_mid.rnk_sq mid_rnk_sq, stf_fnl.stf_nm fnl_nm_1,  stf_fnl.DPT_SQ fnl_dpt, stf_fnl.rnk_sq fnl_rnk_sq, apv.*
+	from stf_tb stf_mid, stf_tb stf_fnl,
+	(
+	    select DIV_APV_TB.DIV_APV_NM, APV_TB.APV_SQ, APV_TB.DIV_APV_SQ, APV_TB.STF_SQ, APV_TB.STF_MID_SQ, 
+	          APV_TB.STF_FNL_SQ, APV_TB.APV_OK_SQ, APV_TB.APV_NM, APV_TB.APV_PL_RT, APV_TB.APV_PL_NM, 
+	          APV_TB.APV_NO, to_char(trunc(APV_TB.APV_CR_DATE), 'yyyy.mm.dd') as "APV_CR_DATE", to_char(APV_TB.CONTENT)  as "CONTENT", 
+	           RNK_TB.RNK_NM, DPT_DIV_TB.DPT_NM, STF_TB.STF_BS_PH1, STF_TB.STF_BS_PH2, STF_TB.STF_BS_PH3, STF_TB.STF_EML1, STF_TB.STF_EML2,
+	           STF_TB.STF_CM_ADD, STF_TB.STF_ZIP_ADD, STF_TB.STF_NM, stf_tb.dpt_sq
+	    from APV_TB, DIV_APV_TB, STF_TB, RNK_TB, DPT_DIV_TB
+	   where DIV_APV_TB.DIV_APV_SQ = APV_TB.DIV_APV_SQ
+	    and   APV_TB.STF_SQ = STF_TB.STF_SQ
+	    and   STF_TB.RNK_SQ = RNK_TB.RNK_SQ 
+	    and   DPT_DIV_TB.DPT_SQ = STF_TB.DPT_SQ   
+	    and APV_TB.STF_SQ =  #{stf_sq}
+	    and APV_TB.APV_SQ = #{seq}
+	    order by APV_TB.APV_SQ DESC
+	 )apv   
+	 where stf_mid.stf_sq = apv.stf_mid_sq
+	 and stf_fnl.stf_sq = apv.stf_fnl_sq
+	)apv2
+	where mid_div.dpt_sq = apv2.mid_dpt
+	and fnl_div.dpt_sq = apv2.fnl_dpt
+	)apv3
+	where mid_rnk.RNK_SQ = apv3.mid_rnk_sq
+	and fnl_rnk.RNK_SQ = apv3.fnl_rnk_sq
+
+	</select>
 
 
 	<!-- 기안지 작성 -->
@@ -239,12 +1070,13 @@
  	Insert into GROUPWARE.APV_TB (APV_SQ, DIV_APV_SQ, STF_SQ, STF_MID_SQ, STF_FNL_SQ,
                                   APV_OK_SQ, APV_NM, APV_PL_RT, APV_PL_NM, APV_NO, 
                                   CONTENT) 
-    values                       (APV_TB_APV_SQ.nextval,#{div_apv_sq},#{stf_sq},null,null,
+    values                       (APV_TB_APV_SQ.nextval,#{div_apv_sq},#{stf_sq},#{stf_mid_sq},#{stf_fnl_sq},
                                   4,#{apv_nm},null,null,null,
                                   #{content})
 	</insert>
 
 	
+
 	<!-- 중간승인자 선택 -->
 	<update id="selectMiddleApproval" parameterType="ApprovalDto">
 	update apv_tb
@@ -259,17 +1091,17 @@
 	where  apv_sq = #{apv_sq}
 	</update>
 
-	<!-- 중간결재 (최초: 4)(진행: 3)(최종: 1)-->
-	<update id="middleApproval" parameterType="ApprovalDto">
+	<!-- 중간결재 (최초: 4)(중간: 3)(최종: 2)(반려:1)-->
+	<update id="middleApproval" parameterType="Map">
 	update apv_tb
 	set apv_ok_sq = 3
-	where  apv_sq = #{apv_sq}
+	where  apv_sq = #{apv_sq}  
 	</update>
 
-	<!-- 최종결재 (최초: 4)(진행: 3)(최종: 1)-->
-	<update id="fnlApproval" parameterType="ApprovalDto">
+	<!-- 최종결재 (최초: 4)(중간: 3)(최종: 2)(반려:1)-->
+	<update id="fnlApproval" parameterType="map">
 	update apv_tb
-	set apv_ok_sq = 1
+	set apv_ok_sq = 2
 	where  apv_sq = #{apv_sq}
 	</update>
 
