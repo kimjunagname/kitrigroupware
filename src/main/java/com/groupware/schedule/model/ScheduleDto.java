@@ -9,8 +9,16 @@ public class ScheduleDto extends ScheduleDivisionDto{
 		private String bs_scd_cnt;  /* 내용 */
 		private String bs_scd_str_dt;  /* 시작일 */
 		private String bs_scd_end_dt;  /* 종료일 */
-		//일정구분번호2 삭제함
 		
+		// 부서별 일정에서 사용할 것
+		private String stf_nm; /* 사원이름 */
+		
+		public String getStf_nm() {
+			return stf_nm;
+		}
+		public void setStf_nm(String stf_nm) {
+			this.stf_nm = stf_nm;
+		}
 		public int getBs_scd_sq() {
 			return bs_scd_sq;
 		}
