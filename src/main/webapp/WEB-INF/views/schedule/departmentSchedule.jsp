@@ -9,7 +9,7 @@
 	<section id="main-content">
 		<section class="wrapper">
 			<div class="table-agile-info">
-			<h2 class="jg">개인 일정보기</h2>			
+			<h2 class="jg">부서 일정보기</h2>			
 			<hr style="clear: left;">
 			
 				<div class="row">
@@ -198,8 +198,9 @@
 				</div>
 			</div>
 		</section>
-	
+	</section>
 
+</section>
 <!--main content end-->
 <style type="text/css">
     body {
@@ -302,14 +303,19 @@ $(document).ready(function() {
 
 	    // title 클릭했을 때 event id 가져와서 뿌려주기
 	    eventClick: function(event, element) {
+	    	if(event.stf_sq!= ${userinfo.stf_sq} ){ //event의 id와 유저아이디가 같지 않다면
+	    		$("#modifyBtn").css("display", "none");
+	    		$("#deleteBtn").css("display", "none");
+	    	} else { //아이디가 같다면
+	    		$("#modifyBtn").css("display", "");
+	    		$("#deleteBtn").css("display", "");
+	    	}
 	    	// 수정모달에 데이터 집어넣기
 	    	$("#pid").val(event.id);
 	    	$("#pselect").text(event.sname);
         	$("#psubject").text(event.subject);
         	
 
-    		alert(event.end);
-        	
         	// Fri Aug 31 2018 09:00:00 GMT+0000 > 기본형
         	// new Date(event.start).toISOString() > format 바꾸기
         	// 2018-08-31T09:00:00.000Z > 바뀐 format
@@ -347,7 +353,7 @@ $(document).ready(function() {
 // ajax로 스케쥴리스트 가져오기
 function getList(){
 	$.ajax({
-		url : "${root}/schedule/slist/${userinfo.stf_sq}",
+		url : "${root}/schedule/sDeptList/${userinfo.stf_sq}",
 		type : 'POST',
 		contentType : 'application/json;charset=UTF-8',
 		dataType : 'json',
@@ -383,12 +389,13 @@ function makeList(data){
 		$('#calendar').fullCalendar('addEventSource', [{
 	        id: sList[i].bs_scd_sq,
 	        // select 값 가져오기
-	        title: "["+sList[i].scd_nm+"]"+sList[i].bs_scd_nm,
+	        title: "["+ sList[i].scd_nm+ "]"+ sList[i].stf_nm,
 	        start: sList[i].bs_scd_str_dt,
 	        end: sList[i].bs_scd_end_dt,
 	        content: sList[i].bs_scd_cnt,
 	        sname: sList[i].scd_nm, 
-	        subject: sList[i].bs_scd_nm,
+	        subject: sList[i].bs_scd_nm, //수정모달에서 불러올 제목
+	        stf_sq: sList[i].stf_sq,
 	        color: scolor,
 	        textColor: 'white'
 	    }]);
@@ -510,12 +517,13 @@ function addList(data){
 	$('#calendar').fullCalendar('addEventSource', [{
         id: data.bs_scd_sq,
         // select 값 가져오기
-        title: "["+data.scd_nm+"]"+data.bs_scd_nm,
+        title: "["+ sList[i].scd_nm+ "]"+ sList[i].stf_nm,
         start: data.bs_scd_str_dt,
         end: data.bs_scd_end_dt,
         content: data.bs_scd_cnt,
         sname: data.scd_nm, 
-        subject: data.bs_scd_nm,
+        stf_sq: sList[i].stf_sq,
+        subject: sList[i].bs_scd_nm,
         color: scolor,
         textColor: 'white'
     }]);
@@ -633,7 +641,7 @@ $(document).on("click", "#mModifyBtn", function() {
 		
 	//if(scontent.trim().length!= 0){
 		$.ajax({
-			url : "${root}/schedule/smodify.kitri",
+			url : "${root}/schedule/dmodify.kitri",
 			type : 'PUT',
 			contentType : 'application/json;charset=UTF-8',
 			dataType : 'json',
