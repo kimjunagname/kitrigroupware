@@ -69,7 +69,6 @@
             <th>출근시간</th>
             <th>퇴근시간</th>
             <th data-breakpoints="xs">상태</th>
-           
             <th data-breakpoints="xs sm md" data-title="DOB">지각시간</th>
             <th data-breakpoints="xs">사유</th>
           </tr>
@@ -258,21 +257,22 @@ $(document).ready(function(){
 		
 		var chkTm = new Date(Date.UTC(00, 00, 00, 09, 00, 00));
 		var strTm = new Date(Date.UTC(00, 00, 00, hms[0], hms[1], 00));
-		var hours = strTm.getHours()-chkTm.getHours();
-		var mins = strTm.getMinutes()-chkTm.getMinutes();
+		var hours = strTm.getUTCHours()-chkTm.getUTCHours();
+		var mins = strTm.getUTCMinutes()-chkTm.getUTCMinutes();
 		if(hours > 0 || (hours == 0  && mins > 0)){
 			var lateStr = "";
 			if(hours > 0){
 				lateStr = hours + "시간";
-				calcDate.setHours(calcDate.getHours()+hours);
+				calcDate.setUTCHours(calcDate.getUTCHours()+hours);
 			}
 			if(mins > 0){
 				lateStr += mins + "분";
-				calcDate.setMinutes(calcDate.getMinutes()+mins);
+				calcDate.setUTCMinutes(calcDate.getUTCMinutes()+mins);
 			}
+			console.log(lateStr);
 			$(this).siblings(".late").text(lateStr);
-			var str = calcDate.getHours()-nowDate.getHours()+"시간";
-			str += calcDate.getMinutes()-nowDate.getMinutes() + "분";
+			var str = calcDate.getUTCHours()-nowDate.getUTCHours()+"시간";
+			str += calcDate.getUTCMinutes()-nowDate.getUTCMinutes() + "분";
 			$("#totalLate").text(str);
 			
 		}
