@@ -256,8 +256,8 @@ $(document).ready(function(){
 		var ymd = $(this).attr("strTm").split(" ")[0].split("-");
 		var hms = $(this).attr("strTm").split(" ")[1].split(":");
 		
-		var chkTm = new Date(Date.UTC(ymd[0], ymd[1], ymd[2], 09, 00, 00));
-		var strTm = new Date(Date.UTC(ymd[0], ymd[1], ymd[2], hms[0], hms[1], 00));
+		var chkTm = new Date(Date.UTC(00, 00, 00, 09, 00, 00));
+		var strTm = new Date(Date.UTC(00, 00, 00, hms[0], hms[1], 00));
 		var hours = strTm.getHours()-chkTm.getHours();
 		var mins = strTm.getMinutes()-chkTm.getMinutes();
 		if(hours > 0 || (hours == 0  && mins > 0)){
