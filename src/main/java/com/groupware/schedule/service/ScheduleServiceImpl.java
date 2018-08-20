@@ -59,14 +59,14 @@ public class ScheduleServiceImpl implements ScheduleService {
 //			String sql= "insert into ScheduleDto (bs_bs_nm, bs_bs_scd_cnt, bs_scd_str_dt) \n";
 //			sql+= "values (?, ?, to_date(?, 'yyyy-mm-dd hh:mi:ss'))";
 //			//form : 2018-08-08 00:00:00
-//			//제목, 내용, 시작일
+//			//�젣紐�, �궡�슜, �떆�옉�씪
 //			PreparedStatement pstmt= con.prepareStatement(sql);
 //			pstmt.setString(1, dto.getBs_bs_nm());
 //			pstmt.setString(2, dto.getBs_bs_scd_cnt());
 //			pstmt.setString(3, dto.getBs_scd_str_dt());
 //			
 //			System.out.println("DAO IN!!!!!!!!!!!!!!!!!!!!");
-//			System.out.println("넣을값 >>> "+ dto.getBs_scd_str_dt());
+//			System.out.println("�꽔�쓣媛� >>> "+ dto.getBs_scd_str_dt());
 //			
 //			cnt= pstmt.executeUpdate();
 //			pstmt.close();
@@ -80,9 +80,9 @@ public class ScheduleServiceImpl implements ScheduleService {
 //				dto2.setBs_bs_nm(rs.getString("bs_bs_nm"));
 //				dto2.setBs_bs_scd_cnt(rs.getString("bs_bs_scd_cnt"));
 //				dto2.setBs_scd_str_dt(rs.getString("bs_scd_str_dt"));
-//				System.out.println("가져온값 >>>" + rs.getString("bs_scd_str_dt"));
+//				System.out.println("媛��졇�삩媛� >>>" + rs.getString("bs_scd_str_dt"));
 //			} else
-//				System.out.println("if문 안들어갔다!!!!!!!!!!!!!!1");
+//				System.out.println("if臾� �븞�뱾�뼱媛붾떎!!!!!!!!!!!!!!1");
 //		} catch (SQLException e) {
 //			e.printStackTrace();
 //		}
@@ -106,6 +106,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 		json.put("bs_scd_str_dt", dto.getBs_scd_str_dt());
 		json.put("bs_scd_end_dt", dto.getBs_scd_end_dt());
 		json.put("scd_nm", dto.getScd_nm());
+		json.put("stf_nm", dto.getStf_nm());
 		
 		return json.toString();
 	}
@@ -150,12 +151,12 @@ public class ScheduleServiceImpl implements ScheduleService {
 			schedule.put("stf_sq", dto.getStf_sq());
 			schedule.put("bs_scd_nm", dto.getBs_scd_nm());
 			//schedule.put("bs_scd_nm", dto.getStf_nm()+ " : "+ dto.getBs_scd_nm());
-			//제목 >> 홍길동 : 일정이름
+			//�젣紐� >> �솉湲몃룞 : �씪�젙�씠由�
 			schedule.put("bs_scd_cnt", dto.getBs_scd_cnt());
 			schedule.put("bs_scd_str_dt", dto.getBs_scd_str_dt());
 			schedule.put("bs_scd_end_dt", dto.getBs_scd_end_dt());
 			schedule.put("scd_nm", dto.getScd_nm());
-			schedule.put("stf_nm", dto.getStf_nm()); //사원이름
+			schedule.put("stf_nm", dto.getStf_nm()); //�궗�썝�씠由�
 			
 			array.put(schedule);
 		}
