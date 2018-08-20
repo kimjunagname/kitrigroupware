@@ -91,7 +91,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td align="left">00:00</td>
+            <td align="left" id="totalLate">00:00</td>
           </tr>
       </table>
     </div>
@@ -244,9 +244,9 @@
 <script>
 $(document).ready(function(){
 	setDate();
-	var d = new Date();
-	var d2 = new Date(d);
-	d2.setMinutes(d.getMinutes()+10);
+	var nowDate = new Date();
+	var calcDate = new Date(nowDate);
+	//calcDate.setMinutes(nowDate.getMinutes()+10);
 //	alert(d2.getHours() + "시"+d2.getMinutes());
 	
 	$("td:contains('토')").css('color', 'blue');
@@ -256,19 +256,25 @@ $(document).ready(function(){
 		var ymd = $(this).attr("strTm").split(" ")[0].split("-");
 		var hms = $(this).attr("strTm").split(" ")[1].split(":");
 		
-		var chkTm = new Date(Date.UTC(ymd[0], ymd[1], ymd[2], 09, 00, 00));
-		var strTm = new Date(Date.UTC(ymd[0], ymd[1], ymd[2], hms[0], hms[1], 00));
+		var chkTm = new Date(Date.UTC(00, 00, 00, 09, 00, 00));
+		var strTm = new Date(Date.UTC(00, 00, 00, hms[0], hms[1], 00));
 		var hours = strTm.getHours()-chkTm.getHours();
 		var mins = strTm.getMinutes()-chkTm.getMinutes();
 		if(hours > 0 || (hours == 0  && mins > 0)){
 			var lateStr = "";
 			if(hours > 0){
 				lateStr = hours + "시간";
+				calcDate.setHours(calcDate.getHours()+hours);
 			}
 			if(mins > 0){
 				lateStr += mins + "분";
+				calcDate.setMinutes(calcDate.getMinutes()+mins);
 			}
 			$(this).siblings(".late").text(lateStr);
+			var str = calcDate.getHours()-nowDate.getHours()+"시간";
+			str += calcDate.getMinutes()-nowDate.getMinutes() + "분";
+			$("#totalLate").text(str);
+			
 		}
 	});
 });
