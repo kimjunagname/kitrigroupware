@@ -68,8 +68,8 @@
             <th data-breakpoints="xs">날짜</th>
             <th>출근시간</th>
             <th>퇴근시간</th>
+            <th>근무시간</th>
             <th data-breakpoints="xs">상태</th>
-           
             <th data-breakpoints="xs sm md" data-title="DOB">지각시간</th>
             <th data-breakpoints="xs">사유</th>
           </tr>
@@ -80,6 +80,7 @@
             <td>${cmt.cmt_dt}</td>
             <td strTm="${cmt.cmt_str_tm}">${fn:substring(cmt.cmt_str_tm, 11, 16)}</td>
             <td endTm="${cmt.cmt_end_tm}">${fn:substring(cmt.cmt_end_tm, 11, 16)}</td>
+            <td class="total"></td>
             <td>${cmt.scd_nm}</td>
             <td class="late"></td>
             <td>${cmt.cmt_msg}</td>
@@ -90,8 +91,9 @@
             <td>합계</td>
             <td></td>
             <td></td>
+            <td align="left" id="totalDuty"></td>
             <td></td>
-            <td align="left">00:00</td>
+            <td align="left" id="totalLate">00:00</td>
           </tr>
       </table>
     </div>
@@ -244,31 +246,59 @@
 <script>
 $(document).ready(function(){
 	setDate();
-	var d = new Date();
-	var d2 = new Date(d);
-	d2.setMinutes(d.getMinutes()+10);
-//	alert(d2.getHours() + "시"+d2.getMinutes());
+	var nowDate = new Date();
+	var calcDate = new Date(nowDate);
 	
 	$("td:contains('토')").css('color', 'blue');
 	$("td:contains('일')").css('color', 'red');
 	
+	$("td[endTm]:not(:empty)").each(function(i, item){
+		var strHms = $(this).siblings("td[strTm]").attr("strTm").split(" ")[1].split(":");
+		var endHms = $(this).attr("endTm").split(" ")[1].split(":");
+		var strTm = new Date(Date.UTC(00, 00, 00, strHms[0], strHms[1], 00));
+		var endTm = new Date(Date.UTC(00, 00, 00, endHms[0], endHms[1], 00));
+		var dayTotalStr = "";
+		var hours = Math.floor((endTm - strTm) / 1000 / 60 / 60);
+		var mins = ((endTm - strTm) / 1000 / 60 % 60);
+
+		if(hours > 0 ){
+			dayTotalStr = hours + "시간";
+			calcDate.setUTCHours(calcDate.getUTCHours() + hours);
+		}
+		if(mins > 0){
+			dayTotalStr += mins + "분";
+			calcDate.setUTCMinutes(calcDate.getUTCMinutes() + mins);
+		}
+		$(this).siblings(".total").text(dayTotalStr);
+		var str = Math.floor((calcDate - nowDate) / 1000 / 60 / 60) + "시간";
+		str += ((calcDate - nowDate) / 1000 / 60 % 60) + "분";
+		$("#totalDuty").text(str);
+		
+	});
+
+	calcDate = new Date(nowDate);
 	$("td[strTm]:not(:empty)").each(function(i, item){
-		var ymd = $(this).attr("strTm").split(" ")[0].split("-");
 		var hms = $(this).attr("strTm").split(" ")[1].split(":");
 		
-		var chkTm = new Date(Date.UTC(ymd[0], ymd[1], ymd[2], 09, 00, 00));
-		var strTm = new Date(Date.UTC(ymd[0], ymd[1], ymd[2], hms[0], hms[1], 00));
-		var hours = strTm.getHours()-chkTm.getHours();
-		var mins = strTm.getMinutes()-chkTm.getMinutes();
+		var chkTm = new Date(Date.UTC(00, 00, 00, 09, 00, 00));
+		var strTm = new Date(Date.UTC(00, 00, 00, hms[0], hms[1], 00));
+		var hours = strTm.getUTCHours() - chkTm.getUTCHours();
+		var mins = strTm.getUTCMinutes() - chkTm.getUTCMinutes();
 		if(hours > 0 || (hours == 0  && mins > 0)){
 			var lateStr = "";
 			if(hours > 0){
 				lateStr = hours + "시간";
+				calcDate.setUTCHours(calcDate.getUTCHours() + hours);
 			}
 			if(mins > 0){
 				lateStr += mins + "분";
+				calcDate.setUTCMinutes(calcDate.getUTCMinutes() + mins);
 			}
 			$(this).siblings(".late").text(lateStr);
+			var str = Math.floor((calcDate - nowDate) / 1000 / 60 / 60) + "시간";
+			str += ((calcDate - nowDate) / 1000 / 60 % 60) + "분";
+			$("#totalLate").text(str);
+			
 		}
 	});
 });
@@ -292,7 +322,7 @@ $("#punchBtn").click(function() {
 
 $("#punchInBtn").click(function() {
 	var now = date.toISOString().slice(0,10);
-	var check = $("td[strTm^='"+ now +"']");
+	var check = $("td[strTm^='" + now + "']");
 	if(check.text() != ""){
 		$("#punchIn").attr("disabled", "disabled");
 		$("#punchOut").attr("checked", "checked");

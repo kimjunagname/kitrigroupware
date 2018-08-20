@@ -19,7 +19,7 @@ $(document).ready(function() {
 			return;
 		} else if($("#stf_pw").val()!= $("#stf_pwcheck").val()){
 			alert("비밀번호 확인!");
-			return;
+			return;			
 		} else {
 			$("form[name='registerform']").attr("method","POST").attr("action","${root}/member/register.kitri").submit();
 		}
@@ -70,7 +70,7 @@ $(document).ready(function() {
   					<span>이름</span>
   				</div>
   				<div class="col-sm-8">
-  					<input type="text" class="form-control gg" name="stf_nm" id="stf_nm" placeholder="이름">
+  					<input type="text" class="form-control gg" name="stf_nm" id="stf_nm" placeholder="${userinfo.stf_nm}">
   				</div>
   			</div>
   			
@@ -117,11 +117,11 @@ $(document).ready(function() {
   				</div>
   				<div class="col-sm-8">
   					<span>
-  						<input type="text" id="sample6_postcode" class="form-control gg" placeholder="우편번호" style="float: left; width: 20%" name="stf_zip_add">
+  						<input type="text" id="sample6_postcode" class="form-control gg" placeholder="우편번호" readOnly="readonly" style="float: left; width: 20%;" name="stf_zip_add">
   						<p style="float: left"> &emsp;</p>
   						<p class="zip ns" onclick= "sample6_execDaumPostcode()" style="float: left; background-color: #56aebf; color: white; padding: 5px; margin-top: 5px;" >
   						&emsp;검색 &emsp;</p><br>						
-						<input type="text" class="form-control gg" id="sample6_address" name="stf_cm_add" placeholder="주소"  >
+						<input type="text" class="form-control gg" id="sample6_address" readOnly="readonly" name="stf_cm_add" placeholder="주소">
 						<input type="text" class="form-control gg" id="sample6_address2" name="stf_dt_add" placeholder="상세주소">							
   					</span> 
   				</div>  				
@@ -145,12 +145,13 @@ $(document).ready(function() {
   				</div>
   				<div class="col-sm-8">
   					<select class="form-control gg" name="dpt_sq" id="dpt_sq">
-        				<option value="1">관리부</option>    
-        				<option value="2">무역부</option>   				
-        				<option value="3">영업부</option>   
-        				<option value="4">판매부</option>   
-        				<option value="5">기술부</option>      	
-      				</select>
+        			
+  					<c:forEach var="dpt" items="${dptlist}">
+        				<option value="${dpt.dpt_sq}">${dpt.dpt_nm}</option>            				    
+        			</c:forEach>	
+        			
+      				</select>    	
+      				
   				</div>  				
 			</div>			
 			
