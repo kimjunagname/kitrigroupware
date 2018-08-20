@@ -15,7 +15,7 @@
 			    			<!-- 1단 -->
 			    			
 						<h3><b>진행현황</b></h3><hr>
-			                <div class="col-lg-3">
+			                <div class="col-lg-4">
 			                <h5>· 일반공문</h5><br>
 								 <div class="panel panel-default">
 								    <div>
@@ -60,7 +60,7 @@
 						    </div>
 						    
 						   <!-- 1단 -->
-			                <div class="col-lg-3">
+			                <div class="col-lg-4">
 			                <h5>· 협조공문</h5><br>
 								 <div class="panel panel-default">
 								    <div>
@@ -104,7 +104,7 @@
 						    </div>
 						    
 						   <!-- 1단 -->						    
-						    <div class="col-lg-3">
+						    <div class="col-lg-4">
 			                <h5>· 기타공문</h5><br>
 								 <div class="panel panel-default">
 								    <div>
@@ -147,7 +147,8 @@
 								  </div>
 						    </div>
 						    
-						   <!-- 1단 -->						    
+						   <!-- 1단 -->
+						   <!-- 						    
 						    <div class="col-lg-3">
 			                <h5>· 메모보고</h5><br>
 								 <div class="panel panel-default">
@@ -190,7 +191,7 @@
 								      </div>
 								  </div>
 						    </div>
-						    
+						     -->
 						    
 						  <h3><b>결재 - 진행</b></h3><hr>
 						    <!-- 2단 진행중 시작 -->
@@ -314,6 +315,7 @@
 						    </div>
 						    
 						    <!-- 5단 -->
+						    <!-- 
 						    <div class="col-lg-12">
 			                <h5>· 메모보고</h5><br>
 								 <div class="panel panel-default">
@@ -352,6 +354,7 @@
 								      </div>
 								  </div>
 						    </div>
+						     -->
 						  <!-- 5단 진행중 종료 -->
 						    
 						    
@@ -382,7 +385,7 @@
 								         </thead>
 								         <tbody>
 								          <c:forEach items="${gListOneApprovalRequest}" var="map">
-								          <tr class="posting"  APV_TB_apv_seq="${map.APV_SQ}" >
+								          <tr class="postingapp"  APV_TB_apv_seq="${map.APV_SQ}" >
 								           <td>${map.APV_SQ}</td>
 								           <td>${map.APV_CR_DATE}</td>
 								           <td>${map.APV_NM}</td>
@@ -422,7 +425,7 @@
 								         </thead>
 								         <tbody>
 								          <c:forEach items="${cListOneApprovalRequest}" var="map">
-								          <tr class="posting"  APV_TB_apv_seq="${map.APV_SQ}">
+								          <tr class="postingapp"  APV_TB_apv_seq="${map.APV_SQ}">
 								           <td>${map.APV_SQ}</td>
 								           <td>${map.APV_CR_DATE}</td>
 								           <td>${map.APV_NM}</td>
@@ -462,7 +465,7 @@
 								         </thead>
 								         <tbody>
 								          <c:forEach items="${eListOneApprovalRequest}" var="map">
-								          <tr class="posting"  APV_TB_apv_seq="${map.APV_SQ}">
+								          <tr class="postingapp"  APV_TB_apv_seq="${map.APV_SQ}">
 								           <td>${map.APV_SQ}</td>
 								           <td>${map.APV_CR_DATE}</td>
 								           <td>${map.APV_NM}</td>
@@ -477,6 +480,7 @@
 						    </div>
 						    
 						    <!-- 5단 -->
+						    <!-- 
 						    <div class="col-lg-12">
 			                <h5>· 메모보고</h5><br>
 								 <div class="panel panel-default">
@@ -515,6 +519,7 @@
 								      </div>
 								  </div>
 						    </div>
+						     -->
 						  <!-- 5단 1차 결재 끝 -->
 						    
 						    
@@ -545,7 +550,7 @@
 								         </thead>
 								         <tbody>
 								          <c:forEach items="${gListTwoApprovalRequest}" var="map">
-								          <tr class="posting"  APV_TB_apv_seq="${map.APV_SQ}" >
+								          <tr class="postingapp"  APV_TB_apv_seq="${map.APV_SQ}" >
 								           <td>${map.APV_SQ}</td>
 								           <td>${map.APV_CR_DATE}</td>
 								           <td>${map.APV_NM}</td>
@@ -585,7 +590,7 @@
 								         </thead>
 								         <tbody>
 								          <c:forEach items="${cListTwoApprovalRequest}" var="map">
-								          <tr class="posting"  APV_TB_apv_seq="${map.APV_SQ}">
+								          <tr class="postingapp"  APV_TB_apv_seq="${map.APV_SQ}">
 								           <td>${map.APV_SQ}</td>
 								           <td>${map.APV_CR_DATE}</td>
 								           <td>${map.APV_NM}</td>
@@ -625,7 +630,7 @@
 								         </thead>
 								         <tbody>
 								          <c:forEach items="${eListTwoApprovalRequest}" var="map">
-								          <tr class="posting"  APV_TB_apv_seq="${map.APV_SQ}">
+								          <tr class="postingapp"  APV_TB_apv_seq="${map.APV_SQ}">
 								           <td>${map.APV_SQ}</td>
 								           <td>${map.APV_CR_DATE}</td>
 								           <td>${map.APV_NM}</td>
@@ -640,6 +645,7 @@
 						    </div>
 						    
 						    <!-- 5단 -->
+						    <!--  
 						    <div class="col-lg-12">
 			                <h5>· 메모보고</h5><br>
 								 <div class="panel panel-default">
@@ -678,6 +684,7 @@
 								      </div>
 								  </div>
 						    </div>
+						    -->
 						  <!-- 5단 2차 결재 종료-->
 						    
 						    
@@ -727,14 +734,28 @@ $(document).ready(function() {
 		$("#commonform").attr("method", "get").attr("action", viewpath).submit();
 	});
 	
-	$("#mposting").click(function() {
+	//$("#mposting").click(function() {
+	//	$("#bcode").val("");
+	//	$("#seq").val($(this).attr("APV_TB_apv_seq"));
+	//	$("#pg").val("");
+	//	$("#key").val("");
+	//	$("#word").val("");
+	//	$("#commonform").attr("method", "get").attr("action", mviewpath).submit();
+	//});
+	
+	$(".postingapp").click(function() {
 		$("#bcode").val("");
 		$("#seq").val($(this).attr("APV_TB_apv_seq"));
 		$("#pg").val("");
 		$("#key").val("");
 		$("#word").val("");
-		$("#commonform").attr("method", "get").attr("action", mviewpath).submit();
-	});
+		$("#commonform").attr("method", "get").attr("action", appviewpath).submit();
+	});	
+	
+	
+	
+	
+	
 	
 });
 

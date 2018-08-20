@@ -128,7 +128,7 @@
 								         </thead>
 								         <tbody>
 								          <c:forEach items="${gListOneApprovalRequest}" var="map">
-								          <tr class="posting"  approval-seq="${map.APV_SQ}">
+								          <tr class="postingapp"  id="postingapp" approval-seq="${map.APV_SQ}">
 								           <td>${map.APV_SQ}</td>
 								           <td>${map.APV_CR_DATE}</td>
 								           <td>${map.APV_NM}</td>
@@ -170,7 +170,7 @@
 								         </thead>
 								         <tbody>
 								          <c:forEach items="${gListTwoApprovalRequest}" var="map">
-								          <tr class="posting"  approval-seq="${map.APV_SQ}">
+								          <tr class="postingapp" id="postingapp" approval-seq="${map.APV_SQ}">
 								           <td>${map.APV_SQ}</td>
 								           <td>${map.APV_CR_DATE}</td>
 								           <td>${map.APV_NM}</td>
@@ -186,7 +186,7 @@
 								<input id = "glist"type="button" value="일반 공문 목록" class="btn btn-info">
 								<input id = "clist"type="button" value="협조 공문 목록" class="btn btn-info">
 								<input id = "elist"type="button" value="기타 공문 목록" class="btn btn-info">
-								<input id = "mlist"type="button" value="메모 보고 목록" class="btn btn-info">
+								<!--<input id = "mlist"type="button" value="메모 보고 목록" class="btn btn-info">-->
 							</div>
 						    </div>
 
@@ -269,6 +269,15 @@ $(document).ready(function() {
 		$("#word").val("");
 		$("#commonform").attr("method", "get").attr("action", mlistpath).submit();
 	});
+	//.class #
+	$("#postingapp").click(function() {
+		$("#bcode").val("");
+		$("#seq").val($(this).attr("approval-seq"));
+		$("#pg").val("");
+		$("#key").val("");
+		$("#word").val("");
+		$("#commonform").attr("method", "get").attr("action", appviewpath).submit();
+	});	
 	
 	
 });

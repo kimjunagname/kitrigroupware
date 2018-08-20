@@ -47,7 +47,7 @@
 						<li><span>KITRI 주식회사</span>
 							<ul>
 								<c:forEach items="${selectDpt_Div_Tb}" var="dptmap">
-									<li data-options="state:'open'"><span>${dptmap.DPT_NM}</span>
+									<li data-options="state:'open'"><span>${dptmap.DPT_NM}|${dptmap.DPT_SQ}</span>
 										<ul>
 											<c:forEach items="${selectStf_tb}" var="stfmap">
 												<c:if test="${dptmap.DPT_NM eq stfmap.DPT_NM}">
@@ -222,13 +222,13 @@
 											<tr>
 												<th></th>
 												<th>(경유)</th>
-												<th colspan="7"></th>
-												<!-- <th></th>
+												<th></th>
+												<th></th>
 								        		<th></th>
 								        		<th></th>
 								        		<th></th>
 								        		<th></th>
-								        		<th></th>-->
+								        		<th></th>
 												<th></th>
 											</tr>
 											<tr>
@@ -310,9 +310,7 @@
 												<th>
 													<div class="w3ls_head">
 													<!-- 모달만들기 1 / 버튼을 만든다(아이디 변경) app_Fnl_modal-->
-														<button type="button" id="app_Fnl_modal"
-															class="btn btn-primary btn-sm" data-backdrop="static"
-															data-toggle="modal">최종결재</button>
+														<button type="button" id="app_Fnl_modal" class="btn btn-primary btn-sm" data-backdrop="static" data-toggle="modal">최종결재</button>
 													</div>
 												</th>
 												<!-- 모달 추가 >> app_fnl_select -->

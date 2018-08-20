@@ -210,8 +210,8 @@ ul.sidebar-menu li a.active i {
                     </a>
                     <ul class="sub">
 						<li><a href="${root}/approval/list.kitri">목록</a></li>
-						<li><a href="${root}/approval/write.kitri">기안</a></li>
-						<li><a href="${root}/approval/mwrite.kitri">메모보고</a></li>
+						<li><a href="${root}/approval/write.kitri">공문 작성</a></li>
+
                     </ul>
                 </li>
                 

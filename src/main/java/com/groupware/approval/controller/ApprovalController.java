@@ -505,4 +505,30 @@ public class ApprovalController {
 	      return entity;
 	   }
 	*/
+	   
+	   
+		//일반, 협조, 기타 공문시 > appview.jsp 이동
+		@RequestMapping(value="/appview.kitri", method=RequestMethod.GET)
+		public ModelAndView appviewApprovalManager(HttpSession session, @RequestParam Map<String, String> map) {
+			System.out.println("ApprovalController - view");
+			
+			ModelAndView mav = new ModelAndView();
+			MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+			map.put("stf_sq", memberDto.getStf_sq());
+			if(map.size() == 0) {
+				map.put("stf_sq", (String) session.getAttribute("stf_sq"));
+			}
+			
+			List <ApprovalDto> ViewApproval = approvalService.ViewApproval(map);
+			
+			mav.addObject("stf_sq", session.getAttribute("stf_sq"));
+			mav.addObject("ViewApproval", ViewApproval);
+			
+			System.out.println("ViewApproval" + ViewApproval);
+		    mav.setViewName("/approval/appview"); // /webapp/pds5/list.jsp
+			return mav;
+		}
+		 
+	   
+	   
 }
