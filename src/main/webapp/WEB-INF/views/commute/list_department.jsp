@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <!--main content start--><!--main content start--><!--main content start--><!--main content start-->
 <!--main content start--><!--main content start--><!--main content start--><!--main content start-->
@@ -64,8 +65,7 @@
             <th>출근시간</th>
             <th>퇴근시간</th>
             <th data-breakpoints="xs">상태</th>
-           
-            <th data-breakpoints="xs sm md" data-title="DOB">지각시간</th>
+<!--             <th data-breakpoints="xs sm md" data-title="DOB">지각시간</th> -->
             <th data-breakpoints="xs">사유</th>
           </tr>
         </thead>
@@ -73,10 +73,10 @@
           <c:forEach var="map" items="${commuteList}">
           <tr>
           	<td class="NM">[${map.STF_SQ}]${map.STF_NM} [${map.RNK_NM}]</td>
-          	<td class="STR">${map.CMT_STR_TM}</td>
-          	<td class="END">${map.CMT_END_TM}</td>
+          	<td class="STR">${fn:substring(map.CMT_STR_TM, 11, 16)}</td>
+          	<td class="END">${fn:substring(map.CMT_END_TM, 11, 16)}</td>
 			<td class="STT">${map.SCD_NM}</td>
-			<td></td>
+<!-- 			<td></td> -->
           	<td class="MSG">${map.CMT_MSG}</td>
           </tr>
           </c:forEach>
