@@ -362,7 +362,7 @@ $(document).ready(function() {
 	    	// 수정모달에 데이터 집어넣기
 	    	$("#pid").val(event.id);
 	    	$("#pselect").text(event.sname);
-        	$("#psubject").text(event.title);
+        	$("#psubject").text(event.subject);
         	
 
     		alert(event.end);
@@ -446,11 +446,12 @@ function makeList(data){
 		$('#calendar').fullCalendar('addEventSource', [{
 	        id: sList[i].bs_scd_sq,
 	        // select 값 가져오기
-	        title: sList[i].bs_scd_nm,
+	        title: "["+sList[i].scd_nm+"]"+sList[i].bs_scd_nm,
 	        start: sList[i].bs_scd_str_dt,
 	        end: sList[i].bs_scd_end_dt,
 	        content: sList[i].bs_scd_cnt,
 	        sname: sList[i].scd_nm, 
+	        subject: sList[i].bs_scd_nm,
 	        color: scolor,
 	        textColor: 'white'
 	    }]);
@@ -488,6 +489,7 @@ $(document).on("click", "#registBtn", function() {
 	} else if($("#sname").val()== ''){
 		alert("제목을 적어주세요");
 	} else { // 유효성검사 모두 만족할 때
+		alert("등록하기 눌렀을 때 이벤트 ???");
 		// $("#sform").attr("method", "post").attr("action", "${root}/schedule/sadd.kitri").submit();
 		
 		// 일정구분 선택
@@ -497,9 +499,12 @@ $(document).on("click", "#registBtn", function() {
 		var send_date= $("#send_date").val();
 		
 		var	sstart_time= $("#sstart_time").val();
-		var send_time= "";
+		var send_time= "";	
 		
-		if($("#mstart_time").val()== ''){
+		alert("end time value >>> ");
+		alert("end time value >>> " + $("#send_time").val());
+		
+		if($("#send_time").val()== ''){
 			alert("if 문 안! 23:59 setting")
 			send_time= "23:59";
 		} else { //null일 때, length가 0이 일때
@@ -583,11 +588,12 @@ function addList(data){
 	$('#calendar').fullCalendar('addEventSource', [{
         id: data.bs_scd_sq,
         // select 값 가져오기
-        title: data.bs_scd_nm,
+        title: "["+data.scd_nm+"]"+data.bs_scd_nm,
         start: data.bs_scd_str_dt,
         end: data.bs_scd_end_dt,
         content: data.bs_scd_cnt,
         sname: data.scd_nm, 
+        subject: data.bs_scd_nm,
         color: scolor,
         textColor: 'white'
     }]);
@@ -777,15 +783,12 @@ $(function () {
         member_sq= arr[2]; // 사원번호 변경하기
     	
     	// 기존의 리스트를 불러와서 삭제
-    	alert("기존 이벤트 지워주기");
     	for(var i=0; i<savedList.length; i++){
-    		alert("sq >>> "+ savedList[i].bs_scd_sq);
     		if(savedList[i].bs_scd_sq!= 'undefined')
     			$('#calendar').fullCalendar('removeEvents', savedList[i].bs_scd_sq);
     	} // 기존 이벤트 지워주기
     	
     	// 새 이벤트 뿌려주기
-    	alert("새 이벤트 뿌려주기")
     	getMemberList(arr[2]); // 사번
     });
 });

@@ -439,7 +439,7 @@ $(document).on("click", "#registBtn", function() {
 		var	sstart_time= $("#sstart_time").val();
 		var send_time= "";
 		
-		if($("#mstart_time").val()== ''){
+		if($("#send_time").val()== ''){
 			alert("if 문 안! 23:59 setting")
 			send_time= "23:59";
 		} else { //null일 때, length가 0이 일때
