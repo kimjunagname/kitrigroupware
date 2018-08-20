@@ -129,7 +129,7 @@
 								         </thead>
 								         <tbody>
 								          <c:forEach items="${eListOneApprovalRequest}" var="map">
-								          <tr class="postingapp" id="postingapp" approval-seq="${map.APV_SQ}">
+								          <tr id="postingapp" approval-seq="${map.APV_SQ}">
 								           <td>${map.APV_SQ}</td>
 								           <td>${map.APV_CR_DATE}</td>
 								           <td>${map.APV_NM}</td>
@@ -172,7 +172,7 @@
 								         </thead>
 								         <tbody>
 								          <c:forEach items="${eListTwoApprovalRequest}" var="map">
-								          <tr class="postingapp" id="postingapp" approval-seq="${map.APV_SQ}">
+								          <tr id="postingapp" approval-seq="${map.APV_SQ}">
 								           <td>${map.APV_SQ}</td>
 								           <td>${map.APV_CR_DATE}</td>
 								           <td>${map.APV_NM}</td>

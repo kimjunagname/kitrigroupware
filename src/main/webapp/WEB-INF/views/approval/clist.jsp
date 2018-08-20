@@ -130,7 +130,7 @@
 								         </thead>
 								         <tbody>
 								          <c:forEach items="${cListOneApprovalRequest}" var="map">
-								          <tr class="postingapp"  approval-seq="${map.APV_SQ}">
+								          <tr id="postingapp"  approval-seq="${map.APV_SQ}">
 								           <td>${map.APV_SQ}</td>
 								           <td>${map.APV_CR_DATE}</td>
 								           <td>${map.APV_NM}</td>
@@ -173,7 +173,7 @@
 								         </thead>
 								         <tbody>
 								          <c:forEach items="${cListTwopprovalRequest}" var="map">
-								          <tr class="postingapp"  approval-seq="${map.APV_SQ}">
+								          <tr id="postingapp"  approval-seq="${map.APV_SQ}">
 								           <td>${map.APV_SQ}</td>
 								           <td>${map.APV_CR_DATE}</td>
 								           <td>${map.APV_NM}</td>
@@ -279,9 +279,9 @@ $(document).ready(function() {
 		$("#commonform").attr("method", "get").attr("action", mlistpath).submit();
 	});
 	
-	$(".postingapp").click(function() {
+	$("#postingapp").click(function() {
 		$("#bcode").val("");
-		$("#seq").val($(this).attr("APV_TB_apv_seq"));
+		$("#seq").val($(this).attr("approval-seq"));
 		$("#pg").val("");
 		$("#key").val("");
 		$("#word").val("");

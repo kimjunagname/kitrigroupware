@@ -1105,6 +1105,13 @@
 	where  apv_sq = #{apv_sq}
 	</update>
 
+	<!-- 최종결재 (임시저장: 5)(최초: 4)(중간: 3)(최종: 2)(반려:1)-->
+	<update id="tempApproval" parameterType="map">
+	update apv_tb
+	set apv_ok_sq = 5
+	where apv_sq = #{apv_sq}
+	</update>
+	
 
 
   
