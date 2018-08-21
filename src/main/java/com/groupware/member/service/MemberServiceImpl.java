@@ -48,5 +48,14 @@ public class MemberServiceImpl implements MemberService {
 		return sqlSession.getMapper(MemberDao.class).dptlist();
 	}
 
-	
+	@Override
+	public void deletemember(int stf_sq) {
+		sqlSession.getMapper(MemberDao.class).deletemember(stf_sq);		
+	}
+
+	@Override
+	public void modifymember(Map<String, String> map) {
+		sqlSession.getMapper(MemberDao.class).modifymember(map);	
+	}
+
 }

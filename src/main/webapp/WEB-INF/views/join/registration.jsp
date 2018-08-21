@@ -61,7 +61,7 @@ $(document).ready(function() {
 <div class="reg-w3 ns">
 <div class="w3layouts-main" style="width: 50%;">
 	<h2 class="jg">회원가입</h2>
-		<form name="registerform" method="post" action="" enctype="multipart/form-data">	
+		<form name="registerform" method="post" action="">	
 			
 			<hr>
 			
@@ -193,14 +193,6 @@ $(document).ready(function() {
   				</div>
   			</div>  			
   			
-  			<div class="row">
-  				<div class="col-sm-4">
-  					<span>프로필 사진</span>  					
-  				</div>
-  				<div class="col-sm-8">
-  					<input type="file" name="picture" id="picture"/>
-  				</div>  				
-			</div>
 			
 			<hr>
 			

@@ -142,6 +142,21 @@
  
  
  <!-- 은진 -->
+ 
+ 	<definition name="/modify/view" extends="base-definition">
+       <put-attribute name="title" value="lsit" />
+       <put-attribute name="body" value="/WEB-INF/views/modify/view.jsp" />
+     </definition>
+	 
+ 	<definition name="/modify/modify" extends="base-definition">
+       <put-attribute name="title" value="lsit" />
+       <put-attribute name="body" value="/WEB-INF/views/modify/modify.jsp" />
+     </definition>
+     
+     <definition name="/modify/modifyok" extends="base-definition">
+       <put-attribute name="title" value="lsit" />
+       <put-attribute name="body" value="/WEB-INF/views/modify/modifyok.jsp" />
+     </definition> 
   	
   	<definition name="/board/list" extends="base-definition">
        <put-attribute name="title" value="lsit" />

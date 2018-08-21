@@ -4,7 +4,7 @@ public class MemberDto {
 	private String stf_sq;/* 사원번호 */
 	private int admn_sq;  /* 권한번호 */
 	private int dpt_sq;  /* 부서명구분번호 */
-	private int pnk_sq; /* 직급구분번호 */
+	private int rnk_sq; /* 직급구분번호 */
 	private String stf_nm; /* 이름 */
 	private String stf_pw;  /* 비밀번호 */
 	private String stf_ph1;  /* 전화번호 */
@@ -21,9 +21,21 @@ public class MemberDto {
 	private String stf_ent;  /* 입사일 */
 	private String stf_reg;  /* 등록일 */
 	private String stf_mod;  /* 최종수정일 */
-	private String stf_pt_rt; /* 사진파일경로 */
-	private String stf_pt_nm; /* 사진파일명 */
+	private String dpt_nm;
+	private String rnk_nm;
 	
+	public String getDpt_nm() {
+		return dpt_nm;
+	}
+	public void setDpt_nm(String dpt_nm) {
+		this.dpt_nm = dpt_nm;
+	}
+	public String getRnk_nm() {
+		return rnk_nm;
+	}
+	public void setRnk_nm(String rnk_nm) {
+		this.rnk_nm = rnk_nm;
+	}
 	public String getStf_sq() {
 		return stf_sq;
 	}
@@ -43,11 +55,11 @@ public class MemberDto {
 	public void setDpt_sq(int dpt_sq) {
 		this.dpt_sq = dpt_sq;
 	}
-	public int getPnk_sq() {
-		return pnk_sq;
+	public int getRnk_sq() {
+		return rnk_sq;
 	}
-	public void setPnk_sq(int pnk_sq) {
-		this.pnk_sq = pnk_sq;
+	public void setRnk_sq(int rnk_sq) {
+		this.rnk_sq = rnk_sq;
 	}
 	public String getStf_nm() {
 		return stf_nm;
@@ -146,17 +158,6 @@ public class MemberDto {
 	public void setStf_mod(String stf_mod) {
 		this.stf_mod = stf_mod;
 	}
-	public String getStf_pt_rt() {
-		return stf_pt_rt;
-	}
-	public void setStf_pt_rt(String stf_pt_rt) {
-		this.stf_pt_rt = stf_pt_rt;
-	}
-	public String getStf_pt_nm() {
-		return stf_pt_nm;
-	}
-	public void setStf_pt_nm(String stf_pt_nm) {
-		this.stf_pt_nm = stf_pt_nm;
-	}
+
 	
 }

@@ -13,15 +13,21 @@
     </select>
     
     <select id="login" parameterType="map" resultType="MemberDto">
-    SELECT *
-	FROM stf_tb
+    SELECT d.dpt_nm, r.rnk_nm, 
+    s.STF_SQ, s.ADMN_SQ, s.DPT_SQ, s.RNK_SQ, s.STF_NM, s.STF_PW, s.STF_PH1,
+    s.STF_PH2, s.STF_PH3, s.STF_ZIP_ADD, s.STF_CM_ADD, s.STF_DT_ADD, s.STF_BS_PH1,
+    s.STF_BS_PH2, s.STF_BS_PH3, s.STF_EML1, s.STF_EML2, s.STF_ENT, s.STF_REG,
+    s.STF_MOD
+	FROM stf_tb s, dpt_div_tb d, rnk_tb r
 	WHERE stf_sq = #{stf_sq} AND stf_pw = #{stf_pw}
 	and admn_sq != 50
+	and s.rnk_sq = r.rnk_sq
+	and s.dpt_sq = d.dpt_sq
     </select>	
     
     <insert id="registerMember" parameterType="MemberDto">
-   	Insert into STF_TB (STF_SQ,ADMN_SQ,DPT_SQ,RNK_SQ,STF_NM,STF_PW,STF_PH1,STF_PH2,STF_PH3,STF_ZIP_ADD,STF_CM_ADD,STF_DT_ADD,STF_BS_PH1,STF_BS_PH2,STF_BS_PH3,STF_EML1,STF_EML2,STF_ENT,STF_REG,STF_MOD,STF_PT_RT,STF_PT_NM) 
-	values (STF_TB_STF_SQ.nextval,1,#{dpt_sq},5,#{stf_nm},#{stf_pw},#{stf_ph1},#{stf_ph2},#{stf_ph3},#{stf_zip_add},#{stf_cm_add},#{stf_dt_add},#{stf_bs_ph1},#{stf_bs_ph2},#{stf_bs_ph3},#{stf_eml1},#{stf_eml2},#{stf_ent},sysdate,sysdate,#{stf_pt_rt, jdbcType=VARCHAR},#{stf_pt_nm, jdbcType=VARCHAR})
+   	Insert into STF_TB (STF_SQ,ADMN_SQ,DPT_SQ,RNK_SQ,STF_NM,STF_PW,STF_PH1,STF_PH2,STF_PH3,STF_ZIP_ADD,STF_CM_ADD,STF_DT_ADD,STF_BS_PH1,STF_BS_PH2,STF_BS_PH3,STF_EML1,STF_EML2,STF_ENT,STF_REG,STF_MOD) 
+	values (STF_TB_STF_SQ.nextval,1,#{dpt_sq},5,#{stf_nm},#{stf_pw},#{stf_ph1},#{stf_ph2},#{stf_ph3},#{stf_zip_add},#{stf_cm_add},#{stf_dt_add},#{stf_bs_ph1},#{stf_bs_ph2},#{stf_bs_ph3},#{stf_eml1},#{stf_eml2},#{stf_ent},sysdate,sysdate)
     </insert>
     
     <select id="findId" parameterType="map" resultType="MemberDto">
@@ -41,5 +47,36 @@
 	FROM stf_tb
 	WHERE stf_eml1 = #{stf_eml1} and stf_eml2 = #{stf_eml2}
 	</select> 
+	
+	<update id="deletemember" parameterType="int">
+	UPDATE stf_tb
+	SET admn_sq = '50',
+	dpt_sq = '0',
+	rnk_sq = '50',
+	stf_eml1 = 'layoff',
+	stf_eml2 = 'layoff.com'
+	WHERE stf_sq = #{stf_sq} 
+	</update>
+	
+	<update id="modifymember" parameterType="map">
+	UPDATE STF_TB
+	SET 	
+	DPT_SQ = #{dpt_sq},
+	STF_NM = #{stf_nm},
+	STF_PW = #{stf_pw},
+	STF_PH1 = #{stf_ph1},
+	STF_PH2 = #{stf_ph2},
+	STF_PH3 = #{stf_ph3},
+	STF_ZIP_ADD = #{stf_zip_add},
+	STF_CM_ADD = #{stf_cm_add},
+	STF_DT_ADD = #{stf_dt_add},
+	STF_BS_PH1 = #{stf_bs_ph1},
+	STF_BS_PH2 = #{stf_bs_ph2},
+	STF_BS_PH3 = #{stf_bs_ph3},
+	STF_EML1 = #{stf_eml1},
+	STF_EML2 = #{stf_eml2},
+	STF_MOD = sysdate	
+	WHERE STF_SQ = #{stf_sq} 
+	</update>
 	
 </mapper>

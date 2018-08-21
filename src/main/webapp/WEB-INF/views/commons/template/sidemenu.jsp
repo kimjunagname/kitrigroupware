@@ -260,7 +260,13 @@ ul.sidebar-menu li a.active i {
                     </ul>
                 </li>
 
-
+				<!-- 마이 페이지 -->
+                <li>
+                    <a href="${root}/member/view.kitri">
+                        <i class="fa fa-bullhorn"></i>
+                        <span>마이페이지</span>
+                    </a>                
+                </li>
 				
             </ul>            
          </div>

@@ -77,35 +77,8 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/register.kitri", method=RequestMethod.POST)
-	public ModelAndView register(MemberDto dto, @RequestParam("picture") MultipartFile multipartFile) {
-		ModelAndView mav= new ModelAndView();
-		
-		if(multipartFile != null && !multipartFile.isEmpty()) {		
-			String originalPicture = multipartFile.getOriginalFilename();
-			String realPath = servletContext.getRealPath("/upload/profile");		
-			
-			DateFormat df = new SimpleDateFormat("yyMMdd");
-			String saveFolder = df.format(new Date());
-			String realSaveFolder = realPath + File.separator + saveFolder;
-			System.out.println(realSaveFolder);
-			File dir = new File(realSaveFolder);
-			if(!dir.exists()) { //폴더가 없다면 만들어라
-				dir.mkdirs();
-			}
-			String savePicture = UUID.randomUUID().toString() + originalPicture.substring(originalPicture.lastIndexOf('.')); 
-			
-			File file = new File(realSaveFolder, savePicture);
-			try {
-				multipartFile.transferTo(file);
-			} catch (IllegalStateException e) {					
-				e.printStackTrace();
-			} catch (IOException e) {					
-				e.printStackTrace();
-			}
-			
-			dto.setStf_pt_rt(saveFolder);
-			dto.setStf_pt_nm(savePicture);
-		}
+	public ModelAndView register(MemberDto dto) {
+		ModelAndView mav= new ModelAndView();		
 		
 		int cnt= memberService.registerMember(dto);
 		Map<String, String> map = new HashMap();		
@@ -202,5 +175,31 @@ public class MemberController {
 		session.invalidate();
 		ModelAndView mav = new ModelAndView("/login/login");
 		return mav;
+	}
+	
+	@RequestMapping(value="/view.kitri", method=RequestMethod.GET)
+	public String view() {
+		return "/modify/view";
+	}	
+	
+	@RequestMapping(value="/modify.kitri", method=RequestMethod.GET)
+	public String modify(Model mav) {
+		List<MemberRankDto> list = memberService.dptlist();		
+		mav.addAttribute("dptlist", list);
+		return "/modify/modify";
+	}	
+	
+	@RequestMapping(value="/modify.kitri", method=RequestMethod.POST)
+	public ModelAndView modify(@RequestParam Map<String, String> map) {
+		ModelAndView mav= new ModelAndView();			
+		memberService.modifymember(map);
+		mav.setViewName("/modify/modifyok");
+		return mav;
+	}
+	
+	@RequestMapping("/delete.kitri")
+	public String delete(@RequestParam("stf_sq") int stf_sq) {
+		memberService.deletemember(stf_sq);		
+		return "redirect:/login/login";
 	}
 }
