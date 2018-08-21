@@ -308,7 +308,7 @@ $(document).ready(function() {
         	$("#psubject").text(event.subject);
         	
 
-    		alert(event.end);
+    		//alert(event.end);
         	
         	// Fri Aug 31 2018 09:00:00 GMT+0000 > 기본형
         	// new Date(event.start).toISOString() > format 바꾸기
@@ -431,8 +431,6 @@ $(document).on("click", "#registBtn", function() {
 		// 일정구분 선택
 		var selectValue= $("#sselect option:selected").val();
 	
-		// TODO 사원번호 집어넣기
-		
 		var sstart_date= $("#sstart_date").val();
 		var send_date= $("#send_date").val();
 		
@@ -440,10 +438,10 @@ $(document).on("click", "#registBtn", function() {
 		var send_time= "";
 		
 		if($("#send_time").val()== ''){
-			alert("if 문 안! 23:59 setting")
+			//alert("if 문 안! 23:59 setting")
 			send_time= "23:59";
 		} else { //null일 때, length가 0이 일때
-			alert("else 문 안!")
+			//alert("else 문 안!")
 			send_time= $("#send_time").val();
 		}
 		
@@ -464,7 +462,7 @@ $(document).on("click", "#registBtn", function() {
 			});
 		}
 		
-		alert(parameter);
+		//alert(parameter);
 			
 		$.ajax({
 			url : "${root}/schedule/sadd.kitri",
@@ -481,7 +479,6 @@ $(document).on("click", "#registBtn", function() {
 
 // 빈 호면 클릭했을 때 등록하기 모달창 띄워주기
 $('#calendar').on('click','.fc-day',function(){
-	alert($(this).attr('data-date'));
 	$("#sstart_date").val($(this).attr('data-date'));
 	$("#send_date").val($(this).attr('data-date'));
 	$("#myModal").modal();
@@ -570,7 +567,7 @@ $(document).on("click", "#modifyBtn", function() {
 			
 			var mitem =i+1;
 			
-			alert("mitem >>> "+ mitem);
+			//alert("mitem >>> "+ mitem);
 
 			if(mitem== 3 || mitem== 4 || mitem== 5)
 				$(".mt").css("display", "none");
@@ -608,17 +605,17 @@ $(document).on("click", "#mModifyBtn", function() {
 	var mend_time= "";
 	
 	if($("#mstart_time").val()== ''){
-		alert("if 문 안! 23:59 setting")
+		//alert("if 문 안! 23:59 setting")
 		mend_time= "23:59";
 	} else { //null일 때, length가 0이 일때
-		alert("else 문 안!")
+		//alert("else 문 안!")
 		mend_time= $("#mend_time").val();
 	}
 	
 	var mname= $("#mname").val();
 	var mcontent= $("#msummernote").val();
 	
-	alert("수정한 제목 >> "+ mname);
+	//alert("수정한 제목 >> "+ mname);
 	var parameter= JSON.stringify({
 			'bs_scd_sq' : id, // 사내일정번호
 			'scd_sq' : selectValue, //일정구분번호
@@ -629,7 +626,7 @@ $(document).on("click", "#mModifyBtn", function() {
 			'bs_scd_end_dt' : mend_date+ " "+ mend_time //종료일
 	});
 	
-	alert(parameter);
+	//alert(parameter);
 		
 	//if(scontent.trim().length!= 0){
 		$.ajax({
