@@ -193,7 +193,8 @@ public class MemberController {
 	public ModelAndView modify(@RequestParam Map<String, String> map, HttpSession session) {
 		ModelAndView mav= new ModelAndView();			
 		memberService.modifymember(map);
-		session.setAttribute("userinfo", map);
+		MemberDto dto = memberService.login(map);	
+		session.setAttribute("userinfo", dto);
 		mav.setViewName("/modify/modifyok");
 		return mav;
 	}
