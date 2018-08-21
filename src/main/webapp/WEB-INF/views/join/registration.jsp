@@ -19,7 +19,7 @@ $(document).ready(function() {
 			return;
 		} else if($("#stf_pw").val()!= $("#stf_pwcheck").val()){
 			alert("비밀번호 확인!");
-			return;			
+			return;	
 		} else {
 			$("form[name='registerform']").attr("method","POST").attr("action","${root}/member/register.kitri").submit();
 		}
@@ -70,7 +70,7 @@ $(document).ready(function() {
   					<span>이름</span>
   				</div>
   				<div class="col-sm-8">
-  					<input type="text" class="form-control gg" name="stf_nm" id="stf_nm" placeholder="${userinfo.stf_nm}">
+  					<input type="text" class="form-control gg" name="stf_nm" id="stf_nm" placeholder="이름">
   				</div>
   			</div>
   			
