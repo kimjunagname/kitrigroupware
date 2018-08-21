@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/commons/public.jsp" %> 
+<!-- jQuery EasyUi API -->
+<link rel="stylesheet" type="text/css" href="${root}/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="${root}/easyui/themes/icon.css">
+<script type="text/javascript" src="${root}/easyui/jquery.easyui.min.js"></script>
 		<!-- 조회모달 시작 -->
 		<div class="modal fade" id="readModal" role="dialog">
 			<div class="modal-dialog modal-lg">
@@ -93,7 +97,7 @@
           </div>
 	  </section>
 		<!-- page end-->
-
+	</section> 
 	
 <script type="text/javascript">
 
@@ -124,10 +128,17 @@
 				 	var eml_nm = data.eml_nm;
 				 	var eml_cnt = data.eml_cnt;
 				 	var rcv_dt = data.snd_dt;
+					var eml_pl_crs = data.eml_pl_crs;
 				 	$("#eml_pl_nm1").text(eml_pl_nm); 
 				 	$("#eml_nm1").text(eml_nm); 
 				 	$("#eml_cnt1").text(eml_cnt); 
-				 	$("#rcv_dt1").text(rcv_dt); 
+				 	$("#rcv_dt1").text(rcv_dt);
+				 	var filePath = "D:/javadata/workspace/framework/kitrigroupware/src/main"+eml_pl_crs;
+				    if(eml_pl_nm != null){
+				    	$("#eml_pl_nm1").html('<a href=${root}/email/download.kitri?fileFullPath='+filePath+'>'+ eml_pl_nm +'</a>');
+				    } else if(eml_pl_nm == null){
+				    	$("#eml_pl_nm1").html("등록된 파일이 없습니다.");
+				    }
 				},
 				error : function(request, status, error) {
 					alert("list search fail :: error code: "+ request.status + "\n" + "error message: "+ error + "\n");

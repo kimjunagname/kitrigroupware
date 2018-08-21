@@ -223,4 +223,11 @@ public class ApprovalServiceImpl implements ApprovalService {
 		// TODO Auto-generated method stub
 		sqlSession.getMapper(ApprovalDao.class).fnlApproval(param);
 	}
+	
+	//임시저장
+	@Override
+	public int tempApproval(ApprovalDto approvalDto) {
+		// TODO Auto-generated method stub
+		return sqlSession.getMapper(ApprovalDao.class).tempApproval(approvalDto);
+	}
 }

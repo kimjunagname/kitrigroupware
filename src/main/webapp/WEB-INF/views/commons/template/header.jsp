@@ -215,11 +215,20 @@
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                 
                 <c:choose>
-       	   			<c:when test="${userinfo.stf_pt_rt != null && userinfo.stf_pt_nm != null}">
-       	   				<img src="${root}/upload/profile/${userinfo.stf_pt_rt}/${userinfo.stf_pt_nm}" style="width: 40px; height: 40px; ">       	   		
+       	   			<c:when test="${userinfo.rnk_sq == 1}">
+       	   				<img src="${root}/images/rating1.png" style="width: 40px; height: 40px; ">       	   		
        	   			</c:when> 
+       	   			<c:when test="${userinfo.rnk_sq == 2}">
+       	   				<img src="${root}/images/rating2.png" style="width: 40px; height: 40px; ">       	   		
+       	   			</c:when>
+       	   			<c:when test="${userinfo.rnk_sq == 3}">
+       	   				<img src="${root}/images/rating3.png" style="width: 40px; height: 40px; ">       	   		
+       	   			</c:when>
+       	   			<c:when test="${userinfo.rnk_sq == 4}">
+       	   				<img src="${root}/images/rating4.png" style="width: 40px; height: 40px; ">       	   		
+       	   			</c:when>
        	  			<c:otherwise>	
-						<img src="${root}/images/noimage.png" style="width: 40px; height: 40px;">	
+						<img src="${root}/images/rating5.png" style="width: 40px; height: 40px;">	
 					</c:otherwise>  
 				</c:choose>		
                 

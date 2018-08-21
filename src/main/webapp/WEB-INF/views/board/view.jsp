@@ -114,13 +114,21 @@
        	<td  align="center">   
        	
        	<c:choose>
-       	   <c:when test="${userinfo.stf_pt_rt != null && userinfo.stf_pt_nm != null}">
-       	   		<img src="${root}/upload/profile/${userinfo.stf_pt_rt}/${userinfo.stf_pt_nm}" style="width: 40px; height: 40px; margin-top: 15px;">
-       	   		
+       	   <c:when test="${userinfo.rnk_sq == 1}">
+       	   		<img src="${root}/images/rating1.png" class="img-circle" style="width: 40px; height: 40px; margin-top: 15px;">       	   		
        	   </c:when> 
-       	   <c:otherwise>	
-				<img src="${root}/images/noimage.png" style="width: 40px; height: 40px; margin-top: 15px;">	
-			</c:otherwise>  
+       	   <c:when test="${userinfo.rnk_sq == 2}">
+       	   		<img src="${root}/images/rating2.png" class="img-circle" style="width: 40px; height: 40px; margin-top: 15px;">       	   		
+       	   </c:when>
+       	   <c:when test="${userinfo.rnk_sq == 3}">
+       	   		<img src="${root}/images/rating3.png" class="img-circle" style="width: 40px; height: 40px; margin-top: 15px;">       	   		
+       	   </c:when>
+       	   <c:when test="${userinfo.rnk_sq == 4}">
+       	   		<img src="${root}/images/rating4.png" class="img-circle" style="width: 40px; height: 40px; margin-top: 15px;">       	   		
+       	   </c:when>
+       	  <c:otherwise>	
+				<img src="${root}/images/rating5.png" class="img-circle" style="width: 40px; height: 40px; margin-top: 15px;">	
+		  </c:otherwise>    
 		</c:choose>			
 		</td>
        	<td  align="center">         		
@@ -276,11 +284,17 @@ $("#deleteBtn").click(function() {
 		var rpylist = memos.rpylist;	
 		var output = "";
 		for(var i=0;i<rpylist.length;i++) {		
-				output += '<tr>'
-				if(rpylist[i].stf_pt_rt != null &&  rpylist[i].stf_pt_nm != null){
-				output += '		<td rowspan="2"><img src="${root}/upload/profile/' + rpylist[i].stf_pt_rt + '/' + rpylist[i].stf_pt_nm + ' style="width: 40px; height: 40px; margin-top: 15px;""></td>'
+				output += '<tr>'				
+				if(rpylist[i].rnk_sq != 1 ){
+				output += '		<td rowspan="2"><img src="${root}/images/rating1.png" class="img-circle" style="width: 40px; height: 40px; margin-top: 15px;"></td>'
+				} else if(rpylist[i].rnk_sq != 2 ){
+					output += '		<td rowspan="2"><img src="${root}/images/rating2.png" class="img-circle" style="width: 40px; height: 40px; margin-top: 15px;"></td>'
+				} else if(rpylist[i].rnk_sq != 3 ){
+					output += '		<td rowspan="2"><img src="${root}/images/rating3.png" class="img-circle" style="width: 40px; height: 40px; margin-top: 15px;"></td>'
+				} else if(rpylist[i].rnk_sq != 4 ){
+					output += '		<td rowspan="2"><img src="${root}/images/rating4.png" class="img-circle" style="width: 40px; height: 40px; margin-top: 15px;"></td>'
 				} else {
-					output += '		<td rowspan="2"><img src="${root}/images/noimage.png" style="width: 40px; height: 40px; margin-top: 15px;"></td>'
+					output += '		<td rowspan="2"><img src="${root}/images/rating5.png" class="img-circle" style="width: 40px; height: 40px; margin-top: 15px;"></td>'
 				}
 				output += '		<td><b>' + rpylist[i].stf_nm + '</b>  작성시간  : ' + rpylist[i].rtf_dt + ' 수정시간  : ' + rpylist[i].rpy_mod + '</td>'   
 				if(rpylist[i].stf_sq == '${userinfo.stf_sq}') {

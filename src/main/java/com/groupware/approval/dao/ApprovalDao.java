@@ -57,4 +57,8 @@ public interface ApprovalDao {
 	//최종 결재
 	public void fnlApproval(Map<String, Object> param) throws Exception;
 	//int fnlApproval(ApprovalDto approvalDto);
+	
+	//임시저장
+	int tempApproval(ApprovalDto approvalDto);
+	
 }

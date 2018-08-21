@@ -163,25 +163,28 @@
 									        		</th>
 									        		<th>${map.MID_DIV_NM}</th>
 									        		<th>
-									        		${map.MID_NM_1} <!-- 
+									        		${map.MID_NM_1} 
+									        			
 									        			<span>
                                  							<button class="btn btn-success btn-sm" id="midApp">결재하기</button>
-                              							</span> -->
+                              						
+                              							</span>
+                              							
 									        		</th>
 								        		</c:forEach>
 								        		<c:forEach items="${ViewApproval}" var="map">
-									        		<th><!-- 
+									        		<th>
 									        		 <form role="form">
                            								<input id="div2" name="div2" type="hidden" value="${map.APV_SQ}">
-                      								  </form> -->
+                      								  </form>
 									        		</th>
 								        		
 									        		<th>${map.FNL_DIV_NM}</th>
 									        		<th>
 									        		${map.FNL_NM_1}
-									        			<!-- <span>
+									        			<span>
                                  							<button class="btn btn-success btn-sm" id="fnlApp">결재하기</button>
-                              							</span> -->
+                              							</span>
 									        		</th>
 								        		</c:forEach>
 									        		<th></th>
@@ -246,7 +249,6 @@
 								<input id = "glist"type="button" value="일반 공문 목록" class="btn btn-info">
 								<input id = "clist"type="button" value="협조 공문 목록" class="btn btn-info">
 								<input id = "elist"type="button" value="기타 공문 목록" class="btn btn-info">
-								<!-- <input id = "mlist"type="button" value="메모 보고 목록" class="btn btn-info"> -->
 							</div>
 						</div>
 					</div>
@@ -296,6 +298,64 @@ $(document).ready(function() {
 	});
 
 	
+	
+    // 중간결재 버튼 눌렀을 때
+    $("#midApp").click("click", function() {
+    
+       var mid = $("#div1").val();
+       midApproval(mid);
+     });
+
+    function midApproval(mid) {
+       var params = {
+          apv_sq : mid
+       };
+       $.ajax({
+          url: "${root}/approval/midApproval.kitri",
+          type: "POST",
+          dataType: "text",
+           data : JSON.stringify(params),
+           contentType: "application/json; charset=UTF-8",
+           success: function(result) {
+              if(result=='SUCCESS'){
+                 alert("1차 결재가 되었습니다.");
+                 window.location.reload();
+              }
+           }
+       });
+    }
+	
+    
+    // 최종결재 버튼 눌렀을 때
+    $("#fnlApp").click("click", function() {
+    
+       var fnl = $("#div2").val();
+       fnlApproval(fnl);
+     });
+
+    function fnlApproval(fnl) {
+       var params = {
+          apv_sq : fnl
+       };
+       $.ajax({
+          url: "${root}/approval/fnlApproval.kitri",
+          type: "POST",
+          dataType: "text",
+           data : JSON.stringify(params),
+           contentType: "application/json; charset=UTF-8",
+           success: function(result) {
+              if(result=='SUCCESS'){
+                 alert("2차 결재가 되었습니다.");
+                 window.location.reload();
+              }
+           }
+       });
+    }   
+    
+    
+    
+    
+    
 });	
 </script>	
 

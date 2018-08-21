@@ -210,8 +210,8 @@ ul.sidebar-menu li a.active i {
                     </a>
                     <ul class="sub">
 						<li><a href="${root}/approval/list.kitri">목록</a></li>
-						<li><a href="${root}/approval/write.kitri">기안</a></li>
-						<li><a href="${root}/approval/mwrite.kitri">메모보고</a></li>
+						<li><a href="${root}/approval/write.kitri">공문 작성</a></li>
+
                     </ul>
                 </li>
                 
@@ -260,7 +260,13 @@ ul.sidebar-menu li a.active i {
                     </ul>
                 </li>
 
-
+				<!-- 마이 페이지 -->
+                <li>
+                    <a href="${root}/member/view.kitri">
+                        <i class="fa fa-bullhorn"></i>
+                        <span>마이페이지</span>
+                    </a>                
+                </li>
 				
             </ul>            
          </div>

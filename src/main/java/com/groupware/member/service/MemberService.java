@@ -19,5 +19,7 @@ public interface MemberService {
 	
 	public MemberDto findPw(Map<String, String> map);	
 	public int emlCheck(Map<String, String> map);
+	public void deletemember(int stf_sq);
+	public void modifymember(Map<String, String> map);
 	
 }

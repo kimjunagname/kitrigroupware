@@ -11,6 +11,7 @@ var writepath;
 var replypath;
 var modifypath;
 var deletepath;
+var appviewpath;
 var complitionpath;
 
 function initPath(){
@@ -19,6 +20,7 @@ function initPath(){
 	clistpath = control+"/clist.kitri";
 	elistpath = control+"/elist.kitri";
 	mlistpath = control+"/mlist.kitri";
+	appviewpath = control+"/appview.kitri";
 	viewpath = control+"/view.kitri";
 	mviewpath = control +"/mview.kitri";
 	writepath = control+"/write.kitri";

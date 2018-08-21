@@ -38,7 +38,7 @@
 		</div>
 	<!-- 조직관리 모달 끝   --> 
 	
-	<!-- 구성원 추가  모달 --> 
+	<!-- 구성원 수정  모달 --> 
 	<div class="modal fade" id="insertModal" role="dialog">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
@@ -970,9 +970,10 @@
 		$("#alllist").on("click", function() {
 			window.location = '${root}/organization/organization.kitri';
 		});
+		
 		// 셀렉터 특정값 option 삭제
 		$("#dpt_sq").find("option").each(function(){
-			if(this.value == "100"){
+			if(this.value == "0"){
 				$(this).remove();
 			}
 		});
@@ -1015,16 +1016,20 @@
 				var officerListCount = data.officerListCount;
 				var officerList = data.officerList;
 				var pageIndexListAjax = data.pageIndexListAjax;
+				 
 				$("#userCount").html(officerListCount);
 				var tbody = $("#officerList > tbody");
 				$.each(officerList,	function(idx, val) {
+					var stf_ph = val.STF_PH1 +'-'+ val.STF_PH2 +'-' + val.STF_PH3;
+					var stf_eml = val.STF_EML1 +'@'+val.STF_EML2;
 					tbody.append($('<tr>').append($('<td>',	{html : "<input type='radio' class='radio' value='"+val.STF_SQ+"'>"}))
-										  .append($('<td>',	{text : val.STF_SQ}))
-										  .append($('<td>',	{text : val.STF_NM}))
-										  .append($('<td>',	{text : val.RNK_NM}))
-										  .append($('<td>',	{text : val.DPT_NM}))
-										  .append($('<td>',	{text : val.ADMN_PW})));
-				});		
+										  .append($('<td>',	{html : val.STF_SQ}))
+										  .append($('<td>',	{html : val.STF_NM}))
+										  .append($('<td>',	{html : val.RNK_NM}))
+										  .append($('<td>',	{html : val.DPT_NM}))
+										  .append($('<td>',	{html : stf_ph}))
+										  .append($('<td>', {html : stf_eml})));	
+				});
 				$("#pageIndexList").html(pageIndexListAjax);
 			},
 			error : function(request, status, error) {

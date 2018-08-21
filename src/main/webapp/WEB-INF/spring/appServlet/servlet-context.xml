@@ -64,9 +64,15 @@
 
 	<!-- uploadPath -->	 
  	<beans:bean id="uploadPath" class="java.lang.String">
- 		<beans:constructor-arg value="D:\\javadata\\workspace\\framework\\kitrigroupware\\src\\main\\webapp\\WEB-INF\\upload\\file\\" />
+ 		<beans:constructor-arg value="D:\\javadata\\workspace\\framework\\kitrigroupware\\src\\main\\webapp\\upload1\\file1\\" />
  	</beans:bean> 
 
+ 	<!-- BeanNameViewResolver 파일 다운로드 -->
+	<beans:bean id="fileDownloadView" class="com.groupware.util.FileDownloadView"/>
+	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+  		<beans:property name="order" value="0"/> 
+	</beans:bean>
+ 
  
   	  <!-- 타일즈 설정: 시작 -->
       <!-- 아래 타일즈를 위한  TilesViewResolver, TilesConfigurer는 스프링3.2 이상에서만...-->
