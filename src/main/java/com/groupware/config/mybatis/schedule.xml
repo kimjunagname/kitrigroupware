@@ -30,9 +30,9 @@
 	</select>
 	
 	<select id="getAddSchedule" parameterType="int" resultType="ScheduleDto">
-	select *
-	from BS_SCD_TB b, SCD_DIV_TB s
-	where b.scd_sq= s.scd_sq and bs_scd_sq = (
+	select b.*, st.stf_nm, s.scd_nm
+	from BS_SCD_TB b, SCD_DIV_TB s, STF_TB st
+	where b.scd_sq= s.scd_sq and st.stf_sq= b.stf_sq and bs_scd_sq = (
 	                    select max(bs_scd_sq)
 	                    from bs_scd_tb
 	                    where stf_sq= #{stf_sq}

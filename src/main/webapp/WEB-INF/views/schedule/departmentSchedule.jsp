@@ -24,7 +24,7 @@
 					
 					<!-- 스케쥴 등록 MODAL 시작 -->
 					<div align= "center">
-						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">일정 등록하기</button>
+						<butto n type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">일정 등록하기</button>
 					</div>
 					<div class="modal fade" id="myModal" role="dialog">
 						<div class="modal-dialog">
@@ -434,23 +434,30 @@ $(document).on("click", "#registBtn", function() {
 		alert("제목을 적어주세요");
 	} else { // 유효성검사 모두 만족할 때
 		// $("#sform").attr("method", "post").attr("action", "${root}/schedule/sadd.kitri").submit();
-		
+	
+		// 기존 등록하기 창 리셋하기
+		$("#sname").val('');
+		$("#sstart_date").val('');
+		$("#send_date").val('');
+		$("#sstart_time").val('');
+		$("#send_time").val('');
+		$('#msummernote').summernote('code', '');
 		// 일정구분 선택
 		var selectValue= $("#sselect option:selected").val();
 	
-		// TODO 사원번호 집어넣기
-		
 		var sstart_date= $("#sstart_date").val();
 		var send_date= $("#send_date").val();
 		
 		var	sstart_time= $("#sstart_time").val();
 		var send_time= "";
 		
-		if($("#mstart_time").val()== ''){
-			alert("if 문 안! 23:59 setting")
+		//alert("end time value >> "+ $("#send_time").val());
+		
+		if($("#send_time").val()== ''){
+			//alert("if 문 안! 23:59 setting")
 			send_time= "23:59";
 		} else { //null일 때, length가 0이 일때
-			alert("else 문 안!")
+			//alert("else 문 안!")
 			send_time= $("#send_time").val();
 		}
 		
@@ -458,7 +465,7 @@ $(document).on("click", "#registBtn", function() {
 		var scontent= $("#summernote").val();
 		
 		if(sstart_date+ " "+ sstart_time > send_date+ " "+ send_time){ //end가 start보다 작으면
-			alert("종료 일이 시작일 보다 빠를 수 없습니다.");
+			//alert("종료 일이 시작일 보다 빠를 수 없습니다.");
 			return;
 		} else {
 			var parameter= JSON.stringify({
@@ -471,7 +478,7 @@ $(document).on("click", "#registBtn", function() {
 			});
 		}
 		
-		alert(parameter);
+		//alert(parameter);
 			
 		$.ajax({
 			url : "${root}/schedule/sadd.kitri",
@@ -486,9 +493,8 @@ $(document).on("click", "#registBtn", function() {
 	}
 });
 
-// 빈 호면 클릭했을 때 등록하기 모달창 띄워주기
+// 빈 화면 클릭했을 때 등록하기 모달창 띄워주기
 $('#calendar').on('click','.fc-day',function(){
-	alert($(this).attr('data-date'));
 	$("#sstart_date").val($(this).attr('data-date'));
 	$("#send_date").val($(this).attr('data-date'));
 	$("#myModal").modal();
@@ -517,13 +523,13 @@ function addList(data){
 	$('#calendar').fullCalendar('addEventSource', [{
         id: data.bs_scd_sq,
         // select 값 가져오기
-        title: "["+ sList[i].scd_nm+ "]"+ sList[i].stf_nm,
+        title: "["+ data.scd_nm+ "]"+ data.stf_nm,
         start: data.bs_scd_str_dt,
         end: data.bs_scd_end_dt,
         content: data.bs_scd_cnt,
         sname: data.scd_nm, 
-        stf_sq: sList[i].stf_sq,
-        subject: sList[i].bs_scd_nm,
+        stf_sq: data.stf_sq,
+        subject: data.bs_scd_nm,
         color: scolor,
         textColor: 'white'
     }]);
@@ -578,7 +584,7 @@ $(document).on("click", "#modifyBtn", function() {
 			
 			var mitem =i+1;
 			
-			alert("mitem >>> "+ mitem);
+			//alert("mitem >>> "+ mitem);
 
 			if(mitem== 3 || mitem== 4 || mitem== 5)
 				$(".mt").css("display", "none");
@@ -616,17 +622,17 @@ $(document).on("click", "#mModifyBtn", function() {
 	var mend_time= "";
 	
 	if($("#mstart_time").val()== ''){
-		alert("if 문 안! 23:59 setting")
+		//alert("if 문 안! 23:59 setting")
 		mend_time= "23:59";
 	} else { //null일 때, length가 0이 일때
-		alert("else 문 안!")
+		//alert("else 문 안!")
 		mend_time= $("#mend_time").val();
 	}
 	
 	var mname= $("#mname").val();
 	var mcontent= $("#msummernote").val();
 	
-	alert("수정한 제목 >> "+ mname);
+	//alert("수정한 제목 >> "+ mname);
 	var parameter= JSON.stringify({
 			'bs_scd_sq' : id, // 사내일정번호
 			'scd_sq' : selectValue, //일정구분번호
@@ -637,7 +643,7 @@ $(document).on("click", "#mModifyBtn", function() {
 			'bs_scd_end_dt' : mend_date+ " "+ mend_time //종료일
 	});
 	
-	alert(parameter);
+	//alert(parameter);
 		
 	//if(scontent.trim().length!= 0){
 		$.ajax({
