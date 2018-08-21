@@ -190,9 +190,10 @@ public class MemberController {
 	}	
 	
 	@RequestMapping(value="/modify.kitri", method=RequestMethod.POST)
-	public ModelAndView modify(@RequestParam Map<String, String> map) {
+	public ModelAndView modify(@RequestParam Map<String, String> map, HttpSession session) {
 		ModelAndView mav= new ModelAndView();			
 		memberService.modifymember(map);
+		session.setAttribute("userinfo", map);
 		mav.setViewName("/modify/modifyok");
 		return mav;
 	}
@@ -200,6 +201,6 @@ public class MemberController {
 	@RequestMapping("/delete.kitri")
 	public String delete(@RequestParam("stf_sq") int stf_sq) {
 		memberService.deletemember(stf_sq);		
-		return "redirect:/login/login";
+		return "/login/login";
 	}
 }
