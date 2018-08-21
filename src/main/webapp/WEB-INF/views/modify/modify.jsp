@@ -223,6 +223,15 @@ $(document).ready(function() {
 		} else if($("#stf_pw").val()!= $("#stf_pwcheck").val()){
 			alert("비밀번호 확인!");
 			return;
+		} else if($("#sample6_address").val() == ""){
+			alert("주소 확인!");
+			return;			
+		} else if($("#stf_eml1").val() == ""){
+			alert("이메일 확인!");
+			return;	
+		} else if($("#stf_ent").val() == ""){
+			alert("입사일 확인!");
+			return;	
 		} else {
 			$("form[name='modifyform']").attr("method","POST").attr("action","${root}/member/modify.kitri").submit();
 		}
