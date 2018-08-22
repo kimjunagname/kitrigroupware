@@ -451,7 +451,7 @@ $(document).on("click", "#registBtn", function() {
 		var	sstart_time= $("#sstart_time").val();
 		var send_time= "";
 		
-		//alert("end time value >> "+ $("#send_time").val());
+		alert("end time value >> "+ $("#send_time").val());
 		
 		if($("#send_time").val()== ''){
 			//alert("if 문 안! 23:59 setting")
@@ -465,7 +465,7 @@ $(document).on("click", "#registBtn", function() {
 		var scontent= $("#summernote").val();
 		
 		if(sstart_date+ " "+ sstart_time > send_date+ " "+ send_time){ //end가 start보다 작으면
-			//alert("종료 일이 시작일 보다 빠를 수 없습니다.");
+			alert("종료 일이 시작일 보다 빠를 수 없습니다.");
 			return;
 		} else {
 			var parameter= JSON.stringify({
