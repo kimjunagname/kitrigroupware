@@ -67,6 +67,7 @@
 								        	<tr>
 								        		<th></th>
 								        		<th>구분</th>
+								        		
 								        		<c:forEach items="${ViewApproval}" var="map">								        		
 								        			<th colspan="7">${map.DIV_APV_NM}</th>
 								        		<!-- <th></th>
@@ -93,7 +94,7 @@
 								        		<th></th>
 								        		<th>제목</th>	
 								        			<th colspan="7">${map.APV_NM}</th>
-								        		</c:forEach>
+								        		
 								        		<!-- <th></th>
 								        		<th></th>
 								        		<th></th>
@@ -119,16 +120,16 @@
 								        		<th></th>  -->
 											</tr>		
 											<tr>
-								          		<c:forEach items="${ViewApproval}" var="map">
+								          		
 								           			<td colspan="10"><text name="content" readonly="readonly" height="30" width="100%">${map.CONTENT}</text>
 								           		</td>
-								           		</c:forEach>
+								           		
 								          	</tr>
 								          	<tr>
 								           		<td colspan="10">
-									         		<form action="" method="post" enctype="multipart/form-data" name="">
+									         		<!-- <form action="" method="post" enctype="multipart/form-data" name="">
 												  		<input type="file" name="FileName">
-											    	</form>
+											    	</form> -->
 												</td>
 								         	 </tr>
 
@@ -151,11 +152,9 @@
 
 											<tr>
 								        		<th></th>
-								        		<c:forEach items="${ViewApproval}" var="map">
 									        		<th>${map.DPT_NM}</th>
 									        		<th>${map.STF_NM}</th>
-								        		</c:forEach>
-								        		<c:forEach items="${ViewApproval}" var="map">
+								        		
 									        		<th>
 									        		 <form role="form">
                            								<input id="div1" name="div1" type="hidden" value="${map.APV_SQ}">
@@ -171,8 +170,6 @@
                               							</span>
                               							
 									        		</th>
-								        		</c:forEach>
-								        		<c:forEach items="${ViewApproval}" var="map">
 									        		<th>
 									        		 <form role="form">
                            								<input id="div2" name="div2" type="hidden" value="${map.APV_SQ}">
@@ -186,7 +183,7 @@
                                  							<button class="btn btn-success btn-sm" id="fnlApp">결재하기</button>
                               							</span>
 									        		</th>
-								        		</c:forEach>
+								        		
 									        		<th></th>
 											</tr>																																																			        		
 											<tr>
@@ -204,7 +201,6 @@
 											<tr>
 								        		<th></th>
 								        		<th>기안</th>
-								        		<c:forEach items="${ViewApproval}" var="map">
 								        			<th colspan="4">${map.APV_CR_DATE}</th>
 								        		<!-- <th></th>
 								        		<th></th>
@@ -236,10 +232,10 @@
 										        		<th colspan="2">${map.STF_EML1}@${map.STF_EML2}</th>
 								        		<!-- <th></th> -->								        		
 									        			<th>/ ${map.DIV_APV_NM}</th>
-									        		</c:forEach>
+									        		
 								        		<th></th>
 											</tr>									        
-								        
+								        </c:forEach>
 										</tbody>
 									</table>
 								</div>

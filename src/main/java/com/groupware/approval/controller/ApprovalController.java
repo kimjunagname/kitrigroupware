@@ -520,12 +520,15 @@ public class ApprovalController {
 			}
 			
 			List <ApprovalDto> ViewApproval = approvalService.ViewApproval(map);
-			
+			//List <ApprovalDto> gListOneApprovalRequest = approvalService.gListOneApprovalRequest(map);
 			mav.addObject("stf_sq", session.getAttribute("stf_sq"));
+			
 			mav.addObject("ViewApproval", ViewApproval);
+			//mav.addObject("gListOneApprovalRequest", gListOneApprovalRequest);
 			
 			System.out.println("ViewApproval" + ViewApproval);
-		    mav.setViewName("/approval/appview"); // /webapp/pds5/list.jsp
+		    //System.out.println("gListOneApprovalRequest" + gListOneApprovalRequest);
+			mav.setViewName("/approval/appview"); // /webapp/pds5/list.jsp
 			return mav;
 		}
 		 

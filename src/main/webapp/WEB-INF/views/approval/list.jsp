@@ -385,7 +385,7 @@
 								         </thead>
 								         <tbody>
 								          <c:forEach items="${gListOneApprovalRequest}" var="map">
-								          <tr id="postingapp" approvalseq="${map.APV_SQ}" >
+								          <tr class="postingapp" approvalseq="${map.APV_SQ}" >
 								           <td>${map.APV_SQ}</td>
 								           <td>${map.APV_CR_DATE}</td>
 								           <td>${map.APV_NM}</td>
@@ -425,7 +425,7 @@
 								         </thead>
 								         <tbody>
 								          <c:forEach items="${cListOneApprovalRequest}" var="map">
-								          <tr id="postingapp" approvalseq="${map.APV_SQ}" >
+								          <tr class="postingapp" approvalseq="${map.APV_SQ}" >
 								           <td>${map.APV_SQ}</td>
 								           <td>${map.APV_CR_DATE}</td>
 								           <td>${map.APV_NM}</td>
@@ -465,7 +465,7 @@
 								         </thead>
 								         <tbody>
 								          <c:forEach items="${eListOneApprovalRequest}" var="map">
-								          <tr id="postingapp" approvalseq="${map.APV_SQ}" >
+								          <tr class="postingapp" approvalseq="${map.APV_SQ}" >
 								           <td>${map.APV_SQ}</td>
 								           <td>${map.APV_CR_DATE}</td>
 								           <td>${map.APV_NM}</td>
@@ -550,7 +550,7 @@
 								         </thead>
 								         <tbody>
 								          <c:forEach items="${gListTwoApprovalRequest}" var="map">
-								          <tr id="postingapp" approvalseq="${map.APV_SQ}" >
+								          <tr class="postingapp" approvalseq="${map.APV_SQ}" >
 								           <td>${map.APV_SQ}</td>
 								           <td>${map.APV_CR_DATE}</td>
 								           <td>${map.APV_NM}</td>
@@ -590,7 +590,7 @@
 								         </thead>
 								         <tbody>
 								          <c:forEach items="${cListTwoApprovalRequest}" var="map">
-								          <tr id="postingapp" approvalseq="${map.APV_SQ}">
+								          <tr class="postingapp" approvalseq="${map.APV_SQ}">
 								           <td>${map.APV_SQ}</td>
 								           <td>${map.APV_CR_DATE}</td>
 								           <td>${map.APV_NM}</td>
@@ -630,7 +630,7 @@
 								         </thead>
 								         <tbody>
 								          <c:forEach items="${eListTwoApprovalRequest}" var="map">
-								          <tr id="postingapp" approvalseq="${map.APV_SQ}">
+								          <tr class="postingapp" approvalseq="${map.APV_SQ}">
 								           <td>${map.APV_SQ}</td>
 								           <td>${map.APV_CR_DATE}</td>
 								           <td>${map.APV_NM}</td>
@@ -743,7 +743,7 @@ $(document).ready(function() {
 	//	$("#commonform").attr("method", "get").attr("action", mviewpath).submit();
 	//});
 	//#: id .: class
-	$("#postingapp").click(function() {
+	$(".postingapp").click(function() {
 		$("#bcode").val("");
 		$("#seq").val($(this).attr("approvalseq"));
 		$("#pg").val("");
