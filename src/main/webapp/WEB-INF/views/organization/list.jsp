@@ -231,14 +231,14 @@
 										<th>비밀번호(*)</th>
 										<td>
 											<div id="stf_pw1_Div">
-												<input type="password" id="stf_pw" name="stf_pw" class="form-control" placeholder="비밀번호"> 
+												<input type="password" id="stf_pw" name="stf_pw" class="form-control" placeholder="비밀번호" readonly="readonly"> 
 											</div>
 										</td>
 									</tr>
 									<tr>
 										<th>비밀번호 확인(*)</th>
 										<td>
-											<input type="password" id="stf_pwcheck" name="stf_pwcheck" class="form-control" placeholder="비밀번호 확인"> 
+											<input type="password" id="stf_pwcheck" name="stf_pwcheck" class="form-control" placeholder="비밀번호 확인" readonly="readonly"> 
 										</td>
 									</tr>
 									<tr>
@@ -1109,6 +1109,12 @@
 				$("#stf_bs_ph1").val(data.STF_BS_PH1);
 				$("#stf_bs_ph2").val(data.STF_BS_PH2);
 				$("#stf_bs_ph3").val(data.STF_BS_PH3);
+				
+				$("#stf_ent").val(data.STF_ENT);
+				$("#stf_pw").val(data.STF_PW);
+				$("#stf_pwcheck").val(data.STF_PW);
+				$("#stf_ent").val(data.STF_ENT);
+				$("#stf_zip_add").val(data.STF_ZIP_ADD); 
 			},
 			error : function(request, status, error) {
 				alert("list search fail :: error code: "

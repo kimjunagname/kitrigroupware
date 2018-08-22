@@ -118,7 +118,7 @@
 	</select>
 	
 	<select id="selectUpdateOfficer" parameterType="Map" resultType="Map">
-	SELECT STF_SQ, ADMN_SQ, DPT_SQ, RNK_SQ, STF_NM, STF_PH1, STF_PH2, STF_PH3, STF_CM_ADD, STF_DT_ADD, STF_BS_PH1, STF_BS_PH2, STF_BS_PH3, STF_EML1, STF_EML2
+	SELECT STF_SQ, STF_ENT, STF_PW, ADMN_SQ, DPT_SQ, RNK_SQ, STF_NM, STF_PH1, STF_PH2, STF_PH3, STF_ZIP_ADD, STF_CM_ADD, STF_DT_ADD, STF_BS_PH1, STF_BS_PH2, STF_BS_PH3, STF_EML1, STF_EML2
 	FROM STF_TB
 	WHERE STF_SQ = #{stf_sq}
 	</select>
@@ -137,6 +137,7 @@
 	ADMN_SQ = #{admn_sq},
 	DPT_SQ = #{dpt_sq},
 	RNK_SQ = #{rnk_sq},
+	STF_ZIP_ADD = #{stf_zip_add},
 	STF_CM_ADD = #{stf_cm_add},
 	STF_DT_ADD = #{stf_dt_add},
 	STF_EML1 = #{stf_eml1},
