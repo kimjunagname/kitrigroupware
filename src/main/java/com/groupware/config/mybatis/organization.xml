@@ -5,15 +5,14 @@
  
   <mapper namespace="com.groupware.organization.dao.OrganizationDao">
   	<select id="officerList" parameterType="Map" resultType="Map">
-	SELECT B.RNUM, B.STF_SQ, B.STF_PT_RT,  B.STF_NM, B.RNK_NM, B.DPT_NM, 
+	SELECT B.RNUM, B.STF_SQ, B.STF_NM, B.RNK_NM, B.DPT_NM, 
 		   B.ADMN_PW, B.STF_PH1, B.STF_PH2, B.STF_PH3, B.STF_BS_PH1, B.STF_BS_PH2, B.STF_BS_PH3, B.STF_EML1, B.STF_EML2
 	FROM (
-		   SELECT ROWNUM AS RNUM, A.STF_SQ, A.STF_PT_RT,  A.STF_NM, 
+		   SELECT ROWNUM AS RNUM, A.STF_SQ, A.STF_NM, 
 			      A.RNK_NM, A.DPT_NM, A.ADMN_PW, A.STF_PH1, A.STF_PH2, A.STF_PH3, A.STF_BS_PH1,
                   A.STF_BS_PH2, A.STF_BS_PH3, A.STF_EML1, A.STF_EML2
 		     FROM (
 			        SELECT  STF.STF_SQ,
-			                STF.STF_PT_RT, 
 			                STF.STF_NM, 
 			                RNK.RNK_SQ,
 			                RNK.RNK_NM,
