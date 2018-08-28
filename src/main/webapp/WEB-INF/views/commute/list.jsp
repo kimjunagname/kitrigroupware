@@ -13,10 +13,12 @@
 <section id="main-content">
  <section class="wrapper">
  <div class="table-agile-info">
+ <h2 class="jg">개인출근조회</h2>			
+	
+	<hr style="clear: left;">
+	<br>	
   <div class="panel panel-default">
-    <div class="panel-heading">
-      개인출근조회
-    </div>
+   
     <div class="row w3-res-tb">
       <div class="col-sm-7 m-b-xs">
       	<form id="searchFrom">
