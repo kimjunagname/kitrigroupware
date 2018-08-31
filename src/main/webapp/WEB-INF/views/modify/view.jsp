@@ -91,7 +91,7 @@
             <td>회사 전화번호</td>
             
             <c:choose>
-       	   			<c:when test="${userinfo.stf_bs_ph1 != null || userinfo.stf_bs_ph2 != null || userinfo.stf_bs_ph3 != null}">
+       	   			<c:when test="${userinfo.stf_bs_ph1 == null || userinfo.stf_bs_ph2 == null || userinfo.stf_bs_ph3 == null}">
        	   				 <td colspan="3">기입 하지 않음</td>    	   		
        	   			</c:when> 
        	  			<c:otherwise>	
